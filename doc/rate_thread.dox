@@ -1,0 +1,14 @@
+/**
+*
+@page icub_rate_thread This tutorial shows how to write a periodic thread
+
+We show how to write a periodic thread and use it to control the head of the robot.
+
+\section sec_intro Introduction
+
+See code in:
+\code
+ tutorials/src/tutorial_rate_thread.cpp
+\endcode
+*
+**/

@@ -1,0 +1,131 @@
+/**
+*
+@page icub_tutorial_module Using the module helper class to write a program.
+
+In this tutorial we show more details of how to write an iCub module using the module helper class. 
+
+\section sec_intro Introduction
+
+In a previous tutorial (\ref icub_resource_finder_basic and \ref icub_resource_finder_advanced) we showed how to use 
+the ResourceFinder to organize modules parameters in $ICUB_ROOT/app.
+
+The RFModule helper class simplify writing an iCub module that uses the ResourceFinder class.
+
+This is how a module will look like:
+
+\code
+#include <iostream>
+#include <yarp/os/RFModule.h>
+#include <yarp/os/Module.h>
+#include <yarp/os/Network.h>
+
+using namespace std;
+using namespace yarp::os;
+
+class MyModule:public RFModule
+{
+    Port handlerPort; //a port to handle messages
+    int count;
+public:
+
+    double getPeriod()
+    {
+	  //module periodicity (seconds), called implicitly by the module.
+        return 1;
+    }
+
+    // This is our main function. Will be called periodically every getPeriod() seconds.
+    bool updateModule()
+    {
+        count++;
+        cout<<"["<<count<<"]"<< " updateModule... "<<endl;
+        
+        return true;
+    }
+
+	
+    // Message handler. Just echo all received messages.
+    bool respond(const Bottle& command, Bottle& reply) 
+    {
+        cout<<"Got something, echo is on"<<endl;
+        if (command.get(0).asString()=="quit")
+            return false;     
+        else
+            reply=command;
+        return true;
+    }
+
+    
+    // Configure function. Receive a previously initialized
+    // resource finder object. Use it to configure your module.
+    // If you are migrating from the old module, this is the function
+    // equivalent to the "open" method.
+    bool configure(yarp::os::ResourceFinder &rf)
+    {
+        count=0;
+	  //optional, attach a port to the module
+        //so that messages received from the port are redirected
+	  //to the respond method
+        handlerPort.open("/myModule");
+        attach(handlerPort);
+	  //optional, attach to terminal if you want that text typed at the console
+        //is redirected to the respond method
+        attachTerminal();     
+        return true;
+    }
+
+    // Interrupt function.
+    bool interruptModule()
+    {
+        cout<<"Interrupting your module, for port cleanup"<<endl;
+        return true;
+    }
+
+    //
+    // Close function, to perform cleanup.
+    bool close()
+    {
+        //optional, close port explicitly
+        cout<<"Calling close function\n";
+        handlerPort.close();
+	  return true;
+    }
+};
+\endcode
+
+and this is the main function to instantiate it.
+
+\code
+int main(int argc, char * argv[])
+{
+    //initialize yarp network
+    Network yarp;
+
+    //create your module
+    MyModule module; 
+
+    // prepare and configure the resource finder
+    ResourceFinder rf;
+    rf.configure("ICUB_ROOT", argc, argv);
+    rf.setVerbose(true);
+ 
+    cout<<"Configure module..."<<endl;
+    module.configure(rf);
+    cout<<"Start module..."<<endl;
+    module.runModule();
+
+    cout<<"Main returning..."<<endl;
+
+    return 0;
+}
+\endcode
+
+\section sec_code Code
+
+See code in:
+\code
+ tutorials/src/tutorial_module.cpp
+\endcode
+*
+**/
+

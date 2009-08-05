@@ -1,0 +1,218 @@
+/**
+*
+@page icub_motor_control_tutorial Getting accustomed with motor interfaces
+
+This tutorial shows how to get interfaces to control the arm.
+
+\section sec_intro Introduction
+
+Motor control in Yarp is done through a device driver. For more documentation 
+please see: [http://yarp0.sourceforge.net/specs/dox/dev/html/yarp_motor_control.html 
+yarp2 documentation] and the related classes. 
+
+The code in src/tutorials/src/tutorial_arm.cpp is a good example to 
+start playing with motor control. This example uses a remoted device driver which exports 
+exactly the same interfaces of the actual device driver (initialization is different). The 
+main difference between the two is in terms of efficiency, if you're developing a low-level 
+control loop you might want to be local, on the other hand a simple sporadic position control 
+can be effected through the remote device driver. Let's assume we have started the server side 
+already (e.g. the simulator).
+
+\section sec_initialization Initialization
+
+Let us assume the simulator is up and running.
+
+In practice, we start by preparing a set of configuration parameters:
+
+\code
+  Property options;
+  options.put("device", "remote_controlboard");
+  options.put("local", "/test/client");                 //local port names
+  options.put("remote", "/icubSim/right_arm");         //where we connect to
+\endcode
+
+where the ''local'' and ''remote'' parameters are used to set the port names for the 
+connection to the server side. In our example this means that the process will create the 
+following (local) ports:
+
+\code
+   /test/client/state:i
+   /test/client/command:o
+   /test/client/rpc:o
+\endcode
+
+And will automatically connect them to the server, on the following (remote) ports 
+(we assume here that the server created those ports correctly):
+
+\code
+   /icubSim/right_arm/state:o
+   /icubSim/right_arm/command:i
+   /icubSim/right_arm/rpc:i
+\endcode
+
+To create the driver we use the PolyDriver:
+
+\code
+  PolyDriver robotDevice(options);
+  if (!robotDevice.isValid()) {
+      ACE_OS::printf("Device not available.  Here are the known devices:\n");
+      ACE_OS::printf("%s", Drivers::factory().toString().c_str());
+      Network::fini();
+      return 1;
+  }
+\endcode
+
+which instantiates the driver. If the parameters are correct and the server side has been prepared the local driver also connects to the remote one. The next step is to get a set of interfaces (pointers to) to work with, for example:
+
+\code
+    IPositionControl *pos;
+    IVelocityControl *vel;
+    IEncoders *enc;
+    IPidControl *pid;
+    IAmplifierControl *amp;
+    IControlLimits *lim;
+\endcode
+
+and:
+
+\code
+    robotDevice.view(pos);
+    robotDevice.view(vel);
+    robotDevice.view(enc);
+    robotDevice.view(pid);
+    robotDevice.view(amp);
+    robotDevice.view(lim);
+\endcode
+
+if everything went ok the pointers are valid pointers (check it!). For example:
+\code
+    if (pos==0) {
+      ACE_OS::printf("Error getting IPositionControl interface.\n");
+      Network::fini();
+      return 1;
+    }
+\endcode 
+
+We can thus start with checking how many axes we can control by doing:
+
+\code
+    int jnts = 0;
+    pos->getAxes(&jnts);
+\endcode
+
+Let's create some vectors for later use:
+\code
+    Vector tmp;
+    Vector encoders;
+    Vector command_position;
+    Vector command_velocity;
+
+    tmp.resize(jnts);
+    encoders.resize(jnts);
+    ...
+\endcode
+
+Let's now initialize the controllers and start up the amplifiers:
+
+\code
+    // we need to set reference accelerations used to generate the velocity
+    // profile, here 50 degrees/sec^2
+    int i;
+    for (i = 0; i < jnts; i++) {
+        tmp[i] = 50.0;
+    }
+    pos->setRefAccelerations(tmp.data());
+\endcode
+
+if needed we can check the position of our axes by doing:
+
+\code
+  enc->getEncoders(encoders.data());
+\endcode
+
+which reads the values of the motor encoders into a vector of doubles of size ''jnts''. 
+
+\section sec_position Position control
+
+First do:
+\code
+  int i;
+  for (i = 0; i < jnts; i++) {
+      tmp[i] = 40.0;
+  }
+  pos->setRefSpeeds(tmp.data());
+\endcode
+
+which sets the reference speed for all axes to 40 degrees per second. The reference speed is used 
+to interpolate the trajectory between the current and the desired position.
+
+Now you can do:
+\code
+  bool ok = pos->positionMove(command_position.data());
+\endcode
+
+where ''command_position'' is the desired position. This starts a movement of all axes toward 
+the desired position.
+
+\section sec_velocity Velocity control
+
+Issue a:
+\code
+  bool ok = vel->velocityMove(command_velocity.data());
+\endcode
+
+which for example accelerates all axes to the velocity described by the vector ''command_velocity'' (in degrees per second). 
+
+\section sec_closing Closing the device
+
+When you are done with controlling the robot don't forget to close the device:
+\code
+  robotDevice.close();
+\endcode
+
+\section sec_caveats Caveats: starting and stopping the amplifiers
+
+Typically before moving the robot you have to enable the amplifiers and start the pids controllers:
+
+\code
+    // enable the amplifier and the pid controller on each joint
+    for (i = 0; i < jnts; i++) {
+        amp->enableAmp(i);
+        pid->enablePid(i);
+    }
+\endcode
+
+However often (and in the simulator) the robot will be already started, with amplifiers and pids 
+already running, so you '''don't''' need to do it.
+
+Usually to close the robot you have to disable the amplifiers and stop the pid controllers:
+
+\code
+  for (i = 0; i < jnts; i++) {
+      amp->disableAmp(i);
+      pid->disablePid(i);
+  }
+\endcode
+
+however before before doing this you have to make sure the robot is in a safe 
+configuration (the robot might fall when the amplifiers are disabled). Again we will 
+be responsible for turning off the robot so you '''don't''' have to bother with this.
+
+\section sec_more_interfaces More interfaces
+
+To read more about the interfaces that are available in YARP read the online documentation:
+[http://eris.liralab.it/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html documentation on interfaces].
+
+\section sec_notes Notes on the local device
+The CanMotionControl class in ICUB_ROOT/src/modules is an example of a local device driver. 
+The procedure to instantiate it is conceptually identical to the sequence illustrated here apart 
+from the parameters passed to open() which are more numerous and complicated. These are typically 
+stored in a .ini file and loaded through the Property class and the fromConfigFile() method.
+
+\section sec_code Code
+
+See code in:
+\code
+ tutorials/src/tutorial_arm.cpp
+\endcode
+**/
