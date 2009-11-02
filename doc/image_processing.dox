@@ -53,7 +53,7 @@ Here's a basic program to get images repeatedly:
   int main() {
     Network yarp; // set up yarp
     BufferedPort<ImageOf<PixelRgb> > imagePort;  // make a port for reading images
-    imagePort.open("/paul/image/in");  // give the port a name
+    imagePort.open("/tutorial/image/in");  // give the port a name
     while (1) { // repeat forever
       ImageOf<PixelRgb> *image = imagePort.read();  // read an image
       if (image!=NULL) { // check we actually got something
@@ -74,17 +74,17 @@ yarp cmake
 This creates a basic CMakeLists.txt project file that is good enough to compile most simple 
 programs. Run cmake in this directory, and compile.  You will get a program called "yarpy" 
 (you can and should change this name by editing the CMakeLists.txt file).  If you run it, 
-you should see a port called "/paul/image/in" being created.  
+you should see a port called "/tutorial/image/in" being created.  
 
 You can then connect an image source to that port using:
 
 \code
-  yarp connect <name of image port> /paul/image/in
+  yarp connect <name of image port> /tutorial/image/in
 \endcode 
 
 for example, for the simulator, it would be something like:
 \code
-  yarp connect /icubSim/cam/left /paul/image/in
+  yarp connect /icubSim/cam/left /tutorial/image/in
 \endcode
 you should now see messages like this:
 \verbatim
@@ -105,7 +105,7 @@ Now let's extend our program a bit, to pick up blueish objects (for example):
   int main() {
     Network yarp; // set up yarp
     BufferedPort<ImageOf<PixelRgb> > imagePort;  // make a port for reading images
-    imagePort.open("/paul/image/in");  // give the port a name
+    imagePort.open("/tutorial/image/in");  // give the port a name
     while (1) { // repeat forever
       ImageOf<PixelRgb> *image = imagePort.read();  // read an image
       if (image!=NULL) { // check we actually got something
@@ -153,8 +153,12 @@ We add some lines at the beginning of the program:
     Network yarp;
     BufferedPort<ImageOf<PixelRgb> > imagePort;
     BufferedPort<Vector> targetPort;  // ADD THIS LINE
-    targetPort.open("/paul/target/out");  // ADD THIS LINE
+    targetPort.open("/tutorial/target/out");  // ADD THIS LINE
+\endcode
+
 and then when we know what our target is, we send it:
+
+\code
     printf("Best guess at blue target: %g %g\n", xMean, yMean);
     Vector& v = targetPort.prepare();
     v.resize(3);
@@ -162,7 +166,7 @@ and then when we know what our target is, we send it:
     v[1] = yMean;
     v[2] = 1;       // a confidence value, always good practice to add.  In this case, we pretend to be very confident
     targetPort.write();  // send our data
-endcode
+\endcode
 
 When no target is selected, it is still good to send output, to say explicitly that there is 
 no output rather than just remaining silent (which is hard to distinguish from the program just 
@@ -180,7 +184,7 @@ stopping or not running).
 
 Now we can read from this port (just to test) with yarp read:
 \code
-  yarp read ... /paul/target/out
+  yarp read ... /tutorial/target/out
 \endcode
 
 \section sec_look_at Look at Location
@@ -195,7 +199,7 @@ Now let's write a separate program that takes the target location computed in fi
   int main() {
     Network yarp; // set up yarp
     BufferedPort<Vector> targetPort;
-    targetPort.open("/paul/target/in");
+    targetPort.open("/tutorial/target/in");
     while (1) { // repeat forever
       Vector *target = targetPort.read();  // read a target
       if (target!=NULL) { // check we actually got something
@@ -210,7 +214,7 @@ Compile using the same method as before.  If we run the two programs, connect an
 source to the first one, and do:
 
 \code
-  yarp connect /paul/target/out /paul/target/in
+  yarp connect /tutorial/target/out /tutorial/target/in
 \endcode
 
 We should see messages like this:
@@ -262,7 +266,7 @@ We connect to the simulator head, as Lorenzo showed (this should go *before* the
 \code
     Property options;
     options.put("device", "remote_controlboard");
-    options.put("local", "/paul/motor/client");
+    options.put("local", "/tutorial/motor/client");
     options.put("remote", "/icubSim/head");
     PolyDriver robotHead(options);
     if (!robotHead.isValid()) {
@@ -343,9 +347,9 @@ Complete code for finding the blue ball:
   Network yarp; // set up yarp
   BufferedPort<ImageOf<PixelRgb> > imagePort;  // make a port for reading images
   BufferedPort<Vector> targetPort;
-  imagePort.open("/paul/image/in");  // give the port a name
-  targetPort.open("/paul/target/out");
-  Network::connect("/icubSim/cam/left","/paul/image/in");
+  imagePort.open("/tutorial/image/in");  // give the port a name
+  targetPort.open("/tutorial/target/out");
+  Network::connect("/icubSim/cam/left","/tutorial/image/in");
   while (1) { // repeat forever
     ImageOf<PixelRgb> *image = imagePort.read();  // read an image
     if (image!=NULL) { // check we actually got something
@@ -407,12 +411,12 @@ Complete look_at_location.cpp:
  int main() {
    Network yarp; // set up yarp
    BufferedPort<Vector> targetPort;
-   targetPort.open("/paul/target/in");
-   Network::connect("/paul/target/out","/paul/target/in");
+   targetPort.open("/tutorial/target/in");
+   Network::connect("/tutorial/target/out","/tutorial/target/in");
  
    Property options;
    options.put("device", "remote_controlboard");
-   options.put("local", "/paul/motor/client");
+   options.put("local", "/tutorial/motor/client");
    options.put("remote", "/icubSim/head");
    PolyDriver robotHead(options);
    if (!robotHead.isValid()) {
