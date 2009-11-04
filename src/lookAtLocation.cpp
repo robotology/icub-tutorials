@@ -8,12 +8,12 @@ using namespace yarp::dev;
 int main() {
   Network yarp; // set up yarp
   BufferedPort<Vector> targetPort;
-  targetPort.open("/paul/target/in");
-  Network::connect("/paul/target/out","/paul/target/in");
+  targetPort.open("/tutorial/target/in");
+  Network::connect("/tutorial/target/out","/tutorial/target/in");
 
   Property options;
   options.put("device", "remote_controlboard");
-  options.put("local", "/paul/motor/client");
+  options.put("local", "/tutorial/motor/client");
   options.put("remote", "/icubSim/head");
   PolyDriver robotHead(options);
   if (!robotHead.isValid()) {
