@@ -9,7 +9,7 @@
  * image processsing from images coming from 
  * the robot or the simulator
  *
- * \author Paul Fitzpatrick
+ * \author Tutorial Fitzpatrick
  */ 
 
 #include <stdio.h>
@@ -24,9 +24,9 @@ int main() {
   BufferedPort<ImageOf<PixelRgb> > imagePort;  // make a port for reading images
   BufferedPort<Vector> targetPort;
 
-  imagePort.open("/paul/image/in");  // give the port a name
-  targetPort.open("/paul/target/out");
-  Network::connect("/icubSim/cam/left","/paul/image/in");
+  imagePort.open("/tutorial/image/in");  // give the port a name
+  targetPort.open("/tutorial/target/out");
+  Network::connect("/icubSim/cam/left","/tutorial/image/in");
 
   while (1) { // repeat forever
     ImageOf<PixelRgb> *image = imagePort.read();  // read an image
