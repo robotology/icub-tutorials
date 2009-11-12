@@ -1,12 +1,197 @@
 /**
 *
-@page icub_rate_thread This tutorial shows how to write a periodic thread
+@page icub_rate_thread This tutorial shows how to write a control loop using threads
 
-We show how to write a periodic thread and use it to control the head of the robot.
+In this tutorial we show how to write a control loop using threads. Before you read this 
+tutorial you should at least get accustomed with motor interfaces as described in 
+\ref icub_motor_control_tutorial (material in \ref icub_basic_image_processing might 
+also be useful).
 
 \section sec_intro Introduction
 
-See code in:
+Often you want to perform different tasks in parallel or with a given periodicity. Modern
+operating system provides support for writing threads. Threads are functions that are
+executed by the cpu in parallel. The use of threads is recommanded in machines 
+with multiple cores.
+
+YARP supports threads with two main classes: yarp::os::Thread and yarp::os::RateThread.
+
+In this tutorial we show how to use the yarp::os::RateThread class to write a control loop 
+with a certain periodicity.
+
+\section Writing your own thread
+
+To write a thread you have to derive a new class from yarp::os::RateThread. In doing so
+you can to explicitly call the RateThread constructor and pass to it the periodicity of
+the thread (in milliseconds).
+
+\code
+class ControlThread: public yarp::os::RateThread
+{
+public:
+     ControlThread(int period):RateThread(period)
+	{...}
+};
+\endcode
+
+We add three methods to the class: run(), threadInit() and threadRelease(). The run() 
+function will be called periodically every "period" milliseconds. threadInit() is called once
+when the thread starts (before run is executed). Finally the thread executes threadRelease()
+when closing.
+
+We would like to write a thread that periodically check the encoders and alternates two velocity
+commands. This thread will control for example the head of the robot. We need a PolyDriver to store
+the robot device (see \ref icub_motor_control_tutorial), and an instance of IEncoders and 
+IVelocityControl. 
+
+\code
+    PolyDriver dd;
+    IVelocityControl *ivel;
+    IEncoders        *iencs;
+\endcode
+
+We also prepare two vectors of to store the encoders and one to store the commands we will send 
+to the controller. A counter will allow us to alternate between two commands.
+
+\code
+    Vector encoders;
+    Vector commands;
+    int count;
+\endcode
+
+Now we can implement the bool threadInit() function. First we will create an instance of the 
+polydriver and configure it to connect to the head.
+
+\code
+bool threadInit()
+{
+	//initialize here variables
+      printf("ControlThread:starting\n");
+        
+      Property options;
+      options.put("device", "remote_controlboard");
+      options.put("local", "/local/head");
+        
+      //substitute icubSim with icub for use with the real robot
+      options.put("remote", "/icubSim/head");
+        
+      dd.open(options);
+\endcode
+
+at this point we have to check that the device is valid and really offers the interfaces we 
+need:
+
+\code
+      dd.view(iencs);
+      dd.view(ivel);
+
+      if ( (!iencs) || (!ivel) )
+          return false;
+\endcode
+
+Notice: it is important to return false if something does not go as expected in the initialization.
+This will prevent the thread from running.
+
+Now we can get the number of joints, resize the vectors and initialize the acceleration of the 
+motors:
+   
+\code
+      int joints;
+   
+      iencs->getAxes(&joints);
+    
+      encoders.resize(joints);
+      commands.resize(joints);
+
+      commands=10000;
+
+      ivel->setRefAccelerations(commands.data());
+      count=0;
+      return true;
+}
+\endcode
+
+It is now time to implement the run function. This function is the thread's body, and perform 
+the real control task:
+
+\code
+void run()
+{
+      //reads encoders
+      iencs->getEncoders(encoders.data());
+
+      count++;
+
+	//alternates two commands
+      if (count%2)
+          commands=5;
+      else
+          commands=-5;
+    
+      ivel->velocityMove(commands.data());
+
+	//print something at each iteration so we see when the
+	//thread runs
+	printf(".");
+}
+\endcode
+
+When the thread will quit we have to make sure that we stop the head and release used resources. 
+We put this code in threadRelease():
+
+\code
+ void threadRelease()
+{
+      printf("ControlThread:stopping the robot\n");
+        
+      ivel->stop();
+
+      dd.close();
+
+	printf("Done, goodbye from ControlThread\n");
+}
+\endcode
+
+\section Running the thread
+Now that we have implemented our thread we can run it. This can be done easily in a few steps:
+
+Create an instance of the thread, we use here 40ms of period:
+\code
+ControlThread myThread(4000);
+\endcode
+
+Start the thread:
+\code
+myThread.start();
+\endcode
+
+The thread is created and start to execute initThread(); if the latter returns true, the
+thread executes run() periodically. In the meanwhile the main thread can perform other 
+operations. In this example we do not do anything smarter than just sitting idle for
+10 seconds:
+
+\code
+    bool done=false;
+    double startTime=Time::now();
+    const int SOME_TIME=10;
+    while(!done)
+    {
+        if ((Time::now()-startTime)>SOME_TIME)
+            done=true;
+    }
+\endcode
+
+
+To stop the thread we call:
+
+\code
+myThread.stop();
+\endcode
+
+stop() blocks and waits that the thread performs the last run() function, and threadRelease(), 
+after which we can safely return.
+
+Full working code of this tutorial is available here:
 \code
  tutorials/src/tutorial_rate_thread.cpp
 \endcode
