@@ -36,6 +36,8 @@ public:
         Property options;
         options.put("device", "remote_controlboard");
         options.put("local", "/local/head");
+        
+        //substitute icubSim with icub for use with the real robot
         options.put("remote", "/icubSim/head");
         
         dd.open(options);
