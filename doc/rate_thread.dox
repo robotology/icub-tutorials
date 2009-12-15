@@ -19,7 +19,7 @@ YARP supports threads with two main classes: yarp::os::Thread and yarp::os::Rate
 In this tutorial we show how to use the yarp::os::RateThread class to write a control loop 
 with a certain periodicity.
 
-\section Writing your own thread
+\section sec_yourownthread Writing your own thread
 
 To write a thread you have to derive a new class from yarp::os::RateThread. In doing so
 you can to explicitly call the RateThread constructor and pass to it the periodicity of
@@ -152,7 +152,7 @@ We put this code in threadRelease():
 }
 \endcode
 
-\section Running the thread
+\section sec_runningthethread Running the thread
 Now that we have implemented our thread we can run it. This can be done easily in a few steps:
 
 Create an instance of the thread, we use here 40ms of period:
