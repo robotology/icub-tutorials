@@ -8,7 +8,7 @@ as a combination of a 3d point to be attained by the end-effector (the center of
 the desired orientation given in axis-angle representation.
 
 Before proceeding, the reader might find helpful to recap some motor control fundamentals (click \ref icub_motor_control_tutorial "here")
-as well as to be introduced to the underneath topic of forward and inverse kinematics by going briefly through the \ref iKin documentation.
+as well as to be introduced to the underneath topic of forward and inverse kinematics by going through the \ref iKin documentation and tutorials.
 
 
 \section sec_dependences Dependences
