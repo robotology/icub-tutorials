@@ -20,11 +20,11 @@ In order to use the Cartesian Interface, make sure that the following steps are 
 
 -# Install <a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a> on the cluster.
 
--# On the cluster: compile with the switches <b>ADD_IPOPT</b> and <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled
-   (the latter will become available as soon as <b>USE_ICUB_MOD</b> is ticked).
+-# On the cluster: compile the repository with the switches <b>ADD_IPOPT</b> and <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled
+   (the latter will become available as soon as <b>USE_ICUB_MOD</b> is ticked). This will make the client part of the interface available.
 
--# On PC104: compile with the switch <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled (again, the switch
-   will become available once <b>USE_ICUB_MOD</b> is selected).
+-# On PC104: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled (again, the switch
+   will become available once <b>USE_ICUB_MOD</b> is selected). This will make the server part of the interface available on the hub.
 
 -# On PC104: create the files to configure the cartesian controllers.
    For example, to configure the cartesian arm controllers do:
@@ -276,13 +276,9 @@ Above we've asked for the default configuration of the secondary task which trie
 only the torso joints in the computation. This prevents the robot from leaning out too much if the target position can be reached easily with
 just the arm.
 
-Full working code of this tutorial is available here:
-\code
- tutorials/src/tutorial_cartesian_interface.cpp
-\endcode
-
 
 \section sec_simcartinterface The Simulator and the Cartesian Interface
 
-...
+To have the Cartesian Interface fully operative together with the robot simulator, please have a look \ref simCartesianControl "here".
+You will need to compile the server part of the interface also on the cluster where the simulator is supposed to run.
 */
