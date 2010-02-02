@@ -46,7 +46,7 @@ close as possible to the iCubInterface by using the application.
 
 \section sec_openclosecartinterface Opening and Closing the Cartesian Interface
 
-The Cartesian Interface can be open as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
+The Cartesian Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
 this the user has to import within his project the new hardware module represented by the cartesian client controller.
 
 To achieve that, the following lines have to be included in the <i>CMakeLists.txt</i> file:
