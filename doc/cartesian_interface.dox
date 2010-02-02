@@ -1,5 +1,5 @@
 /**
-@page icub_cartesian_interface This tutorial shows how to control a robot's limb in the operational space
+@page icub_cartesian_interface The Cartesian Interface
 
 The YARP <b>Cartesian Interface</b> has been conceived in order to enable the control of the arms
 and the legs of the robot directly in the operational space, that is instead of commading new configuration

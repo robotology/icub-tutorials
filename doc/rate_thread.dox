@@ -1,6 +1,6 @@
 /**
 *
-@page icub_rate_thread This tutorial shows how to write a control loop using threads
+@page icub_rate_thread The RateThread Class
 
 In this tutorial we show how to write a control loop using threads. Before you read this 
 tutorial you should at least get accustomed with motor interfaces as described in 

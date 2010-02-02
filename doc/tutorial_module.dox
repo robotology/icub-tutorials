@@ -1,6 +1,6 @@
 /**
 *
-@page icub_tutorial_module Using the module helper class to write a program.
+@page icub_tutorial_module The RFModule Class
 
 In this tutorial we show more details of how to write an iCub module using the module helper class. 
 

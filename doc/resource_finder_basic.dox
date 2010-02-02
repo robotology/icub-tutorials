@@ -1,6 +1,6 @@
 /**
 *
-@page icub_resource_finder_basic How to organize the command line parameters of your modules
+@page icub_resource_finder_basic The ResourceFinder Class (basic)
 
 This tutorial shows how to use the ResourceFinder class to organize parameters passed to 
 modules.

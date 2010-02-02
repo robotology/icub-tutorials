@@ -1,5 +1,5 @@
 /**
-@page icub_basic_image_processing Basic image processing tutorial
+@page icub_basic_image_processing Basic Image Processing
 
 \section sec_goal Goal
 To choose a visual target and fixate it.  For simplicity, the target shall be "blueish stuff", and we'll work on the simulator.
