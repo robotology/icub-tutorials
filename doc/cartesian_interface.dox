@@ -125,7 +125,7 @@ axis (whose norm is 1) and a fourth component for the rotation angle expressed i
 axis/angle notation (click <a href="http://en.wikipedia.org/wiki/Axis_angle">here</a>). \n
 The axis/angle format compacts the notation and protects from some singularities that might appear when the
 Euler angles are adopted, but obviously one can still use his most preferable representation since there exist
-transformation formulas from one domain to another (e.g. look at \ref dcm2axis or \ref axis2dcm). 
+transformation formulas from one domain to another (e.g. look at ctrl::dcm2axis or ctrl::axis2dcm documentation). 
 
 <b>Example</b> \n
 
