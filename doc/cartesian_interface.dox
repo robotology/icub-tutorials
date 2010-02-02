@@ -151,7 +151,7 @@ yarp::sig::Matrix Ry=ctrl::axis2dcm(oy);
 yarp::sig::Matrix Rx=ctrl::axis2dcm(ox);
 
 yarp::sig::Matrix R=Ry*Rx;
-yarp::sig::Vector o=dcm2axis(R);
+yarp::sig::Vector o=ctrl::dcm2axis(R);
 \endcode
 
 The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]
