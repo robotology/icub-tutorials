@@ -159,8 +159,8 @@ The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]
 
 \section sec_usecartinterface Using the Cartesian Interface
 
-The YARP Cartesian Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/dd/de6/classyarp_1_1dev_1_1ICartesianControl.html">here</a> \n
-In the following some examples on how to exploit it are given.
+The YARP Cartesian Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/dd/de6/classyarp_1_1dev_1_1ICartesianControl.html">here</a>.
+However in the following some examples are given on how to get accustomed with it.
 
 Imagine that we want to get the actual arm pose from within our code. What we have to write is just:
 \code
