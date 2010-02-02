@@ -1,0 +1,288 @@
+/**
+@page icub_cartesian_interface This tutorial shows how to control a robot's limb in the operational space
+
+The YARP <b>Cartesian Interface</b> has been conceived in order to enable the control of the arms
+and the legs of the robot directly in the operational space, that is instead of commading new configuration
+for the joints, user can require for instance the arm to reach a specified pose in the cartesian space, expressed
+as a combination of a 3d point to be attained by the end-effector (the center of the palm in this case) along with
+the desired orientation given in axis-angle representation.
+
+Before proceeding, the reader might find helpful to recap some motor control fundamentals from
+\ref icub_motor_control_tutorial as well as to be introduced to the underneath topic of forward and
+inverse kinematics by going briefly through the \ref iKin documentation.
+
+
+\section sec_dependences Dependences
+
+In order to use the Cartesian Interface, make sure that the following steps are done:
+
+-# Update YARP and iCub repositories.
+
+-# Install <a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a> on the cluster.
+
+-# On the cluster: compile with the switches <b>ADD_IPOPT</b> and <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled
+   (the latter will become available as soon as <b>USE_ICUB_MOD</b> is ticked).
+
+-# On PC104: compile with the switch <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled (again, the switch
+   will become available once <b>USE_ICUB_MOD</b> is selected).
+
+-# On PC104: create the files to configure the cartesian controllers.
+   For example, to configure the cartesian arm controllers do:
+   - copy the files cartesianLeftArm.ini and cartesianRightArm.ini from $ICUB_ROOT/app/iCubGenova01/conf
+     to $ICUB_ROOT/app/$ICUB_ROBOT_NAME/conf
+   - create $ICUB_ROOT/app/$ICUB_ROBOT_NAME/conf/iCubInterfaceCartesian.ini containing the following lines:
+     \code
+     config icubSafe.ini // or the current main configuration file
+     cartLeftArm cartesianLeftArm.ini
+     cartRightArm cartesianRightArm.ini
+     \endcode
+
+<b>iCubInterface+Solvers Application Launcher</b> \n
+From this time onwards rely on the $ICUB_ROOT/app/cartesianSolver/scripts/cartesianSolver.xml application to launch
+both the iCubInterface and the cartesian solvers. \n
+The cartesian solvers are required to invert the kinematics using Ipopt and they are meant to run on the cluster
+to avoid overloading the PC104 core. The solvers need the iCubInterface to connect to the robot to get useful data to
+operate (e.g. the joints bounds) and also iCubInterface needs them to open the server side of the cartesian interface.
+Therefore the chicken-egg problem is solved by applying proper connection timeout to the solvers and to keep them as
+close as possible to the iCubInterface by using the application.
+
+
+\section sec_openclosecartinterface Opening and Closing the Cartesian Interface
+
+The Cartesian Interface can be open as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
+this the user has to import within his project the new hardware module represented by the cartesian client controller.
+
+To achieve that, the following lines have to be included in the <i>CMakeLists.txt</i> file:
+\code
+if(USE_ICUB_MOD)
+    add_definitions(-DUSE_ICUB_MOD)
+    find_package(icubmod)
+    import_devices(${ICUB_DIR}/src/${PROJECTNAME}/drivers.h icubmod)
+    set(folder_header drivers.h)
+else(USE_ICUB_MOD)
+    set(folder_header)
+endif(USE_ICUB_MOD)
+\endcode 
+
+and at the same time a <i>DriverCollection</i> object has to be instatiated in the <i>main()</i> function in
+order to insert the cartesian client controller in the list of the available device drivers:
+\code
+...
+#ifdef USE_ICUB_MOD
+    #include "drivers.h"
+#endif
+...
+
+int main()
+{
+...
+#ifdef USE_ICUB_MOD
+    DriverCollection dev;
+#endif
+...
+}
+\endcode
+
+You are now able to open the Cartesian Interface in the usual way:
+\code
+PolyDriver        *clientCartCtrl;
+ICartesianControl *armCart;
+ 
+Property option;
+option.put("device","cartesiancontrollerclient");
+option.put("remote","/icub/cartesianController/right_arm");
+option.put("local","/client/right_arm");
+ 
+clientCartCtrl=new PolyDriver(option);
+clientCartCtrl->view(armCart);
+\endcode
+
+As you might have noticed, the stem-name of the cartesian server controller (taken as standard) is "/<robot_name>/cartesianController/<part_name>".
+Thus, similarly to a usual motor controller, a state port streming out the cartesian pose of the limb's end-effector is also
+available whose name is "/<robot_name>/cartesianController/<part_name>/state:o".
+As result you can do:
+\code
+yarp read /read /icub/cartesianController/right_arm/state:o
+\endcode
+getting the current pose of the right hand end-effector expressed with seven double:
+\f[ \left[x y z a_x a_y a_z \theta\right] \f]
+where the first three components are the 3d location of the center of the palm, whilst the final four describe the rotation of the
+frame attached to the end-effector with respect to the root reference frame in axis/angle notation (see \ref sec_coordsystem).
+
+When you are done with controlling the robot you can explicitly close the device (or just let the destructor do it for you): 
+\code
+clientCartCtrl.close();
+\endcode
+
+
+\section sec_coordsystem Coordinate System 
+
+Central for a correct usage of the cartesian controller is the knowledge of the coordinate system 
+that shall be adopted to describe any desired limb pose.
+
+Positions (in meters) and orientation refer to the root frame attached to the waist as in the
+<a href="http://eris.liralab.it/wiki/ICubForwardKinematics">wiki</a> page. \n
+The root <b>x-axis</b> points backward, the <b>y-axis</b> points rightward, while the <b>z-axis</b> points upward.
+ 
+To specify a target orientation of the end-effector, you have to provide three components for the rotation
+axis (whose norm is 1) and a fourth component for the rotation angle expressed in radians as required by the
+axis/angle notation (click <a href="http://en.wikipedia.org/wiki/Axis_angle">here</a>). \n
+The axis/angle format compacts the notation and protects from some singularities that might appear when the
+Euler angles are adopted, but obviously one can still use his most preferable representation since there exist
+transformation formulas from one domain to another (e.g. look at \ref dcm2axis or \ref axis2dcm). 
+
+<b>Example</b> \n
+
+We want to represent the orientation of the right hand when the arm is in the rest position (the torso and arm joints are zeroed),
+for which the x-axis attached to the center of the palm points downward, the y-axis points backward, while the z-axis
+points leftward. Hence, to transform the root reference frame in the end-effector frame, one solution is to rotate of pi/2
+around the y-axis and then of pi/2 around the resulting x-axis.
+
+In formulas:
+\code
+#include <yarp/sig/Vector.h>
+#include <yarp/sig/Matrix.h>
+#include <yarp/math/Math.h>
+#include <iCub/ctrlMath.h>
+
+using namespace yarp::math;
+
+yarp::sig::Vector oy(4), ox(4);
+oy[0]=0.0; oy[1]=1.0; oy[2]=0.0; oy[3]=M_PI/2.0;
+ox[0]=1.0; ox[1]=0.0; ox[2]=0.0; ox[3]=M_PI/2.0;
+
+yarp::sig::Matrix Ry=ctrl::axis2dcm(oy);
+yarp::sig::Matrix Rx=ctrl::axis2dcm(ox);
+
+yarp::sig::Matrix R=Ry*Rx;
+yarp::sig::Vector o=dcm2axis(R);
+\endcode
+
+The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]
+
+
+\section sec_usecartinterface Using the Cartesian Interface
+
+The YARP Cartesian Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/dd/de6/classyarp_1_1dev_1_1ICartesianControl.html">here</a> \n
+In the following some examples on how to exploit it are given.
+
+Imagine that we want to get the actual arm pose from within our code. What we have to write is just:
+\code
+Vector x0,o0;
+armCart->getPose(x0,o0);
+\endcode
+
+Then we want to move the hand a bit farther from the body, let's say just 10 cm away along -x,
+keeping the orientation constant:
+\code
+Vector xd=x0; xd[0]+=-0.1;
+Vector od=o0;
+armCart->goToPose(xd,od);   // send request and forget
+\endcode
+The <i>goToPose()</i> method does not wait for any acknowledgement that the server has received the request,
+but it just lets the client module go straight to the next instruction in the code flow. Therefore, the 
+intended use of this method is for streaming input (e.g. while tracking).
+
+If we would like to test whether the new pose has been achieved, it's as follows:
+\code
+armCart->goToPoseSync(xd,od);   // send request and wait for reply
+
+bool flag=false;
+while (!flag)
+   armCart->checkMotionDone(&flag);
+\endcode
+Here the method <i>goToPoseSync()</i> guarantees that the server receives the request before allowing the code
+flow to proceed. If we had used the analogous non-sync method, then the result of first check would have been
+unpredictable.
+
+To tune the trajectory execution time, you can call the proper function:
+\code
+armCart->setTrajTime(1.5);  // given in seconds
+\endcode
+
+While moving to a target pose, you can query the controller to find out which will be the final joints configuration
+as determined by the solver:
+\code
+Vector xdcap, odcap, qdcap;
+armCart->getDesired(xdhat,odhat,qdhat);
+\endcode
+Of course due to the optimization process \f$ \hat{x}_d \f$ differs from the commanded \f$ x_d \f$, so as \f$ \hat{o}_d \f$ from \f$ o_d \f$.
+\f$ \hat{q}_d \f$ is such that \f$ \left[\hat{x}_d,\hat{o}_d\right]=K\left(\hat{q}_d\right) \f$, where \f$ K \f$ is the forward
+kinematic map. \n
+
+One useful feature is the possibility to enable/disable some degrees of freedom on-line.
+For example the arm comes with 10 possible DOF's (the torso is included) that the user may or may not want to use
+at the same time while reaching. \n
+In the following snippet of code we ask to enable the torso pitch/yaw joints (which are off by default).
+\code
+Vector curDof;
+armCart->getDOF(curDof);
+cout<<"["<<curDof.toString()<<"]"<<endl;  // [0 0 0 1 1 1 1 1 1 1] will be printed out
+
+Vector newDof(3);
+newDof[0]=1;    // torso pitch: 1 => enable
+newDof[1]=2;    // torso roll:  2 => means "don't change"
+newDof[2]=1;    // torso yaw:   1 => enable
+armCart->setDOF(newDof,curDof);
+cout<<"["<<curDof.toString()<<"]"<<endl;  // [1 0 1 1 1 1 1 1 1 1] will be printed out
+\endcode
+To sum up, a value of '1' makes the joint a real degree of freedom, a value of '0' switches it off, while the special value
+of '2' indicates that the joint status won't be modified (to skip it and proceed forward).
+
+Two things deserve your attention:
+- The torso joints order is the one defined by the kinematic description available from the wiki: [pitch,roll,yaw].
+  Usually the motor control interfaces stream the torso joints in the reversed order: [yaw,roll,pitch].
+- The shoulder joints are considered all together to be a super-joint (in order to take into account the shoulder's cable
+  lenght issue) so that you are not allowed to enable/disable one of them differently from the others.
+
+Furthermore, as you can easily figure out, the torso joints are shared by both arms. This tells us to take care of a misuse
+of the cartesian device that might raise when one arm is controlled simultaneously to the other one: if this happens, a supervisor
+that enables/disables the torso joints according to the needs should be put in place. \n
+
+In this respect, when for example the torso is being controlled by an external module, there exists also the possibility for the
+cartesian device to counteract to the induced movements of the uncontrolled joints in order to mantain the final end-effector pose stable. \n
+To enable this feature one should call the proper method:
+\code
+armCart->setTrackingMode(true);
+\endcode
+Usually the cartesian device brings up in <i>non-tracking</i> mode: this means that once the limb has reached the desired pose, the controller
+gets disconnected until the next command is yielded and the limb can be moved by other external agents. \n
+Conversely, in <i>tracking</i> mode the controller stays connected and tries to compensate externally induced movements on the uncontrolled
+joints (that are seen as disturbs on the actual end-effector position) such as the torso ones (in case they have been previously disabled).
+
+Another worthy feature you can benefit from is the chance to change dynamically the rest position the solver uses to specify a secondary task 
+while converging to the solution.
+Briefly (a detailed description is given in the \ref iKinSlv "solver page") the cartesian solver implements a nonlinear constrained optimization
+that can be described in this way:
+
+\f[
+\mathbf{q}=\arg\min_{\mathbf{q}\in R^{n} }\left(\frac{1}{2}\left\|\mathbf{\alpha}_d-\mathit{K_{\alpha}}\left(\mathbf{q}\right)\right\|^2+\mathit{w}\cdot\frac{1}{2}\left\|\mathbf{w}_{rest}\otimes\left(\mathbf{q}_{rest}-\mathbf{q}\right)\right\|^2\right) \quad s.t.\,\left\{\begin{array}{l}\left\|\mathbf{x}_d-\mathit{K_x}\left(\mathbf{q}\right)\right\|^2<\epsilon\\\mathbf{q}_L<\mathbf{q}<\mathbf{q}_U\end{array}\right.
+\f]
+
+The term \f$ \mathit{w}\cdot\frac{1}{2}\left\|\mathbf{w}_{rest}\otimes\left(\mathbf{q}_{rest}-\mathbf{q}\right)\right\|^2 \f$ represents
+the aforementioned secondary task, where \f$ \mathbf{q}_{rest} \f$ is used to keep the solution as close as possible to a given rest
+position in the joint space, weighting component by component with the \f$ \mathbf{w}_{rest} \f$ vector. \n
+Thereby, to access the elements of \f$ \mathbf{q}_{rest} \f$ and \f$ \mathbf{w}_{rest} \f$ vectors one should call the following methods:
+\code
+Vector curRestPos;
+armCart->getRestPos(curRestPos);
+cout<<"["<<curRestPos.toString()<<"]"<<endl;  // [0 0 0 0 0 0 0 0 0 0] will be printed out
+
+Vector curRestWeights;
+armCart->getRestWeights(curRestWeights);
+cout<<"["<<curRestWeights.toString()<<"]"<<endl;  // [1 1 1 0 0 0 0 0 0 0] will be printed out
+\endcode
+Above we've asked for the default configuration of the secondary task which tries to minimize against the rest position (0,0,0) that considers
+only the torso joints in the computation. This prevents the robot from leaning out too much if the target position can be reached easily with
+just the arm.
+
+Full working code of this tutorial is available here:
+\code
+ tutorials/src/tutorial_cartesian_interface.cpp
+\endcode
+
+
+\section sec_simcartinterface The Simulator and the Cartesian Interface
+
+...
+*/

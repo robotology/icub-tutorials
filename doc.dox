@@ -3,15 +3,16 @@
 /**
 @page icub_tutorials Tutorials
 
-- \ref icub_hello_icub - the typical hello world example
-- \ref icub_motor_control_tutorial - a tutorial on motor control
-- \ref icub_basic_image_processing - a tutorial on image processing
-- \ref icub_resource_finder_basic - tutorial on how to organize the parameters needed by your module
-- \ref icub_resource_finder_advanced - tutorial on how to organize parameters and files needed by your module
-- \ref icub_tutorial_module - tutorial, how to use the module helper class
-- \ref icub_rate_thread - tutorial on how to write a periodic thread and use it for control
+- \ref icub_hello_icub
+- \ref icub_motor_control_tutorial
+- \ref icub_basic_image_processing
+- \ref icub_resource_finder_basic
+- \ref icub_resource_finder_advanced
+- \ref icub_tutorial_module
+- \ref icub_rate_thread
+- \ref icub_cartesian_interface
 
-* This file can be edited at tutorials/doc/main.dox
+* This file can be edited at tutorials/doc.dox
 *
 **/
 
