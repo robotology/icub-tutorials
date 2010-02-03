@@ -35,7 +35,7 @@ In order to use the Cartesian Interface, make sure that the following steps are 
 
 <b>iCubInterface+Solvers Application Launcher</b> \n
 
-From this time onwards rely on the $ICUB_ROOT/app/cartesianSolver/scripts/cartesianSolver.xml application to launch
+From this time onwards rely on the <i>$ICUB_ROOT/app/cartesianSolver/scripts/cartesianSolver.xml</i> application to launch
 both the iCubInterface and the cartesian solvers. \n
 The cartesian solvers are required to invert the kinematics using Ipopt and they are meant to run on the cluster
 to avoid overloading the PC104 core. The solvers need the iCubInterface to connect to the robot to get useful data to
