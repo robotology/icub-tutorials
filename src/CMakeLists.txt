@@ -15,6 +15,9 @@ PROJECT(tutorials)
 FIND_PACKAGE(YARP)
 FIND_PACKAGE(ICUB)
 
+FIND_PACKAGE(icubmod)
+IMPORT_DEVICES(${ICUB_DIR}/tutorials/src/drivers.h icubmod)
+
 # Find .cpp and .h files automatically.  This is a bit lazy,
 # and in principle it would be better to list these files manually.
 FILE(GLOB folder_source *.cpp)
@@ -32,5 +35,6 @@ ADD_EXECUTABLE(tutorial_rf_basic tutorial_rf_basic.cpp)
 ADD_EXECUTABLE(tutorial_rf_advanced tutorial_rf_advanced.cpp)
 ADD_EXECUTABLE(tutorial_rate_thread tutorial_rate_thread.cpp)
 ADD_EXECUTABLE(tutorial_module tutorial_module.cpp)
+ADD_EXECUTABLE(tutorial_cartesian_interface tutorial_cartesian_interface.cpp)
 
 
