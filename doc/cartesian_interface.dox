@@ -37,9 +37,9 @@ In order to use the Cartesian Interface, make sure that the following steps are 
 
 From this time onwards rely on the <i>$ICUB_ROOT/app/cartesianSolver/scripts/cartesianSolver.xml</i> application to launch
 both the iCubInterface and the cartesian solvers. \n
-The cartesian solvers are required to invert the kinematics using Ipopt and they are meant to run on the cluster
-to avoid overloading the PC104 core. The solvers need the iCubInterface to connect to the robot to get useful data to
-operate (e.g. the joints bounds) and also iCubInterface needs them to open the server side of the cartesian interface.
+The \ref iKinCartesianSolver "Cartesian Solvers" are required to invert the kinematics using Ipopt and they are meant to run
+on the cluster to avoid overloading the PC104 core. The solvers need the iCubInterface to connect to the robot to get useful
+data to operate (e.g. the joints bounds) and also iCubInterface needs them to open the server side of the cartesian interface.
 Therefore the chicken-egg problem is solved by applying proper connection timeout to the solvers and to keep them as
 close as possible to the iCubInterface by using the application.
 
