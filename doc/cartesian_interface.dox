@@ -211,7 +211,7 @@ cout<<"["<<curDof.toString()<<"]"<<endl;  // [0 0 0 1 1 1 1 1 1 1] will be print
 
 Vector newDof(3);
 newDof[0]=1;    // torso pitch: 1 => enable
-newDof[1]=2;    // torso roll:  2 => means "don't change"
+newDof[1]=2;    // torso roll:  2 => skip
 newDof[2]=1;    // torso yaw:   1 => enable
 armCart->setDOF(newDof,curDof);
 cout<<"["<<curDof.toString()<<"]"<<endl;  // [1 0 1 1 1 1 1 1 1 1] will be printed out
