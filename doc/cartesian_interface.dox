@@ -160,7 +160,7 @@ The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]
 \section sec_usecartinterface Using the Cartesian Interface
 
 The YARP Cartesian Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/dd/de6/classyarp_1_1dev_1_1ICartesianControl.html">here</a>.
-Moreover, some examples are also given hereafter on how to get accustomed with it.
+Moreover, some examples are also reported hereafter to gain a deeper insight into the cartesian device.
 
 Imagine that we want to get the actual arm pose from within our code. What we have to write is just:
 \code
@@ -279,11 +279,9 @@ just the arm.
 To have the Cartesian Interface fully operative together with the robot simulator, please have a look \ref simCartesianControl "here".
 You will need to compile the server part of the interface also on the cluster where the simulator is supposed to run.
 
-
-\section sec_code Code
-
 An working example is available under
 \code
 tutorials/src/tutorial_cartesian_interface.cpp
 \endcode
+which makes the left hand follow a circular path located in front of the simulated robot.
 */
