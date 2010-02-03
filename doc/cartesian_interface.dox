@@ -17,9 +17,9 @@ In order to use the Cartesian Interface, make sure that the following steps are 
 
 -# Update YARP and iCub repositories.
 -# Install <a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a> on the cluster.
--# On the cluster: compile the repository with the switches <b>ADD_IPOPT</b> and <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled
+-# On the cluster: compile the repository with the switches <b>ADD_IPOPT</b> and <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled
    (the latter will become visible as soon as <b>USE_ICUB_MOD</b> is ticked). This will make the client part of the interface available.
--# On PC104: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled (again, the switch
+-# On PC104: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled (again, the switch
    will become visible once <b>USE_ICUB_MOD</b> is selected). This will make the server part of the interface available on the hub.
 -# On PC104: create the files to configure the cartesian controllers.
    For example, to configure the cartesian arm controllers do:
