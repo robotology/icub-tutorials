@@ -167,7 +167,7 @@ Imagine that we want to get the actual arm pose from within our code. What we ha
 Vector x0,o0;
 armCart->getPose(x0,o0);
 \endcode
-In <i>x0</i> the current translational position is returned as well as <i>o0</i> containes now the current orientation.
+The current translational position is returned in <i>x0</i> while <i>o0</i> containes now the current orientation.
 
 Then we want to move the hand a bit farther from the body, let's say just 10 cm away along -x,
 keeping the orientation constant:
