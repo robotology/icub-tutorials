@@ -11,7 +11,7 @@ Before proceeding, the reader might find helpful to recap some motor control fun
 as well as to be introduced to the underneath topic of forward and inverse kinematics by going through the \ref iKin documentation and tutorials.
 
 
-\section sec_dependences Dependences
+\section sec_dependences Dependencies
 
 In order to use the Cartesian Interface, make sure that the following steps are done:
 
