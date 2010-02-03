@@ -245,7 +245,7 @@ gets disconnected until the next command is yielded and the limb can be moved by
 Conversely, in <i>tracking</i> mode the controller stays connected and tries to compensate for externally induced movements on the uncontrolled
 joints (that are seen as disturbs on the actual end-effector position) such as the torso ones (in case they have been previously disabled).
 
-Another worthy feature you can benefit from is the chance to change dynamically the rest position the solver uses to specify a secondary task 
+Another feature you can benefit from is the chance to change dynamically the rest position the solver uses to specify a secondary task 
 while converging to the solution.
 Briefly (a detailed description is given in the \ref iKinSlv "solver page"), the cartesian solver implements a nonlinear constrained optimization
 that can be described in this way:
