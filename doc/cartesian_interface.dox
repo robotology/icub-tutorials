@@ -86,17 +86,19 @@ int main()
 \endcode
 
 You are now able to open the Cartesian Interface in the usual way:
-\code
-PolyDriver        *clientCartCtrl;
-ICartesianControl *armCart;
- 
+\code 
 Property option;
 option.put("device","cartesiancontrollerclient");
 option.put("remote","/icub/cartesianController/right_arm");
 option.put("local","/client/right_arm");
  
-clientCartCtrl=new PolyDriver(option);
-clientCartCtrl->view(armCart);
+PolyDriver clientCartCtrl(option);
+
+ICartesianControl *armCart=NULL;
+
+if (clientCartCtrl.isValid()) {
+   clientCartCtrl.view(armCart);
+}
 \endcode
 
 As you might have noticed, the stem-name of the cartesian server controller (taken as standard) is "/<robot_name>/cartesianController/<part_name>".
