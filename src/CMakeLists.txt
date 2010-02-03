@@ -14,6 +14,7 @@ PROJECT(tutorials)
 
 FIND_PACKAGE(YARP)
 FIND_PACKAGE(ICUB)
+FIND_PACKAGE(IKIN)
 
 FIND_PACKAGE(icubmod)
 IMPORT_DEVICES(${ICUB_DIR}/tutorials/src/drivers.h icubmod)
@@ -35,6 +36,8 @@ ADD_EXECUTABLE(tutorial_rf_basic tutorial_rf_basic.cpp)
 ADD_EXECUTABLE(tutorial_rf_advanced tutorial_rf_advanced.cpp)
 ADD_EXECUTABLE(tutorial_rate_thread tutorial_rate_thread.cpp)
 ADD_EXECUTABLE(tutorial_module tutorial_module.cpp)
+
 ADD_EXECUTABLE(tutorial_cartesian_interface tutorial_cartesian_interface.cpp)
+TARGET_LINK_LIBRARIES(tutorial_cartesian_interface ${IKIN_LIBRARIES})
 
 
