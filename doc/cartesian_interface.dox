@@ -204,9 +204,9 @@ as determined by the solver:
 Vector xdcap, odcap, qdcap;
 armCart->getDesired(xdhat,odhat,qdhat);
 \endcode
-Of course due to the optimization process \f$ \hat{x}_d \f$ differs from the commanded \f$ x_d \f$, so as \f$ \hat{o}_d \f$ from \f$ o_d \f$;
-\f$ \hat{q}_d \f$ is such that \f$ \left[\hat{x}_d,\hat{o}_d\right]=K\left(\hat{q}_d\right) \f$, where \f$ K \f$ is the forward
-kinematic map. \n
+Of course due to the optimization process \f$ \hat{x}_d \f$ differs from the commanded \f$ x_d \f$ (but the distance in norm complies
+with the given tolerance), so as \f$ \hat{o}_d \f$ from \f$ o_d \f$; \f$ \hat{q}_d \f$ is such that \f$ \left[\hat{x}_d,\hat{o}_d\right]=K\left(\hat{q}_d\right) \f$,
+where \f$ K\left(\cdot\right) \f$ is the forward kinematic map. \n
 
 One useful feature is the possibility to enable/disable some degrees of freedom on-line.
 For example the arm comes with 10 possible DOF's (the torso is included) that the user may or may not want to use
