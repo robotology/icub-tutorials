@@ -132,7 +132,7 @@ public:
 
     void generateTarget()
     {   
-        // translational target part: a circled trajectory
+        // translational target part: a circular trajectory
         // in the yz plane centered in [-0.3,-0.1,0.1] with radius=0.1 m
         // and frequency 0.1 Hz
         xd[0]=-0.3;
