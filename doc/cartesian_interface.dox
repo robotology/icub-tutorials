@@ -51,6 +51,8 @@ this the user has to import within his project the new hardware module represent
 
 To achieve that, the following lines have to be included in the <i>CMakeLists.txt</i> file:
 \code
+find_package(ICUB)
+
 if(USE_ICUB_MOD)
     add_definitions(-DUSE_ICUB_MOD)
     find_package(icubmod)
@@ -61,8 +63,11 @@ else(USE_ICUB_MOD)
 endif(USE_ICUB_MOD)
 \endcode 
 
-and at the same time a <i>DriverCollection</i> object has to be instatiated in the <i>main()</i> function in
-order to insert the cartesian client controller in the list of the available device drivers:
+Remind that the guard on the define <b>USE_ICUB_MOD</b> is meaningful only within the nest build. In case you want to compile 
+your porject out of the main build, remove the guard.
+
+Besides, you have to declare a <i>DriverCollection</i> object in the <i>main()</i> function in order to insert the cartesian
+client controller in the list of the available device drivers:
 \code
 ...
 #ifdef USE_ICUB_MOD
