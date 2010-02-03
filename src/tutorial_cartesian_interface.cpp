@@ -46,7 +46,7 @@ protected:
     double t1;
 
 public:
-    CtrlThread(const double period) : RateThread(period*1000) { }
+    CtrlThread(const double period) : RateThread(int(period*1000.0)) { }
 
     virtual bool threadInit()
     {
@@ -95,9 +95,9 @@ public:
     virtual void afterStart(bool s)
     {
         if (s)
-            cout<<"Thread started successfully"<<endl;
+            fprintf(stdout,"Thread started successfully\n");
         else
-            cout<<"Thread did not start"<<endl;
+            fprintf(stdout,"Thread did not start\n");
 
         t=t0=t1=Time::now();
     }
