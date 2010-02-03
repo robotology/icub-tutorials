@@ -24,8 +24,8 @@ In order to use the Cartesian Interface, make sure that the following steps are 
 -# On PC104: create the files to configure the cartesian controllers.
    For example, to configure the cartesian arm controllers do:
    - copy the files <i>cartesianLeftArm.ini</i> and <i>cartesianRightArm.ini</i> from <i>$ICUB_ROOT/app/iCubGenova01/conf</i>
-     to <i>$ICUB_ROOT/app/$ICUB_ROBOT_NAME/conf</i>.
-   - create the file <i>$ICUB_ROOT/app/$ICUB_ROBOT_NAME/conf/iCubInterfaceCartesian.ini</i> containing the following lines:
+     to <i>$ICUB_ROOT/app/$ICUB_ROBOTNAME/conf</i>.
+   - create the file <i>$ICUB_ROOT/app/$ICUB_ROBOTNAME/conf/iCubInterfaceCartesian.ini</i> containing the following lines:
      \code
      config icubSafe.ini // or the current main configuration file
      cartLeftArm cartesianLeftArm.ini
