@@ -136,22 +136,15 @@ around the y-axis and then of pi/2 around the resulting x-axis.
 
 In formulas:
 \code
-#include <yarp/sig/Vector.h>
-#include <yarp/sig/Matrix.h>
-#include <yarp/math/Math.h>
-#include <iCub/ctrlMath.h>
-
-using namespace yarp::math;
-
-yarp::sig::Vector oy(4), ox(4);
+Vector oy(4), ox(4);
 oy[0]=0.0; oy[1]=1.0; oy[2]=0.0; oy[3]=M_PI/2.0;
 ox[0]=1.0; ox[1]=0.0; ox[2]=0.0; ox[3]=M_PI/2.0;
 
-yarp::sig::Matrix Ry=ctrl::axis2dcm(oy);
-yarp::sig::Matrix Rx=ctrl::axis2dcm(ox);
+Matrix Ry=ctrl::axis2dcm(oy);
+Matrix Rx=ctrl::axis2dcm(ox);
 
-yarp::sig::Matrix R=Ry*Rx;
-yarp::sig::Vector o=ctrl::dcm2axis(R);
+Matrix R=Ry*Rx;
+Vector o=ctrl::dcm2axis(R);
 \endcode
 
 The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]
