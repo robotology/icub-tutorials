@@ -234,7 +234,8 @@ of '2' indicates that the joint status won't be modified (to skip it and proceed
 
 Two things deserve your attention:
 - The torso joints order is the one defined by the kinematic description available from the wiki: [pitch,roll,yaw].
-  Usually the motor control interfaces stream the torso joints in the reversed order: [yaw,roll,pitch].
+  Usually the motor control interfaces stream the torso joints in the reversed order (i.e. [yaw,roll,pitch]) since they assume
+  a different kinematic origin (the base of the neck in this case).
 - The shoulder joints are considered all together to be a super-joint (in order to take into account the shoulder's cable
   lenght issue) so that you are not allowed to enable/disable one of them differently from the others.
 
