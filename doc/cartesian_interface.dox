@@ -32,6 +32,8 @@ In order to use the Cartesian Interface, make sure that the following steps are 
      cartRightArm cartesianRightArm.ini
      \endcode
 
+<b>Important Note</b>: should you experience problems while compiling in Debug mode on a Windows platform, try to run cmake
+twice: just do configure and generate twice without deleting the cache between the two runs. \n
 
 <b>iCubInterface+Solvers Application Launcher</b> \n
 
