@@ -69,7 +69,7 @@ endif(USE_ICUB_MOD)
 \endcode 
 
 Remind that the guard on the define <b>USE_ICUB_MOD</b> is meaningful only within the nest build. In case you want to compile 
-your porject out of the main build, remove the guard.
+your project out of the main build, remove the guard.
 
 Besides, you have to declare a <i>DriverCollection</i> object in the <i>main()</i> function in order to insert the cartesian
 client controller in the list of the available device drivers:
