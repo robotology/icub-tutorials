@@ -206,7 +206,7 @@ armCart->setTrajTime(1.5);  // given in seconds
 While moving to a target pose, you can query the controller to find out which will be the final joints configuration
 as determined by the solver:
 \code
-Vector xdcap, odcap, qdcap;
+Vector xdhat, odhat, qdhat;
 armCart->getDesired(xdhat,odhat,qdhat);
 \endcode
 Of course due to the optimization process \f$ \hat{x}_d \f$ differs from the commanded \f$ x_d \f$ (but the distance in norm complies
