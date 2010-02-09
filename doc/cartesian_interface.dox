@@ -198,7 +198,7 @@ Here the method <i>goToPoseSync()</i> guarantees that the server receives the re
 flow to proceed. If we had used the analogous non-sync method, then the result of first check would have been
 unpredictable.
 
-To tune the trajectory execution time, you can call the proper function:
+To tune the trajectory execution time for point-to-point movements, you can call the proper function:
 \code
 armCart->setTrajTime(1.5);  // given in seconds
 \endcode
