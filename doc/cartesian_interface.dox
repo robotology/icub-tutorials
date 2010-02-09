@@ -240,7 +240,7 @@ Two things deserve your attention:
   lenght issue) so that you are not allowed to enable/disable one of them differently from the others.
 
 Furthermore, as you can easily figure out, the torso joints are shared by both arms. This tells us to take care of a misuse
-of the cartesian device that might raise when one arm is controlled simultaneously to the other one: if this happens, a supervisor
+of the cartesian device that might arise when one arm is controlled simultaneously to the other one: if this happens, a supervisor
 that enables/disables the torso joints according to the needs should be put in place. \n
 
 In this respect, when for example the torso is being controlled by an external module, there exists also the possibility for the
