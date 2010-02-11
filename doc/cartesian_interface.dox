@@ -16,6 +16,7 @@ as well as to be introduced to the underneath topic of forward and inverse kinem
 In order to use the Cartesian Interface, make sure that the following steps are done:
 
 -# Update YARP and iCub repositories.
+-# Compile YARP.
 -# Install <a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a> on the cluster.
 -# On the cluster: compile the repository with the switches <b>ADD_IPOPT</b> and <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled
    (the latter will become visible as soon as <b>USE_ICUB_MOD</b> is ticked). This will make the client part of the interface available.
