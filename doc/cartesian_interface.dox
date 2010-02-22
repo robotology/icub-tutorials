@@ -215,7 +215,7 @@ with the given tolerance), so as \f$ \hat{o}_d \f$ from \f$ o_d \f$; \f$ \hat{q}
 where \f$ K\left(\cdot\right) \f$ is the forward kinematic map. \n
 
 One useful feature is the possibility to enable/disable some degrees of freedom on-line.
-For example the arm comes with 10 possible DOF's (the torso is included) that the user may or may not want to use
+For example, the arm comes with 10 possible DOF's (the torso is included) that the user may or may not want to use
 at the same time while reaching. \n
 In the following snippet of code we ask to enable the torso pitch and yaw joints (which are off by default).
 \code
