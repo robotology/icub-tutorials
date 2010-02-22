@@ -108,7 +108,7 @@ if (clientCartCtrl.isValid()) {
 \endcode
 
 As you might have noticed, the stem-name of the cartesian server controller (taken as standard) is "/<robot_name>/cartesianController/<part_name>".
-Thus, similarly to a usual motor controller, a state port streming out the cartesian pose of the limb's end-effector is also
+Thus, similarly to a usual motor controller, a state port streaming out the cartesian pose of the limb's end-effector is also
 available whose name is "/<robot_name>/cartesianController/<part_name>/state:o".
 As result you can do:
 \code
