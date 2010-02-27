@@ -193,6 +193,7 @@ armCart->goToPoseSync(xd,od);   // send request and wait for reply
 bool flag=false;
 while (!flag) {
    armCart->checkMotionDone(&flag);
+   Time::delay(0.04);   // or any suitable delay
 }
 \endcode
 Here the method <i>goToPoseSync()</i> guarantees that the server receives the request before allowing the code
