@@ -63,9 +63,6 @@ if(USE_ICUB_MOD)
     add_definitions(-DUSE_ICUB_MOD)
     find_package(icubmod)
     import_devices(${ICUB_DIR}/src/${PROJECTNAME}/drivers.h icubmod)
-    set(folder_header drivers.h)
-else(USE_ICUB_MOD)
-    set(folder_header)
 endif(USE_ICUB_MOD)
 \endcode 
 
