@@ -289,5 +289,5 @@ A working example is available under
 \code
 tutorials/src/tutorial_cartesian_interface.cpp
 \endcode
-which makes the left hand follow a circular path located in front of the simulated robot.
+which makes the left hand follow a circular trajectory located in front of the simulated robot.
 */
