@@ -41,8 +41,8 @@ the cache. \n
 
 <b>iCubInterface+Solvers Application Launcher</b> \n
 
-From this time onwards rely on the <i>$ICUB_ROOT/app/cartesianSolver/scripts/cartesianSolver.xml</i> application to launch
-both the iCubInterface and the cartesian solvers. \n
+Henceforth rely on the <i>$ICUB_ROOT/app/cartesianSolver/scripts/cartesianSolver.xml</i> application to launch both the
+iCubInterface and the cartesian solvers. \n
 The \ref iKinCartesianSolver "Cartesian Solvers" are required to invert the kinematics using Ipopt and they are meant to run
 on the cluster to avoid overloading the PC104 core. The solvers need the iCubInterface to connect to the robot to get useful
 data to operate (e.g. the joints bounds) and also iCubInterface needs them to open the server side of the cartesian interface.
