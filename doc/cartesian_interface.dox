@@ -34,11 +34,6 @@ In order to use the Cartesian Interface, make sure that the following steps are 
      \endcode
 
 
-<b>Important Note</b>: should you experience problems while compiling in Debug mode under Windows, please run cmake twice, i.e.
-just do "configure" and "generate" twice in a row: you'll be forced to close and reopen cmake in between, so remember not to delete
-the cache. \n
-
-
 <b>iCubInterface+Solvers Application Launcher</b> \n
 
 Henceforth rely on the <i>$ICUB_ROOT/app/cartesianSolver/scripts/cartesianSolver.xml</i> application to launch both the
