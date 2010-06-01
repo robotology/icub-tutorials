@@ -1,29 +1,16 @@
-IF(WIN32)
-cmake_minimum_required(VERSION 2.6)
-ELSE(WIN32)
-cmake_minimum_required(VERSION 2.4)
-ENDIF(WIN32)
-
-if(COMMAND cmake_policy)
-    cmake_policy(SET CMP0003 NEW)
-endif(COMMAND cmake_policy)
-
 SET(PROJECTNAME tutorials)
 
-PROJECT(tutorials)
+PROJECT(${PROJECTNAME})
 
 FIND_PACKAGE(YARP)
 FIND_PACKAGE(ICUB)
-
-FIND_PACKAGE(icubmod)
-IMPORT_DEVICES(${ICUB_DIR}/tutorials/src/drivers.h icubmod)
 
 # Find .cpp and .h files automatically.  This is a bit lazy,
 # and in principle it would be better to list these files manually.
 FILE(GLOB folder_source *.cpp)
 FILE(GLOB folder_header *.h)
 
-# Declare groups of source and header files -- makes things pretty in MSVC.
+INCLUDE_DIRECTORIES(${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
 # Create everything needed to build our executable.
 ADD_EXECUTABLE(imageProc imageProc.cpp)
@@ -36,5 +23,17 @@ ADD_EXECUTABLE(tutorial_rf_advanced tutorial_rf_advanced.cpp)
 ADD_EXECUTABLE(tutorial_rate_thread tutorial_rate_thread.cpp)
 ADD_EXECUTABLE(tutorial_module tutorial_module.cpp)
 ADD_EXECUTABLE(tutorial_cartesian_interface tutorial_cartesian_interface.cpp)
+
+TARGET_LINK_LIBRARIES(imageProc ${YARP_LIBRARIES})
+TARGET_LINK_LIBRARIES(findLocation ${YARP_LIBRARIES})
+TARGET_LINK_LIBRARIES(lookAtLocation ${YARP_LIBRARIES})
+TARGET_LINK_LIBRARIES(relay ${YARP_LIBRARIES})
+TARGET_LINK_LIBRARIES(tutorial_arm ${YARP_LIBRARIES})
+TARGET_LINK_LIBRARIES(tutorial_rf_basic ${YARP_LIBRARIES})
+TARGET_LINK_LIBRARIES(tutorial_rf_advanced ${YARP_LIBRARIES})
+TARGET_LINK_LIBRARIES(tutorial_rate_thread ${YARP_LIBRARIES})
+TARGET_LINK_LIBRARIES(tutorial_module ${YARP_LIBRARIES})
+TARGET_LINK_LIBRARIES(tutorial_cartesian_interface ${YARP_LIBRARIES} icubmod)
+
 
 

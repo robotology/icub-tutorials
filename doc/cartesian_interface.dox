@@ -14,14 +14,15 @@ as well as to be introduced to the underneath topic of forward and inverse kinem
 \section sec_dependences Dependencies
 
 In order to use the Cartesian Interface, make sure that the following steps are done:
+[[<b>Please note that this procedure applies only to the iCub/main branch</b>]]
 
 -# Update YARP and iCub repositories.
 -# Compile YARP.
 -# Install <a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a> on the cluster.
--# On the cluster: compile the repository with the switches <b>ADD_IPOPT</b> and <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled
-   (the latter will become visible as soon as <b>USE_ICUB_MOD</b> is ticked). This will make the client part of the interface available.
--# On PC104: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled (again, the switch
-   will become visible once <b>USE_ICUB_MOD</b> is selected). This will make the server part of the interface available on the hub.
+-# On the cluster: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled. This will make
+   the client part of the interface available.
+-# On PC104: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled. This will make the
+   server part of the interface available on the hub.
 -# On PC104: create the files to configure the cartesian controllers.
    For example, to configure the cartesian arm controllers do:
    - copy the files <i>cartesianLeftArm.ini</i> and <i>cartesianRightArm.ini</i> from <i>$ICUB_ROOT/app/iCubGenova01/conf</i>
@@ -48,38 +49,27 @@ close as possible to the iCubInterface by using the application.
 \section sec_openclosecartinterface Opening and Closing the Cartesian Interface
 
 The Cartesian Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
-this the user has to import within his project the new hardware module represented by the cartesian client controller.
+this the user has to enforce the dependence of his project from the iCub hardware modules collection.
 
 To achieve that, the following lines have to be included in the <i>CMakeLists.txt</i> file:
 \code
 find_package(ICUB)
-
-if(USE_ICUB_MOD)
-    add_definitions(-DUSE_ICUB_MOD)
-    find_package(icubmod)
-    import_devices(${ICUB_DIR}/src/${PROJECTNAME}/drivers.h icubmod)
-endif(USE_ICUB_MOD)
+...
+target_link_libraries(${PROJECTNAME} ... icubmod ...)
 \endcode 
 
-Remind that the guard on the define <b>USE_ICUB_MOD</b> is meaningful only within the nest build. In case you want to compile 
-your project out of the main build, remove the guard.
-
-Besides, you have to declare a <i>DriverCollection</i> object in the <i>main()</i> function in order to insert the cartesian
-client controller in the list of the available device drivers:
+Besides, it is also required to insert the following lines within the user's code in order to correctly enable the cartesian
+client controller:
 \code
 ...
-#ifdef USE_ICUB_MOD
-    #include "drivers.h"
-#endif
+#include <yarp/dev/Drivers.h>
+YARP_DECLARE_DEVICES(icubmod)
 ...
 
 int main()
 {
-...
-#ifdef USE_ICUB_MOD
-    DriverCollection dev;
-#endif
-...
+    YARP_REGISTER_DEVICES(icubmod)
+    ...
 }
 \endcode
 

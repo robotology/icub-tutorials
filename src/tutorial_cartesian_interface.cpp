@@ -12,6 +12,7 @@
 #include <yarp/sig/Vector.h>
 #include <yarp/math/Math.h>
 
+#include <yarp/dev/Drivers.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 #include <yarp/dev/CartesianControl.h>
 #include <yarp/dev/PolyDriver.h>
@@ -19,11 +20,11 @@
 #include <stdio.h>
 #include <gsl/gsl_math.h>
 
-#include "drivers.h"
-
 #define CTRL_THREAD_PER     0.02    // [s]
 #define PRINT_STATUS_PER    1.0     // [s]
 #define MAX_TORSO_PITCH     30.0    // [deg]
+
+YARP_DECLARE_DEVICES(icubmod)
 
 using namespace yarp;
 using namespace yarp::os;
@@ -237,13 +238,13 @@ public:
 
 
 int main()
-{    
+{   
+    // we need to initialize the drivers list 
+    YARP_REGISTER_DEVICES(icubmod)
+
     Network yarp;
     if (!yarp.checkNetwork())
         return -1;
-
-    // we need to initialize the drivers list
-    DriverCollection dev;
 
     CtrlModule mod;
 
