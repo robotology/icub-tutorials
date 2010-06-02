@@ -23,7 +23,7 @@
 
 #define CTRL_THREAD_PER     0.02        // [s]
 #define PRINT_STATUS_PER    1.0         // [s]
-#define STORE_POI_PER       1.0         // [s]
+#define STORE_POI_PER       3.0         // [s]
 #define SWITCH_STATE_PER    10.0        // [s]
 
 #define STATE_TRACK         0
@@ -139,7 +139,7 @@ public:
             poiList.clear();
 
             fprintf(stdout,"Retrieving POI #0 ... %s [deg]\n",
-                    ((360.0/M_PI)*ang).toString().c_str());
+                    ang.toString().c_str());
 
             // look at the chosen POI
             gaze->lookAtAbsAngles(ang);
@@ -159,7 +159,7 @@ public:
                 gaze->getAngles(ang);            
 
                 fprintf(stdout,"Actual gaze configuration: %s [deg]\n",
-                        ((360.0/M_PI)*ang).toString().c_str());
+                        ang.toString().c_str());
 
                 t1=t2=t3=t;
     
@@ -203,7 +203,7 @@ public:
             gaze->getAngles(ang);            
 
             fprintf(stdout,"Storing POI #%d ... %s [deg]\n",
-                    poiList.size(),((360.0/M_PI)*ang).toString().c_str());
+                    poiList.size(),ang.toString().c_str());
 
             poiList.push_back(ang);
 
