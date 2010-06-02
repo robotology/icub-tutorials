@@ -55,6 +55,8 @@ To achieve that, the following lines have to be included in the <i>CMakeLists.tx
 \code
 find_package(ICUB)
 ...
+include_directories(... ${ICUB_INCLUDE_DIRS} ...)
+...
 target_link_libraries(${PROJECTNAME} ... icubmod ...)
 \endcode 
 
