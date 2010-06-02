@@ -17,8 +17,9 @@
 #include <yarp/dev/CartesianControl.h>
 #include <yarp/dev/PolyDriver.h>
 
-#include <stdio.h>
 #include <gsl/gsl_math.h>
+
+#include <stdio.h>
 
 #define CTRL_THREAD_PER     0.02    // [s]
 #define PRINT_STATUS_PER    1.0     // [s]

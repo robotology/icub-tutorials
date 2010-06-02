@@ -26,6 +26,7 @@ ADD_EXECUTABLE(tutorial_rf_advanced tutorial_rf_advanced.cpp)
 ADD_EXECUTABLE(tutorial_rate_thread tutorial_rate_thread.cpp)
 ADD_EXECUTABLE(tutorial_module tutorial_module.cpp)
 ADD_EXECUTABLE(tutorial_cartesian_interface tutorial_cartesian_interface.cpp)
+ADD_EXECUTABLE(tutorial_gaze_interface tutorial_gaze_interface.cpp)
 
 TARGET_LINK_LIBRARIES(imageProc ${YARP_LIBRARIES})
 TARGET_LINK_LIBRARIES(findLocation ${YARP_LIBRARIES})
@@ -37,6 +38,7 @@ TARGET_LINK_LIBRARIES(tutorial_rf_advanced ${YARP_LIBRARIES})
 TARGET_LINK_LIBRARIES(tutorial_rate_thread ${YARP_LIBRARIES})
 TARGET_LINK_LIBRARIES(tutorial_module ${YARP_LIBRARIES})
 TARGET_LINK_LIBRARIES(tutorial_cartesian_interface ${YARP_LIBRARIES} icubmod)
+TARGET_LINK_LIBRARIES(tutorial_gaze_interface ${YARP_LIBRARIES} icubmod)
 
 
 
