@@ -14,7 +14,6 @@ as well as to be introduced to the underneath topic of forward and inverse kinem
 \section sec_dependences Dependencies
 
 In order to use the Cartesian Interface, make sure that the following steps are done:
-[[<b>Please note that this procedure applies only to the iCub/main branch</b>]]
 
 -# Update YARP and iCub repositories.
 -# Compile YARP.
@@ -51,7 +50,14 @@ close as possible to the iCubInterface by using the application.
 The Cartesian Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
 this the user has to enforce the dependence of his project from the iCub hardware modules collection.
 
-To achieve that, the following lines have to be included in the <i>CMakeLists.txt</i> file:
+To achieve that, the following lines have to be included in the <i>CMakeLists.txt</i> file whenever you intend to put
+your project within the iCub repository:
+\code
+target_link_libraries(${PROJECTNAME} ... icubmod ...)
+\endcode 
+
+On the contrary, if you are developing your module externally to the iCub repository, make sure to include the 
+following lines:
 \code
 find_package(ICUB)
 ...
@@ -60,7 +66,7 @@ include_directories(... ${ICUB_INCLUDE_DIRS} ...)
 target_link_libraries(${PROJECTNAME} ... icubmod ...)
 \endcode 
 
-Besides, it is also required to insert the following lines within the user's code in order to correctly enable the cartesian
+Besides, it is also required to insert the following lines within the code in order to correctly enable the cartesian
 client controller:
 \code
 ...
