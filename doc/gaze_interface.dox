@@ -197,7 +197,7 @@ Vector pxr(2);
 pxr[0]=150.0;
 pxr[1]=120.0;
 
-igaze->lookAtStereoPixel(pxl,pxr);	// look!
+igaze->lookAtStereoPixels(pxl,pxr);		// look!
 \endcode
 
 Of course, the matching problem between pixels of different image plane is left to the user, who has also to
