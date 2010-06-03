@@ -13,7 +13,6 @@
 #include <yarp/math/Math.h>
 
 #include <yarp/dev/Drivers.h>
-#include <yarp/dev/ControlBoardInterfaces.h>
 #include <yarp/dev/CartesianControl.h>
 #include <yarp/dev/PolyDriver.h>
 

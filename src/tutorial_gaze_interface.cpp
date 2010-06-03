@@ -25,10 +25,12 @@
 #define PRINT_STATUS_PER    1.0         // [s]
 #define STORE_POI_PER       3.0         // [s]
 #define SWITCH_STATE_PER    10.0        // [s]
+#define STILL_STATE_TIME    5.0         // [s]
 
 #define STATE_TRACK         0
 #define STATE_RECALL        1
 #define STATE_WAIT          2
+#define STATE_STILL         3
 
 YARP_DECLARE_DEVICES(icubmod)
 
@@ -44,8 +46,11 @@ using namespace yarp::math;
 class CtrlThread: public RateThread
 {
 protected:
-    PolyDriver   *client;
-    IGazeControl *gaze;
+    PolyDriver       *clientGaze;
+    PolyDriver       *clientTorso;
+    IGazeControl     *igaze;
+    IEncoders        *ienc;
+    IPositionControl *ipos;
 
     int state;
 
@@ -58,6 +63,7 @@ protected:
     double t1;
     double t2;
     double t3;
+    double t4;
 
 public:
     CtrlThread(const double period) : RateThread(int(period*1000.0)) { }
@@ -69,23 +75,45 @@ public:
         // 1 - the iCub simulator (icubSim) is running
         // 2 - the gaze server iKinGazeCtrl is running and
         //     launched with --robot icubSim option
-        Property option("(device gazecontrollerclient)");
-        option.put("remote","/iKinGazeCtrl");
-        option.put("local","/gaze_client");
+        Property optGaze("(device gazecontrollerclient)");
+        optGaze.put("remote","/iKinGazeCtrl");
+        optGaze.put("local","/gaze_client");
 
-        client=new PolyDriver;
-        if (!client->open(option))
+        clientGaze=new PolyDriver;
+        if (!clientGaze->open(optGaze))
         {
-            delete client;    
+            delete clientGaze;    
             return false;
         }
 
         // open the view
-        client->view(gaze);
+        clientGaze->view(igaze);
 
-        // set trajectory time
-        gaze->setNeckTrajTime(0.4);
-        gaze->setEyesTrajTime(0.1);
+        // set trajectory time:
+        // we'll go like hell since we're using the simulator :)
+        igaze->setNeckTrajTime(0.4);
+        igaze->setEyesTrajTime(0.1);
+
+        // put the gaze in tracking mode, so that
+        // when the torso moves, the gaze controller 
+        // will compensate for it
+        igaze->setTrackingMode(true);
+
+        Property optTorso("(device remotecontrolboard)");
+        optTorso.put("remote","/icubSim/torso");
+        optTorso.put("local","/torso_client");
+
+        clientTorso=new PolyDriver;
+        if (!clientTorso->open(optTorso))
+        {
+            delete clientTorso;    
+            return false;
+        }
+
+        // open the view
+        clientTorso->view(ienc);
+        clientTorso->view(ipos);
+        ipos->setRefSpeed(0,30.0);
 
         fp.resize(3);
 
@@ -101,7 +129,7 @@ public:
         else
             fprintf(stdout,"Thread did not start\n");
 
-        t=t0=t1=t2=t3=Time::now();
+        t=t0=t1=t2=t3=t4=Time::now();
     }
 
     virtual void run()
@@ -112,9 +140,8 @@ public:
 
         if (state==STATE_TRACK)
         {
-            // look at the target
-            // in streaming
-            gaze->lookAtFixationPoint(fp);
+            // look at the target (streaming)
+            igaze->lookAtFixationPoint(fp);
 
             // some verbosity
             printStatus();
@@ -142,7 +169,7 @@ public:
                     ang.toString().c_str());
 
             // look at the chosen POI
-            gaze->lookAtAbsAngles(ang);
+            igaze->lookAtAbsAngles(ang);
 
             // switch state
             state=STATE_WAIT;
@@ -151,18 +178,38 @@ public:
         if (state==STATE_WAIT)
         {
             bool done=false;
-            gaze->checkMotionDone(&done);
+            igaze->checkMotionDone(&done);
 
             if (done)
             {
                 Vector ang;
-                gaze->getAngles(ang);            
+                igaze->getAngles(ang);            
 
                 fprintf(stdout,"Actual gaze configuration: %s [deg]\n",
                         ang.toString().c_str());
 
+                fprintf(stdout,"Moving the torso; see if the gaze is compensated ... ");
+                
+                // move the torso yaw
+                double val;
+                ienc->getEncoder(0,&val);
+                ipos->positionMove(0,val>0.0?-30.0:30.0);
+
+                t4=t;
+
+                // switch state
+                state=STATE_STILL;
+            }
+        }
+
+        if (state==STATE_STILL)
+        {
+            if (t-t4>=STILL_STATE_TIME)
+            {
+                fprintf(stdout,"done\n");
+
                 t1=t2=t3=t;
-    
+
                 // switch state
                 state=STATE_TRACK;
             }
@@ -175,8 +222,14 @@ public:
         // before closing the client for safety reason
         // (anyway it's already done internally in the
         // destructor)
-        gaze->stopControl();
-        delete client;
+        igaze->stopControl();
+
+        // it's a good rule to reinstate the tracking mode
+        // as it was
+        igaze->setTrackingMode(false);
+
+        delete clientGaze;
+        delete clientTorso;
     }
 
     void generateTarget()
@@ -200,7 +253,7 @@ public:
             // The absolute reference frame for the azimuth/elevation couple
             // is head-centered with the robot in rest configuration
             // (i.e. torso and head angles zeroed). 
-            gaze->getAngles(ang);            
+            igaze->getAngles(ang);            
 
             fprintf(stdout,"Storing POI #%d ... %s [deg]\n",
                     poiList.size(),ang.toString().c_str());
@@ -224,7 +277,7 @@ public:
 
             // we get the current fixation point in the
             // operational space
-            gaze->getFixationPoint(x);
+            igaze->getFixationPoint(x);
 
             fprintf(stdout,"+++++++++\n");
             fprintf(stdout,"fp         [m] = %s\n",fp.toString().c_str());
