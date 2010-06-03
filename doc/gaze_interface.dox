@@ -97,11 +97,11 @@ The YARP Gaze Interface is fully documented <a href="http://eris.liralab.it/yarp
 It makes use of three different coordinate systems that enable the user to control the robot's gaze as detailed hereafter.
 
 \subsection subsec_cartcoorsystem Expressing the fixation point in Cartesian Coordinates
-This coordinate system is the same the \ref icub_cartesian_interface "Cartesian Interface" relies on and complies with the
+This coordinate system is the same as the one the \ref icub_cartesian_interface "Cartesian Interface" relies on and complies with the
 <a href="http://eris.liralab.it/wiki/ICubForwardKinematics">wiki</a> specifications; it lets the user to give the target
 location where to gaze at with respect to the root reference frame attached to the robot's waist.
 
-The following snippet of code shows how to command the gaze in the cartesian space and retrieve the current configuration.
+The following snippet of code shows how to command the gaze in the cartesian space and to retrieve the current configuration.
 
 \code
 #include <iCub/ctrl/ctrlMath.h>
