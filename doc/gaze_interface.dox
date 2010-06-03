@@ -33,7 +33,7 @@ method. Furthermore, by using the <i>$ICUB_ROOT/app/cartesianSolver/scripts/cart
 able to launch the gaze server contextually with the iCubInterface module.
 
 
-\section sec_openclosecartinterface Opening and Closing the Gaze Interface
+\section sec_openclosegazeinterface Opening and Closing the Gaze Interface
 
 The Gaze Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
 this the user has to enforce the dependence of his project from the iCub hardware modules collection.
@@ -184,7 +184,7 @@ igaze->lookAtMonoPixel(camSel,px,z);	// look!
 \endcode
 
 
-\subsection subsec_monopixelcoorsystem Expressing the fixation point in pixel coordinates (stereo approach)
+\subsection subsec_stereopixelcoorsystem Expressing the fixation point in pixel coordinates (stereo approach)
 The same thing can be achieved also by exploiting the stereo vision:
 \code
 // specify the pixel within the left image plane
