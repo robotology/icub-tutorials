@@ -182,11 +182,11 @@ public:
     void generateTarget()
     {   
         // translational target part: a circular trajectory
-        // in the yz plane centered in [-0.5,0.0,0.25] with radius=0.1 m
+        // in the yz plane centered in [-0.5,0.0,0.3] with radius=0.1 m
         // and frequency 0.1 Hz
-        fp[0]=-0.50;
-        fp[1]=+0.00+0.1*cos(2.0*M_PI*0.1*(t-t0));
-        fp[2]=+0.25+0.1*sin(2.0*M_PI*0.1*(t-t0));            
+        fp[0]=-0.5;
+        fp[1]=+0.0+0.1*cos(2.0*M_PI*0.1*(t-t0));
+        fp[2]=+0.3+0.1*sin(2.0*M_PI*0.1*(t-t0));            
     }
 
     void storeInterestingPoint()
