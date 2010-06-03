@@ -54,7 +54,7 @@ include_directories(... ${ICUB_INCLUDE_DIRS} ...)
 target_link_libraries(${PROJECTNAME} ... icubmod ...)
 \endcode 
 
-Besides, it is also required to insert the following lines within the code in order to correctly enable the cartesian
+Besides, it is also required to insert the following lines within the code in order to correctly initialize the cartesian
 client controller:
 \code
 ...
