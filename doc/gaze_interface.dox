@@ -133,7 +133,7 @@ This coordinate system is an absolute head-centered angular reference frame as e
 - <i>Angular</i> means that it makes use of the azimuth, elevation and vergence that are angular quantities.
 - <i>Head-Centered</i> means that the frame is attached to the cyclopic eye, i.e. the ideal eye located at the middle point
   between the two cameras owning the same set of three axes.
-- <i>Absolute</i> indicates that it remains still irrespective of the robot motion and it refers to position of the cyclopic
+- <i>Absolute</i> indicates that it remains still irrespective of the robot motion and it refers to the position of the cyclopic
   eye when the robot is in rest configuration (i.e. torso and head angles zeroed).
   
 For instance, to specify a desired location where to look at in this coordinate system, one can write:
