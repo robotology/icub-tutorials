@@ -1,0 +1,219 @@
+/**
+@page icub_gaze_interface The Gaze Interface
+
+The YARP <b>Gaze Interface</b> provides an abstract layer to control the iCub gaze in a bio-plausible way, moving the neck
+and the eyes independently and performing saccades, pursuit, vergence and VOC.
+
+Essentially the interface exports all the functionalities given by the \ref iKinGazeCtrl module directly from within the
+code without having to be concerned with the communication protocol done via YARP ports. Thus, the user is warmly invited
+to visit the iKinGazeCtrl \ref iKinGazeCtrl "page" where more detailed descriptions can be found.
+
+
+\section sec_dependences Dependencies
+
+In order to use the Gaze Interface, make sure that the following steps are done:
+
+-# Update YARP and iCub repositories.
+-# Compile YARP (always a good practice).
+-# Install <a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a>.
+-# Compile the iCub repository with the switch <b>ENABLE_icubmod_gazecontrollerclient</b> enabled: this will make
+   the client part of the interface available. The server part is represented by the module \ref iKinGazeCtrl itself.
+
+
+\section sec_runningserver Running the Gaze Server
+
+Launch:
+\code
+iKinGazeCtrl --context <path> --config <file>
+\endcode
+
+Notice that through the <i>context</i> and <i>config</i> options the server loads information on the intrinsic camera
+parameters which are required to use some of methods provided by the Gaze Interface, and specifically the <b>lookAtMonoPixel</b>()
+method. Furthermore, by using the <i>$ICUB_ROOT/app/cartesianSolver/scripts/cartesianSolver.xml</i> application the user is also
+able to launch the gaze server contextually with the iCubInterface module.
+
+
+\section sec_openclosecartinterface Opening and Closing the Gaze Interface
+
+The Gaze Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
+this the user has to enforce the dependence of his project from the iCub hardware modules collection.
+
+To achieve that, the following lines have to be included in the <i>CMakeLists.txt</i> file whenever you intend to put
+your project within the iCub repository:
+\code
+target_link_libraries(${PROJECTNAME} ... icubmod ...)
+\endcode 
+
+On the contrary, if you are developing your module externally to the iCub repository, make sure to include the 
+following lines:
+\code
+find_package(ICUB)
+...
+include_directories(... ${ICUB_INCLUDE_DIRS} ...)
+...
+target_link_libraries(${PROJECTNAME} ... icubmod ...)
+\endcode 
+
+Besides, it is also required to insert the following lines within the code in order to correctly enable the cartesian
+client controller:
+\code
+...
+#include <yarp/dev/Drivers.h>
+YARP_DECLARE_DEVICES(icubmod)
+...
+
+int main()
+{
+    YARP_REGISTER_DEVICES(icubmod)
+    ...
+}
+\endcode
+
+You are now able to open the Gaze Interface in the usual way:
+\code 
+Property option;
+option.put("device","gazecontrollerclient");
+option.put("remote","/iKinGazeCtrl");
+option.put("local","/client/gaze");
+ 
+PolyDriver clientGazeCtrl(option);
+
+IGazeControl *igaze=NULL;
+
+if (clientGazeCtrl.isValid()) {
+   clientGazeCtrl.view(igaze);
+}
+\endcode
+
+When you are done with controlling the robot you can explicitly close the device (or just let the destructor do it for you): 
+\code
+clientGazeCtrl.close();
+\endcode
+
+
+\section sec_usegazeinterface Using the Gaze Interface
+
+The YARP Gaze Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/d2/df5/classyarp_1_1dev_1_1IGazeControl.html">here</a>.
+It makes use of three different coordinate systems that enable the user to control the robot's gaze as detailed hereafter.
+
+\subsection subsec_cartcoorsystem Expressing the fixation point in Cartesian Coordinates
+This coordinate system is the same the \ref icub_cartesian_interface "Cartesian Interface" relies on and complies with the
+<a href="http://eris.liralab.it/wiki/ICubForwardKinematics">wiki</a> specifications; it lets the user to give the target
+location where to gaze at with respect to the root reference frame attached to the robot's waist.
+
+The following snippet of code shows how to command the gaze in the cartesian space and retrieve the current configuration.
+
+\code
+#include <iCub/ctrl/ctrlMath.h>
+...
+Vector fp(3);
+fp[0]=-0.50;	// x-component [m]
+fp[1]=+0.00;	// y-component [m]
+fp[2]=+0.35;	// z-component [m]
+
+igaze->lookAtFixationPoint(fp);	// move the gaze to the desired fixation point
+
+// wait until the operation is done
+volatile bool done=false;
+while (!done) {
+   igaze->checkMotionDone(&done);
+   Time::delay(0.04);   // or any suitable delay
+}
+
+Vector x(3);
+igaze->getFixationPoint(x);	// retrieve the current fixation point
+
+// return back a measure of the displacement error
+cout<<"final error = "<<ctrl::norm(fp-x)<<endl;
+\endcode
+
+
+\subsection subsec_absangcoorsystem Expressing the fixation point in Absolute Angular Coordinate System
+This coordinate system is an absolute head-centered angular reference frame as explained below:
+- <i>Angular</i> means that it makes use of the azimuth, elevation and vergence that are angular quantities (degrees are used)
+- <i>Head-Centered</i> means that the frame is attached to the cyclopic eye, i.e. the ideal eye located at the middle point
+  between the two cameras owning the same set of three axes.
+- <i>Absolute</i> indicates that it remains still irrespective of the robot motion and it refers to position of the cyclopic
+  eye when the robot is in rest configuration (i.e. torso and head angles zeroed).
+  
+For instance, to specify a desired location where to look at in this coordinate system, one can write:
+\code
+Vector ang(3);
+ang[0]=+10.0;	// azimuth-component [deg]
+ang[1]=-05.0;	// elevation-component [deg]
+ang[2]=+20.0;	// vergence-component [deg]
+
+igaze->lookAtAbsAngles(ang);	// move the gaze
+
+...
+
+igaze->getAngles(ang);	// get the current angular configuration
+\endcode
+
+
+\subsection subsec_relangcoorsystem Expressing the fixation point in Relative Angular Coordinate System
+Also the relative angular coordinate system is available which is basically the same as the absolute one but refers to the current
+configuration of the cyclopic eye. So that we can use:
+\code
+Vector ang(3);
+ang[0]=+10.0;	// azimuth-relative component wrt the current configuration [deg]
+ang[1]=-05.0;	// elevation-relative component wrt the current configuration [deg]
+ang[2]=+20.0;	// vergence-relative component wrt the current configuration [deg]
+
+igaze->lookAtRelAngles(ang);	// move the gaze wrt the current configuration
+\endcode
+
+
+\subsection subsec_monopixelcoorsystem Expressing the fixation point in pixel coordinates (monocular approach)
+The user can also command the gaze by specifying a location within the image plane of one camera as follows:
+\code
+// select the image plane: left or right
+int camSel=0;	// 0: left, 1: right
+
+// specify the pixel where to look
+Vector px(2);
+px[0]=160.0;
+px[1]=120.0;
+
+// we still have one degree of freedom given by
+// the distance of the object from the image plane
+// if you don't have it, try to guess :)
+double z=1.0;	// distance [m]
+
+igaze->lookAtMonoPixel(camSel,px,z);	// look!
+\endcode
+
+
+\subsection subsec_monopixelcoorsystem Expressing the fixation point in pixel coordinates (stereo approach)
+The same thing can be achieved also by exploiting the stereo vision:
+\code
+// specify the pixel within the left image plane
+Vector pxl(2);
+pxl[0]=170.0;
+pxl[1]=120.0;
+
+// specify the pixel within the right image plane
+Vector pxr(2);
+pxr[0]=150.0;
+pxr[1]=120.0;
+
+igaze->lookAtStereoPixel(pxl,pxr);	// look!
+\endcode
+
+Of course, the matching problem between pixels of different image plane is left to the user, who has also to
+provide a continuous visual feedback while converging to the target.
+
+
+\section sec_simgazeinterface The Simulator and the Gaze Interface
+
+The Gaze Interface is already fully operative with the robot simulator: you only need to launch the server part with the robot option correctly set.
+Example:
+\code
+iKinGazeCtrl --robot icubSim
+\endcode
+
+A working example is available under
+\code
+tutorials/src/tutorial_gaze_interface.cpp
+\endcode
+*/

@@ -13,10 +13,12 @@ as well as to be introduced to the underneath topic of forward and inverse kinem
 
 \section sec_dependences Dependencies
 
-In order to use the Cartesian Interface, make sure that the following steps are done:
+In order to use the Cartesian Interface, make sure that the following steps are done: \n
+[Note that the term <i>cluster</i> refers to the set of computers directly connected to the robot network, whereas <i>PC104</i>
+indicates the hub board mounted on the robot]
 
 -# Update YARP and iCub repositories.
--# Compile YARP.
+-# Compile YARP (always a good practice).
 -# Install <a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a> on the cluster.
 -# On the cluster: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled. This will make
    the client part of the interface available.
@@ -180,9 +182,9 @@ If we would like to test whether the new pose has been achieved, it's as follows
 \code
 armCart->goToPoseSync(xd,od);   // send request and wait for reply
 
-bool flag=false;
-while (!flag) {
-   armCart->checkMotionDone(&flag);
+volatile bool done=false;
+while (!done) {
+   armCart->checkMotionDone(&done);
    Time::delay(0.04);   // or any suitable delay
 }
 \endcode
