@@ -119,6 +119,8 @@ public:
 
         state=STATE_TRACK;
 
+		t=t0=t1=t2=t3=t4=Time::now();
+
         return true;
     }
 
@@ -127,9 +129,7 @@ public:
         if (s)
             fprintf(stdout,"Thread started successfully\n");
         else
-            fprintf(stdout,"Thread did not start\n");
-
-        t=t0=t1=t2=t3=t4=Time::now();
+            fprintf(stdout,"Thread did not start\n");        
     }
 
     virtual void run()
