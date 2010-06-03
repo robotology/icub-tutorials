@@ -99,7 +99,7 @@ public:
         // will compensate for it
         igaze->setTrackingMode(true);
 
-        Property optTorso("(device remotecontrolboard)");
+        Property optTorso("(device remote_controlboard)");
         optTorso.put("remote","/icubSim/torso");
         optTorso.put("local","/torso_client");
 
@@ -113,7 +113,7 @@ public:
         // open the view
         clientTorso->view(ienc);
         clientTorso->view(ipos);
-        ipos->setRefSpeed(0,30.0);
+        ipos->setRefSpeed(0,10.0);
 
         fp.resize(3);
 
