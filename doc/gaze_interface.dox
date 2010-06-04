@@ -2,7 +2,7 @@
 @page icub_gaze_interface The Gaze Interface
 
 The YARP <b>Gaze Interface</b> provides an abstract layer to control the iCub gaze in a bio-plausible way, moving the neck
-and the eyes independently and performing saccades, pursuit, vergence and VOC.
+and the eyes independently and performing saccades, pursuit, vergence and VCR (vestibulo-collic reflex).
 
 Essentially the interface exports all the functionalities given by the \ref iKinGazeCtrl module directly from within the
 code without having to be concerned with the communication protocol done via YARP ports. Thus, the user is warmly invited
@@ -28,7 +28,7 @@ iKinGazeCtrl --context <path> --config <file>
 \endcode
 
 Notice that through the <i>context</i> and <i>config</i> options the server loads information on the intrinsic camera
-parameters which are required to use some of methods provided by the Gaze Interface, and specifically the <b>lookAtMonoPixel</b>()
+parameters which are required to use some of methods provided by the Gaze Interface, and specifically the <i>lookAtMonoPixel()</i>
 method. Furthermore, by using the <i>$ICUB_ROOT/app/cartesianSolver/scripts/cartesianSolver.xml</i> application the user is also
 able to launch the gaze server contextually with the iCubInterface module.
 
