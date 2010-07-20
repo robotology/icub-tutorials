@@ -14,6 +14,8 @@ FILE(GLOB folder_header *.h)
 
 INCLUDE_DIRECTORIES(${ICUB_INCLUDE_DIRS}
                     ${YARP_INCLUDE_DIRS})
+					
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${ICUB_LINK_FLAGS}")					
 
 # Create everything needed to build our executable.
 ADD_EXECUTABLE(imageProc imageProc.cpp)
