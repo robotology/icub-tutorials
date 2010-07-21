@@ -5,6 +5,7 @@
 
 - \ref icub_hello_icub - how to write the very first program
 - \ref icub_motor_control_tutorial - a tutorial on how to use the motor interfaces
+- \ref icub_impedance_control_tutorial - a tutorial on how to use the joint level torque/impedance interface
 - \ref icub_basic_image_processing - a tutorial on a basic image processing
 - \ref icub_resource_finder_basic - a tutorial on how to organize the command line parameters of your modules
 - \ref icub_resource_finder_advanced - organizing parameters: advanced tutorial
