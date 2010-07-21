@@ -87,6 +87,13 @@ int main(int argc, char *argv[])
     for (i = 0; i < nj; i++) {
         tmp[i] = 10.0;
         pos->setRefSpeed(i, tmp[i]);
+		//SET THE IMPEDANCE:
+		//40 is the stiffness coefficient
+		//5 is the damping coefficient
+		//0 is the additional torque offset
+		//WARNING: playing with this value may lead to undamped oscillatory behaviours.
+		//when you raise the stiffness, you should increase the damping coefficient accordingly.
+		iimp->setImpedance(i, 40, 5, 0);
     }
 
     //pos->setRefSpeeds(tmp.data()))
@@ -101,13 +108,15 @@ int main(int argc, char *argv[])
     command[3]=50;
     pos->positionMove(command.data());
     
-    bool done=false;
+    /*
+	bool done=false;
 
     while(!done)
         {
             pos->checkMotionDone(&done);
             Time::delay(0.1);
         }
+	*/
 
     int times=0;
     while(true)
@@ -115,13 +124,19 @@ int main(int argc, char *argv[])
         times++;
         if (times%2)
         {
+			 // set the elbow joint only in impedence position mode
+			 ictrl->setImpedancePositionMode(3);
+			 // set new reference positions
              command[0]=50;
              command[1]=20;
              command[2]=-10;
-             command[3]=50;
+             command[3]=60;
         }
         else
         {
+			 // set the elbow joint in position mode
+			 ictrl->setPositionMode(3);
+			 // set new reference positions
              command[0]=20;
              command[1]=10;
              command[2]=-10;
@@ -136,8 +151,8 @@ int main(int argc, char *argv[])
                 Time::delay(0.1);
                 encs->getEncoders(encoders.data());
 				itrq->getTorques(torques.data());
-				printf("Encoders: %.1lf %.1lf %.1lf %.1lf", encoders[0], encoders[1], encoders[2], encoders[3]);
-				printf("Torques:  %.1lf %.1lf %.1lf %.1lf", torques[0], torques[1], torques[2], torques[3]);
+				printf("Encoders: %+5.1lf %+5.1lf %+5.1lf %+5.1lf ", encoders[0], encoders[1], encoders[2], encoders[3]);
+				printf("Torques:  %+5.1lf %+5.1lf %+5.1lf %+5.1lf ", torques[0], torques[1], torques[2], torques[3]);
 				printf("Control:  ");
 				for (i = 0; i < 4; i++)
 				{
@@ -155,6 +170,7 @@ int main(int argc, char *argv[])
 						case VOCAB_CM_UNKNOWN:		printf("UNKNOWN  ");	break;
 					}
 				}
+				printf("\n");
             }
     }
 
