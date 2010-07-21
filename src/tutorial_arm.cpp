@@ -94,10 +94,10 @@ int main(int argc, char *argv[])
     bool done=false;
 
     while(!done)
-        {
-            pos->checkMotionDone(&done);
-            Time::delay(0.1);
-        }
+    {
+        pos->checkMotionDone(&done);
+        Time::delay(0.1);
+    }
 
     int times=0;
     while(true)
