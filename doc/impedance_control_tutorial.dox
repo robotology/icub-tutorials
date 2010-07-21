@@ -1,0 +1,210 @@
+/**
+*
+@page icub_impedance_control_tutorial Getting accustomed with torque/impedance interfaces
+
+This tutorial shows how to use the following interfaces:
+
+yarp::dev::IControlMode
+
+yarp::dev::ITorqueControl
+
+yarp::dev::IImpedanceControl
+
+
+\section sec_intro Introduction
+Prerequisites:
+http://eris.liralab.it/iCub/dox/html/icub_motor_control_tutorial.html
+
+The code described in this tutorial can be found at: src/tutorials/src/tutorial_arm_joint_impedance.cpp which is based on the previous tutorial src/tutorials/src/tutorial_arm.cpp.
+The example shows how to open the ITorqueControl to show the arm joint torques and how to change the control mode of the elbow joint from position to impedance control. 
+
+A detailed reference of the yarp interfaces used in this tutorial(IControlMode,ITorqueControl,IImpedanceControl) can be found at:
+http://eris.liralab.it/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html
+
+\section sec_initialization Initialization
+
+Let us assume the module wholeBodyTorqueObserver is up and running. The wholeBodyTorqueObserver module, based on the iDyn library (http://eris.liralab.it/iCub/dox/html/group__iDyn.html) acts as a server and is responsibile for the calculation of the joint torques. 
+In order to access to the torque values, our program has to declare and open the yarp ITorqueControl interface, in the same manner as you
+open the iPositionControl interface (see previous tutorial: http://eris.liralab.it/iCub/dox/html/icub_motor_control_tutorial.html).
+We can also open the IControlMode interface (resposibile to set the control mode of each joint (position/velocity/impedance etc.) and the IImpedanceControl interface, used to set the impedance paramteres (joint stiffness/ joint damping etc). 
+
+\code
+    IPositionControl *pos;
+    IEncoders *encs;
+    IControlMode *ictrl;
+    IImpedanceControl *iimp;
+    ITorqueControl *itrq;
+\endcode
+
+and:
+
+\code
+    bool ok;
+    ok = robotDevice.view(pos);
+    ok = ok && robotDevice.view(encs);
+    ok = ok && robotDevice.view(ictrl);
+    ok = ok && robotDevice.view(iimp);
+    ok = ok && robotDevice.view(itrq);
+
+    if (!ok) {
+        printf("Problems acquiring interfaces\n");
+        return 0;
+    }
+\endcode
+
+We can thus start with checking how many axes we can control by doing:
+
+\code
+    int jnts = 0;
+    pos->getAxes(&jnts);
+\endcode
+
+Let's create some vectors for later use:
+\code
+    Vector tmp;
+    Vector encoders;
+    Vector command_position;
+    Vector command_velocity;
+
+    tmp.resize(jnts);
+    encoders.resize(jnts);
+    ...
+\endcode
+
+Let's now initialize the controllers and start up the amplifiers:
+
+\code
+    // we need to set reference accelerations used to generate the velocity
+    // profile, here 50 degrees/sec^2
+    int i;
+    for (i = 0; i < jnts; i++) {
+        tmp[i] = 50.0;
+    }
+    pos->setRefAccelerations(tmp.data());
+    for (i = 0; i < jnts; i++) {
+        tmp[i] = 10.0;
+        pos->setRefSpeed(i, tmp[i]);
+    }
+\endcode
+
+if needed we can check the position of our axes by doing:
+
+\code
+  enc->getEncoders(encoders.data());
+\endcode
+
+which reads the values of the motor encoders into a vector of doubles of size ''jnts''. 
+
+\section sec_position Position control
+
+First do:
+\code
+  int i;
+  for (i = 0; i < jnts; i++) {
+      tmp[i] = 40.0;
+  }
+  pos->setRefSpeeds(tmp.data());
+\endcode
+
+which sets the reference speed for all axes to 40 degrees per second. The reference speed is used 
+to interpolate the trajectory between the current and the desired position.
+
+Now you can do:
+\code
+  bool ok = pos->positionMove(command_position.data());
+\endcode
+
+where ''command_position'' is the desired position. This starts a movement of all axes toward 
+the desired position.
+
+\section sec_torque_reading Reading the torques of a joint
+You can use the ITorqueControl interface to read the torque at a specific joint.
+\code
+Vector torques;
+torques.resize(nj);
+itrq->getTorques(torques.data());
+\endcode
+
+\section sec_impedance Using different control modes: Impedance Position Control
+
+You can change the impedence parameters of a joint at any time:
+\code
+  double stiffness = 40.0;
+  double damping = 5.0;
+  double force_offset = 0.0;
+  bool ok = iimp->setImpedance(joint, stiffness, damping, force_offset);
+\endcode
+
+You can use iIControlMode interface to change the control mode of a specific joint to impedance mode:
+
+\code
+ictrl->setImpedancePositionMode(3);
+\endcode
+
+When in impedance position mode, the low level controller (DSP) computes a refence torque Td as:
+
+\f[ T_d = K_spring * (q-q_d) + K_damp * (\dot{q} - \dot{q_d}) + force_offset \f]
+
+which is tracked by the internal PID regulator.
+
+NOTE: When you enter in impedance mode from a different control mode, the equilibrium position of the joint is the current position of the joint.
+
+You can specify a new equilibrium position using the usual position interface. 
+
+\code
+bool ok = pos->positionMove(command_position.data());
+\endcode
+
+If you need to change it back to position (stiff) mode:
+
+\code
+ictrl->setPositionMode(jnt);
+\endcode
+
+An ImpedanceVelocity control mode is also available.
+In this control modality you can use vel->VelocityMove() command in order to command a velocity while mantaining the impedance specified with the iimp->setImpedance(joint, stiffness, damping, dorce_offset) command.
+
+\section sec_torque_control Using different control modes: Torque Control
+
+Torque control mode can be used to directly specify a reference torque at a joint. 
+
+\code
+ictrl->setTorqueMode(jnt);
+
+double jnt_torque= 0.0; //expressed in Nm
+itrq->setRefTorque(jnt_torque); 
+\endcode
+
+The gains of the PID controller resposibile of tracking the torque reference can be obtained using iTorqueControl::getTorquePid() method.
+
+NOTE: the reference torque that you can specify on the icub joints is limited (clamped) to:
+
++8  -8  Nm for the arm joints
+
++12 -12 Nm for the leg joints
+
+NOTE2: near the hardware limits of the robot, the torque PID controlled is disabled, in order to prevent to command a torque againts the hardware limits. The PID controller is automatically re-enabled  as soon as the joint is moved far the limits (You can view the value of the limites using the IControlLimits interface).
+
+NOTE3: during calibration/parking of the robot, iCubInterface automatically sets the control mode of all the joints to position control (stiff mode). 
+
+NOTE4: If your application changes the control mode of one joint, it's good practice to reset it to the previous modality when your application quits.
+
+\section sec_closing Closing the device
+
+When you are done with controlling the robot don't forget to close the device:
+\code
+  robotDevice.close();
+\endcode
+
+\section sec_more_interfaces More interfaces
+
+To read more about the interfaces that are available in YARP read the online documentation:
+http://eris.liralab.it/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html
+
+\section sec_code Code
+
+See code in:
+\code
+ tutorials/src/tutorial_arm_joint_impedance.cpp
+\endcode
+**/
