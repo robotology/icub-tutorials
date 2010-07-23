@@ -88,12 +88,12 @@ int main(int argc, char *argv[])
         tmp[i] = 10.0;
         pos->setRefSpeed(i, tmp[i]);
 		//SET THE IMPEDANCE:
-		//40 is the stiffness coefficient
-		//5 is the damping coefficient
+		//0.111 is the stiffness coefficient. units:   Nm/deg
+		//0.014 is the damping coefficient. units:     Nm/(deg/s)
 		//0 is the additional torque offset
 		//WARNING: playing with this value may lead to undamped oscillatory behaviours.
 		//when you raise the stiffness, you should increase the damping coefficient accordingly.
-		iimp->setImpedance(i, 40, 5, 0);
+		iimp->setImpedance(i, 0.111, 0.014, 0);
     }
 
     //pos->setRefSpeeds(tmp.data()))
@@ -152,7 +152,7 @@ int main(int argc, char *argv[])
                 encs->getEncoders(encoders.data());
 				itrq->getTorques(torques.data());
 				printf("Encoders: %+5.1lf %+5.1lf %+5.1lf %+5.1lf ", encoders[0], encoders[1], encoders[2], encoders[3]);
-				printf("Torques:  %+5.1lf %+5.1lf %+5.1lf %+5.1lf ", torques[0], torques[1], torques[2], torques[3]);
+				printf("Torques:  %+5.1lfNm %+5.1lfNm %+5.1lfNm %+5.1lfNm ", torques[0], torques[1], torques[2], torques[3]);
 				printf("Control:  ");
 				for (i = 0; i < 4; i++)
 				{
