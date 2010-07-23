@@ -136,10 +136,10 @@ itrq->getTorques(torques.data());
 
 You can change the impedence parameters of a joint at any time:
 \code
-  double stiffness = 40.0;
-  double damping = 5.0;
-  double force_offset = 0.0;
-  bool ok = iimp->setImpedance(joint, stiffness, damping, force_offset);
+  double stiffness = 0.111;   // stiffness coefficient, units are Nm/deg
+  double damping =  0.014;    // damping coefficient,   units are Nm/(deg/s)
+  double offset = 0.0;		  // torque offset,         units are Nm
+  bool ok = iimp->setImpedance(joint, stiffness, damping, offset);
 \endcode
 
 You can use iIControlMode interface to change the control mode of a specific joint to impedance mode:
