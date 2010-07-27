@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
     //
     command=0;
     //now set the shoulder to some value
-    command[0]=50;
+    command[0]=-50;
     command[1]=20;
     command[2]=-10;
     command[3]=50;
@@ -105,15 +105,15 @@ int main(int argc, char *argv[])
         times++;
         if (times%2)
         {
-             command[0]=50;
+             command[0]=-50;
              command[1]=20;
              command[2]=-10;
              command[3]=50;
         }
         else
         {
-             command[0]=20;
-             command[1]=10;
+             command[0]=-20;
+             command[1]=40;
              command[2]=-10;
              command[3]=30;
         }

@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
     //
     command=0;
     //now set the shoulder to some value
-    command[0]=50;
+    command[0]=-50;
     command[1]=20;
     command[2]=-10;
     command[3]=50;
@@ -112,10 +112,10 @@ int main(int argc, char *argv[])
 	bool done=false;
 
     while(!done)
-        {
-            pos->checkMotionDone(&done);
-            Time::delay(0.1);
-        }
+    {
+        pos->checkMotionDone(&done);
+        Time::delay(0.1);
+    }
 	*/
 
     int times=0;
@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 			 // set the elbow joint only in impedence position mode
 			 ictrl->setImpedancePositionMode(3);
 			 // set new reference positions
-             command[0]=50;
+             command[0]=-50;
              command[1]=20;
              command[2]=-10;
              command[3]=60;
@@ -137,8 +137,8 @@ int main(int argc, char *argv[])
 			 // set the elbow joint in position mode
 			 ictrl->setPositionMode(3);
 			 // set new reference positions
-             command[0]=20;
-             command[1]=10;
+             command[0]=-20;
+             command[1]=40;
              command[2]=-10;
              command[3]=30;
         }
