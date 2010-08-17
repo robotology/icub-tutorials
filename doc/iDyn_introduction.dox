@@ -1,0 +1,155 @@
+/**
+@page idyn_introduction A short introduction to iDyn
+
+iDyn is a library for computing kinematics and dynamics of serial-links chains of revolute joints and iCub limbs.
+It started as an extension of the iKin library, with the purpose of including the dynamic description of the links, 
+and gradually evolved until considering the whole body dynamics. 
+Thus, starting from links (from iKinLink to iDynLink) the library provides classes for links, chain of links, 
+and generic limbs. 
+Of course, iCub limbs are included, with the specific kinematics and dynamics data already set 
+(by default, the CAD parameters). 
+
+The library also provides a Newton-Euler based method to compute forces, moments, and joint torques, for each link in single or multiple interconnected chains, in presence or not of FT sensors, placed anywhere in the chain (e.g. in the middle of the chain). 
+
+The main purposes of the library are:
+
+- computation of all iCub joint torques
+- computation of external wrenches acting at the end-effector of the arms/legs of iCub
+
+The modules using iDyn and performing these operations are \ref WholeBodyTorqueObserver "WholeBodyTorqueObserver " and \ref WrenchObserver "WrenchObserver", which are the bases for the Torque Interface, Torque Control, Impedance Control, Zero-force control, external contact detection and so on.
+The complete and detailed documentation of iDyn code is available \ref iDyn "here".
+
+
+\section sec_library_modules Library modules
+
+The library modules are:
+
+- RecursiveNewtonEuler: force/torque computation in a chain using Newton-Euler recursive formulation, both in the forward/backward sense
+- iDynInv: estimation of force/moment measured by a virtual FT sensor placed everywhere in a chain
+- iDynFwd: retrieve joint torques of limbs with single FT sensor measurements
+- iDynBody: whole body dynamics, i.e. interconnection of multiple chains
+- iTransform: projection of forces along the chain	
+
+
+\section sec_core Core classes
+
+The base classes describing serial links chains are:
+
+- iDynLink: a link with kinematic and dynamic characteristics 
+- iDynChain: a chain of serial links, with kinematic and dynamic properties
+- iDynLimb: a generic limb, described by a chain
+	
+Note that iDynLink and iDynChain are derived from the corresponding classes (iKinLink and iKinChain) in the iKin library, so they provide both kinematic and dynamic data and methods. iDynLimb is, as in iKin, basically a redefinition of iDynChain methods, used to protect some chain data.
+iDynLink is an extension of iKinLink, since it adds the dynamic parameters of the link:
+
+- \f$ H_C \f$ (HC,COM) : the center of mass, i.e. a roto-translational matrix defining the COM with respect to the link frame
+- \f$ m \f$ (m): the link mass, concentrated in the COM
+- \f$ I \f$ (I): the inertia matrix of the link
+
+and the other characteristic variables used for dynamics:
+
+- \f$ \dot{q},\ddot{q} \f$ (dq/dAng, ddq/d2q/d2Ang) : joint velocity & acceleration 
+- \f$ w, \dot{w} \f$ (w,dw): link angular velocity & acceleration
+- \f$ \ddot{p},\ddot{p}_C \f$ (ddp,ddpC): link and its COM linear acceleration
+- \f$ f, \mu \f$ (F, Mu): link force, moment
+- \f$ \tau \f$ (Tau): joint torque	
+
+An iDynChain is basically a list of links; the main difference with respect to iKin is that blocked links contribute to the dynamics, so there's no need to have a second list to fasten dynamic computations. However, since iDynChain inherits from iKinChain, blocked links are considered for the Jacobian computation, which is unchanged.
+One of the advantages of iDyn is the possibility to interconnect multiple limbs and computing also a "shared" Jacobian. To this purpose, the concept of "node" must be introduced.
+
+iDynNode represents a virtual node where multiple limbs are connected, and may exchange kinematic and wrench information among them. Multiple limbs can be attached to the Node, but at least one must be attached.
+
+The mutual exchange between node and limbs (full duplex) is managed used a RigidBodyTransformation class, containing the roto-translational matrix which describes the connection, and the type of ``flow'' of kinematic and wrench variables: from limb to node or from node to limb. 
+One limb can be attached to a node at the base or at the end-effector: this, combined with the information flows, affects the computations in particular the application of the Newton-Euler algorithm while solving the limbs dynamic.
+
+If a FT sensor is present inside a kinematic chain, its measurements can be exploited to initialize the wrench phase of the Newton-Euler recursive algorithm, starting from the sensor instead of the end-effector of the chain (or the final link of the chain). A iDynSensor class is then used: a generic class, which attaches a FT sensor into a iDynChain. The ``attach'' is specified by the \f$ s-th \f$ link  hosting the sensor, the roto-translational matrix defining the sensor frame with respect to the link frame, and the dynamical parameters of the "sub-link" between the link frame and the sensor frame (the portion of link between the sensor and the end of the link).
+
+
+\section sec_icub_limbs iCub limbs
+
+iDyn is a generic library that could be used for any robot, but of course iCub parts/limbs are already available to the user, pre-configured with the iCub CAD parameters. A generic iCub limb name is:
+iCub + part + Dyn
+where part is: Arm, Torso, Leg, Eye, EyeNeckRef, InertialSensor, NeckInertial.
+For legs and arms the part can be also followed by the tag "NoTorso": the reason is that in iKin the arm limb includes the torso
+links in the chain, whereas in iDyn one may choose to work on the arm only; in a similar way, legs in iKin are referred to the torso \f$H_0\f$ matrix, whereas in iDyn one can choose to have them without reference to the torso. 
+
+\image html icub_limbs.png
+
+
+\section sec_using_idyn Using iDyn
+
+In order to use the iDyn library, make sure that the following steps are done: \n
+
+-# Update YARP and iCub repositories.
+-# Compile YARP and iCub (always a good practice).
+-# Try first the tutorial examples, located in 
+\code
+iCub/main/src/libraries/iDyn/tutorials/
+\endcode
+
+iDyn depends only on YARP and iKin. In order to include iDyn and use it in your software, make sure you include the following lines in the <i>CMakeLists.txt</i>:
+\code
+FIND_PACKAGE(YARP)
+FIND_PACKAGE(ICUB)
+...
+...
+TARGET_LINK_LIBRARIES(${PROJECTNAME} ... iDyn ...)
+\endcode
+
+In your code the iDyn namespace must be declared, and the header files needed must be included:
+\code
+#include <iCub/iDyn/iDyn.h>
+#include <iCub/iDyn/iDynInv.h>
+...
+using namespace iCub::iDyn;
+\endcode
+
+
+\section sec_notes_newton_euler Basic Newton-Euler algorithm
+
+The Newton-Euler recursive algorithm is basically a set of computations, consisting in two steps: the so called "kinematic" and "wrench phase". In the first, the kinematic variables of the link (angular velocity/acceleration, linear acceleration, and so on) are computed, whereas in the latter the force, moment and joint torque are computed.
+Both phases must be initialized properly, with kinematic information (usually at the base of the chain) and external wrench information (usually at the end-effector of the chain). 
+
+<b>Classic Newton-Euler computations</b>
+
+Kinematic phase (Forward): \f$ i=1,2,\ldots,n \f$
+
+\f[ w^i_i = {R^{i-1}_i}^\top (w^{i-1}_{i-1} + \dot{\theta}_i z_0) \f]
+\f[ \dot{w}^i_i = {R^{i-1}_i}^\top (\dot{w}^{i-1}_{i-1} + \ddot{\theta}_i z_0 + \dot{\theta}_i w^{i-1}_{i-1} \times z_0) \f]
+\f[ \ddot{p}^i_i = {R^{i-1}_i}^\top \ddot{p}^{i-1}_{i-1} + \dot{w}^i_i \times r^i_{i-1,i} + w^i_i \times (w^i_i \times r^i_{i-1,i}) \f]
+\f[ \ddot{p}^i_{C_i} = \ddot{p}^i_i + \dot{w}^i_i \times r^i_{i,C_i} + w^i_i \times (w^i_i \times r^i_{i,C_i}) \f]
+
+initialized by \f$ w^0_0, \dot{w}^0_0, \ddot{p}^0_0-g^0_0 \f$.
+
+Wrench phase (Backward): \f$ i=n,n-1,\ldots,1 \f$
+
+\f[ f^i_i = {R^{i}_{i+1}}^\top f^{i+1}_{i+1} + m_i \ddot{p}^i_{C_i} \f]
+\f[ \mu^i_i = - f^i_i \times ( r^i_{i-1,i} + r^i_{i,C_i} ) + R^i_{i+1} \mu^{i+1}_{i+1} + R^i_{i+1} f^{i+1}_{i+1} \times r^i_{i,C_i} + \bar{I}^i_i \dot{w}^i_i + w^i_i \times (\bar{I}^i_i w^i_i) \f]
+\f[ \tau_i = {\mu^i_i}^\top {R^{i-1}_i}^\top z_0 \f]
+
+initialized by \f$ f^{n+1}_{n+1},\mu^{n+1}_{n+1} \f$.
+
+The detailed description of the algorithm can be found in: 
+<i>L. Sciavicco, B. Siciliano, Modelling and Control of Robot Manipulators, 2nd Edition, Springer-Verlag, 2000.</i>
+
+
+<b>Note</b>
+
+iDyn provides Newton-Euler recursive algorithm computations for the classical case, but also for all possible cases, i.e. when the external kinematic and wrench information are set at the beginning or at the end of the chain, or whenever external force measurements (coming from a FT sensor inside the chain) are available.
+
+
+\section sec_more_info More about iDyn
+
+A more detailed description of the library, along with tutorial slides, is available in the <a href="http://eris.liralab.it/wiki/iDyn">wiki page on iDyn</a>.
+
+Some working examples are available under
+\code
+iCub/main/src/libraries/iDyn/tutorials/
+\endcode
+
+The detailed code documentation is available \ref iDyn "here".
+
+
+\author Serena Ivaldi
+
+*/
