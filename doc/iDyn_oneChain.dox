@@ -1,0 +1,118 @@
+/**
+*
+@page idyn_one_chain_tutorial Computation of torques in a single chain, using iDyn
+
+In this tutorial we show how to compute the joint torques in a single kinematic chain, using the iDyn library.
+Before you read this tutorial you should at least get accustomed with the iDyn library, and the basic of Newton-Euler algorithm (reading the \ref idyn_introduction "short introduction to iDyn" might be useful).
+
+Remember to include YARP and iCub as packages, and to link iDyn library in CMakeLists.txt:
+\code
+	FIND_PACKAGE(YARP)
+	FIND_PACKAGE(ICUB)
+	...									
+	TARGET_LINK_LIBRARIES(${PROJECTNAME} iDyn ${YARP_LIBRARIES})
+\endcode
+
+Using iDyn classes, vectors and matrices are used all the times.
+\code
+	#include <yarp/sig/Vector.h>
+	#include <yarp/sig/Matrix.h>
+	#include <iCub/iDyn/iDyn.h>
+	...
+	using namespace yarp::sig;
+	using namespace iCub::iDyn;
+\endcode
+
+We start creating a iDyn::iCubArmDyn, that is a chain with arm and torso links.
+If you are familiar with iKin, it is exactly the same limb type, with the same kinematic properties of a iCubArm. 
+Of course, iCubArmDyn is more complete, since it basically inherits the kinematics and provides the dynamics.
+\code
+	iCubArmDyn armTorsoDyn("right");
+\endcode
+
+By default in iCubArmDyn the torso is blocked, as it is in its corresponding iKin limb, iCubArm;
+we unblock it, so we can also use the torso links. Note that releasing the links we have N==DOF (i.e. the number of links equal to the number of degrees of freedom).
+\code
+	armTorsoDyn.releaseLink(0);
+	armTorsoDyn.releaseLink(1);
+	armTorsoDyn.releaseLink(2);
+\endcode
+
+Before any computation, we must prepare the necessary variables and put them in the chain model.
+First of all, we must set the joint angles in the limb model: in dynamics, we need joint positions, velocities and accelerations. 
+
+\code
+    	Vector q(armTorsoDyn.getN()); q.zero();
+    	Vector dq(q); Vector ddq(q);
+\endcode
+	
+In iCub we only have position measurements from the encoders, so in order to avoid noisy values on velocity and acceleration, we suggest to apply at least a linear filter on the velocity data computed by differentiation, and a quadratic filter on the acceleration data.
+Note that if the joint angles exceed the joint limits, their value is saturated to their min/max value automatically (as in iKin). At the moment there's not such a limitation for velocities and accelerations. It must be reminded that the joint limits could be different in the real robot, so it is always a good practice, when using the robot, to call the <i>alignJointsBound</i> method, which queries the robot for the real joints limits.
+
+\code
+    	armTorsoDyn.setAng(q);
+    	armTorsoDyn.setDAng(dq);
+    	armTorsoDyn.setD2Ang(ddq);
+\endcode
+
+In order to initialize the kinematic phase of Newton-Euler algorithm, we need the kinematic informations to be set in the base of the chain, where the base is intended to be the first link (first w.r.t the Denavit Hartenberg convention for describing the links, so the torso base in iCubArmDyn). If the robot is fixed and not moving, everything can be simply set to zero: but remember to provide the gravity information!
+
+\code
+	Vector w0(3); Vector dw0(3); Vector ddp0(3);
+	w0=dw0=ddp0=0.0; ddp0[2]=9.81;
+\endcode
+    
+The end-effector external wrench (force/moment), is necessary to initialize the wrench phase of the Newton-Euler algorithm.
+If the robot is not touching anything, the external wrench is zero by default. If there's contact... look at the \ref WrenchObserver module.
+ 
+\code
+    	Vector Fend(3); Fend.zero();
+    	Vector Muend(Fend);
+\endcode
+
+
+We can now start using iDyn.
+In order to perform the kinematic and wrench computation in a chain, we must first tell the limb that we want to use the iDyn::RecursiveNewtonEuler library, by calling a "prepare" method.
+In fact, before using our method, a new chain, parallel to the iDynChain, is built: it is a OneChainNewtonEuler, and it is made of OneLinkNewtonEuler virtual links, each having its "real" corresponding iDynLink; in addition, a BaseLink and a FinalLink elements are added to the chain, defining the entry points for the kinematic and wrench phases of Newton-Euler computations. 
+
+The reason of the existence of the <i>prepareNewtonEuler</i> method is twofold:
+-# one can use a iDynLimb without dynamics, since it includes the kinematics of iKin
+    for example one may only want to set joint angles and compute the jacobian
+-# one may prefer to use its own dynamic library to compute internal forces/torques, and not
+    necessarily the Newton-Euler one we provide. 
+ 
+When calling <i>prepareNewtonEuler()</i>, we must specify the type of computations we want to perform, which are basically:
+
+ - STATIC: we only need q (joints positions)
+ - DYNAMIC: we need q,dq,ddq (joints position, velocity, acceleration) --> default
+
+\code
+    	armTorsoDyn.prepareNewtonEuler(DYNAMIC);
+\endcode
+
+Finally we perform the computations, by calling a single function which performs autonomously:
+-# Initialization of both phases
+-# Kinematic Phase
+-# Wrench Phase
+
+\code
+    	armTorsoDyn.computeNewtonEuler(w0,dw0,ddp0,Fend,Muend);
+\endcode
+	
+We can now retrieve the results: forces, moments and joint torques. In particular, F and M are 3xN matrices, where the i-th column is the i-th force/moment (each having 3 components), whereas Tau is a 1xN vector, since the joint torque is a scalar number.
+
+\code
+    	Matrix F = armTorsoDyn.getForces();
+    	Matrix Mu = armTorsoDyn.getMoments();
+    	Vector Tau = armTorsoDyn.getTorques();
+\endcode
+
+
+Full working code of this tutorial is available here:
+\code
+ 	iCub/main/src/libraries/iDyn/tutorials/oneChainDynamics/main.cpp
+\endcode
+
+\author Serena Ivaldi
+*
+**/
