@@ -87,13 +87,14 @@ In order to use the iDyn library, make sure that the following steps are done: \
 iCub/main/src/libraries/iDyn/tutorials/
 \endcode
 
-iDyn depends only on YARP and iKin. In order to include iDyn and use it in your software, make sure you include the following lines in the <i>CMakeLists.txt</i>:
+iDyn depends only on YARP and iKin. In order to include iDyn and use it in your software, make sure you include the following line in the <i>CMakeLists.txt</i>:
+\code
+TARGET_LINK_LIBRARIES(${PROJECTNAME} ... iDyn ...)
+\endcode
+Of course if you are developing outside the iCub project (e.g. in contrib), you may also add these lines:
 \code
 FIND_PACKAGE(YARP)
 FIND_PACKAGE(ICUB)
-...
-...
-TARGET_LINK_LIBRARIES(${PROJECTNAME} ... iDyn ...)
 \endcode
 
 In your code the iDyn namespace must be declared, and the header files needed must be included:
