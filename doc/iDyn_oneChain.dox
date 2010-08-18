@@ -12,6 +12,7 @@ Remember to include YARP and iCub as packages, and to link iDyn library in CMake
 	...									
 	TARGET_LINK_LIBRARIES(${PROJECTNAME} iDyn ${YARP_LIBRARIES})
 \endcode
+note that in this case we need to look for the packages because we are developing a tutorial which is outside iCub project.
 
 Using iDyn classes, vectors and matrices are used all the times.
 \code
@@ -46,7 +47,8 @@ First of all, we must set the joint angles in the limb model: in dynamics, we ne
     	Vector dq(q); Vector ddq(q);
 \endcode
 	
-In iCub we only have position measurements from the encoders, so in order to avoid noisy values on velocity and acceleration, we suggest to apply at least a linear filter on the velocity data computed by differentiation, and a quadratic filter on the acceleration data.
+In iCub we only have position measurements from the encoders, so in order to avoid noisy values on velocity and acceleration, we suggest to apply at least a linear filter on the velocity data computed by differentiation, and a quadratic filter on the acceleration data. 
+As a suggestion, look for adaptWinPolyEstimator in the ctrlLib, or have a look at the module WholeBodyTorqueObserver.
 Note that if the joint angles exceed the joint limits, their value is saturated to their min/max value automatically (as in iKin). At the moment there's not such a limitation for velocities and accelerations. It must be reminded that the joint limits could be different in the real robot, so it is always a good practice, when using the robot, to call the <i>alignJointsBound</i> method, which queries the robot for the real joints limits.
 
 \code
