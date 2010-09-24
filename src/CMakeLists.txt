@@ -7,6 +7,9 @@ PROJECT(${PROJECTNAME})
 FIND_PACKAGE(YARP)
 FIND_PACKAGE(ICUB)
 
+SET(CMAKE_MODULE_PATH ${YARP_DIR}/conf ${CMAKE_MODULE_PATH})
+SET(CMAKE_MODULE_PATH ${ICUB_DIR}/conf ${CMAKE_MODULE_PATH})
+
 # Find .cpp and .h files automatically.  This is a bit lazy,
 # and in principle it would be better to list these files manually.
 FILE(GLOB folder_source *.cpp)
