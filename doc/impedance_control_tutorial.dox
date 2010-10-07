@@ -13,15 +13,15 @@ yarp::dev::IImpedanceControl
 
 \section sec_intro Introduction
 Prerequisites:
-http://eris.liralab.it/iCub/dox/html/icub_motor_control_tutorial.html
+http://eris.liralab.it/iCub/main/dox/html/icub_motor_control_tutorial.html
 
 The code described in this tutorial can be found at:
 
-<b>src/tutorials/src/tutorial_arm_joint_impedance.cpp</b>
+<b>$ICUB_ROOT/tutorials/src/tutorial_arm_joint_impedance.cpp</b>
 
 The example is based on the previous tutorial:
 
-<b>src/tutorials/src/tutorial_arm.cpp</b>
+<b>$ICUB_ROOT/tutorials/src/tutorial_arm.cpp</b>
 
 The example shows how to open the ITorqueControl to show the arm joint torques and how to change the control mode of the elbow joint from position to impedance control. 
 
@@ -150,7 +150,7 @@ ictrl->setImpedancePositionMode(3);
 
 When in impedance position mode, the low level controller (DSP) computes a refence torque Td as:
 
-\f[ T_d = K_{spring} * (q-q_d) + K_{damp} * (\dot{q} - \dot{q_d}) + F_{offset} \f]
+\f[ T_d = K_{spring} * (q-q_d) + K_{damp} * \dot{q} + F_{offset} \f]
 
 which is tracked by the internal PID regulator.
 
