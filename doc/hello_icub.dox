@@ -19,6 +19,8 @@ Open a text editor and type the following:
 #include <stdio.h>
 #include <yarp/os/Time.h>
 
+using namespace yarp::os;
+
 int main()
 {
 	printf("Starting the application\n");
