@@ -1,6 +1,8 @@
 /**
 @page icub_cartesian_interface The Cartesian Interface
 
+\author Ugo Pattacini
+
 The YARP <b>Cartesian Interface</b> has been conceived in order to enable the control of the arms
 and the legs of the robot directly in the operational space, that is instead of commading new configuration
 for the joints, user can require for instance the arm to reach a specified pose in the cartesian space, expressed
@@ -9,6 +11,7 @@ the desired orientation given in axis-angle representation.
 
 Before proceeding, the reader might find helpful to recap some motor control fundamentals (click \ref icub_motor_control_tutorial "here")
 as well as to be introduced to the underneath topic of forward and inverse kinematics by going through the \ref iKin documentation and tutorials.
+A paper that describes how the controller works can be downloaded \link CartesianControllersEvaluation.pdf {here}.
 
 
 \section sec_dependences Dependencies
