@@ -11,7 +11,7 @@ the desired orientation given in axis-angle representation.
 
 Before proceeding, the reader might find helpful to recap some motor control fundamentals (click \ref icub_motor_control_tutorial "here")
 as well as to be introduced to the underneath topic of forward and inverse kinematics by going through the \ref iKin documentation and tutorials.
-A paper that describes how the controller works can be downloaded \link CartesianControllersEvaluation.pdf {here}.
+A paper that describes how the controller works can be downloaded <a href="http://eris.liralab.it/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
 
 
 \section sec_dependences Dependencies
