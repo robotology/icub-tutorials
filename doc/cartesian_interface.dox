@@ -11,7 +11,9 @@ the desired orientation given in axis-angle representation.
 
 Before proceeding, the reader might find helpful to recap some motor control fundamentals (click \ref icub_motor_control_tutorial "here")
 as well as to be introduced to the underneath topic of forward and inverse kinematics by going through the \ref iKin documentation and tutorials.
-A paper that describes how the controller works can be downloaded <a href="http://eris.liralab.it/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
+
+\note A paper that describes how the controller works can be downloaded <a href="http://eris.liralab.it/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
+If you're going to use this controller for your work, please quote it within any resulting publication.
 
 
 \section sec_dependences Dependencies
@@ -29,9 +31,9 @@ indicates the hub board mounted on the robot]
    server part of the interface available on the hub.
 -# On PC104: create the files to configure the cartesian controllers.
    For example, to configure the cartesian arm controllers do:
-   - copy the files <i>cartesianLeftArm.ini</i> and <i>cartesianRightArm.ini</i> from <i>$ICUB_ROOT/app/iCubGenova01/conf</i>
-     to <i>$ICUB_ROOT/app/$ICUB_ROBOTNAME/conf</i>.
-   - create/update the file <i>$ICUB_ROOT/app/$ICUB_ROBOTNAME/conf/iCubInterface.ini</i> containing the following lines:
+   - copy the files <i>cartesianLeftArm.ini</i> and <i>cartesianRightArm.ini</i> from <i>$ICUB_ROOT/main/app/robots/iCubGenova01/conf</i>
+     to <i>$ICUB_ROOT/main/app/robots/$ICUB_ROBOTNAME/conf</i>.
+   - create/update the file <i>$ICUB_ROOT/main/app/robots/$ICUB_ROBOTNAME/conf/iCubInterface.ini</i> containing the following lines:
      \code
      config icubSafe.ini // or the current main configuration file
      cartLeftArm cartesianLeftArm.ini
@@ -41,7 +43,7 @@ indicates the hub board mounted on the robot]
 
 <b>iCubInterface+Solvers Application Launcher</b> \n
 
-Henceforth rely on the <i>$ICUB_ROOT/app/cartesianSolver/scripts/cartesianSolver.xml</i> application to launch both the
+Henceforth rely on the <i>$ICUB_ROOT/main/app/cartesianSolver/scripts/cartesianSolver.xml</i> application to launch both the
 iCubInterface and the cartesian solvers. \n
 The \ref iKinCartesianSolver "Cartesian Solvers" are required to invert the kinematics using Ipopt and they are meant to run
 on the cluster to avoid overloading the PC104 core. The solvers need the iCubInterface to connect to the robot to get useful
