@@ -13,7 +13,7 @@ Before proceeding, the reader might find helpful to recap some motor control fun
 as well as to be introduced to the underneath topic of forward and inverse kinematics by going through the \ref iKin documentation and tutorials.
 
 \note A paper that describes how the controller works can be downloaded <a href="http://eris.liralab.it/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
-If you're going to use this controller for your work, please quote it within any resulting publication.
+<b>If you're going to use this controller for your work, please quote it within any resulting publication</b>.
 
 
 \section sec_dependences Dependencies
