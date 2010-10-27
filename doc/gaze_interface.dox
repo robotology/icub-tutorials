@@ -115,18 +115,16 @@ fp[2]=+0.35;	// z-component [m]
 
 igaze->lookAtFixationPoint(fp);	// move the gaze to the desired fixation point
 
-// wait until the operation is done
 volatile bool done=false;
-while (!done) {
+while (!done) {         // wait until the operation is done
    igaze->checkMotionDone(&done);
    Time::delay(0.04);   // or any suitable delay
 }
 
 Vector x(3);
-igaze->getFixationPoint(x);	// retrieve the current fixation point
+igaze->getFixationPoint(x);                             // retrieve the current fixation point
 
-// return back a measure of the displacement error
-cout<<"final error = "<<ctrl::norm(fp-x)<<endl;
+cout<<"final error = "<<ctrl::norm(fp-x)<<endl;         // return a measure of the displacement error
 \endcode
 
 
@@ -169,18 +167,13 @@ igaze->lookAtRelAngles(ang);	// move the gaze wrt the current configuration
 \subsection subsec_monopixelcoorsystem Expressing the fixation point in pixel coordinates (monocular approach)
 The user can also command the gaze by specifying a location within the image plane of one camera as follows:
 \code
-// select the image plane: left or right
-int camSel=0;	// 0: left, 1: right
+int camSel=0;	// select the image plane: 0 (left), 1 (right)
 
-// specify the pixel where to look
-Vector px(2);
+Vector px(2);   // specify the pixel where to look
 px[0]=160.0;
 px[1]=120.0;
 
-// we still have one degree of freedom given by
-// the distance of the object from the image plane
-// if you do not have it, try to guess :)
-double z=1.0;	// distance [m]
+double z=1.0;	// distance [m] of the object from the image plane
 
 igaze->lookAtMonoPixel(camSel,px,z);	// look!
 \endcode
@@ -189,13 +182,11 @@ igaze->lookAtMonoPixel(camSel,px,z);	// look!
 \subsection subsec_stereopixelcoorsystem Expressing the fixation point in pixel coordinates (stereo approach)
 The same thing can be achieved also by exploiting the stereo vision:
 \code
-// specify the pixel within the left image plane
-Vector pxl(2);
+Vector pxl(2);  // specify the pixel within the left image plane
 pxl[0]=170.0;
 pxl[1]=120.0;
 
-// specify the pixel within the right image plane
-Vector pxr(2);
+Vector pxr(2);  // specify the pixel within the right image plane
 pxr[0]=150.0;
 pxr[1]=120.0;
 
