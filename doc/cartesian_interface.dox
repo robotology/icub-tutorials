@@ -212,6 +212,17 @@ Of course due to the optimization process \f$ \hat{x}_d \f$ differs from the com
 with the given tolerance), so as \f$ \hat{o}_d \f$ from \f$ o_d \f$; \f$ \hat{q}_d \f$ is such that \f$ \left[\hat{x}_d,\hat{o}_d\right]=K\left(\hat{q}_d\right) \f$,
 where \f$ K\left(\cdot\right) \f$ is the forward kinematic map. \n
 
+By contrast, if you want to solve for a given pose without actually moving there, you can use the ask-based methods as follows:
+\code
+Vector xd(3);
+xd[0]=-0.3;
+xd[1]=0.0;
+xd[2]=0.1;
+
+Vector xdhat, odhat, qdhat;
+armCart->askForPosition(xd,xdhat,odhat,qdhat);
+\endcode
+
 One useful feature is the possibility to enable/disable some degrees of freedom on-line.
 For example, the arm comes with 10 possible DOF's (the torso is included) that the user may or may not want to use
 at the same time while reaching. \n
