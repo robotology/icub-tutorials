@@ -10,6 +10,8 @@ Essentially the interface exports all the functionalities given by the \ref iKin
 code without having to be concerned with the communication protocol done via YARP ports. Thus, the user is warmly invited
 to visit the iKinGazeCtrl \ref iKinGazeCtrl "page" where more detailed descriptions can be found.
 
+\note <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>.
+
 
 \section sec_dependences Dependencies
 
