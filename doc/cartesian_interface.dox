@@ -179,7 +179,7 @@ Vector xd=x0; xd[0]+=-0.1;
 Vector od=o0;
 armCart->goToPose(xd,od);   // send request and forget
 \endcode
-The <i>goToPose()</i> method does not wait for any acknowledgement that the server has received the request,
+The <i>goToPose(.)</i> method does not wait for any acknowledgement that the server has received the request,
 but it just lets the client module go straight to the next instruction in the code flow. Therefore, the 
 intended use of this method is for streaming input (e.g. while tracking).
 
@@ -193,7 +193,7 @@ while (!done) {
    Time::delay(0.04);   // or any suitable delay
 }
 \endcode
-Here the method <i>goToPoseSync()</i> guarantees that the server receives the request before allowing the code
+Here the method <i>goToPoseSync(.)</i> guarantees that the server receives the request before allowing the code
 flow to proceed. If we had used the analogous non-sync method, then the result of first check would have been
 unpredictable.
 
@@ -222,6 +222,8 @@ xd[2]=0.1;
 Vector xdhat, odhat, qdhat;
 armCart->askForPosition(xd,xdhat,odhat,qdhat);
 \endcode
+The ask-based methods such as <i>askForPosition(.)</i> and <i>askForPose(.)</i> allow the user to employ the Cartesian Interface
+just as a simple layer the wraps around the inverse kinematics solver.
 
 One useful feature is the possibility to enable/disable some degrees of freedom on-line.
 For example, the arm comes with 10 possible DOF's (the torso is included) that the user may or may not want to use
