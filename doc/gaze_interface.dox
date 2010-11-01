@@ -175,7 +175,7 @@ Vector px(2);   // specify the pixel where to look
 px[0]=160.0;
 px[1]=120.0;
 
-double z=1.0;	// distance [m] of the object from the image plane
+double z=1.0;	// distance [m] of the object from the image plane: yes, you probably need to guess, but it works pretty robustly
 
 igaze->lookAtMonoPixel(camSel,px,z);	// look!
 \endcode
