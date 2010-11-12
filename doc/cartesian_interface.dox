@@ -142,7 +142,7 @@ transformation formulas from one domain to another (e.g. look at ctrl::dcm2axis 
 We want to represent the orientation of the right hand when the arm is in the rest position (the torso and arm joints are zeroed),
 for which the x-axis attached to the center of the palm points downward, the y-axis points backward, while the z-axis
 points leftward. Hence, to transform the root reference frame in the end-effector frame, one solution is to rotate of pi/2
-around the y-axis and then of pi/2 around the x-axis.
+around the y-axis and then of pi/2 around the resulting x-axis.
 
 In formulas:
 \code
