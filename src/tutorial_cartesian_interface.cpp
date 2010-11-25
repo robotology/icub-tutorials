@@ -42,6 +42,8 @@ protected:
     Vector xd;
     Vector od;
 
+    int context_id;
+
     double t;
     double t0;
     double t1;
@@ -70,6 +72,12 @@ public:
 
         // open the view
         client->view(arm);
+
+        // latch the controller context in order to preserve
+        // it after closing the module
+        // the context contains the dofs status, the tracking mode,
+        // the resting positions, the limits and so on.
+        arm->saveContext(&context_id);
 
         // set trajectory time
         arm->setTrajTime(1.0);
@@ -128,6 +136,11 @@ public:
         // (anyway it's already done internally in the
         // destructor)
         arm->stopControl();
+
+        // it's a good rule to restore the controller
+        // context as it was before opening the module
+        arm->restoreContext(context_id);
+
         delete client;
     }
 
