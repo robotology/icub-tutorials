@@ -77,7 +77,7 @@ public:
         // it after closing the module
         // the context contains the dofs status, the tracking mode,
         // the resting positions, the limits and so on.
-        arm->saveContext(&context_id);
+        arm->storeContext(&context_id);
 
         // set trajectory time
         arm->setTrajTime(1.0);

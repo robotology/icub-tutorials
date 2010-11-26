@@ -93,7 +93,7 @@ public:
         // latch the controller context in order to preserve
         // it after closing the module
         // the context contains the tracking mode, the neck limits and so on.
-        igaze->saveContext(&context_id);
+        igaze->storeContext(&context_id);
 
         // set trajectory time:
         // we'll go like hell since we're using the simulator :)
