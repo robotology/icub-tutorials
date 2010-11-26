@@ -227,7 +227,7 @@ Vector xdhat, odhat, qdhat;
 armCart->askForPosition(xd,xdhat,odhat,qdhat);
 \endcode
 The ask-based methods such as <i>askForPosition(.)</i> and <i>askForPose(.)</i> allow the user to employ the Cartesian Interface
-just as a simple layer the wraps around the inverse kinematics solver.
+just as a simple layer that wraps around the inverse kinematics solver.
 
 One useful feature is the possibility to enable/disable some degrees of freedom on-line.
 For example, the arm comes with 10 possible DOF's (the torso is included) that the user may or may not want to use
