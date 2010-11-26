@@ -179,17 +179,24 @@ igaze->lookAtMonoPixel(camSel,px,z);	// look!
 \subsection subsec_stereopixelcoorsystem Expressing the fixation point in pixel coordinates (stereo approach)
 The same thing can be achieved also by exploiting the stereo vision:
 \code
-Vector pxl(2);  // specify the pixel within the left image plane
-pxl[0]=170.0;
-pxl[1]=120.0;
+Vector c(2), pxl(2), pxr(2);
+c[0]=160.0;     // center of image plane
+c[1]=120.0;
 
-Vector pxr(2);  // specify the pixel within the right image plane
-pxr[0]=150.0;
-pxr[1]=120.0;
+bool converged=false;
+while (!converged)
+{
+    pxl[0]=...;         // specify somehow the pixel within the left image plane
+    pxl[1]=...;
 
-igaze->lookAtStereoPixels(pxl,pxr);		// look!
+    pxr[0]=...;         // specify somehow the pixel within the right image plane
+    pxr[1]=...;
+
+    igaze->lookAtStereoPixels(pxl,pxr);                 // look!
+
+    converged=(0.5*(norm(c-pxl)+norm(c-pxr))<5);        // recompute somehow the convergence status
+}
 \endcode
-
 Of course, the matching problem between pixels of different image plane is left to the user, who has also to
 provide a continuous visual feedback while converging to the target.
 
