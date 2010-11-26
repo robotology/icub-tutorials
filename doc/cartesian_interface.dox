@@ -195,7 +195,8 @@ while (!done) {
 \endcode
 The same can be achieved also by the following streamlined snippet of code:
 \code
-armCart->waitMotionDone(0.04);
+armCart->goToPoseSync(xd,od);   // send request and wait for reply
+armCart->waitMotionDone(0.04);  // wait until the motion is done and ping at each 0.04 seconds
 \endcode
 Here the method <i>goToPoseSync(.)</i> guarantees that the server receives the request before allowing the code
 flow to proceed. If we had used the analogous non-sync method, then the result of first check would have been
