@@ -308,17 +308,18 @@ A way to easily switch among contexts is to rely on <i>storeContext(.)</i> and <
 armCart->setDOF(newDof1,curDof1);       // here the user prepares the context
 armCart->setTrackingMode(true);
 ...
-int context_id;
-armCart->storeContext(&context_id);     // latch the context
+int context_0;
+armCart->storeContext(&context_0);      // latch the context
 
 armCart->setDOF(newDof2,curDof2);       // at certain point the user may want the controller to
 armCart->goToPose(x,o,t);               // perform some actions with different configuration
 ...
 
-armCart->restoreContext(context_id);    // ... and then retrieve the stored context
+armCart->restoreContext(context_0);     // ... and then retrieve the stored context 0
+armCart->goToPose(x,o);                 // now the controller performs the same action but within the context 0
 \endcode
-It's a good rule to store the context at the initialization of any user module that resorts to the cartesian controller in order to
-then restore it at releasing time to avoid leaving the controller in a different configuration.
+Whenever any user module opens the cartesian interface the context is automatically stored so that as soon as the interface
+is closed the controller configuration is restored at its previous status.
 
 
 \section sec_simcartinterface The Simulator and the Cartesian Interface
