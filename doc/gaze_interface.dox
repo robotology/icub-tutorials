@@ -192,9 +192,9 @@ while (!converged)
     pxr[0]=...;         // specify somehow the pixel within the right image plane
     pxr[1]=...;
 
-    igaze->lookAtStereoPixels(pxl,pxr);                 // look!
+    igaze->lookAtStereoPixels(pxl,pxr);                         // look!
 
-    converged=(0.5*(norm(c-pxl)+norm(c-pxr))<5);        // recompute somehow the convergence status
+    converged=(0.5*(ctrl::norm(c-pxl)+ctrl::norm(c-pxr))<5);    // recompute somehow the convergence status
 }
 \endcode
 Of course, the matching problem between pixels of different image plane is left to the user, who has also to
