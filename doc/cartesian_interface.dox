@@ -318,8 +318,8 @@ armCart->goToPose(x,o,t);               // perform some actions with different c
 armCart->restoreContext(context_0);     // ... and then retrieve the stored context 0
 armCart->goToPose(x,o);                 // now the controller performs the same action but within the context 0
 \endcode
-Whenever any user module opens the cartesian interface the context is automatically stored so that as soon as the interface
-is closed the controller configuration is restored at its previous status.
+It's a good rule to store the context at the initialization of any user module that resorts to the cartesian controller in order to
+then restore it at releasing time to avoid leaving the controller in a different configuration.
 
 
 \section sec_simcartinterface The Simulator and the Cartesian Interface

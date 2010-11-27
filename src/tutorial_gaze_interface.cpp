@@ -53,6 +53,7 @@ protected:
     IPositionControl *ipos;
 
     int state;
+    int startup_context_id;
 
     Vector fp;
 
@@ -88,6 +89,11 @@ public:
 
         // open the view
         clientGaze->view(igaze);
+
+        // latch the controller context in order to preserve
+        // it after closing the module
+        // the context contains the tracking mode, the neck limits and so on.
+        igaze->storeContext(&startup_context_id);
 
         // set trajectory time:
         // we'll go like hell since we're using the simulator :)
@@ -223,6 +229,10 @@ public:
         // (anyway it's already done internally in the
         // destructor)
         igaze->stopControl();
+
+        // it's a good rule to restore the controller
+        // context as it was before opening the module
+        igaze->restoreContext(startup_context_id);
 
         delete clientGaze;
         delete clientTorso;
