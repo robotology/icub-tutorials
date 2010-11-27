@@ -197,7 +197,7 @@ while (!converged)
     converged=(0.5*(ctrl::norm(c-pxl)+ctrl::norm(c-pxr))<5);    // recompute somehow the convergence status
 }
 \endcode
-Of course, the matching problem between pixels of different image plane is left to the user, who has also to
+Of course, the matching problem between pixels of different image planes is left to the user, who has also to
 provide a continuous visual feedback while converging to the target.
 
 
