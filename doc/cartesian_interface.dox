@@ -318,7 +318,7 @@ armCart->goToPose(x,o,t);               // perform some actions with different c
 armCart->restoreContext(context_0);     // ... and then retrieve the stored context 0
 armCart->goToPose(x,o);                 // now the controller performs the same action but within the context 0
 \endcode
-It's a good rule to store the context at the initialization of any user module that resorts to the cartesian controller in order to
+Unless the user needs the interface just for logging purposes, it's a good rule to store the context at the initialization of his module in order to
 then restore it at releasing time to avoid leaving the controller in a different configuration.
 
 
