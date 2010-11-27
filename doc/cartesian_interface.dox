@@ -319,7 +319,7 @@ armCart->restoreContext(context_0);     // ... and then retrieve the stored cont
 armCart->goToPose(x,o);                 // now the controller performs the same action but within the context 0
 \endcode
 Unless the user needs the interface just for logging purposes, it's a good rule to store the context at the initialization of his module in order to
-then restore it at releasing time to avoid leaving the controller in a different configuration.
+then restore it at releasing time to preserve the controller configuration.
 
 
 \section sec_simcartinterface The Simulator and the Cartesian Interface

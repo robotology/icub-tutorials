@@ -223,8 +223,8 @@ igaze->lookAtFixationPoint(fp);
 igaze->restoreContext(context_0);       // ... and then retrieve the stored context 0
 igaze->lookAtFixationPoint(fp);         // now the controller performs the same action but within the context 0
 \endcode
-Unless the user needs the interface just for logging purposes, it's a good rule to store the context at the initialization of his module in order to
-then restore it at releasing time to avoid leaving the controller in a different configuration.
+Unless the user needs the interface just for logging purposes, it's a good rule to store the context at the initialization
+of his module in order to then restore it at releasing time to preserve the controller configuration.
 
 
 \section sec_simgazeinterface The Simulator and the Gaze Interface
