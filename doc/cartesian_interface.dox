@@ -315,8 +315,8 @@ armCart->setDOF(newDof2,curDof2);       // at certain point the user may want th
 armCart->goToPose(x,o,t);               // perform some actions with different configuration
 ...
 
-armCart->restoreContext(context_0);     // ... and then retrieve the stored context 0
-armCart->goToPose(x,o);                 // now the controller performs the same action but within the context 0
+armCart->restoreContext(context_0);     // ... and then retrieve the stored context_0
+armCart->goToPose(x,o);                 // now the controller performs the same action but within the context_0
 \endcode
 Unless the user needs the interface just for logging purposes, it's a good rule to store the context at the initialization of his module in order to
 then restore it at releasing time to preserve the controller configuration.
