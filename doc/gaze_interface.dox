@@ -149,10 +149,8 @@ igaze->getAngles(ang);	// get the current angular configuration
 
 
 \subsection subsec_relangcoorsystem Expressing the fixation point in Relative Angular Coordinate System
-Also the relative angular coordinate system is available which works as follows: given the user input in relative mode, 
-it computes the current fixation point in absolute coordinates and then add the relative angular displacements in order to
-retrieve the ultimate fixation point in the cartesian space.
-Hence we can use:
+Also the relative angular coordinate system is available which is basically the same as the absolute one but refers to the current
+configuration of the cyclopic eye. Hence we can use:
 \code
 Vector ang(3);
 ang[0]=+10.0;	// azimuth-relative component wrt the current configuration [deg]
