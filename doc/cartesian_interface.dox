@@ -327,9 +327,9 @@ then restore it at releasing time to preserve the controller configuration.
 The user is further provided with the method <i>setTaskVelocities(.)</i> that allows to command a reference velocity for the end-effector in the
 operational space as follows:
 \code
-Vector xdot(3); // move the end-effector along y-axis only at specified velocity
-xdot[0]=0.0;
-xdot[1]=0.01;   // [m/s]
+Vector xdot(3); // move the end-effector along y-axis at specified velocity
+xdot[0]=0.0;    // [m/s]
+xdot[1]=0.01;
 xdot[2]=0.0;
 
 Vector odot(4); // no rotation is required
