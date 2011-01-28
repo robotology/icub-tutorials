@@ -322,6 +322,25 @@ Unless the user needs the interface just for logging purposes, it's a good rule 
 then restore it at releasing time to preserve the controller configuration.
 
 
+\section sec_taskRefVel Task-Space Reference Velocity Command
+
+The user is further provided with the method <i>setTaskVelocities(.)</i> that allows to command a reference velocity for the end-effector in the
+operational space as follows:
+\code
+Vector xdot(3); // move the end-effector along y-axis only at specified velocity
+xdot[0]=0.0;
+xdot[1]=0.01;   // [m/s]
+xdot[2]=0.0;
+
+Vector odot(4); // no rotation is required
+odot=0.0;       // [rad/s]
+
+armCart->setTaskVelocities(xdot,odot);
+\endcode
+The solver still plays a meaningful role in this command mode so that the whole set of constraints active in the inverse kinematics problem
+are taken into account.
+
+
 \section sec_simcartinterface The Simulator and the Cartesian Interface
 
 To have the Cartesian Interface fully operative together with the robot simulator, please have a look \ref simCartesianControl "here".
