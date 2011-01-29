@@ -338,7 +338,9 @@ odot=0.0;       // [rad/s]
 armCart->setTaskVelocities(xdot,odot);
 \endcode
 The solver still plays a meaningful role in this command mode so that the whole set of constraints active in the inverse kinematics problem
-are taken into account.
+are taken into account. Moreover, the task-space reference velocity will be tracked according to the reactivity level of the internal controller
+which is basically determined by the current trajectory time, meaning that for executing high task-space velocity the trajectory time should be
+tuned towards lower values, whereas it should be increased to track low task-space reference velocity.
 
 
 \section sec_simcartinterface The Simulator and the Cartesian Interface
