@@ -24,13 +24,13 @@ using namespace yarp::os;
 
 class MyModule:public RFModule
 {
-    Port handlerPort; \/\/a port to handle messages
+    Port handlerPort; // a port to handle messages
     int count;
 public:
 
     double getPeriod()
     {
-        ////module periodicity (seconds), called implicitly by the module.
+        // module periodicity (seconds), called implicitly by the module.
         return 1;
     }
 
