@@ -34,7 +34,7 @@ public:
         return 1;
     }
 
-    //////// This is our main function. Will be called periodically every getPeriod() seconds.
+    // This is our main function. Will be called periodically every getPeriod() seconds.
     bool updateModule()
     {
         count++;
