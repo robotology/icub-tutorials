@@ -36,7 +36,7 @@ using namespace yarp::math;
 class CtrlThread: public RateThread
 {
 protected:
-    PolyDriver        *client;
+    PolyDriver         client;
     ICartesianControl *arm;
 
     Vector xd;
@@ -69,15 +69,11 @@ public:
         option.put("remote","/icubSim/cartesianController/left_arm");
         option.put("local","/cartesian_client/left_arm");
 
-        client=new PolyDriver;
-        if (!client->open(option))
-        {
-            delete client;    
+        if (!client.open(option))
             return false;
-        }
 
         // open the view
-        client->view(arm);
+        client.view(arm);
 
         // latch the controller context in order to preserve
         // it after closing the module
@@ -147,7 +143,7 @@ public:
         // context as it was before opening the module
         arm->restoreContext(startup_context_id);
 
-        delete client;
+        client.close();
     }
 
     void generateTarget()

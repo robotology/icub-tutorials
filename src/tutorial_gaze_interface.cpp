@@ -46,8 +46,8 @@ using namespace yarp::math;
 class CtrlThread: public RateThread
 {
 protected:
-    PolyDriver       *clientGaze;
-    PolyDriver       *clientTorso;
+    PolyDriver        clientGaze;
+    PolyDriver        clientTorso;
     IGazeControl     *igaze;
     IEncoders        *ienc;
     IPositionControl *ipos;
@@ -80,15 +80,11 @@ public:
         optGaze.put("remote","/iKinGazeCtrl");
         optGaze.put("local","/gaze_client");
 
-        clientGaze=new PolyDriver;
-        if (!clientGaze->open(optGaze))
-        {
-            delete clientGaze;    
+        if (!clientGaze.open(optGaze))
             return false;
-        }
 
         // open the view
-        clientGaze->view(igaze);
+        clientGaze.view(igaze);
 
         // latch the controller context in order to preserve
         // it after closing the module
@@ -109,16 +105,12 @@ public:
         optTorso.put("remote","/icubSim/torso");
         optTorso.put("local","/torso_client");
 
-        clientTorso=new PolyDriver;
-        if (!clientTorso->open(optTorso))
-        {
-            delete clientTorso;    
+        if (!clientTorso.open(optTorso))
             return false;
-        }
 
         // open the view
-        clientTorso->view(ienc);
-        clientTorso->view(ipos);
+        clientTorso.view(ienc);
+        clientTorso.view(ipos);
         ipos->setRefSpeed(0,10.0);
 
         fp.resize(3);
@@ -234,8 +226,8 @@ public:
         // context as it was before opening the module
         igaze->restoreContext(startup_context_id);
 
-        delete clientGaze;
-        delete clientTorso;
+        clientGaze.close();
+        clientTorso.close();
     }
 
     void generateTarget()
