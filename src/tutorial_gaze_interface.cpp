@@ -218,8 +218,6 @@ public:
     {    
         // we require an immediate stop
         // before closing the client for safety reason
-        // (anyway it's already done internally in the
-        // destructor)
         igaze->stopControl();
 
         // it's a good rule to restore the controller
