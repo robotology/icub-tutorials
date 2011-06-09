@@ -35,7 +35,7 @@ indicates the hub board mounted on the robot]
      to <i>$ICUB_ROOT/main/app/robots/$ICUB_ROBOTNAME/conf</i>.
    - create/update the file <i>$ICUB_ROOT/main/app/robots/$ICUB_ROBOTNAME/conf/iCubInterface.ini</i> containing the following lines:
      \code
-     config icubSafe.ini // or the current main configuration file
+     config icub.ini    // or the current main configuration file
      cartLeftArm cartesianLeftArm.ini
      cartRightArm cartesianRightArm.ini
      \endcode
