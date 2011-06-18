@@ -50,6 +50,9 @@ on the cluster to avoid overloading the PC104 core. The solvers need the iCubInt
 data to operate (e.g. the joints bounds) and also iCubInterface needs them to open the server side of the cartesian interface.
 Therefore the <i>chicken-egg</i> problem is solved by applying proper connection timeout to the solvers and to keep them as
 close as possible to the iCubInterface by using the application.
+Moreover, once everything is launched from within the application, if the user <i>accidentally</i> stops one of these modules,
+it turns to be mandatory to restart all of them from the beginning; this comes from the requirement to keep the communication
+protocol as light as possible, avoiding requests for integrity checking and reinitialization.
 
 
 \section sec_openclosecartinterface Opening and Closing the Cartesian Interface
