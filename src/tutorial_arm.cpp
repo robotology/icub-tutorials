@@ -12,7 +12,6 @@
 using namespace yarp::dev;
 using namespace yarp::sig;
 using namespace yarp::os;
-using namespace yarp;
 
 int main(int argc, char *argv[]) 
 {
