@@ -306,15 +306,15 @@ just the arm.
 In this small section a couple of considerations that motivated the design of the inversion problem are briefly summarized as taken from the
 article on the cartesian controller and perhaps more importantly as they came up from discussions with some meticulous users.
 
-One of the main aspects of the nonlinear problem handled by the cartesian solver is that the reaching for position is a constraint, whereas the
+One of the main aspects of the nonlinear problem as handled by the cartesian solver is that the reaching for position is a constraint, whereas the
 reaching in orientation appears directly in the cost function. As result, the former is treated with higher priority with respect to the latter
 to reflect the requirement of achieving the task in a very localized zone of the space. For example, this particular preference is of major
 interest for grasping, where having an hand perfectly oriented with respect to the object to be grasped but with a position of even a couple
 of centimeters away from the target will cause the task to fail much more frequently than having the hand perfectly located in position and
 with even ten degrees out of the alignment.
-One behavior emerging from this design the user may experience effortlessly is the following: when a out-of-range position is commanded to be
-attained together with a given orientation, then it turns that the robot will stretch its body up to its maximum extension almost irrespective
-of the final orientation.
+One behavior emerging from this design that the user may experience effortlessly is the following: when a out-of-range position is commanded
+together with a given orientation, it turns that the robot will stretch its body up to its maximum extension almost irrespective of the final
+orientation.
 
 Conversely, there does not exist a specific reason why an optimizer (or more generally an inverse kinematic algorithm) should be employed to put
 the end-effector in a given orientation almost regardless its position in the space, which sounds like with a priority equal to the position:
