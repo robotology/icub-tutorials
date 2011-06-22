@@ -313,8 +313,8 @@ interest for grasping, where having an hand perfectly oriented with respect to t
 of centimeters away from the target will cause the task to fail much more frequently than having the hand perfectly located in position and
 with even ten degrees out of the alignment.
 One behavior emerging from this design that the user may experience effortlessly is the following: when a out-of-range position is commanded
-together with a given orientation, it turns that the robot will stretch its body up to its maximum extension almost irrespective of the final
-orientation.
+together with a given orientation, it turns that the robot will stretch its body up to its maximum extension (depending on the parts currently
+enabled) almost irrespective of the final orientation.
 
 Conversely, there does not exist a specific reason why an optimizer (or more generally an inverse kinematic algorithm) should be employed to put
 the end-effector in a given orientation almost regardless its position in the space, which sounds like with a priority equal to the position:
