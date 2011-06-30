@@ -116,7 +116,7 @@ public:
 
         state=STATE_TRACK;
 
-		t=t0=t1=t2=t3=t4=Time::now();
+        t=t0=t1=t2=t3=t4=Time::now();
 
         return true;
     }
