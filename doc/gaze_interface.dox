@@ -181,8 +181,9 @@ Vector x;
 igaze->get3Dpoint(camSel,px,z,x);
 igaze->lookAtFixationPoint(x);
 \endcode
-The benefit of lookAtMonoPixel() method is clearly that the time for the rpc communication is saved; on the other hand, the knowledge
-of the cartesian point remains hidden to the user, unless it is retrieved at the end of the motion through a getFixationPoint().
+The benefit of lookAtMonoPixel() method is clearly that the time for the rpc communication is saved, hence it is particularly designed for control
+in streaming mode; on the other hand, the knowledge of the cartesian point remains hidden to the user, unless it is retrieved at the end of the
+motion through a call to getFixationPoint().
 
 
 \subsection subsec_stereopixelcoorsystem Expressing the fixation point in pixel coordinates (stereo approach)
@@ -210,7 +211,7 @@ Of course, the matching problem between pixels of different image planes is left
 provide a continuous visual feedback while converging to the target.
 
 
-\subsection subsec_projectiononplane Projecting pixels on planes
+\subsection subsec_geometrypixels Geometry of pixels
 It might be useful sometimes to perform an homography in order to retrieve the projection of a pixel into a plane specified
 in the 3D space: let's think for instance to the context of the robot presented with a number of objects that all lie on a table.
 The table introduces a constraint that allows determining the component z of the point in case the monocular approach is used.
@@ -229,6 +230,21 @@ plane[3]=0.12;    // d
 
 Vector x;
 igaze->get3DPointOnPlane(camSel,px,plane,x);	// get the projection
+\endcode
+It is possible to execute a triangulation to find from the pixels images the corresponding 3D point in the space. This problem is
+solved through a fast least-squares minimization.
+\code
+Vector pxl(2), pxr(2);
+pxl[0]=...;         // specify somehow the pixel within the left image plane
+pxl[1]=...;
+
+pxr[0]=...;         // specify somehow the pixel within the right image plane
+pxr[1]=...;
+
+Vector x;
+igaze->triangulate3DPoint(pxl,pxr,x);
+Importantly, the triangulation is strongly affected by uncertainties in the cameras alignment, so that, unless these unknowns are
+perfectly compensated, to fixate in stereo mode it is advisable to rely on the method lookAtStereoPixels().
 \endcode
 
 
