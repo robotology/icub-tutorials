@@ -231,8 +231,8 @@ plane[3]=0.12;    // d
 Vector x;
 igaze->get3DPointOnPlane(camSel,px,plane,x);	// get the projection
 \endcode
-It is possible to execute a triangulation to find from the pixels images the corresponding 3D point in the space. This problem is
-solved through a fast least-squares minimization.
+It is possible to execute a triangulation to find from the pixels in the images the corresponding 3D point in the space. This problem is
+solved through a least-squares minimization.
 \code
 Vector pxl(2), pxr(2);
 pxl[0]=...;         // specify somehow the pixel within the left image plane
