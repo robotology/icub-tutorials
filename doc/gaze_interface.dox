@@ -181,8 +181,8 @@ Vector x;
 igaze->get3Dpoint(camSel,px,z,x);
 igaze->lookAtFixationPoint(x);
 \endcode
-The benefit of the former method is clearly that the time for the rpc communication is saved; on the other hand, the knowledge
-of the cartesian point remains hidden.
+The benefit of lookAtMonoPixel() method is clearly that the time for the rpc communication is saved; on the other hand, the knowledge
+of the cartesian point remains hidden to the user, unless it is retrieved at the end of the motion through a getFixationPoint().
 
 
 \subsection subsec_stereopixelcoorsystem Expressing the fixation point in pixel coordinates (stereo approach)
