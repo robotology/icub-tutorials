@@ -243,9 +243,9 @@ pxr[1]=...;
 
 Vector x;
 igaze->triangulate3DPoint(pxl,pxr,x);
+\endcode
 Importantly, the triangulation is strongly affected by uncertainties in the cameras alignment, so that, unless these unknowns are
 perfectly compensated, to fixate in stereo mode it is advisable to rely on the method lookAtStereoPixels().
-\endcode
 
 
 \section sec_contextswitch Context Switch
