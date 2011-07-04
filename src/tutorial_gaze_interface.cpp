@@ -74,7 +74,8 @@ public:
         // we suppose that:
         // 1 - the iCub simulator (icubSim) is running
         // 2 - the gaze server iKinGazeCtrl is running and
-        //     launched with --robot icubSim option
+        //     launched with the following options:
+        //     --robot icubSim --context cameraCalibration/conf --config icubSimEyes.ini
         Property optGaze("(device gazecontrollerclient)");
         optGaze.put("remote","/iKinGazeCtrl");
         optGaze.put("local","/gaze_client");

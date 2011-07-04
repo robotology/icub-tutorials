@@ -279,7 +279,7 @@ of his module in order to then restore it at releasing time to preserve the cont
 The Gaze Interface is already fully operative with the robot simulator: you only need to launch the server part with the robot option correctly set.
 Example:
 \code
-iKinGazeCtrl --robot icubSim
+iKinGazeCtrl --robot icubSim --context cameraCalibration/conf --config icubSimEyes.ini
 \endcode
 
 A working example is available under
