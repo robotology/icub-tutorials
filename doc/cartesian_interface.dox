@@ -14,6 +14,8 @@ as well as to be introduced to the underneath topic of forward and inverse kinem
 
 \note A paper that describes how the controller works can be downloaded <a href="http://eris.liralab.it/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
 <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>.
+U. Pattacini, F. Nori, L. Natale, G. Metta, G. Sandini, "An Experimental Evaluation of a Novel Minimum-Jerk Cartesian Controller for Humanoid Robots",
+<i>IEEE/RSJ International Conference on Intelligent Robots and Systems</i>, Taipei, Taiwan, 2010. 
 
 
 \section sec_dependencies Dependencies
