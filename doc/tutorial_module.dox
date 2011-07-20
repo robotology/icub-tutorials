@@ -30,11 +30,11 @@ public:
 
     double getPeriod()
     {
-        // module periodicity (seconds), called implicitly by the module.
+        /* module periodicity (seconds), called implicitly by the module. */
         return 1;
     }
 
-    // This is our main function. Will be called periodically every getPeriod() seconds.
+    /* This is our main function. Will be called periodically every getPeriod() seconds */
     bool updateModule()
     {
         count++;
@@ -44,7 +44,7 @@ public:
     }
 
 	
-    // Message handler. Just echo all received messages.
+    /* Message handler. Just echo all received messages. */
     bool respond(const Bottle& command, Bottle& reply) 
     {
         cout<<"Got something, echo is on"<<endl;
@@ -56,20 +56,20 @@ public:
     }
 
     
-    // Configure function. Receive a previously initialized
-    // resource finder object. Use it to configure your module.
-    // If you are migrating from the old module, this is the function
-    // equivalent to the "open" method.
+    /* Configure function. Receive a previously initialized
+       resource finder object. Use it to configure your module.
+       If you are migrating from the old module, this is the function
+       equivalent to the "open" method. */
     bool configure(yarp::os::ResourceFinder &rf)
     {
         count=0;
-	  //optional, attach a port to the module
-        //so that messages received from the port are redirected
-	  //to the respond method
+	    /* optional, attach a port to the module
+        /* so that messages received from the port are redirected
+	    /* to the respond method
         handlerPort.open("/myModule");
         attach(handlerPort);
-	  //optional, attach to terminal if you want that text typed at the console
-        //is redirected to the respond method
+	    /* optional, attach to terminal if you want that text typed at the console
+           is redirected to the respond method */
         attachTerminal();     
         return true;
     }
@@ -81,11 +81,10 @@ public:
         return true;
     }
 
-    //
-    // Close function, to perform cleanup.
+    /* Close function, to perform cleanup. */
     bool close()
     {
-        //optional, close port explicitly
+        /* optional, close port explicitly */
         cout<<"Calling close function\n";
         handlerPort.close();
 	  return true;
@@ -98,13 +97,13 @@ and this is the main function to instantiate it.
 \code
 int main(int argc, char * argv[])
 {
-    //initialize yarp network
+    /* initialize yarp network */
     Network yarp;
 
-    //create your module
+    /* create your module */
     MyModule module; 
 
-    // prepare and configure the resource finder
+    /* prepare and configure the resource finder */
     ResourceFinder rf;
     rf.configure("ICUB_ROOT", argc, argv);
     rf.setVerbose(true);

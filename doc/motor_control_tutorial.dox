@@ -55,9 +55,8 @@ To create the driver we use the PolyDriver:
 \code
   PolyDriver robotDevice(options);
   if (!robotDevice.isValid()) {
-      ACE_OS::printf("Device not available.  Here are the known devices:\n");
-      ACE_OS::printf("%s", Drivers::factory().toString().c_str());
-      Network::fini();
+      printf("Device not available.  Here are the known devices:\n");
+      printf("%s", Drivers::factory().toString().c_str());
       return 1;
   }
 \endcode
@@ -87,8 +86,7 @@ and:
 if everything went ok the pointers are valid pointers (check it!). For example:
 \code
     if (pos==0) {
-      ACE_OS::printf("Error getting IPositionControl interface.\n");
-      Network::fini();
+      printf("Error getting IPositionControl interface.\n");
       return 1;
     }
 \endcode 

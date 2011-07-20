@@ -65,7 +65,7 @@ polydriver and configure it to connect to the head.
 \code
 bool threadInit()
 {
-	//initialize here variables
+	  //initialize here variables
       printf("ControlThread:starting\n");
         
       Property options;
@@ -122,7 +122,7 @@ void run()
 
       count++;
 
-	//alternates two commands
+	  //alternates two commands
       if (count%2)
           commands=5;
       else
@@ -148,7 +148,7 @@ We put this code in threadRelease():
 
       dd.close();
 
-	printf("Done, goodbye from ControlThread\n");
+	  printf("Done, goodbye from ControlThread\n");
 }
 \endcode
 
