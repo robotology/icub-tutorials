@@ -174,7 +174,7 @@ double z=1.0;   // distance [m] of the object from the image plane (extended to 
 
 igaze->lookAtMonoPixel(camSel,px,z);    // look!
 \endcode
-What the interface will internally execute is to retrieve the corresponding 3D point through a call to get3DPoint() to then use
+What the interface will internally execute is to retrieve the corresponding 3D point through a call to <i>get3DPoint()</i> to then use
 this result to command an equivalent cartesian displacement as in the following:
 \code
 Vector x;
