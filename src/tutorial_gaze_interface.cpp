@@ -92,9 +92,8 @@ public:
         igaze->storeContext(&startup_context_id);
 
         // set trajectory time:
-        // we'll go like hell since we're using the simulator :)
-        igaze->setNeckTrajTime(0.4);
-        igaze->setEyesTrajTime(0.1);
+        igaze->setNeckTrajTime(0.8);
+        igaze->setEyesTrajTime(0.4);
 
         // put the gaze in tracking mode, so that
         // when the torso moves, the gaze controller 
