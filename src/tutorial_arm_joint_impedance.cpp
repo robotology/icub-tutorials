@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 		//0 is the additional torque offset
 		//WARNING: playing with this value may lead to undamped oscillatory behaviours.
 		//when you raise the stiffness, you should increase the damping coefficient accordingly.
-		iimp->setImpedance(i, 0.111, 0.014, 0);
+		iimp->setImpedance(i, 0.111, 0.014);
     }
 
     //pos->setRefSpeeds(tmp.data()))
