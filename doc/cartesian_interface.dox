@@ -184,7 +184,7 @@ Vector xd=x0; xd[0]+=-0.1;
 Vector od=o0;
 armCart->goToPose(xd,od);   // send request and forget
 \endcode
-The <i>goToPose(.)</i> method does not wait for any acknowledgement that the server has received the request,
+The <i>goToPose()</i> method does not wait for any acknowledgement that the server has received the request,
 but it just lets the client module go straight to the next instruction in the code flow. Therefore, the 
 intended use of this method is for streaming input (e.g. while tracking).
 
@@ -203,7 +203,7 @@ The same can be achieved also by the following streamlined snippet of code:
 armCart->goToPoseSync(xd,od);   // send request and wait for reply
 armCart->waitMotionDone(0.04);  // wait until the motion is done and ping at each 0.04 seconds
 \endcode
-Here the method <i>goToPoseSync(.)</i> guarantees that the server receives the request before allowing the code
+Here the method <i>goToPoseSync()</i> guarantees that the server receives the request before allowing the code
 flow to proceed. If we had used the analogous non-sync method, then the result of first check would have been
 unpredictable.
 
@@ -232,7 +232,7 @@ xd[2]=0.1;
 Vector xdhat, odhat, qdhat;
 armCart->askForPosition(xd,xdhat,odhat,qdhat);
 \endcode
-The ask-based methods such as <i>askForPosition(.)</i> and <i>askForPose(.)</i> allow the user to employ the Cartesian Interface
+The ask-based methods such as <i>askForPosition()</i> and <i>askForPose()</i> allow the user to employ the Cartesian Interface
 just as a simple layer that wraps around the inverse kinematics solver.
 
 One useful feature is the possibility to enable/disable some degrees of freedom on-line.
@@ -332,7 +332,7 @@ it will be as straightforward as to inherit C++ classes to describe the cost fun
 We define here the <i>context</i> as the configuration in which the controller operates: therefore the context includes the actual number of DOF's,
 their angular bounds, the resting positions and weights, the trajectory execution time, the current tracking mode and so on.
 Obviously the controller performs the same action differently depending on the current context.
-A way to easily switch among contexts is to rely on <i>storeContext(.)</i> and <i>restoreContext(.)</i> methods as follows:
+A way to easily switch among contexts is to rely on <i>storeContext()</i> and <i>restoreContext()</i> methods as follows:
 \code
 armCart->setDOF(newDof1,curDof1);       // here the user prepares the context
 armCart->setTrackingMode(true);
@@ -353,7 +353,7 @@ then restore it at releasing time to preserve the controller configuration.
 
 \section sec_taskRefVel Task-Space Reference Velocity Command
 
-The user is further provided with the method <i>setTaskVelocities(.)</i> that allows to command a reference velocity for the end-effector in the
+The user is further provided with the method <i>setTaskVelocities()</i> that allows to command a reference velocity for the end-effector in the
 operational space as follows:
 \code
 Vector xdot(3); // move the end-effector along y-axis at specified velocity
