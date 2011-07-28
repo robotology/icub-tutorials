@@ -41,7 +41,7 @@ application the user is also able to launch the gaze server contextually with th
 \section sec_openclosegazeinterface Opening and Closing the Gaze Interface
 
 The Gaze Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
-this the user has to enforce the dependence of his project from the iCub hardware modules collection.
+this the user has to enforce the dependency of his project from the iCub hardware modules collection.
 
 To achieve that, the following lines have to be included in the <i>CMakeLists.txt</i> file whenever you intend to put
 your project within the iCub repository:
