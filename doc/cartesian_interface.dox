@@ -12,10 +12,15 @@ the desired orientation given in axis-angle representation.
 Before proceeding, the reader might find helpful to recap some motor control fundamentals (click \ref icub_motor_control_tutorial "here")
 as well as to be introduced to the underneath topic of forward and inverse kinematics by going through the \ref iKin documentation and tutorials.
 
+The architecture of the Cartesian Interface is based on three components: 1) a complex nonlinear <b>optimizer</b> that handles the inverse kinematics problem;
+2) a <b>controller</b> that represents the server part of the interface and is responsible for generating the human-like velocity profiles to move the system
+from its initial state to the joints configuration found by the solver; 3) a <b>client</b> part that exposes a collection of C++ methods to abstract the interface
+from the its specific implementation.
+
 \note A paper that describes how the controller works can be downloaded <a href="http://eris.liralab.it/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
 <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>: U. Pattacini, F. Nori, L. Natale, G. Metta, G. Sandini,
 "An Experimental Evaluation of a Novel Minimum-Jerk Cartesian Controller for Humanoid Robots", <i>IEEE/RSJ International Conference on Intelligent Robots and Systems</i>,
-Taipei, Taiwan, 2010. 
+Taipei, Taiwan, 2010.
 
 
 \section sec_dependencies Dependencies
