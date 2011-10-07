@@ -15,7 +15,7 @@ as well as to be introduced to the underneath topic of forward and inverse kinem
 The architecture of the Cartesian Interface is based on three components: 1) a complex nonlinear <b>optimizer</b> that handles the inverse kinematics problem;
 2) a <b>controller</b> that represents the server part of the interface and is responsible for generating the human-like velocity profiles to move the system
 from its initial state to the joints configuration found by the solver; 3) a <b>client</b> part that exposes a collection of C++ methods to abstract the interface
-from the its specific implementation.
+from its specific implementation.
 
 \note A paper that describes how the controller works can be downloaded <a href="http://eris.liralab.it/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
 <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>: U. Pattacini, F. Nori, L. Natale, G. Metta, G. Sandini,
