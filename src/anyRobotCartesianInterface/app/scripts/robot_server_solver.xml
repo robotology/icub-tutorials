@@ -1,0 +1,27 @@
+<application>
+<name>Services Launcher</name>
+
+        <dependencies>
+        </dependencies>
+      
+        <module>
+            <name>fakeRobot</name>
+            <node>node</node>
+            <tag>yr_fakeRobot</tag>
+        </module>
+
+        <module>
+            <name>server</name>
+            <node>node</node>
+            <tag>yr_server</tag>
+        </module>
+
+        <module>
+            <name>solver</name>
+            <node>node</node>
+            <tag>yr_solver</tag>
+        </module>
+
+</application>
+
+

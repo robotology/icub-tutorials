@@ -1,0 +1,17 @@
+<application>
+<name>Client Launcher</name>
+
+        <dependencies>
+            <port>/server/state:o</port>
+        </dependencies>
+      
+        <module>
+            <name>client</name>
+            <node>node</node>
+            <stdio>node</stdio>
+            <tag>yr_client</tag>
+        </module>
+
+</application>
+
+
