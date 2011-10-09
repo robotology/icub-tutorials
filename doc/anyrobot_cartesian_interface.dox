@@ -4,9 +4,9 @@
 \author Ugo Pattacini
 
 This tutorial will guide the user through the steps required to run all the components of the Cartesian Interface
-in order to control a generic yarp-compatible robot limb in its operational space. Therefore, this is a somewhat
-advanced topic which might be of interest just for developers who want to adopt this interface for their platforms,
-or for those of you who are really geek inside :). \n
+with the purpose of controlling a generic yarp-compatible robot limb in its operational space. Therefore, this is
+a somewhat advanced topic which might be of interest just for developers who want to adopt this interface for their
+platforms, or for those of you who are really geek inside :). \n
 For "normal" people - who have only iCub in their work life - the tutorial on the \ref icub_cartesian_interface
 "Cartesian Interface" is extensive; it is also a prerequisite for proceeding further.
 
@@ -36,13 +36,18 @@ performances. Here are the details. \n
   as much as possible since a lag in the control loop will inevitably cause for instance unwanted overshoots in the
   response. As final suggestion, consider placing the server physically close to the robot, that is where ethernet ends
   (and yarp too) and the internal robot bus begins; for the iCub indeed, the server runs aboard the PC104.
-- The client simply lives inside the user code, making queries to the server through yarp ports, thus it does never
-  speak to the solver. There are no special needs for it: the location of the client depends only on the requirements
-  of the user code; a program that opens up a client may run on a shuffle PC so as on a powerful machine or even aboard
-  the robot hub.
+- The client simply lives inside the user code, making queries to the server through yarp ports, thus it never speaks
+  to the solver. There are no special needs for it: the location of the client depends only on the requirements of the
+  user code; a program that opens up a client may run on a shuffle PC so as on a powerful machine or even aboard the
+  robot hub.
 
 
 \section sec_dependencies Dependencies
 
-...
+Besides the "classical" dependecies you need to compile and run all the components (Ipopt, iKin, cartesiancontrollerserver,
+cartesiancontrollerclient; you should know them very well by now :), you are required to accomplish a preliminary job...
+
+... to be continued
+
+
 
