@@ -1,0 +1,48 @@
+/**
+@page icub_anyrobot_cartesian_interface Customizing the Cartesian Interface for a Generic Robot
+
+\author Ugo Pattacini
+
+This tutorial will guide the user through the steps required to run all the components of the Cartesian Interface
+in order to control a generic yarp-compatible robot limb in its operational space. Therefore, this is a somewhat
+advanced topic which might be of interest just for developers who want to adopt this interface for their platforms,
+or for those of you who are really geek inside :). \n
+For "normal" people - who have only iCub in their work life - the tutorial on the \ref icub_cartesian_interface
+"Cartesian Interface" is extensive; it is also a prerequisite for proceeding further.
+
+
+\section sec_architecture The Architecture
+
+The architecture of the Cartesian Interface is sketched out below.
+
+\image html cartIFArchitecture.jpg
+
+We already know there is a <b>solver</b> in charge of inverting the kinematics, a <b>server</b> controlling the robot
+limb and finally a <b>client</b> enabling the user to forward requests for cartesian movements directly from within
+the code through typical calls to C++ methods. \n
+However, the diagram is more informative than that: it tells us about how these three components are arranged in the
+iCub network, an allocation that should be preserved also for your robot's architecture to achieve fast and reliable
+performances. Here are the details. \n
+- The solver is the most computational demanding tool; for this reason it should be launched on a powerful machine
+  belonging to the cluster of PCs connected to the robot network. It employs Ipopt for nonlinear optimization and
+  should not be a burden to any critical routine that has to control the robot in real-time. \n
+  Nonetheless, having a powerful computer as own resource, the solver can tackle the inverse kinematics problem with
+  a large number of degrees-of-freedom in near real-time (something like ~20 ms).
+- The server is a canonical controller responsible for sending velocity commands to the robot with the purpose of
+  achieving the joints configuration as found by the solver. It is a light-weight program so that it can run directly
+  onboard the robot hub; it collects the requests coming from all the clients, it asks the solver to do its job and
+  feeds back clients with useful information such as the current end-effector pose. The main reason why the server
+  should be running on the hub is that the lag due to the communication must be reduced as much as possible since a
+  lag in the control loop will inevitably cause for instance unwanted overshoots in the response. As final suggestion,
+  consider placing the server physically close to the robot, that is where ethernet ends (and yarp too) and the internal
+  robot bus begins; for the iCub indeed, the server runs aboard the PC104.
+- The client simply lives inside the user code, making queries to the server through yarp ports, thus it does never
+  speak to the solver. There are no special needs for it: the location of the client depends only on the requirements
+  of the user code; a program that opens up a client may run on a shuffle PC so as on a powerful machine or even aboard
+  the robot hub.
+
+
+\section sec_dependencies Dependencies
+
+...
+
