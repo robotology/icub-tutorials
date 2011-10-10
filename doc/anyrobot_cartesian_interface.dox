@@ -22,7 +22,7 @@ limb and finally a <b>client</b> enabling the user to forward requests for carte
 the code through typical calls to C++ methods. \n
 However, the diagram is more informative than that: it tells us about how these three components are arranged in the
 iCub network, an allocation that should be preserved also for your robot's architecture to achieve fast and reliable
-performances. Here are the details. \n
+performances. Here follow the details. \n
 - The solver is the most computational demanding tool; for this reason it should be launched on a powerful machine
   belonging to the cluster of PCs connected to the robot network. It employs Ipopt for nonlinear optimization and
   should not be a burden to any critical routine that has to control the robot in real-time. \n
@@ -34,8 +34,9 @@ performances. Here are the details. \n
   feeds back clients with useful information such as the current end-effector pose.\n
   The main reason why the server should be running on the hub is that the lag due to the communication must be reduced
   as much as possible since a lag in the control loop will inevitably cause for instance unwanted overshoots in the
-  response. As final suggestion, consider placing the server physically close to the robot, that is where ethernet ends
-  (and yarp too) and the internal robot bus begins; for the iCub indeed, the server runs aboard the PC104.
+  response. As final suggestion, consider placing the server physically close to the robot, that is where fast ethernet
+  link ends (and yarp too) and the internal robot bus begins (e.g. CAN); for iCub indeed, the server runs aboard the
+  PC104.
 - The client simply lives inside the user code, making queries to the server through yarp ports, thus it never speaks
   to the solver. There are no special needs for it: the location of the client depends only on the requirements of the
   user code; a program that opens up a client may run on a shuffle PC so as on a powerful machine or even aboard the
@@ -44,8 +45,46 @@ performances. Here are the details. \n
 
 \section sec_dependencies Dependencies
 
-Besides the "classical" dependecies you need to compile and run all the components (Ipopt, iKin, cartesiancontrollerserver,
-cartesiancontrollerclient; you should know them very well by now :), you are required to accomplish a preliminary job...
+Besides the "classical" dependecies you need to have in order to compile all the components (<a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a>,
+\ref iKin, \ref servercartesiancontroller, \ref clientcartesiancontroller; you should know them very well by now :),
+you are required to accomplish a preliminary job: it can be tedious (I realize it when I had to write the "fake" stuff :)
+but is mandatory. You have to provide some low-level yarp motor interfaces that are necessary for the cartesian components
+to start and operate correctly. They are only three: <b>IControlLimits</b>, <b>IEncoders</b>, <b>IVelocityControl</b>.
+The former two serve to get the number of joints, their actual range along with current joints configuration which is fed
+back to the controller; the latter is obviously employed to send velocity profiles to the robot. \n
+This is not the right place where to tell about how to deal with these interfaces, but please find out more on the topic
+of making a new device in yarp <a href="http://eris.liralab.it/wiki/Making_a_new_device_in_YARP">here</a>.
+
+
+\section sec_custom_example Customization Example
+
+Let's explain how to configure all the components for your robot through an example, whose code is available under
+\code
+tutorials/src/anyRobotCartesianInterface.
+\endcode
+Imagine you're done with coding the basic motor interfaces for your robot, which is not as cute as iCub: it is equipped
+indeed with just three degrees-of-freedom represented by three joints controlled by three independent motors. You'll probably
+end up having something similar to the library <i>fakeMotorDevice</i> I wrote for our artifact. It contains the server and
+client implementations of such motor interfaces: again, the IControlLimits, the IEncoders and the IVelocityControl.
+Of course we would need now a program that simulates our fake manipulator together with the server layer that exposes a
+yarp access to it. Here it is: it's called <i>fakeRobot</i> and instantiates three motors that are embodied as pure integrators
+that give back joints positions once fed with joints velocities. \n
+The relevant code for this is located within the file <i>fakeMotorDeviceServer.cpp</i> and resumed here for your convenience:
+\code
+Matrix lim(3,2);
+lim(0,0)=-180; lim(0,1)=180;                    // joint 0 bounds [deg]
+lim(1,0)=-90;  lim(1,1)=90;                     // joint 1 bounds [deg]
+lim(2,0)=-45;  lim(2,1)=45;                     // joint 2 bounds [deg]
+
+Vector q0;                                      // create a starting configuration q0
+for (int i=0; i<lim.rows(); i++)
+    q0.push_back((lim(i,0)+lim(i,1))/2.0);
+
+motors=new Integrator(0.001*Ts,q0,lim);         // Ts is the period expressed in [ms]
+\endcode
+Aside from the details of the <i>Intergator</i> class (it is provided by the \ref ctrlLib library), it is worth noticing here
+how the joints have hard-coded bounds defined by the matrix <i>lim</i>.
+
 
 ... to be continued
 
