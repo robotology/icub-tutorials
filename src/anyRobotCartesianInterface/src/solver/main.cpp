@@ -39,9 +39,8 @@ protected:
      * drivers used by the solver to access the robot, along with
      * the kinematic structure of the links.
      * 
-     * @param options The configuration parameters whose description can be acquired
-     *                directly from the CartesianSolver class.
-     * 
+     * @param options The parameters required by the super-class to 
+     *                get configured.
      * @return A pointer to the descriptor or NULL if something wrong happens.
      */
     PartDescriptor *getPartDesc(Searchable &options)
@@ -76,14 +75,16 @@ protected:
 
         // we fill in the descriptor fields
         PartDescriptor *p=new PartDescriptor;
-        p->lmb=limb;                    // a pointer to the iKinLimb
-        p->chn=limb->asChain();         // the associated iKinChain object
-        p->cns=NULL;                    // any further (linear) constraints on the joints other than the bounds? This requires some more effort
-        p->prp.push_back(optPart);    // attach the options to open the device driver of the fake part
-        p->rvs.push_back(false);        // it may happen that the motor commands to be sent are in reversed order wrt the order of kinematics links (e.g. the iCub torso); if so put here "true"
-        p->num=1;                       // only one device driver for the whole limb (see below)
+        p->lmb=limb;                // a pointer to the iKinLimb
+        p->chn=limb->asChain();     // the associated iKinChain object
+        p->cns=NULL;                // any further (linear) constraints on the joints other than the bounds? This requires some more effort
+        p->prp.push_back(optPart);  // attach the options to open the device driver of the fake part
+        p->rvs.push_back(false);    // it may happen that the motor commands to be sent are in reversed order wrt the order of kinematics links (e.g. the iCub torso); if so put here "true"
+        p->num=1;                   // only one device driver for the whole limb (see below)
 
-        // whenever a limb is actuated resorting to more than one device (e.g. for iCub: torso+arm), the following applies:
+        // whenever a limb is actuated resorting to more than one device
+        // (e.g. for iCub: torso+arm), the following applies:
+        // 
         // p->prp.push_back(optDevice_1);
         // p->prp.push_back(optDevice_2);
         // p->rvs.push_back(true);

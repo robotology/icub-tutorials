@@ -105,7 +105,12 @@ Do not worry about that: at start-up the solver will query the low-level interfa
 joints range and will update the kinematic structure accordingly. Later on, the server will get upgraded with a similar request
 to the solver. \n
 
-We are happy with the kinematics, let's continue with the components configuration.
+At this stage we are happy with the kinematics, so let's continue with the components configuration.
+
+
+\section sec_solver_configuration Configuring the solver
+
+
 
 
 ... to be continued
