@@ -69,7 +69,8 @@ client implementations of such motor interfaces: again, the IControlLimits, the 
 Of course we would need now a program that simulates our fake manipulator together with the server layer that exposes a
 yarp access to it. Here it is: it's called <i>fakeRobot</i> and instantiates three motors that are embodied as pure integrators
 that give back joints positions once fed with joints velocities. \n
-The relevant code for this is located within the file <i>fakeMotorDeviceServer.cpp</i> and resumed here for your convenience:
+The relevant code snippet of this instantiation is located within the file <i>fakeMotorDeviceServer.cpp</i> and resumed here
+for your convenience:
 \code
 Matrix lim(3,2);
 lim(0,0)=-180; lim(0,1)=180;                    // joint 0 bounds [deg]
@@ -83,10 +84,45 @@ for (int i=0; i<lim.rows(); i++)
 motors=new Integrator(0.001*Ts,q0,lim);         // Ts is the period expressed in [ms]
 \endcode
 Aside from the details of the <i>Intergator</i> class (it is provided by the \ref ctrlLib library), it is worth noticing here
-how the joints have hard-coded bounds defined by the matrix <i>lim</i>.
+how the joints have bounds defined by the matrix <i>lim</i>.
+
+Now, since you're so motivated, you've already got the kinematic description of the manipulator from your colleague who's hooked
+on mechanics. You have to provide the conventional Denavit-Hartenberg table of links properties as done for the fake robot in the
+file <i>app/conf/kinematics.ini</i>:
+\code
+numLinks 3      // number of revolute links: currently, iKin does not handle prismatic links
+
+link_0 (A 1.0) (D 0.0) (alpha 0.0) (offset 0.0) (min -180.0) (max 180.0)
+link_1 (A 1.0) (D 0.0) (alpha 0.0) (offset 0.0) (min -180.0) (max 180.0)
+link_2 (A 1.0) (D 0.0) (alpha 0.0) (offset 0.0) (min -180.0) (max 180.0)
+\endcode
+The meaning of these parameters is described in the \ref iKinLink class; by the way they are easily recognized as the link length
+(<i>A</i> in [m]), the link offset (<i>D</i> in [m]), the link twist (<i>alpha</i> in [rad]) and so on: please visit the wiki
+<a href="http://eris.liralab.it/wiki/ICubForwardKinematics">page</a> on kinematics for a deeper insight. \n
+A careful reader should have not missed the expression for the joints limits, which here can definitely take whatever values for all
+the three joints, much different from the bounds assigned to the real joints and hard-coded within the fake motor device.
+Do not worry about that: at start-up the solver will query the low-level interface (namely <i>IControlLimits</i>) about the actual
+joints range and will update the kinematic structure accordingly. Later on, the server will get upgraded with a similar request
+to the solver. \n
+
+We are happy with the kinematics, let's continue with the components configuration.
 
 
 ... to be continued
 
+
+
+
+
+
+\section sec_final_notes Finals Notes about Compiling the Example
+
+The example has been designed according to the packaging policy we pursue for iCub-based application: there is a <i>src</i> directory
+filled with the library and the code and then there is an <i>app</i> directory containing the configuration files and the scripts
+to run the binaries. Therefore, just create the <i>anyRobotCartesianInterface/build</i> directory (be alway neat and divide the code
+from the compilation produts :), go there and launch the <i>ccmake ../</i> command. After the compilation you'll end up having the
+directory <i>anyRobotCartesianInterface/bin</i> where all the binaries will be copied out along with the configuration files and the
+xml scripts. Before launching in a row first the <i>robot_server_solver.xml</i> and soon afterwards the <i>client.xml</i>, please
+run the command <i>yarprun --server /node</i> from the same directory of the binaries.
 
 
