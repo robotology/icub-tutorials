@@ -12,7 +12,6 @@
 - \ref icub_tutorial_module - a tutorial on how to use the module helper class to write a program
 - \ref icub_rate_thread - a tutorial on how to write a control loop using threads
 - \ref icub_cartesian_interface - a tutorial on how to control a robot's limb in the operational space
-- \ref icub_anyrobot_cartesian_interface - how to customize the cartesian interface for a generic robot
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a Yarp interface
 - \ref idyn_introduction - a short introduction to the iDyn library
 - \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using iDyn library
