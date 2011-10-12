@@ -112,10 +112,17 @@ At this stage we are happy with the kinematics, so let's continue with the compo
 
 What is required here is only to inherit a new class from the iKin superclass <b>CartesianSolver</b> and then override the method
 <i>getPartDesc()</i> which is responsible for describing all the parts used by the solver. \n
-Essentially, you have to do three things:
+Essentially, you have to do the following four things: \n
+-# Retrieve the configuration parameters;
+-# Initialize the devices to access the motors;
+-# Retrieve information about the kinematics;
+-# Fill a descriptor to be returned to the superclass.
 
-The initial configuration of the solver is established by the parameters provided from within the file <i>solver.ini</i> and listed
-just below. However, these values can be easily modified through calls to the cartesian interface methods.
+\subsection subsec_solver_confparams 1. Retrieving Configuration Parameters
+
+The parameter of the <i>getPartDesc()</i> method is a <i>Searchable</i> object that should contain the initial configuration of the
+solver as provided for instance through the file <i>solver.ini</i> whose content is listed just below. However, these values can be
+easily modified at run-time through calls to the cartesian interface methods.
 \code
 robot          fake_robot               // the name of the robot to connect to
 name           solver                   // the name of the solver as seen in yarp network
@@ -132,8 +139,62 @@ xyzTol         0.00000001               // tolerance for attaining in position [
 interPoints    off                      // if [on] the points discovered while converging are provided as well: they might be not so adjacent
 ping_robot_tmo 10.0                     // at start-up, while connecting to the robot, wait for this timeout in [s] before giving up
 \endcode
-This file is loaded by the module and passed to the <i>getPartDesc()</i> method of the class.
 
+\subsection subsec_solver_initdevices 2. Initializing Motor Devices
+
+The solver must be aware of how to open a client to speak to motor device drivers. Prepare therefore as many <i>Property</i> objects
+containing the suitable options as it is required by the manipulator: i.e. if the manipulator is composed of two parts (e.g. torso + arm),
+prepare one <i>Property</i> for each part, filled with the instructions to open the corresponding motor client. \n
+In the current example the fake manipulator is represented by just one motor part as it follows:
+\code
+Property optPart;
+optPart.put("device","fakeyClient");                    // the name of the device
+optPart.put("remote",(robot+"/"+part).c_str());         // the stem-name of the server remote yarp port
+optPart.put("local",(slvName+"/"+part).c_str());        // the tag used as stem-name for the local ports
+optPart.put("part",part.c_str());                       // just the name of the part for displaying purpose
+\endcode
+
+\subsection subsec_solver_kininfo 3. Retrieving Kinematics Info
+
+There is a special key in the configuration file <i>solver.ini</i> which is missing: the one that tells the solver how to retrieve the
+kinematics description. Its tag is "customKinFile" and must point to the <i>kinematics.ini</i> file. The path has to be absolute and
+can be easily completed automatically by the <i>ResourceFinder</i> class - as you know: that's why we code it like the following:
+\code
+Property config;
+config.fromConfigFile(rf.findFile("from").c_str());
+config.put("customKinFile",pathToKin.c_str());
+\endcode
+
+We then build up the kinematic structure by populating an <i>iKinLimb</i> object with such information:
+\code
+Property linksOptions;
+linksOptions.fromConfigFile(options.find("customKinFile").asString().c_str());
+iKinLimb *limb=new iKinLimb(linksOptions);
+\endcode
+
+\subsection subsec_solver_filldesc 4. Filling Descriptor
+
+Finally, we need to provide a descriptor that in turn will be processed by the superclass:
+\code
+PartDescriptor *p=new PartDescriptor;
+p->lmb=limb;                // a pointer to the iKinLimb
+p->chn=limb->asChain();     // the associated iKinChain object
+p->cns=NULL;                // any further (linear) constraints on the joints other than the bounds? This requires some more effort
+p->prp.push_back(optPart);  // attach the options to open the device driver of the fake part
+p->rvs.push_back(false);    // (*)
+p->num=1;                   // only one device driver for the whole limb
+\endcode
+(*) It may happen that the motor commands to be sent are in reversed order with respect to the order of kinematics links as in the case
+of the iCub torso; if so, push a "true" in the <i>rvs</i> field for the corresponding part.
+
+Whenever a limb is actuated resorting to more than one device (e.g. for iCub: torso+arm), the following applies:
+\code
+p->prp.push_back(optDevice_1);
+p->prp.push_back(optDevice_2);
+p->rvs.push_back(true);
+p->rvs.push_back(false);
+p->num=2;
+\endcode
 
 
 
