@@ -118,7 +118,10 @@ int main(int argc, char *argv[])
 {
     Network yarp;
     if (!yarp.checkNetwork())
+    {
+        cout<<"Error: yarp server does not seem available"<<endl;
         return -1;
+    }
 
     // register here the icubmod devices
     // along with the new yarp devices

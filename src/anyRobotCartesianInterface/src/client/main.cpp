@@ -131,7 +131,10 @@ int main(int argc, char *argv[])
 {   
     Network yarp;
     if (!yarp.checkNetwork())
+    {
+        cout<<"Error: yarp server does not seem available"<<endl;
         return -1;
+    }
 
     // we need to initialize the drivers list 
     YARP_REGISTER_DEVICES(icubmod)

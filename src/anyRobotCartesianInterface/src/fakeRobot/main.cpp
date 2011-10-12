@@ -66,7 +66,10 @@ int main()
 {
     Network yarp;
     if (!yarp.checkNetwork())
+    {
+        cout<<"Error: yarp server does not seem available"<<endl;
         return -1;
+    }
 
     // register here the new yarp devices
     // for dealing with the fake robot
