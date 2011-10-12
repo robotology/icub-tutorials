@@ -189,8 +189,8 @@ of the iCub torso; if so, push a "true" in the <i>rvs</i> field for the correspo
 
 Whenever a limb is actuated resorting to more than one device (e.g. for iCub: torso+arm), the following applies:
 \code
-p->prp.push_back(optDevice_1);
-p->prp.push_back(optDevice_2);
+p->prp.push_back(optTorso);
+p->prp.push_back(optArm);
 p->rvs.push_back(true);
 p->rvs.push_back(false);
 p->num=2;
