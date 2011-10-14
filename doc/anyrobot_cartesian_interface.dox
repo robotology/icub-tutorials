@@ -29,9 +29,9 @@ performances. Here follow the details. \n
   Nonetheless, having a powerful computer as own resource, the solver can tackle the inverse kinematics problem with
   a large number of degrees-of-freedom in near real-time (something like ~20 ms).
 - The server is a canonical controller responsible for sending velocity commands to the robot with the purpose of
-  achieving the joints configuration as found by the solver. It is a light-weight program so that it can run directly
-  onboard the robot hub; it collects the requests coming from all the clients, it asks the solver to do its job and
-  feeds back clients with useful information such as the current end-effector pose.\n
+  achieving the joints configuration as found by the solver by moving the limb in a human-like fashion. It is a light-weight
+  program so that it can run directly onboard the robot hub; it collects the requests coming from all the clients, it asks
+  the solver to do its job and feeds back clients with useful information such as the current end-effector pose.\n
   The main reason why the server should be running on the hub is that the lag due to the communication must be reduced
   as much as possible since a lag in the control loop will inevitably cause for instance unwanted overshoots in the
   response. As final suggestion, consider placing the server physically close to the robot, that is where fast ethernet
