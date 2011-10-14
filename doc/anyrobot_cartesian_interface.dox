@@ -8,7 +8,7 @@ with the purpose of controlling a generic yarp-compatible robot limb in its oper
 a somewhat advanced topic which might be of interest just for developers who want to adopt this interface for their
 platforms, or for those of you who are really geek inside :). \n
 For "normal" people - who have only iCub in their work life - the tutorial on the \ref icub_cartesian_interface
-"Cartesian Interface" is extensive; it is also a prerequisite for proceeding further.
+"Cartesian Interface" is extensive enough; it is also a prerequisite for proceeding further.
 
 
 \section sec_architecture The Architecture
