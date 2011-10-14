@@ -264,7 +264,7 @@ filled with the library and the code and then there is an <i>app</i> directory c
 to run the binaries. Therefore, just create the <i>anyRobotCartesianInterface/build</i> directory (be always neat and divide the code
 from the compilation produts :), go there and launch the <i>ccmake ../</i> command. After the compilation you'll end up having the
 directory <i>anyRobotCartesianInterface/bin</i> where all the binaries will be copied in, along with the configuration files and the
-xml scripts. Before launching in a row first the <i>robot_server_solver.xml</i> and soon afterwards the <i>client.xml</i>, please
-run the command <i>yarprun --server /node</i> from the same directory of the binaries.
+xml scripts. Run the command <i>yarprun --server /node</i> from the same directory of the binaries and then launch in a row first the
+modules in <i>robot_server_solver.xml</i> and soon afterwards the modules in <i>client.xml</i>.
 */
 
