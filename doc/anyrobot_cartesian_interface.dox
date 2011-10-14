@@ -266,5 +266,5 @@ from the compilation produts :), go there and launch the <i>ccmake ../</i> comma
 directory <i>anyRobotCartesianInterface/bin</i> where all the binaries will be copied in, along with the configuration files and the
 xml scripts. Before launching in a row first the <i>robot_server_solver.xml</i> and soon afterwards the <i>client.xml</i>, please
 run the command <i>yarprun --server /node</i> from the same directory of the binaries.
-
+*/
 
