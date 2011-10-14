@@ -244,7 +244,11 @@ NumberOfDrivers     1                   // the number of parts composing the str
 [DRIVER_0]                              // here come the parameters for each part driver
 Key                 fake_part           // the tag-name assigned to the part within the code
 JointsOrder         direct              // the joints order: [direct] or [reversed] (see explanation \ref subsec_solver_filldesc "above")
+MinAbsVels          (0.0 0.0 0.0)       // (*)
 \endcode
+(*) This is an optional parameter that accounts joint by joint for the minimum velocity (in [deg/s]) the motors can somehow achieve,
+and are meant to be provided in absolute values. Whenever the controller tries to deliver velocities under these thresholds, then
+it switches in a bang-bang mode to finally attain the target positions.
 
 
 \section sec_client_configuration Configuring the Client
