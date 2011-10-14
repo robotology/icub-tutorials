@@ -201,13 +201,50 @@ the first pushed object.
 
 \section sec_server_configuration Configuring the Server
 
+Coming to the server, life gets a bit easier. It is indeed required to open the device drivers of each involved part (in our case just
+one, the "fake_part"), put them into a special list, open the <i>cartesiancontrollerserver</i> device passing the proper configuration
+parameters that ensure the initialization of the kinematic structure, finally attach that list to such cartesian device. \n
+The code is worth a thousand words ...
+\code
+Property optPart("(device fakeyClient)");        
+optPart.put("device","fakeyClient");
+optPart.put("remote","fake_robot/fake_part");
+optPart.put("local","server/fake_part");
+optPart.put("part","fake_part");
 
+PolyDriver partDrv;
+partDrv.open(optPart);                                          // open the device driver for the "fake_part"
 
+Property optServer("(device cartesiancontrollerserver)");
+optServer.fromConfigFile(rf.findFile("from").c_str(),false);    // init the server options from the ResourceFinder
+Bottle &kinInfo=optServer.findGroup("GENERAL").addList();       // append something like "customKinFile <actual_file>"
+kinInfo.addString("customKinFile");
+kinInfo.addString(pathToKin.c_str());
 
+PolyDriver server;
+server.open(optServer);                                         // open the cartesian controller server
 
+PolyDriverList list;
+list.push(&partDrv,"fake_part");                                // fill the list with the given tag-name (see below)
 
+IMultipleWrapper *wrapper;
+server.view(wrapper);
+wrapper->attachAll(list);                                       // attach the list
+\endcode
 
+The configuration parameters of the server are the following:
+\code
+[GENERAL]
+ControllerName      server              // the yarp stem-name of the controller
+ControllerPeriod    20                  // the period of the control thread
+SolverNameToConnect solver              // the yarp stem-name of the solver to connect to
+KinematicPart       custom              // this is a special keyword that tells the server to open custom kinematics
+NumberOfDrivers     1                   // the number of parts composing the structure
 
+[DRIVER_0]                              // here come the parameters for each part driver
+Key                 fake_part           // the tag-name assigned to the part within the code
+JointsOrder         direct              // the joints order: [direct] or [reversed] (see explanation \ref subsec_solver_filldesc "above")
+\endcode
 
 
 \section sec_client_configuration Configuring the Client
