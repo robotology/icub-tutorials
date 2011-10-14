@@ -83,7 +83,7 @@ for (int i=0; i<lim.rows(); i++)
 
 motors=new Integrator(0.001*Ts,q0,lim);         // Ts is the period expressed in [ms]
 \endcode
-Aside from the details of the <i>Intergator</i> class (it is provided by the \ref ctrlLib library), it is worth noticing here
+Aside from the details of the <i>Integrator</i> class (it is provided by the \ref ctrlLib library), it is worth noticing here
 how the joints have bounds defined by the matrix <i>lim</i>.
 
 Now, since you're so motivated, you've already got the kinematic description of the manipulator from your colleague who's hooked
