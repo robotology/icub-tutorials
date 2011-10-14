@@ -15,7 +15,7 @@ For "normal" people - who have only iCub in their work life - the tutorial on th
 
 The architecture of the Cartesian Interface is sketched out below.
 
-\image html cartIFArchitecture.jpg
+\image html cartIFArchitecture.jpg "The components of Cartesian Interface"
 
 We already know there is a <b>solver</b> in charge of inverting the kinematics, a <b>server</b> controlling the robot
 limb and finally a <b>client</b> enabling the user to forward requests for cartesian movements directly from within
@@ -56,7 +56,7 @@ This is not the right place where to tell about how to deal with these interface
 of making a new device in yarp <a href="http://eris.liralab.it/wiki/Making_a_new_device_in_YARP">here</a>.
 
 
-\section sec_custom_example Customization Example
+\section sec_custom_example Example of Customization
 
 Let's explain how to configure all the components for your robot through an example, whose code is available under
 \code
