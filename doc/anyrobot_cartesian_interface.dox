@@ -168,7 +168,7 @@ config.put("customKinFile",pathToKin.c_str());
 We then build up the kinematic structure by populating an <i>iKinLimb</i> object with such information:
 \code
 Property linksOptions;
-linksOptions.fromConfigFile(options.find("customKinFile").asString().c_str());
+linksOptions.fromConfigFile(config.find("customKinFile").asString().c_str());
 iKinLimb *limb=new iKinLimb(linksOptions);
 \endcode
 
