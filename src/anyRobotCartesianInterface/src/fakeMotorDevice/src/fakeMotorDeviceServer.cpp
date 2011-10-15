@@ -49,9 +49,9 @@ bool fakeMotorDeviceServer::open(Searchable &config)
     // the part is composed of three rotational joints
     // whose bounds are given in degrees just below
     Matrix lim(3,2);
-    lim(0,0)=-180; lim(0,1)=180;    // joint 0
-    lim(1,0)=-90;  lim(1,1)=90;     // joint 1
-    lim(2,0)=-45;  lim(2,1)=45;     // joint 2
+    lim(0,0)=-180.0; lim(0,1)=180.0;    // joint 0
+    lim(1,0)=-90.0;  lim(1,1)=90.0;     // joint 1
+    lim(2,0)=-45.0;  lim(2,1)=45.0;     // joint 2
 
     Vector q0;
     for (int i=0; i<lim.rows(); i++)
