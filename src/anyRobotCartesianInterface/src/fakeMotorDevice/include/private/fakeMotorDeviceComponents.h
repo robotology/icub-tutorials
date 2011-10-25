@@ -91,7 +91,7 @@ public:
 
     ////////////////////////////////////////////////////////////
     ////
-    //// IEncoders Interface
+    //// IVelocityControl Interface
     ////
     /**********************************************************/
     bool velocityMove(int j, double sp);
@@ -184,7 +184,7 @@ public:
 
     ////////////////////////////////////////////////////////////
     ////
-    //// IEncoders Interface
+    //// IVelocityControl Interface
     ////
     /**********************************************************/
     bool velocityMove(int j, double sp);
