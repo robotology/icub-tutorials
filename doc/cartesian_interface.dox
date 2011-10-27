@@ -329,7 +329,7 @@ the end-effector in a given orientation almost regardless its position in the sp
 it would be indeed more conveniently to rely on the pure joint control for these cases.
 
 Nonetheless, \ref iKin provides a bunch of suitable tools to easily interface with Ipopt and develop different kinematic optimization problems:
-it will be as straightforward as to inherit C++ classes to describe the cost function to minimize along with the corresponding set of constraints.
+it will be as straightforward as to inherit C++ classes to describe the cost function to minimize along with the related set of constraints.
 
 
 \section sec_contextswitch Context Switch
