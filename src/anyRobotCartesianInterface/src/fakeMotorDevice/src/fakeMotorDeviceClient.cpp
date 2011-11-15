@@ -132,7 +132,7 @@ bool fakeMotorDeviceClient::getEncoders(double *encs)
         return false;
 
     mutex.wait();
-    for (int i=0; i<this->encs.length(); i++)
+    for (size_t i=0; i<this->encs.length(); i++)
         encs[i]=this->encs[i];
     mutex.post();
 

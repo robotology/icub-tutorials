@@ -65,7 +65,7 @@ public:
 
         Vector dof;
         arm->getDOF(dof);
-        for (int i=0; i<dof.length(); i++)
+        for (size_t i=0; i<dof.length(); i++)
         {
             double min,max;
             arm->getLimits(i,&min,&max);

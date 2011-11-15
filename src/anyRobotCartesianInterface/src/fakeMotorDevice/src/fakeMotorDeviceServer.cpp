@@ -108,7 +108,7 @@ void fakeMotorDeviceServer::run()
     if (Bottle *cmd=cmdPort.read(false))
     {
         if (cmd->size()>=vel.length())
-            for (int i=0; i<vel.length(); i++)
+            for (size_t i=0; i<vel.length(); i++)
                 vel[i]=cmd->get(i).asDouble();
     }
 
@@ -214,7 +214,7 @@ bool fakeMotorDeviceServer::getAxes(int *ax)
 
     if (ax!=NULL)
     {
-        *ax=motors->get().length();
+        *ax=(int)motors->get().length();
         return true;
     }
     else
@@ -227,7 +227,7 @@ bool fakeMotorDeviceServer::velocityMove(int j, double sp)
     if (!configured)
         return false;
 
-    if (j<vel.length())
+    if ((size_t)j<vel.length())
     {
         vel[j]=sp;
         return true;
@@ -239,7 +239,7 @@ bool fakeMotorDeviceServer::velocityMove(int j, double sp)
 /**********************************************************/
 bool fakeMotorDeviceServer::setRefAcceleration(int j, double acc)
 {
-    if (configured && (j<vel.length()))
+    if (configured && ((size_t)j<vel.length()))
         return true;
     else
         return false;
