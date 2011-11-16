@@ -254,7 +254,19 @@ it switches in a bang-bang mode to finally attain the target positions.
 \section sec_client_configuration Configuring the Client
 
 The client does not have to be aware of any particular implementation, thus it can be configured as documented in the \ref icub_cartesian_interface
-"Cartesian Interface" page.
+"Cartesian Interface" page. In this respect, to open a client that connects to server above one can rely on the following:
+\code
+Property option("(device cartesiancontrollerclient)");
+option.put("remote","/server");
+option.put("local","/client");
+
+PolyDriver         client;
+ICartesianControl *ctrl=NULL;
+
+if (client.open(option)) {
+    client.view(ctrl);    // open the view
+}
+\endcode
 
 
 \section sec_final_notes Finals Notes about Compiling the Example
