@@ -3,18 +3,18 @@
 
 \author Ugo Pattacini
 
-\section sec_contents Contents
+\section sec_gaze_contents Contents
 
-- \ref sec_intro
-- \ref sec_dependencies
-- \ref sec_runningserver
-- \ref sec_openclosegazeinterface
-- \ref sec_usegazeinterface
-- \ref sec_contextswitch
-- \ref sec_simgazeinterface
+- \ref sec_gaze_intro
+- \ref sec_gaze_dependencies
+- \ref sec_gaze_runningserver
+- \ref sec_gaze_opencloseinterface
+- \ref sec_gaze_useinterface
+- \ref sec_gaze_contextswitch
+- \ref sec_gaze_siminterface
 
 
-\section sec_intro Introduction
+\section sec_gaze_intro Introduction
 
 The YARP <b>Gaze Interface</b> provides an abstract layer to control the iCub gaze in a bio-plausible way, moving the neck
 and the eyes independently and performing saccades, pursuit, vergence, OCR (oculo-collic reflex) and VOR (vestibulo-ocular reflex
@@ -27,7 +27,7 @@ to visit the iKinGazeCtrl \ref iKinGazeCtrl "page" where more detailed descripti
 \note <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>.
 
 
-\section sec_dependencies Dependencies
+\section sec_gaze_dependencies Dependencies
 
 In order to use the Gaze Interface, make sure that the following steps are done:
 
@@ -38,7 +38,7 @@ In order to use the Gaze Interface, make sure that the following steps are done:
    the client part of the interface available. The server part is represented by the module \ref iKinGazeCtrl itself.
 
 
-\section sec_runningserver Running the Gaze Server
+\section sec_gaze_runningserver Running the Gaze Server
 
 Launch:
 \code
@@ -51,7 +51,7 @@ and <i>lookAtStereoPixel()</i> method. Furthermore, by using the <i>$ICUB_ROOT/m
 application the user is also able to launch the gaze server contextually with the iCubInterface module.
 
 
-\section sec_openclosegazeinterface Opening and Closing the Gaze Interface
+\section sec_gaze_opencloseinterface Opening and Closing the Gaze Interface
 
 The Gaze Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
 this the user has to enforce the dependency of his project from the iCub hardware modules collection.
@@ -109,12 +109,12 @@ clientGazeCtrl.close();
 \endcode
 
 
-\section sec_usegazeinterface Using the Gaze Interface
+\section sec_gaze_useinterface Using the Gaze Interface
 
 The YARP Gaze Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/d2/df5/classyarp_1_1dev_1_1IGazeControl.html">here</a>.
 It makes use of three different coordinate systems that enable the user to control the robot's gaze as detailed hereafter.
 
-\subsection subsec_cartcoorsystem Expressing the fixation point in Cartesian Coordinates
+\subsection subsec_gaze_cartcoorsystem Expressing the fixation point in Cartesian Coordinates
 This coordinate system is the same as the one the \ref icub_cartesian_interface "Cartesian Interface" relies on and complies with the
 <a href="http://eris.liralab.it/wiki/ICubForwardKinematics">wiki</a> specifications; it lets the user to give the target
 location where to gaze at with respect to the root reference frame attached to the robot's waist.
@@ -139,7 +139,7 @@ cout<<"final error = "<<ctrl::norm(fp-x)<<endl;         // return a measure of t
 \endcode
 
 
-\subsection subsec_absangcoorsystem Expressing the fixation point in Absolute Angular Coordinate System
+\subsection subsec_gaze_absangcoorsystem Expressing the fixation point in Absolute Angular Coordinate System
 This coordinate system is an absolute head-centered angular reference frame as explained below:
 - <i>Angular</i> means that it makes use of the azimuth, elevation and vergence that are angular quantities.
 - <i>Head-Centered</i> means that the frame is attached at the middle point between the two cameras owning the same set of three axes.
@@ -161,7 +161,7 @@ igaze->getAngles(ang);  // get the current angular configuration
 \endcode
 
 
-\subsection subsec_relangcoorsystem Expressing the fixation point in Relative Angular Coordinate System
+\subsection subsec_gaze_relangcoorsystem Expressing the fixation point in Relative Angular Coordinate System
 Also the relative angular coordinate system is available which is basically the same as the absolute one but refers to the current
 configuration of the head-centered frame. Hence we can use:
 \code
@@ -174,7 +174,7 @@ igaze->lookAtRelAngles(ang);    // move the gaze wrt the current configuration
 \endcode
 
 
-\subsection subsec_monopixelcoorsystem Expressing the fixation point in pixel coordinates (monocular approach)
+\subsection subsec_gaze_monopixelcoorsystem Expressing the fixation point in pixel coordinates (monocular approach)
 The user can also command the gaze by specifying a location within the image plane of one camera as follows:
 \code
 int camSel=0;   // select the image plane: 0 (left), 1 (right)
@@ -199,7 +199,7 @@ in streaming mode; on the other hand, the knowledge of the cartesian point remai
 motion through a call to <i>getFixationPoint()</i>.
 
 
-\subsection subsec_stereopixelcoorsystem Expressing the fixation point in pixel coordinates (stereo approach)
+\subsection subsec_gaze_stereopixelcoorsystem Expressing the fixation point in pixel coordinates (stereo approach)
 The same thing can be achieved also by exploiting the stereo vision:
 \code
 Vector c(2), pxl(2), pxr(2);
@@ -224,7 +224,7 @@ Of course, the matching problem between pixels of different image planes is left
 provide a continuous visual feedback while converging to the target.
 
 
-\subsection subsec_geometrypixels Geometry of pixels
+\subsection subsec_gaze_geometrypixels Geometry of pixels
 It might be useful sometimes to perform an homography in order to retrieve the projection of a pixel into a plane specified
 in the 3D space: let's think for instance to the context of the robot presented with a number of objects that all lie on a table.
 The table introduces a constraint that allows determining the component z of the point in case the monocular approach is used.
@@ -261,7 +261,7 @@ Importantly, the triangulation is strongly affected by uncertainties in the came
 perfectly compensated, to fixate in stereo mode it is advisable to rely on the method <i>lookAtStereoPixels()</i>.
 
 
-\section sec_contextswitch Context Switch
+\section sec_gaze_contextswitch Context Switch
 
 We define here the <i>context</i> as the configuration in which the controller operates: therefore the context includes
 the current tracking mode, the eyes and neck trajectory execution time and so on.
@@ -287,7 +287,7 @@ Unless the user needs the interface just for logging purposes, it's a good rule 
 of his module in order to then restore it at releasing time to preserve the controller configuration.
 
 
-\section sec_simgazeinterface The Simulator and the Gaze Interface
+\section sec_gaze_siminterface The Simulator and the Gaze Interface
 
 The Gaze Interface is already fully operative with the robot simulator: you only need to launch the server part with the robot option correctly set.
 Example:

@@ -3,20 +3,20 @@
 
 \author Ugo Pattacini
 
-\section sec_contents Contents
+\section sec_cart_contents Contents
 
-- \ref sec_intro
-- \ref sec_dependencies
-- \ref sec_openclosecartinterface
-- \ref sec_coordsystem
-- \ref sec_usecartinterface
-- \ref sec_nonlineardesign
-- \ref sec_contextswitch
-- \ref sec_taskRefVel
-- \ref sec_simcartinterface
+- \ref sec_cart_intro
+- \ref sec_cart_dependencies
+- \ref sec_cart_opencloseinterface
+- \ref sec_cart_coordsystem
+- \ref sec_cart_useinterface
+- \ref sec_cart_nonlineardesign
+- \ref sec_cart_contextswitch
+- \ref sec_cart_taskRefVel
+- \ref sec_cart_siminterface
 
 
-\section sec_intro Introduction
+\section sec_cart_intro Introduction
 
 The YARP <b>Cartesian Interface</b> has been conceived in order to enable the control of the arms
 and the legs of the robot directly in the operational space, that is instead of commading new configuration
@@ -38,7 +38,7 @@ from its specific implementation.
 Taipei, Taiwan, 2010.
 
 
-\section sec_dependencies Dependencies
+\section sec_cart_dependencies Dependencies
 
 In order to use the Cartesian Interface, make sure that the following steps are done: \n
 [Note that the term <i>cluster</i> refers to the set of computers directly connected to the robot network, whereas <i>PC104</i>
@@ -77,7 +77,7 @@ it turns to be mandatory to restart all of them from the beginning; this comes f
 protocol as light as possible, avoiding requests for integrity checking and reinitialization.
 
 
-\section sec_openclosecartinterface Opening and Closing the Cartesian Interface
+\section sec_cart_opencloseinterface Opening and Closing the Cartesian Interface
 
 The Cartesian Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
 this the user has to enforce the dependency of his project from the iCub hardware modules collection.
@@ -138,7 +138,7 @@ yarp read /read /icub/cartesianController/right_arm/state:o
 \endcode
 getting the current pose of the right hand end-effector expressed with seven double \f$ \left[x,y,z,a_x,a_y,a_z,\theta\right] \f$,
 where the first three components are the 3d location of the center of the palm, whilst the final four describe the rotation of the
-frame attached to the end-effector with respect to the root reference frame in axis/angle notation (see \ref sec_coordsystem).
+frame attached to the end-effector with respect to the root reference frame in axis/angle notation (see \ref sec_cart_coordsystem).
 
 When you are done with controlling the robot you can explicitly close the device (or just let the destructor do it for you): 
 \code
@@ -146,7 +146,7 @@ clientCartCtrl.close();
 \endcode
 
 
-\section sec_coordsystem Coordinate System 
+\section sec_cart_coordsystem Coordinate System 
 
 Central for a correct usage of the cartesian controller is the knowledge of the coordinate system 
 that shall be adopted to describe any desired limb pose.
@@ -185,7 +185,7 @@ Vector o=ctrl::dcm2axis(R);     // from rotation matrix back to the axis/angle n
 The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]
 
 
-\section sec_usecartinterface Using the Cartesian Interface
+\section sec_cart_useinterface Using the Cartesian Interface
 
 The YARP Cartesian Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/dd/de6/classyarp_1_1dev_1_1ICartesianControl.html">here</a>.
 Moreover, some examples are also reported hereafter to gain a deeper insight into the cartesian device.
@@ -323,7 +323,7 @@ only the torso joints in the computation. This prevents the robot from leaning o
 just the arm.
 
 
-\section sec_nonlineardesign Nonlinear Problem Design
+\section sec_cart_nonlineardesign Nonlinear Problem Design
 
 In this small section a couple of considerations that motivated the design of the inversion problem are briefly summarized as taken from the
 article on the cartesian controller and perhaps more importantly as they came up from discussions with some meticulous users.
@@ -347,7 +347,7 @@ Nonetheless, \ref iKin provides a bunch of suitable tools to easily interface wi
 it will be as straightforward as to inherit C++ classes to describe the cost function to minimize along with the related set of constraints.
 
 
-\section sec_contextswitch Context Switch
+\section sec_cart_contextswitch Context Switch
 
 We define here the <i>context</i> as the configuration in which the controller operates: therefore the context includes the actual number of DOF's,
 their angular bounds, the resting positions and weights, the trajectory execution time, the current tracking mode and so on.
@@ -371,7 +371,7 @@ Unless the user needs the interface just for logging purposes, it's a good rule 
 then restore it at releasing time to preserve the controller configuration.
 
 
-\section sec_taskRefVel Task-Space Reference Velocity Command
+\section sec_cart_taskRefVel Task-Space Reference Velocity Command
 
 The user is further provided with the method <i>setTaskVelocities()</i> that allows to command a reference velocity for the end-effector in the
 operational space as follows:
@@ -392,7 +392,7 @@ which is basically determined by the current trajectory time; thus, for executin
 towards lower values, whereas it should be increased to track low task-space reference velocity.
 
 
-\section sec_simcartinterface The Simulator and the Cartesian Interface
+\section sec_cart_siminterface The Simulator and the Cartesian Interface
 
 To have the Cartesian Interface fully operative together with the robot simulator, please have a look \ref simCartesianControl "here".
 You will need to compile the server part of the interface also on the cluster where the simulator is supposed to run.

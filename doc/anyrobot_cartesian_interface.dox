@@ -3,20 +3,20 @@
 
 \author Ugo Pattacini
 
-\section sec_contents Contents
+\section sec_customcart_contents Contents
 
-- \ref sec_intro
-- \ref sec_architecture
-- \ref sec_dependencies
-- \ref sec_custom_example
-- \ref sec_solver_configuration
-- \ref sec_server_configuration
-- \ref sec_client_configuration
-- \ref sec_final_notes
-- \ref sec_succ_stories
+- \ref sec_customcart_intro
+- \ref sec_customcart_architecture
+- \ref sec_customcart_dependencies
+- \ref sec_customcart_custom_example
+- \ref sec_customcart_solver_configuration
+- \ref sec_customcart_server_configuration
+- \ref sec_customcart_client_configuration
+- \ref sec_customcart_final_notes
+- \ref sec_customcart_succ_stories
 
 
-\section sec_intro Introduction
+\section sec_customcart_intro Introduction
 
 This tutorial will guide the user through the steps required to run all the components of the Cartesian Interface
 with the purpose of controlling a generic yarp-compatible robot limb in its operational space. Therefore, this is
@@ -26,7 +26,7 @@ For "normal" people - who have only iCub in their work life - the tutorial on th
 "Cartesian Interface" is extensive enough; it is also a prerequisite for proceeding further.
 
 
-\section sec_architecture The Architecture
+\section sec_customcart_architecture The Architecture
 
 The architecture of the Cartesian Interface is sketched out below.
 
@@ -58,7 +58,7 @@ performances. Here follow the details. \n
   robot hub.
 
 
-\section sec_dependencies Dependencies
+\section sec_customcart_dependencies Dependencies
 
 Besides the "classical" dependecies you need to have in order to compile all the components (<a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a>,
 \ref iKin, \ref servercartesiancontroller, \ref clientcartesiancontroller; you should know them very well by now :),
@@ -71,7 +71,7 @@ This is not the right place where to tell about how to deal with these interface
 of making a new device in yarp <a href="http://eris.liralab.it/wiki/Making_a_new_device_in_YARP">here</a>.
 
 
-\section sec_custom_example Example of Customization
+\section sec_customcart_custom_example Example of Customization
 
 Let's explain how to configure all the components for your robot through an example, whose code is available under
 \code
@@ -123,7 +123,7 @@ to the solver. \n
 At this stage we are happy with the kinematics, so let's continue with the components configuration.
 
 
-\section sec_solver_configuration Configuring the Solver
+\section sec_customcart_solver_configuration Configuring the Solver
 
 What is required here is only to inherit a new class from the iKin superclass <b>CartesianSolver</b> and then override the method
 <i>getPartDesc()</i> which is responsible for describing all the parts used by the solver. \n
@@ -133,7 +133,7 @@ Essentially, you have to do the following four things: \n
 -# Retrieve information about the kinematics;
 -# Fill a descriptor to be returned to the superclass.
 
-\subsection subsec_solver_confparams 1. Retrieving Configuration Parameters
+\subsection subsec_customcart_solver_confparams 1. Retrieving Configuration Parameters
 
 The parameter of the <i>getPartDesc()</i> method is a <i>Searchable</i> object that should contain the initial configuration of the
 solver as provided for instance through the file <i>solver.ini</i> whose content is listed just below. However, these values can be
@@ -155,7 +155,7 @@ interPoints    off                      // if [on] the points discovered while c
 ping_robot_tmo 10.0                     // at start-up, while connecting to the robot, wait for this timeout in [s] before giving up
 \endcode
 
-\subsection subsec_solver_initdevices 2. Initializing Motor Devices
+\subsection subsec_customcart_solver_initdevices 2. Initializing Motor Devices
 
 The solver must be aware of how to open a client to speak to motor device drivers. Prepare therefore as many <i>Property</i> objects
 containing the suitable options as it is required by the manipulator: i.e. if the manipulator is composed of two parts (e.g. torso + arm),
@@ -169,7 +169,7 @@ optPart.put("local",(slvName+"/"+part).c_str());        // the tag used as stem-
 optPart.put("part",part.c_str());                       // just the name of the part for displaying purpose
 \endcode
 
-\subsection subsec_solver_kininfo 3. Retrieving Kinematics Info
+\subsection subsec_customcart_solver_kininfo 3. Retrieving Kinematics Info
 
 There is a special key in the configuration file <i>solver.ini</i> which is missing: the one that tells the solver how to retrieve the
 kinematics description. Its tag is "customKinFile" and must point to the <i>kinematics.ini</i> file. The path has to be absolute and
@@ -187,7 +187,7 @@ linksOptions.fromConfigFile(options.find("customKinFile").asString().c_str());
 iKinLimb *limb=new iKinLimb(linksOptions);
 \endcode
 
-\subsection subsec_solver_filldesc 4. Filling the Descriptor
+\subsection subsec_customcart_solver_filldesc 4. Filling the Descriptor
 
 Finally, we need to provide a descriptor that in turn will be processed by the superclass:
 \code
@@ -214,7 +214,7 @@ Intuitively, the insertion order depends on the links of the chain. In iCub the 
 the first pushed object.
 
 
-\section sec_server_configuration Configuring the Server
+\section sec_customcart_server_configuration Configuring the Server
 
 Coming to the server, life gets a bit easier. It is indeed required to open the device drivers of each involved part (in our case just
 one, the "fake_part"), put them into a special list, open the <i>cartesiancontrollerserver</i> device passing the proper configuration
@@ -258,7 +258,7 @@ NumberOfDrivers     1                   // the number of parts composing the str
 
 [DRIVER_0]                              // here come the parameters for each part driver
 Key                 fake_part           // the tag-name assigned to the part within the code
-JointsOrder         direct              // the joints order: [direct] or [reversed] (see explanation \ref subsec_solver_filldesc "above")
+JointsOrder         direct              // the joints order: [direct] or [reversed] (see explanation above)
 MinAbsVels          (0.0 0.0 0.0)       // (*)
 \endcode
 (*) This is an optional parameter that accounts joint by joint for the minimum velocity (in [deg/s]) the motors can somehow achieve,
@@ -266,7 +266,7 @@ and are meant to be provided in absolute values. Whenever the controller tries t
 it switches in a bang-bang mode to finally attain the target positions.
 
 
-\section sec_client_configuration Configuring the Client
+\section sec_customcart_client_configuration Configuring the Client
 
 The client does not have to be aware of any particular implementation, thus it can be configured as documented in the \ref icub_cartesian_interface
 "Cartesian Interface" page. In this respect, to open a client that connects to server above one can rely on the following:
@@ -284,7 +284,7 @@ if (client.open(option)) {
 \endcode
 
 
-\section sec_final_notes Finals Notes about Compiling the Example
+\section sec_customcart_final_notes Finals Notes about Compiling the Example
 
 The example has been designed according to the packaging policy we pursue for iCub-based application: there is a <i>src</i> directory
 filled with the library and the code and then there is an <i>app</i> directory containing the configuration files and the scripts
@@ -295,7 +295,7 @@ xml scripts. Run the command <i>yarprun --server /node</i> from the same directo
 modules in <i>robot_server_solver.xml</i> and soon afterwards the modules in <i>client.xml</i>.
 
 
-\section sec_succ_stories Successful Stories
+\section sec_customcart_succ_stories Successful Stories
 
 You are warmly encouraged to add up your case study on the use of Cartesian Interface below:
 - Duarte Aragão employed the Cartesian Interface for his robot Vizzy and made available his story
