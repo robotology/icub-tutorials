@@ -3,6 +3,21 @@
 
 \author Ugo Pattacini
 
+\section sec_contents Contents
+
+- \ref sec_intro
+- \ref sec_dependencies
+- \ref sec_openclosecartinterface
+- \ref sec_coordsystem
+- \ref sec_usecartinterface
+- \ref sec_nonlineardesign
+- \ref sec_contextswitch
+- \ref sec_taskRefVel
+- \ref sec_simcartinterface
+
+
+\section sec_intro Introduction
+
 The YARP <b>Cartesian Interface</b> has been conceived in order to enable the control of the arms
 and the legs of the robot directly in the operational space, that is instead of commading new configuration
 for the joints, user can require for instance the arm to reach a specified pose in the cartesian space, expressed

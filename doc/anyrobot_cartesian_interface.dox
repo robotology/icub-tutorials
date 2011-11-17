@@ -5,15 +5,18 @@
 
 \section sec_contents Contents
 
--\ref sec_architecture
--\ref sec_dependencies
--\ref sec_custom_example
--\ref sec_solver_configuration
--\ref sec_server_configuration
--\ref sec_client_configuration
--\ref sec_final_notes
--\ref sec_succ_stories
+- \ref sec_intro
+- \ref sec_architecture
+- \ref sec_dependencies
+- \ref sec_custom_example
+- \ref sec_solver_configuration
+- \ref sec_server_configuration
+- \ref sec_client_configuration
+- \ref sec_final_notes
+- \ref sec_succ_stories
 
+
+\section sec_intro Introduction
 
 This tutorial will guide the user through the steps required to run all the components of the Cartesian Interface
 with the purpose of controlling a generic yarp-compatible robot limb in its operational space. Therefore, this is

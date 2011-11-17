@@ -3,6 +3,19 @@
 
 \author Ugo Pattacini
 
+\section sec_contents Contents
+
+- \ref sec_intro
+- \ref sec_dependencies
+- \ref sec_runningserver
+- \ref sec_openclosegazeinterface
+- \ref sec_usegazeinterface
+- \ref sec_contextswitch
+- \ref sec_simgazeinterface
+
+
+\section sec_intro Introduction
+
 The YARP <b>Gaze Interface</b> provides an abstract layer to control the iCub gaze in a bio-plausible way, moving the neck
 and the eyes independently and performing saccades, pursuit, vergence, OCR (oculo-collic reflex) and VOR (vestibulo-ocular reflex
 relying on inertial data). 
