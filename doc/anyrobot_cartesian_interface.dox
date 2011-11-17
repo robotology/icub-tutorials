@@ -3,6 +3,18 @@
 
 \author Ugo Pattacini
 
+\section sec_contents Contents
+
+-\ref sec_architecture
+-\ref sec_dependencies
+-\ref sec_custom_example
+-\ref sec_solver_configuration
+-\ref sec_server_configuration
+-\ref sec_client_configuration
+-\ref sec_final_notes
+-\ref sec_succ_stories
+
+
 This tutorial will guide the user through the steps required to run all the components of the Cartesian Interface
 with the purpose of controlling a generic yarp-compatible robot limb in its operational space. Therefore, this is
 a somewhat advanced topic which might be of interest just for developers who want to adopt this interface for their
@@ -282,7 +294,7 @@ modules in <i>robot_server_solver.xml</i> and soon afterwards the modules in <i>
 
 \section sec_succ_stories Successful Stories
 
-You are encouraged to add up your case study on the use of Cartesian Interface hereafter:
+You are warmly encouraged to add up your case study on the use of Cartesian Interface below:
 - Duarte Aragão employed the Cartesian Interface for his robot Vizzy and made available his story
   <a href="http://mediawiki.isr.ist.utl.pt/wiki/Vizzy_Cartesian_Interface">here</a>.
 */
