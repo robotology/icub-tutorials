@@ -278,5 +278,12 @@ from the compilation products :), go there and launch the <i>ccmake ../</i> comm
 directory <i>anyRobotCartesianInterface/bin</i> where all the binaries will be copied in, along with the configuration files and the
 xml scripts. Run the command <i>yarprun --server /node</i> from the same directory of the binaries and then launch in a row first the
 modules in <i>robot_server_solver.xml</i> and soon afterwards the modules in <i>client.xml</i>.
+
+
+\section sec_succ_stories Successful Stories
+
+You are encouraged to add up your case study on the use of Cartesian Interface hereafter:
+- Duarte Aragão employed the Cartesian Interface for his robot Vizzy and made available his story
+  <a href="http://mediawiki.isr.ist.utl.pt/wiki/Vizzy_Cartesian_Interface">here</a>.
 */
 
