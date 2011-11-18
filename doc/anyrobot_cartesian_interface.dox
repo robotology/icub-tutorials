@@ -295,7 +295,7 @@ xml scripts. Run the command <i>yarprun --server /node</i> from the same directo
 modules in <i>robot_server_solver.xml</i> and soon afterwards the modules in <i>client.xml</i>.
 
 
-\section sec_customcart_succ_stories Successful Stories
+\section sec_customcart_succ_stories Success Stories
 
 You are warmly encouraged to add up your case study on the use of Cartesian Interface below:
 - Duarte Aragão employed the Cartesian Interface for his robot Vizzy and made available his story
