@@ -298,7 +298,7 @@ modules in <i>robot_server_solver.xml</i> and soon afterwards the modules in <i>
 \section sec_customcart_succ_stories Success Stories
 
 You are warmly encouraged to add up below your case study on the use of Cartesian Interface:
-- Duarte Aragão employed the Cartesian Interface for his robot Vizzy and made available his story
+- Duarte Aragão employed the Cartesian Interface for his robot Vizzy and documented the development
   <a href="http://mediawiki.isr.ist.utl.pt/wiki/Vizzy_Cartesian_Interface">here</a>.
 */
 
