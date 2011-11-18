@@ -32,7 +32,8 @@ The architecture of the Cartesian Interface is based on three components: 1) a c
 from its initial state to the joints configuration found by the solver; 3) a <b>client</b> part that exposes a collection of C++ methods to abstract the interface
 from its specific implementation. \n
 Alternatively, the client can act as a pure wrapper over the solver coping with the inverse kinematics, whereas the user might consider developing his own controller
-meeting some specific requirements. However, also in this configuration, the server part needs to be launched as a gateway to let the client communicate with the solver.
+meeting some specific requirements. However, also in this configuration, the server part needs to be launched (even if not employed) as a gateway to let the client
+communicate with the solver.
 
 \note A paper that describes how the controller works can be downloaded <a href="http://eris.liralab.it/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
 <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>: U. Pattacini, F. Nori, L. Natale, G. Metta, G. Sandini,
