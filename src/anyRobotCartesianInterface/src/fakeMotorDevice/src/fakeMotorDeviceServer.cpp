@@ -107,7 +107,7 @@ void fakeMotorDeviceServer::run()
 
     if (Bottle *cmd=cmdPort.read(false))
     {
-        if (cmd->size()>=vel.length())
+        if ((size_t)cmd->size()>=vel.length())
             for (size_t i=0; i<vel.length(); i++)
                 vel[i]=cmd->get(i).asDouble();
     }
