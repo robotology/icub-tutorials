@@ -65,8 +65,8 @@ indicates the hub board mounted on the robot]
 
 <b>iCubInterface+Solvers Application Launcher</b> \n
 
-Henceforth rely on the <i>$ICUB_ROOT/main/app/cartesianSolver/scripts/cartesianSolver.xml</i> application to launch both the
-iCubInterface and the cartesian solvers. \n
+Henceforth rely on the <i>$ICUB_ROOT/main/app/cartesianSolver/scripts/cartesianSolver.xml.template</i> application to launch
+both the iCubInterface and the cartesian solvers. \n
 The \ref iKinCartesianSolver "Cartesian Solvers" are required to invert the kinematics using Ipopt and they are meant to run
 on the cluster to avoid overloading the PC104 core. The solvers need the iCubInterface to connect to the robot to get useful
 data to operate (e.g. the joints bounds) and also iCubInterface needs them to open the server side of the Cartesian Interface.
@@ -74,7 +74,9 @@ Therefore the <i>chicken-egg</i> problem is solved by applying proper connection
 close as possible to the iCubInterface by using the application.
 Moreover, once everything is launched from within the application, if the user <i>accidentally</i> stops one of these modules,
 it turns to be mandatory to restart all of them from the beginning; this comes from the requirement to keep the communication
-protocol as light as possible, avoiding requests for integrity checking and reinitialization.
+protocol as light as possible, avoiding requests for integrity checking and reinitialization. \n
+More recently a new application has been made available to start up the robot with all the useful tools already in: it is located
+under <i>$ICUB_ROOT/main/app/iCubStartup/scripts/iCubStartup.xml.template</i>.
 
 
 \section sec_cart_opencloseinterface Opening and Closing the Cartesian Interface
