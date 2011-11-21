@@ -41,8 +41,9 @@ performances. Here follow the details. \n
 - The solver is the most computational demanding tool; for this reason it should be launched on a powerful machine
   belonging to the cluster of PCs connected to the robot network. It employs Ipopt for nonlinear optimization and
   should not be a burden to any critical routine that has to control the robot in real-time. \n
-  Nonetheless, having a powerful computer as own resource, the solver can tackle the inverse kinematics problem with
-  a large number of degrees-of-freedom in near real-time (something like ~30 ms).
+  Nonetheless, running on a powerful computer, the solver can tackle the inverse kinematics problem with a large number
+  of degrees-of-freedom in near real-time (something like ~30 ms). This level of performance lets the robot do tracking
+  pretty nicely.
 - The server is a canonical controller responsible for sending velocity commands to the robot with the purpose of
   achieving the joints configuration as found by the solver by moving the limb in a human-like fashion. It is a light-weight
   program so that it can run directly onboard the robot hub; it collects the requests coming from all the clients, it asks
