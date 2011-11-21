@@ -96,7 +96,7 @@ Vector q0;                                      // create a starting configurati
 for (int i=0; i<lim.rows(); i++)
     q0.push_back((lim(i,0)+lim(i,1))/2.0);
 
-motors=new Integrator(0.001*Ts,q0,lim);         // Ts is the period expressed in [ms]
+motors=new Integrator(Ts,q0,lim);               // Ts is the period expressed in [s]
 \endcode
 Aside from the details of the <i>Integrator</i> class (it is provided by the \ref ctrlLib library), it is worth noticing here
 how the joints have bounds defined by the matrix <i>lim</i>.
