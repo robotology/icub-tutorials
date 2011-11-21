@@ -211,7 +211,7 @@ p->rvs.push_back(false);
 p->num=2;
 \endcode
 Intuitively, the insertion order depends on the links of the chain. In iCub the three links of torso come first, hence <i>optTorso</i> is
-the first pushed object.
+the first object to be pushed.
 
 
 \section sec_customcart_server_configuration Configuring the Server
