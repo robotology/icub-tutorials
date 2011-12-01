@@ -288,10 +288,10 @@ Two things deserve your attention:
 
 Furthermore, as you can easily figure out, the torso joints are shared by both arms. This tells us to take care of a misuse
 of the cartesian device that might arise when one arm is controlled simultaneously to the other one: if this happens, a supervisor
-that enables/disables the torso joints according to the needs should be put in place. \n
+that enables/disables the torso joints according to the needs should be put in place.
 
-In this respect, when for example the torso is being controlled by an external module, there exists also the possibility for the
-cartesian device to counteract to the induced movements of the uncontrolled joints in order to mantain the final end-effector pose stable. \n
+When the torso is being controlled by an external module, there exists also the possibility for the cartesian device to counteract
+to the induced movements of the uncontrolled joints in order to mantain the final end-effector pose stable. \n
 To enable this feature one should call the proper method:
 \code
 armCart->setTrackingMode(true);
