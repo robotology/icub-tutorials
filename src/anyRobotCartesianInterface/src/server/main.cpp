@@ -50,7 +50,7 @@ public:
 
         // prepare the option to open up the device driver to
         // access the fake robot
-        Property optPart("(device fakeyClient)");        
+        Property optPart;
         optPart.put("device","fakeyClient");
         optPart.put("remote",(robot+"/"+part).c_str());
         optPart.put("local",(local+"/"+part).c_str());
