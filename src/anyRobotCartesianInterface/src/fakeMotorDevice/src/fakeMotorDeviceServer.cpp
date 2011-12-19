@@ -80,6 +80,10 @@ bool fakeMotorDeviceServer::close()
     if (isRunning())
         stop();
 
+    mutex.wait();
+    RateThread::stop();
+    mutex.post();
+
     statePort.interrupt();
     cmdPort.interrupt();
     rpcPort.interrupt();
