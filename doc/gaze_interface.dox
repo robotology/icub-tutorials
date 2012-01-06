@@ -45,7 +45,7 @@ Launch:
 iKinGazeCtrl --context <path> --config <file>
 \endcode
 
-Notice that through the <i>context</i> and <i>config</i> options the server loads information on the intrinsic camera
+Notice that through the <i>context</i> and <i>config</i> options the server loads information on the camera intrinsic
 parameters which are required to use some of the methods provided by the Gaze Interface, and specifically the <i>lookAtMonoPixel()</i>
 and <i>lookAtStereoPixel()</i> method. Furthermore, by using the <i>$ICUB_ROOT/main/app/cartesianSolver/scripts/cartesianSolver.xml</i>
 application the user is also able to launch the gaze server contextually with the iCubInterface module.
