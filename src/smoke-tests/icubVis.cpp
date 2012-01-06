@@ -5,19 +5,15 @@
 // Author: Lorenzo Natale
 
 #include <iCub/iCubVis/cht.h>
-#include <yarp/os/ResourceFinder.h>
 #include <iostream>
 
 using namespace std;
 int main(int argc, char *argv[]) 
 {
-    yarp::os::ResourceFinder config;
-    config.configure("ICUB_ROOT", argc, argv);
-
+    printf("iCubVis: testing library linking...");
     CircularHT ht;
-    ht.alloc();
-    ht.buildLookUpTable();
-
-    ht.dealloc();
+	ht.setParameters(1, 255, 1, 320, 240);
+		
+	printf("success!\n");
     return 0;
 }
