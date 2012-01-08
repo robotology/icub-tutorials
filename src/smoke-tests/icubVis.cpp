@@ -5,7 +5,7 @@
 // Author: Lorenzo Natale
 
 #include <iCub/vis/cht.h>
-#include <iostream>
+#include <stdio.h>
 
 using namespace std;
 int main(int argc, char *argv[]) 
