@@ -40,7 +40,7 @@ int main() {
     Vector *target = targetPort.read();  // read a target
     if (target!=NULL) { // check we actually got something
        printf("We got a vector containing");
-       for (int i=0; i<target->size(); i++) {
+       for (size_t i=0; i<target->size(); i++) {
          printf(" %g", (*target)[i]);
        }
        printf("\n");
