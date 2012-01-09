@@ -7,7 +7,6 @@
 #include <iCub/vis/cht.h>
 #include <stdio.h>
 
-using namespace std;
 int main(int argc, char *argv[]) 
 {
     printf("iCubVis: testing library linking...");
