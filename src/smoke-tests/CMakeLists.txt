@@ -15,6 +15,8 @@ INCLUDE(iCubFindDependencies)
 
 ### enable testing
 INCLUDE (CTest)
+set(CTEST_SOURCE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../")
+
 
 INCLUDE_DIRECTORIES(${ICUB_INCLUDE_DIRS}
                     ${YARP_INCLUDE_DIRS})
