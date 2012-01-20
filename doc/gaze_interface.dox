@@ -111,7 +111,7 @@ clientGazeCtrl.close();
 
 \section sec_gaze_useinterface Using the Gaze Interface
 
-The YARP Gaze Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/d2/df5/classyarp_1_1dev_1_1IGazeControl.html">here</a>.
+The YARP Gaze Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/classyarp_1_1dev_1_1IGazeControl.html">here</a>.
 It makes use of three different coordinate systems that enable the user to control the robot's gaze as detailed hereafter.
 
 \subsection subsec_gaze_cartcoorsystem Expressing the fixation point in Cartesian Coordinates
