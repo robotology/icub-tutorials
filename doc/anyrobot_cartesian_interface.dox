@@ -309,7 +309,7 @@ commanded by our velocity controller (dashed black) is depicted against the two 
 
 \image html cartPlantResponse.jpg "System Response with and without Plant Compensantion"
 
-Interestingly, under iCub/contrib/src/misc/jointVelCtrlIdent you can find a module that lets you collect information about the system response
+Interestingly, under <i>iCub/contrib/src/misc/jointVelCtrlIdent</i> you can find a module that lets you collect information about the system response
 to the chirp command. You can then think of employing the <i>System Identification Toolbox</i> from MATLAB to find out where these unwanted
 poles and zero are located in the complex plane.
 
