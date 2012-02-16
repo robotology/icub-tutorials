@@ -272,9 +272,9 @@ This topic is somewhat advanced and is concerned with the possibility to improve
 required for normal operations and the user might consider skipping it at the early stage of his implementation. \n
 The closed-loop joint controller is designed in such a way that it delivers velocity commands to shape the system response as to follow a
 trajectory that resembles a minimum-jerk profile. To this end, the strong assumption is that the joint itself behaves like a pure integrator.
-Of course the real world deviates - sometimes significantly - from the ideal conditions and a number of unmodelled factors start taking place.
+Of course the real world deviates - sometimes significantly - from the ideal conditions and a number of unmodelled factors starts taking place.
 In this respect, two specific elements deserve particular care since they preserve the property of being linear and thus can be conveniently
-compensated: (1) the high-order plant dynmics, (2) the dead-time affecting the plant response.
+compensated: (1) the high-order plant dynamics, (2) the dead-time affecting the plant response.
 
 Regarding the high-order plant dynamics, as it is traditionally envisaged, a <i>chirp</i> signal is injected into the system with the goal
 of identifying any further relevant zero and/or pole of the plant. Since the overall system is always stable and minimum-phase, it holds that
