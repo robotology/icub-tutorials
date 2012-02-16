@@ -313,7 +313,7 @@ Interestingly, under iCub/contrib/src/misc/jointVelCtrlIdent you can find a modu
 to the chirp command. You can then think of employing the <i>System Identification Toolbox</i> from MATLAB to find out where these unwanted
 poles and zero are located in the complex plane.
 
-Finally, as last step, one can try also to compensate the lag of the control system, represented by the exponential term. \n
+Finally, as last step, one can try also to compensate the lag of the control system, represented by the exponential term in the transfer function. \n
 As you might know, a lag in a control loop is dangerous because it introduces distortions in the response. To recover the ideal response
 profile, one common solution is to plug into the system a Smith Predictor. Nonetheless, this further block should be applied only when between
 the controller and the plant there exist significant communication delays; indeed a pure fractional tranfer function with only the integrator,
