@@ -276,9 +276,9 @@ Of course the real world deviates - sometimes significantly - from the ideal con
 In this respect, two specific elements deserve particular care since they preserve the property of being linear and thus can be conveniently
 compensated: (1) the high-order plant dynmics, (2) the dead-time affecting the plant response.
 
-Regarding the high-order plant dynamics, a traditional methodology makes use of a <i>chirp</i> signal to be injected into the system in order
-to identify further relevant zeros and poles. Since the overall system is always stable and minimum-phase, it holds that the controller is
-capable of compensating the unwanted dynamics with pole-zero cancellation. \n
+Regarding the high-order plant dynamics, as it is traditionally envisaged, a <i>chirp</i> signal is injected into the system with the goal
+of identifying any further relevant zero and/or pole of the plant. Since the overall system is always stable and minimum-phase, it holds that
+the controller turns to be capable of compensating the unwanted dynamics with pole-zero cancellation. \n
 The framework can thus compensate plants characterized by the following transfer function:
 
 \f[
