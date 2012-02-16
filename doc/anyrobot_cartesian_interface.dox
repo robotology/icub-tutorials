@@ -305,7 +305,7 @@ joint_9           ((Kp 1.000) (Tz 0.000) (Tw 0.000) (Zeta 0.000) (Td 0.000))
 \endcode
 
 To give the feeling of how important could be accounting for this dynamics, take a look at the picture below, where the ideal response of a joint
-commanded by our velocity controller is depicted against the two real cases: (1) with and (2) without the compensation. 
+commanded by our velocity controller (dashed black) is depicted against the two real cases: with (green) and without (red) the compensation. 
 
 \image html cartPlantResponse.jpg "System Response with and without Plant Compensantion"
 
