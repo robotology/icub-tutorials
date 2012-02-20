@@ -277,8 +277,9 @@ In this respect, the following two elements deserve particular care since they c
 (2) the dead-time affecting the plant response.
 
 Regarding the high-order plant dynamics, as it is traditionally envisaged, a <i>chirp</i> signal can be injected into the system with the goal
-of identifying any further relevant zero and/or pole of the plant. Since the overall system is always stable and minimum-phase, it holds that
-the controller is capable of filtering out the unwanted dynamics with pole-zero cancellation. \n
+of identifying any further relevant zero and/or pole of the plant. Since the overall system is always stable and minimum-phase (both further poles
+and zeros belong to the left side of the complex plane), it derives that the controller is capable of filtering out the unwanted dynamics with
+pole-zero cancellation. \n
 The framework can thus compensate plants characterized by the following transfer function:
 
 \f[
