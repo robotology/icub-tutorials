@@ -312,7 +312,8 @@ commanded by our velocity controller (dashed black) is depicted against the two 
 
 Interestingly, under <i>iCub/contrib/src/misc/jointVelCtrlIdent</i> you can find a module that lets you collect information about the system response
 to the chirp command. You can then think of employing the <i>System Identification Toolbox</i> from MATLAB to find out where these unwanted
-poles and zero are located in the complex plane.
+poles and zero are located in the complex plane. In fact, the <i>ident</i> tool contained whithin the MATLAB package allows you to go through an
+identification session of the exact process <i>P(s)</i> specified above.
 
 Finally, as very last step, one can try also to compensate the lag of the control system represented by the exponential term in the transfer function. \n
 As you might know, a lag in a control loop is dangerous because it introduces distortions in the response. To recover the ideal response
