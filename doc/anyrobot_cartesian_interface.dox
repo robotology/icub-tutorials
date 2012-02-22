@@ -112,7 +112,7 @@ link_0 (A 1.0) (D 0.0) (alpha 0.0) (offset 0.0) (min -180.0) (max 180.0)
 link_1 (A 1.0) (D 0.0) (alpha 0.0) (offset 0.0) (min -180.0) (max 180.0)
 link_2 (A 1.0) (D 0.0) (alpha 0.0) (offset 0.0) (min -180.0) (max 180.0)
 \endcode
-The meaning of these parameters is described in the \ref iKinLink class; by the way they are easily recognized as the link length
+The meaning of these parameters is described in the \ref iKinLink class; at any rate they are easily recognized as the link length
 (<i>A</i> in [m]), the link offset (<i>D</i> in [m]), the link twist (<i>alpha</i> in [rad]) and so on: please visit the wiki
 <a href="http://eris.liralab.it/wiki/ICubForwardKinematics">page</a> on kinematics for a deeper insight. \n
 A careful reader should have not missed the expression for the joints limits, which here can definitely take whatever values for all
