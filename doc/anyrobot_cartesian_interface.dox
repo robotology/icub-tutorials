@@ -308,7 +308,7 @@ joint_9           ((Kp 1.000) (Tz 0.000) (Tw 0.000) (Zeta 0.000) (Td 0.000))
 To give the feeling of how important could be accounting for this dynamics, take a look at the picture below, where the ideal response of a joint
 commanded by our velocity controller (dashed black) is depicted against the two real cases: with (green) and without (red) the compensation. 
 
-\image html cartPlantResponse.jpg "System Response with and without Plant Compensantion"
+\image html cartIFPlantResponse.jpg "System Response with and without Plant Compensantion"
 
 Interestingly, under <i>iCub/contrib/src/misc/jointVelCtrlIdent</i> you can find a module that lets you collect information about the system response
 to the chirp command. You can then think of employing the <i>System Identification Toolbox</i> from MATLAB to find out where these unwanted
