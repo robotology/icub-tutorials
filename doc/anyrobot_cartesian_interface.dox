@@ -12,7 +12,7 @@
 - \ref sec_customcart_solver_configuration
 - \ref sec_customcart_server_configuration
 - \ref sec_customcart_client_configuration
-- \ref sec_customcart_final_notes
+- \ref sec_customcart_example
 - \ref sec_customcart_succ_stories
 
 
@@ -339,7 +339,7 @@ if (client.open(option)) {
 \endcode
 
 
-\section sec_customcart_final_notes Final Notes about Compiling the Example
+\section sec_customcart_example Compiling and Running the Example
 
 The example has been designed according to the packaging policy we pursue for iCub-based application: there is a <i>src</i> directory
 filled with the library and the code and then there is an <i>app</i> directory containing the configuration files and the scripts
