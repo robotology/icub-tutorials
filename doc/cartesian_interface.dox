@@ -237,6 +237,14 @@ To tune the trajectory execution time for point-to-point movements, you can call
 armCart->setTrajTime(1.5);  // given in seconds
 \endcode
 
+To let the controller determine when to declare the movement accomplished, there is a dedicated tolerance acting 
+both at the level of position and orientation errors. To set this tolerance you can write the following:
+\code
+armCart->setInTargetTol(0.001);
+\endcode
+This means that the movement will be intended finished whenever norm(xd-x)<0.001, where x comprises the position
+and the orientation of the end-effector.
+
 While moving to a target pose, you can query the controller to find out which will be the final joints configuration
 as determined by the solver:
 \code
