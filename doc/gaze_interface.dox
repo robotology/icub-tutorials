@@ -263,6 +263,15 @@ Importantly, the triangulation is strongly affected by uncertainties in the came
 perfectly compensated, to fixate in stereo mode it is advisable to rely on the method <i>lookAtStereoPixels()</i>.
 
 
+\subsection subsec_gaze_fastsaccadicmode Fast Saccadic Mode
+The user has the possibility to enable the fast saccadic mode that employs the low level position control in order to generate
+very fast saccadic movements of the eyes. To do that one can simply do the following:
+\code
+igaze->setSaccadesStatus(true);
+\endcode
+<i>Caveat</i>: vision processing algorithms that assume the continuity of the images flow might be heavily affected by saccades.
+
+
 \section sec_gaze_contextswitch Context Switch
 
 We define here the <i>context</i> as the configuration in which the controller operates: therefore the context includes
