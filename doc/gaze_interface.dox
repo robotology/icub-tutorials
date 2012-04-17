@@ -42,13 +42,14 @@ In order to use the Gaze Interface, make sure that the following steps are done:
 
 Launch:
 \code
-iKinGazeCtrl --context <path> --config <file>
+iKinGazeCtrl
 \endcode
 
-Notice that through the <i>context</i> and <i>config</i> options the server loads information on the camera intrinsic
-parameters which are required to use some of the methods provided by the Gaze Interface, and specifically the <i>lookAtMonoPixel()</i>
-and <i>lookAtStereoPixel()</i> method. Furthermore, by using the <i>$ICUB_ROOT/main/app/cartesianSolver/scripts/cartesianSolver.xml</i>
-application the user is also able to launch the gaze server contextually with the iCubInterface module.
+Notice that the server will load its parameters from the default location and configuration file (overridden by the <i>context</i>
+and the <i>from</i> command-line options) that contains information on the camera intrinsic parameters which are required to use some
+of the methods provided by the Gaze Interface, and specifically the <i>lookAtMonoPixel()</i> and <i>lookAtStereoPixel()</i> method. \n
+Furthermore, by using the <i>$ICUB_ROOT/main/app/cartesianSolver/scripts/cartesianSolver.xml</i> application the user is also able
+to launch the gaze server contextually with the iCubInterface module.
 
 
 \section sec_gaze_opencloseinterface Opening and Closing the Gaze Interface
@@ -303,7 +304,7 @@ of his module in order to then restore it at releasing time to preserve the cont
 The Gaze Interface is already fully operative with the robot simulator: you only need to launch the server part with the robot option correctly set.
 Example:
 \code
-iKinGazeCtrl --robot icubSim --context cameraCalibration/conf --config icubSimEyes.ini
+iKinGazeCtrl --from configSim.ini
 \endcode
 
 A working example is available under
