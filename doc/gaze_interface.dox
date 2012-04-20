@@ -302,7 +302,7 @@ of his module in order to then restore it at releasing time to preserve the cont
 \section sec_gaze_siminterface The Simulator and the Gaze Interface
 
 The Gaze Interface is already fully operative with the robot simulator: you only need to select the proper configuration file. \n
-to do that, type the following:
+To do that, type the following:
 \code
 iKinGazeCtrl --from configSim.ini
 \endcode
