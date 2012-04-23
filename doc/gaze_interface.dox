@@ -270,6 +270,8 @@ very fast saccadic movements of the eyes. To do that one can simply do the follo
 \code
 igaze->setSaccadesStatus(true);
 \endcode
+After a saccade is executed the next saccadic movement can be performed only after a given inhibition period of time that can be
+retrieved and/or tuned relying on proper methods (i.e. <i>get/setSaccadesInhibitionPeriod()</i>).
 <i>Caveat</i>: vision processing algorithms that assume the continuity of the images flow might be heavily affected by saccades.
 
 
