@@ -134,6 +134,15 @@ public:
         return true;
     }
 
+    /************************************************************************/
+    bool interruptModule()
+    {
+        if (solver!=NULL)
+            solver->interrupt();
+
+        return true;
+    }
+
     /**********************************************************/
     bool close()
     {
