@@ -53,10 +53,8 @@ TARGET_LINK_LIBRARIES(tutorial_gaze_interface ${YARP_LIBRARIES} icubmod)
 ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
 TARGET_LINK_LIBRARIES(test_icubVis ${YARP_LIBRARIES} iCubVis)
 
-IF(ICUB_USE_IPOPT)
-    ADD_EXECUTABLE(test_ipopt smoke-tests/ipopt.cpp)
-    TARGET_LINK_LIBRARIES(test_ipopt ${YARP_LIBRARIES} iKin)
-ENDIF()
+ADD_EXECUTABLE(test_ipopt smoke-tests/ipopt.cpp)
+TARGET_LINK_LIBRARIES(test_ipopt ${YARP_LIBRARIES} iKin)
 
 ### execute tests
 GET_TARGET_PROPERTY(EXELOC test_icubVis LOCATION_RELEASE)
