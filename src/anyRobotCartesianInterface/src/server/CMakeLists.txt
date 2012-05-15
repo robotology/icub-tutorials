@@ -13,7 +13,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
 include(iCubOptions)
 include(iCubHelpers)
-include(iCubFindDependencies)
 
 set(folder_source main.cpp)
 source_group("Source Files" FILES ${folder_source})

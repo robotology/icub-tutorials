@@ -200,7 +200,7 @@ bool fakeMotorDeviceServer::getLimits(int axis, double *min, double *max)
     if (!configured)
         return false;
 
-    if ((axis<motors->get().length()) && (min!=NULL) && (max!=NULL))
+    if ((axis<(int)motors->get().length()) && (min!=NULL) && (max!=NULL))
     {
         Matrix lim=motors->getLim();
         *min=lim(axis,0); *max=lim(axis,1);

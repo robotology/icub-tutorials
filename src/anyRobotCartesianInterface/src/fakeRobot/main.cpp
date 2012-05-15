@@ -19,6 +19,10 @@
 #include <yarp/dev/all.h>
 #include <fakeMotorDevice.h>
 
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
 using namespace yarp::os;
 using namespace yarp::dev;
 
