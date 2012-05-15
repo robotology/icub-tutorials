@@ -53,16 +53,22 @@ TARGET_LINK_LIBRARIES(tutorial_gaze_interface ${YARP_LIBRARIES} icubmod)
 ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
 TARGET_LINK_LIBRARIES(test_icubVis ${YARP_LIBRARIES} iCubVis)
 
-ADD_EXECUTABLE(test_ipopt smoke-tests/ipopt.cpp)
-TARGET_LINK_LIBRARIES(test_ipopt ${YARP_LIBRARIES} iKin)
+#ADD_EXECUTABLE(test_ipopt smoke-tests/ipopt.cpp)
+#TARGET_LINK_LIBRARIES(test_ipopt ${YARP_LIBRARIES} iKin)
 
 ### execute tests
 GET_TARGET_PROPERTY(EXELOC test_icubVis LOCATION_RELEASE)
 ADD_TEST(test_icubVis ${EXELOC})
 
 IF(ICUB_USE_IPOPT)
+    message(STATUS "Testing IPOPT dependent code")
+
+    ADD_EXECUTABLE(test_ipopt smoke-tests/ipopt.cpp)
+    TARGET_LINK_LIBRARIES(test_ipopt ${YARP_LIBRARIES} iKin)
+
     GET_TARGET_PROPERTY(EXELOC test_ipopt LOCATION_RELEASE)
     ADD_TEST(test_ipopt ${EXELOC})
 ENDIF()
+
 ###################### end of test specific code
 
