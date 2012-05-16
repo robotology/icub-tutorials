@@ -68,6 +68,10 @@ but is mandatory. You have to provide some low-level yarp motor interfaces that 
 to start and operate correctly. They are only three: <b>IControlLimits</b>, <b>IEncoders</b>, <b>IVelocityControl</b>.
 The former two serve to get the number of joints, their actual range along with current joints configuration which is fed
 back to the controller; the latter is obviously employed to send velocity commands to the robot. \n
+Alternatively, user might consider implementing the newest <b>IEncodersTimed</b> motor interface in place of <b>IEncoders</b>,
+providing also information about the time stamps of the encoders that in turn will be attached to the pose information for
+synchronization purpose. At startup, the cartesian server will check accordingly the availability of the most suitable encoders
+interface. \n
 This is not the right place where to tell about how to deal with these interfaces, but please find out more on the topic
 of making a new device in yarp <a href="http://eris.liralab.it/wiki/Making_a_new_device_in_YARP">here</a>.
 
