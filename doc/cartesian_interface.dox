@@ -68,7 +68,7 @@ indicates the hub board mounted on the robot]
 
 <b>iCubStartup Application Launcher</b> \n
 
-Henceforth rely on the installed version of <i>$ICUB_ROOT/main/app/iCubStartup/scripts/iCubStartup.xml.template</i> application
+Henceforth rely on the installed copy of <i>$ICUB_ROOT/main/app/iCubStartup/scripts/iCubStartup.xml.template</i> application
 to launch both the iCubInterface and the cartesian solvers (and other useful tools as well). \n
 The \ref iKinCartesianSolver "Cartesian Solvers" are required to invert the kinematics using Ipopt and they are meant to run
 on the cluster to avoid overloading the PC104 core. The solvers need the iCubInterface to connect to the robot to get useful
