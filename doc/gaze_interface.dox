@@ -133,7 +133,7 @@ fp[2]=+0.35;    // z-component [m]
 igaze->lookAtFixationPoint(fp);	// move the gaze to the desired fixation point
 igaze->waitMotionDone();        // wait until the operation is done
 
-Vector x(3);
+Vector x;
 igaze->getFixationPoint(x);                     // retrieve the current fixation point
 
 cout<<"final error = "<<norm(fp-x)<<endl;       // return a measure of the displacement error
