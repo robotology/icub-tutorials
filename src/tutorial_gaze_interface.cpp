@@ -248,11 +248,12 @@ public:
             // The absolute reference frame for the azimuth/elevation couple
             // is head-centered with the robot in rest configuration
             // (i.e. torso and head angles zeroed). 
-            igaze->getAngles(ang);            
+            igaze->getAngles(ang);
 
-            poiList.push_back(ang);
             fprintf(stdout,"Storing POI #%lu: (%s) [deg]\n",
                     poiList.size(),ang.toString().c_str());
+
+            poiList.push_back(ang);
 
             t3=t;
         }
