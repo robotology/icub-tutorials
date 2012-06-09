@@ -250,10 +250,9 @@ public:
             // (i.e. torso and head angles zeroed). 
             igaze->getAngles(ang);            
 
-            fprintf(stdout,"Storing POI #%d ... %s [deg]\n",
-                    (int)poiList.size(),ang.toString().c_str());
-
             poiList.push_back(ang);
+            fprintf(stdout,"Storing POI #%lu: (%s) [deg]\n",
+                    poiList.size(),ang.toString().c_str());
 
             t3=t;
         }
