@@ -12,7 +12,8 @@
 - \ref sec_cart_useinterface
 - \ref sec_cart_nonlineardesign
 - \ref sec_cart_contextswitch
-- \ref sec_cart_taskRefVel
+- \ref sec_cart_taskrefvel
+- \ref sec_cart_eventscallbacks
 - \ref sec_cart_siminterface
 
 
@@ -105,7 +106,7 @@ Besides, it is also required to insert the following lines within the code in or
 client controller:
 \code
 ...
-#include <yarp/dev/Drivers.h>
+#include <yarp/dev/all.h>
 YARP_DECLARE_DEVICES(icubmod)
 ...
 
@@ -125,10 +126,10 @@ option.put("local","/client/right_arm");
  
 PolyDriver clientCartCtrl(option);
 
-ICartesianControl *armCart=NULL;
+ICartesianControl *icart=NULL;
 
 if (clientCartCtrl.isValid()) {
-   clientCartCtrl.view(armCart);
+   clientCartCtrl.view(icart);
 }
 \endcode
 
@@ -196,7 +197,7 @@ Moreover, some examples are also reported hereafter to gain a deeper insight int
 Imagine that we want to get the actual arm pose from within our code. What we have to write is just:
 \code
 Vector x0,o0;
-armCart->getPose(x0,o0);
+icart->getPose(x0,o0);
 \endcode
 The current translational position is returned in <i>x0</i> while <i>o0</i> containes now the current orientation.
 
@@ -205,7 +206,7 @@ keeping the orientation constant:
 \code
 Vector xd=x0; xd[0]+=-0.1;
 Vector od=o0;
-armCart->goToPose(xd,od);   // send request and forget
+icart->goToPose(xd,od);   // send request and forget
 \endcode
 The <i>goToPose()</i> method does not wait for any acknowledgement that the server has received the request,
 but it just lets the client module go straight to the next instruction in the code flow. Therefore, the 
@@ -213,18 +214,18 @@ intended use of this method is for streaming input (e.g. while tracking).
 
 If we would like to test whether the new pose has been achieved, it's as follows:
 \code
-armCart->goToPoseSync(xd,od);   // send request and wait for reply
+icart->goToPoseSync(xd,od);   // send request and wait for reply
 
 bool done=false;
 while (!done) {
-   armCart->checkMotionDone(&done);
+   icart->checkMotionDone(&done);
    Time::delay(0.04);   // or any suitable delay
 }
 \endcode
 The same can be achieved also by the following streamlined snippet of code:
 \code
-armCart->goToPoseSync(xd,od);   // send request and wait for reply
-armCart->waitMotionDone(0.04);  // wait until the motion is done and ping at each 0.04 seconds
+icart->goToPoseSync(xd,od);   // send request and wait for reply
+icart->waitMotionDone(0.04);  // wait until the motion is done and ping at each 0.04 seconds
 \endcode
 Here the method <i>goToPoseSync()</i> guarantees that the server receives the request before allowing the code
 flow to proceed. If we had used the analogous non-sync method, then the result of first check would have been
@@ -232,13 +233,13 @@ unpredictable.
 
 To tune the trajectory execution time for point-to-point movements, you can call the proper function:
 \code
-armCart->setTrajTime(1.5);  // given in seconds
+icart->setTrajTime(1.5);  // given in seconds
 \endcode
 
 To let the controller determine when to declare the movement accomplished, there is a dedicated tolerance acting 
 both at the level of position and orientation errors. To set this tolerance you can write the following:
 \code
-armCart->setInTargetTol(0.001);
+icart->setInTargetTol(0.001);
 \endcode
 This means that the movement will be intended finished whenever norm(xd-x)<0.001, where x comprises the position
 and the orientation of the end-effector.
@@ -247,7 +248,7 @@ While moving to a target pose, you can query the controller to find out which wi
 as determined by the solver:
 \code
 Vector xdhat, odhat, qdhat;
-armCart->getDesired(xdhat,odhat,qdhat);
+icart->getDesired(xdhat,odhat,qdhat);
 \endcode
 Of course due to the optimization process \f$ \hat{x}_d \f$ differs from the commanded \f$ x_d \f$ (but the distance in norm complies
 with the given tolerance), so as \f$ \hat{o}_d \f$ from \f$ o_d \f$; \f$ \hat{q}_d \f$ is such that \f$ \left[\hat{x}_d,\hat{o}_d\right]=K\left(\hat{q}_d\right) \f$,
@@ -261,7 +262,7 @@ xd[1]=0.0;
 xd[2]=0.1;
 
 Vector xdhat, odhat, qdhat;
-armCart->askForPosition(xd,xdhat,odhat,qdhat);
+icart->askForPosition(xd,xdhat,odhat,qdhat);
 \endcode
 The ask-based methods such as <i>askForPosition()</i> and <i>askForPose()</i> allow the user to employ the Cartesian Interface
 just as a <b>simple layer that wraps around the inverse kinematics solver</b>.
@@ -272,14 +273,14 @@ at the same time while reaching. \n
 In the following snippet of code we ask to enable the torso pitch and yaw joints (which are off by default).
 \code
 Vector curDof;
-armCart->getDOF(curDof);
+icart->getDOF(curDof);
 cout<<"["<<curDof.toString()<<"]"<<endl;  // [0 0 0 1 1 1 1 1 1 1] will be printed out
 
 Vector newDof(3);
 newDof[0]=1;    // torso pitch: 1 => enable
 newDof[1]=2;    // torso roll:  2 => skip
 newDof[2]=1;    // torso yaw:   1 => enable
-armCart->setDOF(newDof,curDof);
+icart->setDOF(newDof,curDof);
 cout<<"["<<curDof.toString()<<"]"<<endl;  // [1 0 1 1 1 1 1 1 1 1] will be printed out
 \endcode
 To sum up, a value of '1' makes the joint a real degree of freedom, a value of '0' switches it off, while the special value
@@ -300,7 +301,7 @@ When the torso is being controlled by an external module, there exists also the 
 to the induced movements of the uncontrolled joints in order to mantain the final end-effector pose stable. \n
 To enable this feature one should call the proper method:
 \code
-armCart->setTrackingMode(true);
+icart->setTrackingMode(true);
 \endcode
 Usually the cartesian device brings up in <i>non-tracking</i> mode: this means that once the limb has reached the desired pose, the controller
 gets disconnected until the next command is yielded and the limb can be moved by other external agents. \n
@@ -322,11 +323,11 @@ position in the joint space, weighting component by component with the diagonal 
 Thereby, to access the elements of \f$ \mathbf{q}_r \f$ and \f$ \mathit{W}_r \f$ one should call the following methods:
 \code
 Vector curRestPos;
-armCart->getRestPos(curRestPos);
+icart->getRestPos(curRestPos);
 cout<<"["<<curRestPos.toString()<<"]"<<endl;  // [0 0 0 0 0 0 0 0 0 0] will be printed out
 
 Vector curRestWeights;
-armCart->getRestWeights(curRestWeights);
+icart->getRestWeights(curRestWeights);
 cout<<"["<<curRestWeights.toString()<<"]"<<endl;  // [1 1 1 0 0 0 0 0 0 0] will be printed out
 \endcode
 Above we've asked for the default configuration of the secondary task which tries to minimize against the rest position (0,0,0) that considers
@@ -365,24 +366,24 @@ their angular bounds, the resting positions and weights, the trajectory executio
 Obviously the controller performs the same action differently depending on the current context.
 A way to easily switch among contexts is to rely on <i>storeContext()</i> and <i>restoreContext()</i> methods as follows:
 \code
-armCart->setDOF(newDof1,curDof1);       // here the user prepares the context
-armCart->setTrackingMode(true);
+icart->setDOF(newDof1,curDof1);         // here the user prepares the context
+icart->setTrackingMode(true);
 ...
 int context_0;
-armCart->storeContext(&context_0);      // latch the context
-
-armCart->setDOF(newDof2,curDof2);       // at certain point the user may want the controller to
-armCart->goToPose(x,o,t);               // perform some actions with different configuration
+icart->storeContext(&context_0);        // latch the context
+                                        
+icart->setDOF(newDof2,curDof2);         // at certain point the user may want the controller to
+icart->goToPose(x,o,t);                 // perform some actions with different configuration
 ...
 
-armCart->restoreContext(context_0);     // ... and then retrieve the stored context_0
-armCart->goToPose(x,o);                 // now the controller performs the same action but within the context_0
+icart->restoreContext(context_0);       // ... and then retrieve the stored context_0
+icart->goToPose(x,o);                   // now the controller performs the same action but within the context_0
 \endcode
 Unless the user needs the interface just for logging purposes, it's a good rule to store the context at the initialization of his module in order to
 then restore it at releasing time to preserve the controller configuration.
 
 
-\section sec_cart_taskRefVel Task-Space Reference Velocity Command
+\section sec_cart_taskrefvel Task-Space Reference Velocity Command
 
 The user is further provided with the method <i>setTaskVelocities()</i> that allows to command a reference velocity for the end-effector in the
 operational space as follows:
@@ -395,12 +396,42 @@ xdot[2]=0.0;
 Vector odot(4); // no rotation is required
 odot=0.0;       // [rad/s]
 
-armCart->setTaskVelocities(xdot,odot);
+icart->setTaskVelocities(xdot,odot);
 \endcode
 The solver still plays a meaningful role in this command mode so that the whole set of constraints active in the inverse kinematics problem
 are taken into account. Moreover, the task-space reference velocity will be tracked according to the reactivity level of the internal controller
 which is basically determined by the current trajectory time; thus, for executing high task-space velocity the trajectory time should be tuned
 towards lower values, whereas it should be increased to track low task-space reference velocity.
+
+
+\section sec_cart_eventscallbacks Events Callbacks
+
+The Cartesian Interface provides also an easy way to register events callbacks. For example, an event might be represented by the onset of
+the movement when the controller gets activated or the end of the movement itself. The user can then attach a callback to any event generated
+by the interface. \n
+It is required to inherit from a specific class <i>CartesianEvent</i> that handles events and override the <i>cartesianEventCallback()</i> method.
+\code
+class MotionDoneEvent : public CartesianEvent
+{
+public:
+   virtual void cartesianEventCallback()
+   {
+      cout<<"motion complete"<<endl;
+   }
+};
+
+MotionDoneEvent event;
+icart->registerEvent("motion-done",&event);    // the tag "motion-done" identifies the event to be notified
+icart->goToPosition(x);                        // as soon as the motion is complete, the callback will print out the message
+\endcode
+
+To know which events are available for notification, the user can do:
+\code
+Bottle info;
+icart->getInfo(info);
+cout<<info.find("events").asList()->toString().c_str()<<endl;
+\endcode
+The special wildcard "*" can be used to assign a callback to any event, regardless of its type.
 
 
 \section sec_cart_siminterface The Simulator and the Cartesian Interface

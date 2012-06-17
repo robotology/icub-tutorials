@@ -11,6 +11,7 @@
 - \ref sec_gaze_opencloseinterface
 - \ref sec_gaze_useinterface
 - \ref sec_gaze_contextswitch
+- \ref sec_gaze_eventscallbacks
 - \ref sec_gaze_siminterface
 
 
@@ -77,7 +78,7 @@ Besides, it is also required to insert the following lines within the code in or
 client controller:
 \code
 ...
-#include <yarp/dev/Drivers.h>
+#include <yarp/dev/all.h>
 YARP_DECLARE_DEVICES(icubmod)
 ...
 
@@ -126,12 +127,12 @@ The following snippet of code shows how to command the gaze in the cartesian spa
 #include <iCub/ctrl/ctrlMath.h>
 ...
 Vector fp(3);
-fp[0]=-0.50;    // x-component [m]
-fp[1]=+0.00;    // y-component [m]
-fp[2]=+0.35;    // z-component [m]
+fp[0]=-0.50;                                    // x-component [m]
+fp[1]=+0.00;                                    // y-component [m]
+fp[2]=+0.35;                                    // z-component [m]
 
-igaze->lookAtFixationPoint(fp);	// move the gaze to the desired fixation point
-igaze->waitMotionDone();        // wait until the operation is done
+igaze->lookAtFixationPoint(fp);                 // move the gaze to the desired fixation point
+igaze->waitMotionDone();                        // wait until the operation is done
 
 Vector x;
 igaze->getFixationPoint(x);                     // retrieve the current fixation point
@@ -150,15 +151,15 @@ This coordinate system is an absolute head-centered angular reference frame as e
 For instance, to specify a desired location where to look at in this coordinate system, one can write:
 \code
 Vector ang(3);
-ang[0]=+10.0;   // azimuth-component [deg]
-ang[1]=-05.0;   // elevation-component [deg]
-ang[2]=+20.0;   // vergence-component [deg]
+ang[0]=+10.0;                   // azimuth-component [deg]
+ang[1]=-05.0;                   // elevation-component [deg]
+ang[2]=+20.0;                   // vergence-component [deg]
 
 igaze->lookAtAbsAngles(ang);    // move the gaze
 
 ...
 
-igaze->getAngles(ang);  // get the current angular configuration
+igaze->getAngles(ang);          // get the current angular configuration
 \endcode
 
 
@@ -299,6 +300,36 @@ igaze->lookAtFixationPoint(fp);         // now the controller performs the same 
 \endcode
 Unless the user needs the interface just for logging purposes, it's a good rule to store the context at the initialization
 of his module in order to then restore it at releasing time to preserve the controller configuration.
+
+
+\section sec_gaze_eventscallbacks Events Callbacks
+
+The Gaze Interface provides also an easy way to register events callbacks. For example, an event might be represented by the onset of
+the movement when the controller gets activated or the end of the movement itself. The user can then attach a callback to any event generated
+by the interface. \n
+It is required to inherit from a specific class <i>GazeEvent</i> that handles events and override the <i>gazeEventCallback()</i> method.
+\code
+class MotionDoneEvent : public GazeEvent
+{
+public:
+   virtual void gazeEventCallback()
+   {
+      cout<<"motion complete"<<endl;
+   }
+};
+
+MotionDoneEvent event;
+igaze->registerEvent("motion-done",&event);    // the tag "motion-done" identifies the event to be notified
+igze->lootAtFixationPoint(fp);                 // as soon as the motion is complete, the callback will print out the message
+\endcode
+
+To know which events are available for notification, the user can do:
+\code
+Bottle info;
+icart->getInfo(info);
+cout<<info.find("events").asList()->toString().c_str()<<endl;
+\endcode
+The special wildcard "*" can be used to assign a callback to any event, regardless of its type.
 
 
 \section sec_gaze_siminterface The Simulator and the Gaze Interface
