@@ -320,13 +320,13 @@ public:
 
 MotionDoneEvent event;
 igaze->registerEvent("motion-done",&event);    // the tag "motion-done" identifies the event to be notified
-igze->lootAtFixationPoint(fp);                 // as soon as the motion is complete, the callback will print out the message
+igaze->lootAtFixationPoint(fp);                // as soon as the motion is complete, the callback will print out the message
 \endcode
 
 To know which events are available for notification, the user can do:
 \code
 Bottle info;
-icart->getInfo(info);
+igaze->getInfo(info);
 cout<<info.find("events").asList()->toString().c_str()<<endl;
 \endcode
 The special wildcard "*" can be used to assign a callback to any event, regardless of its type.
