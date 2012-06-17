@@ -158,7 +158,7 @@ public:
     {
         t=Time::now();
 
-        generateTarget();        
+        generateTarget();
 
         if (state==STATE_TRACK)
         {
