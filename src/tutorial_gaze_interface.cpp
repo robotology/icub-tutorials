@@ -41,8 +41,8 @@ using namespace yarp::sig;
 using namespace yarp::math;
 
 
-
-class CtrlThread: public RateThread
+class CtrlThread: public RateThread,
+                  public GazeEvent
 {
 protected:
     PolyDriver        clientGaze;
@@ -64,6 +64,31 @@ protected:
     double t2;
     double t3;
     double t4;
+
+    // the motion-done callback
+    virtual void gazeEventCallback()
+    {
+        Vector ang;
+        igaze->getAngles(ang);
+
+        fprintf(stdout,"Actual gaze configuration: (%s) [deg]\n",
+                ang.toString(3,3).c_str());
+
+        fprintf(stdout,"Moving the torso; see if the gaze is compensated ...\n");
+
+        // move the torso yaw
+        double val;
+        ienc->getEncoder(0,&val);
+        ipos->positionMove(0,val>0.0?-30.0:30.0);
+
+        t4=t;
+        
+        // detach the callback
+        igaze->unregisterEvent("motion-done");
+
+        // switch state
+        state=STATE_STILL;
+    }
 
 public:
     CtrlThread(const double period) : RateThread(int(period*1000.0)) { }
@@ -162,41 +187,18 @@ public:
             Vector ang=poiList.front();
             poiList.clear();
 
-            fprintf(stdout,"Retrieving POI #0 ... %s [deg]\n",
-                    ang.toString().c_str());
+            fprintf(stdout,"Retrieving POI #0 ... (%s) [deg]\n",
+                    ang.toString(3,3).c_str());
+
+            // register the motion-done event, attaching the callback
+            // that will be executed as soon as the gaze is accomplished
+            igaze->registerEvent("motion-done",this);
 
             // look at the chosen POI
             igaze->lookAtAbsAngles(ang);
 
             // switch state
             state=STATE_WAIT;
-        }
-
-        if (state==STATE_WAIT)
-        {
-            bool done=false;
-            igaze->checkMotionDone(&done);
-
-            if (done)
-            {
-                Vector ang;
-                igaze->getAngles(ang);            
-
-                fprintf(stdout,"Actual gaze configuration: %s [deg]\n",
-                        ang.toString().c_str());
-
-                fprintf(stdout,"Moving the torso; see if the gaze is compensated ... ");
-                
-                // move the torso yaw
-                double val;
-                ienc->getEncoder(0,&val);
-                ipos->positionMove(0,val>0.0?-30.0:30.0);
-
-                t4=t;
-
-                // switch state
-                state=STATE_STILL;
-            }
         }
 
         if (state==STATE_STILL)
@@ -252,7 +254,7 @@ public:
 
             int numPOI=(int)poiList.size();
             fprintf(stdout,"Storing POI #%d: (%s) [deg]\n",
-                    numPOI,ang.toString().c_str());
+                    numPOI,ang.toString(3,3).c_str());
 
             poiList.push_back(ang);
 
@@ -276,8 +278,8 @@ public:
             igaze->getFixationPoint(x);
 
             fprintf(stdout,"+++++++++\n");
-            fprintf(stdout,"fp         [m] = %s\n",fp.toString().c_str());
-            fprintf(stdout,"x          [m] = %s\n",x.toString().c_str());
+            fprintf(stdout,"fp         [m] = (%s)\n",fp.toString(3,3).c_str());
+            fprintf(stdout,"x          [m] = (%s)\n",x.toString(3,3).c_str());
             fprintf(stdout,"norm(fp-x) [m] = %g\n",norm(fp-x));
             fprintf(stdout,"---------\n\n");
 
