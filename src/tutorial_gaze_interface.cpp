@@ -95,7 +95,7 @@ public:
     {
         // here we specify that the event we are interested in is
         // of type "motion-done"
-        gazeEventType="motion-done";
+        gazeEventParameters.type="motion-done";
     }
 
     virtual bool threadInit()
