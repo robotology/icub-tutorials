@@ -324,7 +324,7 @@ public:
 };
 
 MotionDoneEvent event;
-igaze->registerEvent(&event);              // the tag "motion-done" identifies the event to be notified
+igaze->registerEvent(event);               // the tag "motion-done" identifies the event to be notified
 igaze->lootAtFixationPoint(fp);            // as soon as the motion is complete, the callback will print out the message
 \endcode
 

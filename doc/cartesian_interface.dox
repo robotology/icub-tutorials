@@ -426,7 +426,7 @@ public:
 };
 
 MotionDoneEvent event;
-icart->registerEvent(&event);              // the tag "motion-done" identifies the event to be notified
+icart->registerEvent(event);               // the tag "motion-done" identifies the event to be notified
 icart->goToPosition(x);                    // as soon as the motion is complete, the callback will print out the message
 \endcode
 

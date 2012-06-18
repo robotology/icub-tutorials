@@ -84,7 +84,7 @@ protected:
         t4=t;
         
         // detach the callback
-        igaze->unregisterEvent(this);
+        igaze->unregisterEvent(*this);
 
         // switch state
         state=STATE_STILL;
@@ -197,7 +197,7 @@ public:
 
             // register the motion-done event, attaching the callback
             // that will be executed as soon as the gaze is accomplished
-            igaze->registerEvent(this);
+            igaze->registerEvent(*this);
 
             // look at the chosen POI
             igaze->lookAtAbsAngles(ang);
