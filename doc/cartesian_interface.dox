@@ -414,6 +414,11 @@ It is required to inherit from a specific class <i>CartesianEvent</i> that handl
 class MotionDoneEvent : public CartesianEvent
 {
 public:
+   MotionDoneEvent()
+   {
+      cartesianEventType="motion-done";    // select here the event type we want to listen to
+   }
+
    virtual void cartesianEventCallback()
    {
       cout<<"motion complete"<<endl;
@@ -421,8 +426,8 @@ public:
 };
 
 MotionDoneEvent event;
-icart->registerEvent("motion-done",&event);    // the tag "motion-done" identifies the event to be notified
-icart->goToPosition(x);                        // as soon as the motion is complete, the callback will print out the message
+icart->registerEvent(&event);              // the tag "motion-done" identifies the event to be notified
+icart->goToPosition(x);                    // as soon as the motion is complete, the callback will print out the message
 \endcode
 
 To know which events are available for notification, the user can do:

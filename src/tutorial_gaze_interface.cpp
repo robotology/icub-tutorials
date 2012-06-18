@@ -84,14 +84,19 @@ protected:
         t4=t;
         
         // detach the callback
-        igaze->unregisterEvent("motion-done");
+        igaze->unregisterEvent(this);
 
         // switch state
         state=STATE_STILL;
     }
 
 public:
-    CtrlThread(const double period) : RateThread(int(period*1000.0)) { }
+    CtrlThread(const double period) : RateThread(int(period*1000.0))
+    {
+        // here we specify that the event we are interested in is
+        // of type "motion-done"
+        gazeEventType="motion-done";
+    }
 
     virtual bool threadInit()
     {
@@ -192,7 +197,7 @@ public:
 
             // register the motion-done event, attaching the callback
             // that will be executed as soon as the gaze is accomplished
-            igaze->registerEvent("motion-done",this);
+            igaze->registerEvent(this);
 
             // look at the chosen POI
             igaze->lookAtAbsAngles(ang);

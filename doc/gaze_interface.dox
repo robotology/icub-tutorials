@@ -312,6 +312,11 @@ It is required to inherit from a specific class <i>GazeEvent</i> that handles ev
 class MotionDoneEvent : public GazeEvent
 {
 public:
+   MotionDoneEvent()
+   {
+      gazeEventType="motion-done";         // select here the event type we want to listen to
+   }
+
    virtual void gazeEventCallback()
    {
       cout<<"motion complete"<<endl;
@@ -319,8 +324,8 @@ public:
 };
 
 MotionDoneEvent event;
-igaze->registerEvent("motion-done",&event);    // the tag "motion-done" identifies the event to be notified
-igaze->lootAtFixationPoint(fp);                // as soon as the motion is complete, the callback will print out the message
+igaze->registerEvent(&event);              // the tag "motion-done" identifies the event to be notified
+igaze->lootAtFixationPoint(fp);            // as soon as the motion is complete, the callback will print out the message
 \endcode
 
 To know which events are available for notification, the user can do:
