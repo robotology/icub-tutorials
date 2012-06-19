@@ -32,11 +32,12 @@ using namespace yarp::sig;
 using namespace yarp::math;
 
 
-class CtrlThread: public RateThread
+class CtrlThread: public RateThread,
+                  public CartesianEvent
 {
 protected:
     PolyDriver         client;
-    ICartesianControl *arm;
+    ICartesianControl *icart;
 
     Vector xd;
     Vector od;
@@ -47,8 +48,20 @@ protected:
     double t0;
     double t1;
 
+    // the event callback attached to the "motion-ongoing"
+    virtual void cartesianEventCallback()
+    {
+        fprintf(stdout,"20%% of trajectory attained\n");
+    }
+
 public:
-    CtrlThread(const double period) : RateThread(int(period*1000.0)) { }
+    CtrlThread(const double period) : RateThread(int(period*1000.0))
+    {
+        // we wanna raise an event each time the arm is at 20%
+        // of the trajectory (or 70% far from the target)
+        cartesianEventParameters.type="motion-ongoing";
+        cartesianEventParameters.motionOngoingCheckPoint=0.2;
+    }
 
     virtual bool threadInit()
     {
@@ -72,20 +85,20 @@ public:
             return false;
 
         // open the view
-        client.view(arm);
+        client.view(icart);
 
         // latch the controller context in order to preserve
         // it after closing the module
         // the context contains the dofs status, the tracking mode,
         // the resting positions, the limits and so on.
-        arm->storeContext(&startup_context_id);
+        icart->storeContext(&startup_context_id);
 
         // set trajectory time
-        arm->setTrajTime(1.0);
+        icart->setTrajTime(1.0);
 
         // get the torso dofs
         Vector newDof, curDof;
-        arm->getDOF(curDof);
+        icart->getDOF(curDof);
         newDof=curDof;
 
         // enable the torso yaw and pitch
@@ -98,7 +111,10 @@ public:
         limitTorsoPitch();
 
         // send the request for dofs reconfiguration
-        arm->setDOF(newDof,curDof);
+        icart->setDOF(newDof,curDof);
+
+        // register the event, attaching the callback
+        icart->registerEvent(*this);
 
         xd.resize(3);
         od.resize(4);
@@ -124,7 +140,7 @@ public:
 
         // go to the target :)
         // (in streaming)
-        arm->goToPose(xd,od);
+        icart->goToPose(xd,od);
 
         // some verbosity
         printStatus();
@@ -134,11 +150,11 @@ public:
     {    
         // we require an immediate stop
         // before closing the client for safety reason
-        arm->stopControl();
+        icart->stopControl();
 
         // it's a good rule to restore the controller
         // context as it was before opening the module
-        arm->restoreContext(startup_context_id);
+        icart->restoreContext(startup_context_id);
 
         client.close();
     }
@@ -175,8 +191,8 @@ public:
         // to lean out more than 30 degrees forward
 
         // we keep the lower limit
-        arm->getLimits(axis,&min,&max);
-        arm->setLimits(axis,min,MAX_TORSO_PITCH);
+        icart->getLimits(axis,&min,&max);
+        icart->setLimits(axis,min,MAX_TORSO_PITCH);
     }
 
     void printStatus()
@@ -187,12 +203,12 @@ public:
 
             // we get the current arm pose in the
             // operational space
-            arm->getPose(x,o);
+            icart->getPose(x,o);
 
             // we get the final destination of the arm
             // as found by the solver: it differs a bit
             // from the desired pose according to the tolerances
-            arm->getDesired(xdhat,odhat,qdhat);
+            icart->getDesired(xdhat,odhat,qdhat);
 
             double e_x=norm(xdhat-x);
             double e_o=norm(odhat-o);
