@@ -436,7 +436,46 @@ Bottle info;
 icart->getInfo(info);
 cout<<info.find("events").asList()->toString().c_str()<<endl;
 \endcode
-The special wildcard "*" can be used to assign a callback to any event, regardless of its type.
+
+The class <i>CartesianEvent</i> contains two structures: the <i>cartesianEventParameters</i> and the <i>cartesianEventVariables</i>.
+The former has to be filled by the user to set up the event details, whereas the latter is filled directly by the event handler in order
+to provide information to the callback. \n
+For instance, to raise a callback at the middle point of the path, one can do:
+\code
+class MotionMiddleEvent : public CartesianEvent
+{
+public:
+   MotionMiddleEvent()
+   {
+      cartesianEventParameters.type="motion-ongoing";
+      cartesianEventParameters.motionOngoingCheckPoint=0.5;   // middle point is 50% of the path
+   }
+
+   virtual void cartesianEventCallback()
+   {
+      cout<<"attained the "<<cartesianEventVariables.motionOngoingCheckPoint;
+      cout<<" of the path"<<endl;
+   }
+};
+\endcode
+
+The special wildcard "*" can be used to assign a callback to any event, regardless of its type, as done below.
+\code
+class GeneralEvent : public CartesianEvent
+{
+public:
+   GeneralEvent()
+   {
+      cartesianEventParameters.type="*";
+   }
+
+   virtual void cartesianEventCallback()
+   {
+      cout<<"event of type: "<<cartesianEventVariables.type.c_str()<<endl;
+      cout<<"happened at:   "<<cartesianEventVariables.time<< "[s] (source time)"<<endl;
+   }
+};
+\endcode
 
 
 \section sec_cart_siminterface The Simulator and the Cartesian Interface

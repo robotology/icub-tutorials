@@ -334,7 +334,46 @@ Bottle info;
 igaze->getInfo(info);
 cout<<info.find("events").asList()->toString().c_str()<<endl;
 \endcode
-The special wildcard "*" can be used to assign a callback to any event, regardless of its type.
+
+The class <i>GazeEvent</i> contains two structures: the <i>gazeEventParameters</i> and the <i>gazeEventVariables</i>.
+The former has to be filled by the user to set up the event details, whereas the latter is filled directly by the event handler in order
+to provide information to the callback. \n
+For instance, to raise a callback at the middle point of the path, one can do:
+\code
+class MotionMiddleEvent : public GazeEvent
+{
+public:
+   MotionMiddleEvent()
+   {
+      gazeEventParameters.type="motion-ongoing";
+      gazeEventParameters.motionOngoingCheckPoint=0.5;   // middle point is 50% of the path
+   }
+
+   virtual void cartesianEventCallback()
+   {
+      cout<<"attained the "<<gazeEventVariables.motionOngoingCheckPoint;
+      cout<<" of the path"<<endl;
+   }
+};
+\endcode
+
+The special wildcard "*" can be used to assign a callback to any event, regardless of its type, as done below.
+\code
+class GeneralEvent : public GazeEvent
+{
+public:
+   GeneralEvent()
+   {
+      gazeEventParameters.type="*";
+   }
+
+   virtual void gazeEventCallback()
+   {
+      cout<<"event of type: "<<gazeEventVariables.type.c_str()<<endl;
+      cout<<"happened at:   "<<gazeEventVariables.time<< "[s] (source time)"<<endl;
+   }
+};
+\endcode
 
 
 \section sec_gaze_siminterface The Simulator and the Gaze Interface
