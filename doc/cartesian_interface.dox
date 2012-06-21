@@ -453,8 +453,8 @@ public:
 
    virtual void cartesianEventCallback()
    {
-      cout<<"attained the "<<cartesianEventVariables.motionOngoingCheckPoint;
-      cout<<" of the path"<<endl;
+      cout<<"attained the "<<100.0*cartesianEventVariables.motionOngoingCheckPoint;
+      cout<<"% of the path"<<endl;
    }
 };
 \endcode

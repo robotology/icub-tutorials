@@ -351,8 +351,8 @@ public:
 
    virtual void gazeEventCallback()
    {
-      cout<<"attained the "<<gazeEventVariables.motionOngoingCheckPoint;
-      cout<<" of the path"<<endl;
+      cout<<"attained the "<<100.0*gazeEventVariables.motionOngoingCheckPoint;
+      cout<<"% of the path"<<endl;
    }
 };
 \endcode
