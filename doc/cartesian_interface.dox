@@ -373,7 +373,7 @@ int context_0;
 icart->storeContext(&context_0);        // latch the context
                                         
 icart->setDOF(newDof2,curDof2);         // at certain point the user may want the controller to
-icart->goToPose(x,o,t);                 // perform some actions with different configuration
+icart->goToPose(x,o);                   // perform some actions with different configuration
 ...
 
 icart->restoreContext(context_0);       // ... and then retrieve the stored context_0
