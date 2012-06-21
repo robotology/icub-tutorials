@@ -349,7 +349,7 @@ public:
       gazeEventParameters.motionOngoingCheckPoint=0.5;   // middle point is 50% of the path
    }
 
-   virtual void cartesianEventCallback()
+   virtual void gazeEventCallback()
    {
       cout<<"attained the "<<gazeEventVariables.motionOngoingCheckPoint;
       cout<<" of the path"<<endl;
