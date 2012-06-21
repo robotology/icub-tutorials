@@ -113,6 +113,11 @@ public:
         // send the request for dofs reconfiguration
         icart->setDOF(newDof,curDof);
 
+        // print out some info about the controller
+        Bottle info;
+        icart->getInfo(info);
+        fprintf(stdout,"info = %s\n",info.toString().c_str());
+
         // register the event, attaching the callback
         icart->registerEvent(*this);
 

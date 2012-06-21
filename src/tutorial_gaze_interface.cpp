@@ -130,6 +130,11 @@ public:
         // will compensate for it
         igaze->setTrackingMode(true);
 
+        // print out some info about the controller
+        Bottle info;
+        igaze->getInfo(info);
+        fprintf(stdout,"info = %s\n",info.toString().c_str());
+
         Property optTorso("(device remote_controlboard)");
         optTorso.put("remote","/icubSim/torso");
         optTorso.put("local","/torso_client");
