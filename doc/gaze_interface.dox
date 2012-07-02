@@ -124,8 +124,6 @@ location where to gaze at with respect to the root reference frame attached to t
 The following snippet of code shows how to command the gaze in the cartesian space and to retrieve the current configuration.
 
 \code
-#include <iCub/ctrl/ctrlMath.h>
-...
 Vector fp(3);
 fp[0]=-0.50;                                    // x-component [m]
 fp[1]=+0.00;                                    // y-component [m]
