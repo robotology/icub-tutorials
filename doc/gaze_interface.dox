@@ -271,6 +271,8 @@ igaze->setSaccadesStatus(true);
 \endcode
 After a saccade is executed, the next saccadic movement can be performed only after a given inhibition period of time, that in turn
 can be retrieved and/or tuned relying on specific methods (i.e. <i>get/setSaccadesInhibitionPeriod()</i>). \n
+The controller chooses to perform a saccade only if the angular distance of the target from the straight-ahead line overcomes a given
+threshold the user might profitable tune relying on dedicated methods (i.e. <i>get/setSaccadesActivationAngle()</i>). \n \n
 <i>Caveat</i>: vision processing algorithms that assume the continuity of the images flow might be heavily affected by saccades.
 
 
