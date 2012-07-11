@@ -346,7 +346,7 @@ public:
    MotionMiddleEvent()
    {
       gazeEventParameters.type="motion-ongoing";
-      gazeEventParameters.motionOngoingCheckPoint=0.5;   // middle point is 50% of the path
+      gazeEventParameters.motionOngoingCheckPoint=0.5;   // middle point is at 50% of the path
    }
 
    virtual void gazeEventCallback()

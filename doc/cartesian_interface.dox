@@ -448,7 +448,7 @@ public:
    MotionMiddleEvent()
    {
       cartesianEventParameters.type="motion-ongoing";
-      cartesianEventParameters.motionOngoingCheckPoint=0.5;   // middle point is 50% of the path
+      cartesianEventParameters.motionOngoingCheckPoint=0.5;   // middle point is at 50% of the path
    }
 
    virtual void cartesianEventCallback()
