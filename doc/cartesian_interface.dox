@@ -380,7 +380,9 @@ icart->restoreContext(context_0);       // ... and then retrieve the stored cont
 icart->goToPose(x,o);                   // now the controller performs the same action but within the context_0
 \endcode
 Unless the user needs the interface just for logging purposes, it's a good rule to store the context at the initialization of his module in order to
-then restore it at releasing time to preserve the controller configuration.
+then restore it at releasing time to preserve the controller configuration. \n
+Note that the special context tagged with the id 0 is reserved by the system to let the user restore the start-up configuration of the controller
+at any time.
 
 
 \section sec_cart_taskrefvel Task-Space Reference Velocity Command
