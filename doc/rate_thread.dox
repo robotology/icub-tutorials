@@ -121,7 +121,7 @@ void run()
 
       count++;
 
-	  //alternates two commands
+	  /* alternates two commands */
       if (count%2)
           commands=5;
       else
