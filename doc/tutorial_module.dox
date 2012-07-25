@@ -13,7 +13,7 @@ The RFModule helper class simplify writing an iCub module that uses the Resource
 
 This is how a module will look like:
 
-\code{.cpp}
+\code
 #include <iostream>
 #include <yarp/os/RFModule.h>
 #include <yarp/os/Module.h>
