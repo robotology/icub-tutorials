@@ -13,7 +13,7 @@ The RFModule helper class simplify writing an iCub module that uses the Resource
 
 This is how a module will look like:
 
-\code
+\code{.cpp}
 #include <iostream>
 #include <yarp/os/RFModule.h>
 #include <yarp/os/Module.h>
@@ -64,8 +64,8 @@ public:
     {
         count=0;
 	    /* optional, attach a port to the module
-        /* so that messages received from the port are redirected
-	    /* to the respond method
+           so that messages received from the port are redirected
+	       to the respond method */
         handlerPort.open("/myModule");
         attach(handlerPort);
 	    /* optional, attach to terminal if you want that text typed at the console

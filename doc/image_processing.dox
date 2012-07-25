@@ -36,16 +36,16 @@ and typing:
 
 In YARP, camera images are sent from one program to another using ports.  In C++, we can create a port for reading or writing images like this:
 
-\verbatim  
+\code{.cpp}  
 BufferedPort<ImageOf<PixelRgb> > port;
-\endverbatim
+\endcode
 
 This means "make a port with buffering for sending/receiving images in RGB format".
 
 Here's a basic program to get images repeatedly:
-\verbatim
+\code{.cpp}
   #include <stdio.h>
-  // Get all OS and signal processing YARP classes
+  /* Get all OS and signal processing YARP classes */
   #include <yarp/os/all.h>
   #include <yarp/sig/all.h>
   using namespace yarp::os;
@@ -54,7 +54,7 @@ Here's a basic program to get images repeatedly:
     Network yarp; // set up yarp
     BufferedPort<ImageOf<PixelRgb> > imagePort;  // make a port for reading images
     imagePort.open("/tutorial/image/in");  // give the port a name
-    while (1) { // repeat forever
+    while (1) { 
       ImageOf<PixelRgb> *image = imagePort.read();  // read an image
       if (image!=NULL) { // check we actually got something
          printf("We got an image of size %dx%d\n", image->width(), image->height());
@@ -62,7 +62,7 @@ Here's a basic program to get images repeatedly:
     }
     return 0;
   }
-\endverbatim
+\endcode
 
 You can compile this any way you like.  One quick way to do it is to go into the directory where 
 you saved this program (call it "find_location.cpp") and type:
@@ -95,7 +95,7 @@ you should now see messages like this:
 \endverbatim
 
 Now let's extend our program a bit, to pick up blueish objects (for example):
-\code
+\code{.cpp}
   #include <stdio.h>
   // Get all OS and signal processing YARP classes
   #include <yarp/os/all.h>
@@ -190,7 +190,7 @@ Now we can read from this port (just to test) with yarp read:
 \section sec_look_at Look at Location
 
 Now let's write a separate program that takes the target location computed in find_location.cpp and drives the real of simulated camera to look towards that location.  First, we need to read our vector:
-\code
+\code{.cpp}
   #include <stdio.h>
   #include <yarp/os/all.h>
   #include <yarp/sig/all.h>
@@ -257,13 +257,13 @@ if no target is visible.
 Now we need to drive the motors, using either of the methods Lorenzo demonstrated on Day 2.  We'll use 
 the "device" method.  For this, we need the YARP device classes, so we add another header file at 
 the start of our program:
-\code
+\code{.cpp}
   #include <yarp/dev/all.h>
   using namespace yarp::dev;
 \endcode
 
 We connect to the simulator head, as Lorenzo showed (this should go *before* the while loop):
-\code
+\code{.cpp}
     Property options;
     options.put("device", "remote_controlboard");
     options.put("local", "/tutorial/motor/client");
@@ -291,7 +291,7 @@ We connect to the simulator head, as Lorenzo showed (this should go *before* the
 \endcode
 
 Finally let's send a dumb command just to test:
-\code
+\code{.cpp}
     if (target!=NULL) {
       ...
       // prepare command
@@ -305,7 +305,7 @@ Finally let's send a dumb command just to test:
 \endcode
 
 The robot head should move to an extreme "diagonal" location.  This helps us figure out which signs for velocity move the robot's view in which direction.  Here's an actual working tracker:
-\code
+\code{.cpp}
  double x = (*target)[0];
  double y = (*target)[1];
  double conf = (*target)[2];
@@ -336,7 +336,7 @@ The simulated robot should now successfully center the blue ball on the table, o
 
 Complete code for finding the blue ball:
 
-\code
+\code{.cpp}
   #include <stdio.h>
   // Get all OS and signal processing YARP classes
   #include <yarp/os/all.h>
@@ -360,11 +360,11 @@ Complete code for finding the blue ball:
        for (int x=0; x<image->width(); x++) {
          for (int y=0; y<image->height(); y++) {
            PixelRgb& pixel = image->pixel(x,y);
-           // very simple test for blueishness
-           // make sure blue level exceeds red and green by a factor of 2
+           /* very simple test for blueishness */
+           /* make sure blue level exceeds red and green by a factor of 2 */
            if (pixel.b>pixel.r*1.2+10 && pixel.b>pixel.g*1.2+10) {
-            // there's a blueish pixel at (x,y)!
-            // let's find the average location of these pixels
+            /* there's a blueish pixel at (x,y)! */
+            /* let's find the average location of these pixels */
             xMean += x;
             yMean += y;
             ct++;
@@ -400,7 +400,7 @@ Complete code for finding the blue ball:
 
 Complete look_at_location.cpp:
 
-\code
+\code{.cpp}
  #include <stdio.h>
  #include <yarp/os/all.h>
  #include <yarp/sig/all.h>
@@ -458,7 +458,7 @@ Complete look_at_location.cpp:
         double vx = x*0.1;
         double vy = -y*0.1;
  
-        // prepare command
+        /* prepare command */
         for (int i=0; i<jnts; i++) {
           setpoints[i] = 0;
         }

@@ -44,7 +44,7 @@ commands. This thread will control for example the head of the robot. We need a 
 the robot device (see \ref icub_motor_control_tutorial), and an instance of IEncoders and 
 IVelocityControl. 
 
-\code
+\code{.cpp}
     PolyDriver dd;
     IVelocityControl *ivel;
     IEncoders        *iencs;
@@ -53,7 +53,7 @@ IVelocityControl.
 We also prepare two vectors of to store the encoders and one to store the commands we will send 
 to the controller. A counter will allow us to alternate between two commands.
 
-\code
+\code{.cpp}
     Vector encoders;
     Vector commands;
     int count;
@@ -62,17 +62,17 @@ to the controller. A counter will allow us to alternate between two commands.
 Now we can implement the bool threadInit() function. First we will create an instance of the 
 polydriver and configure it to connect to the head.
 
-\code
+\code{.cpp}
 bool threadInit()
 {
-	  //initialize here variables
+	  /* initialize here variables */
       printf("ControlThread:starting\n");
         
       Property options;
       options.put("device", "remote_controlboard");
       options.put("local", "/local/head");
         
-      //substitute icubSim with icub for use with the real robot
+      /* substitute icubSim with icub for use with the real robot */
       options.put("remote", "/icubSim/head");
         
       dd.open(options);
@@ -81,7 +81,7 @@ bool threadInit()
 at this point we have to check that the device is valid and really offers the interfaces we 
 need:
 
-\code
+\code{.cpp}
       dd.view(iencs);
       dd.view(ivel);
 
@@ -89,13 +89,12 @@ need:
           return false;
 \endcode
 
-Notice: it is important to return false if something does not go as expected in the initialization.
-This will prevent the thread from running.
+Note: it is important to return false if something does not go as expected in the initialization. This will prevent the thread from running.
 
 Now we can get the number of joints, resize the vectors and initialize the acceleration of the 
 motors:
    
-\code
+\code{.cpp}
       int joints;
    
       iencs->getAxes(&joints);
@@ -108,16 +107,16 @@ motors:
       ivel->setRefAccelerations(commands.data());
       count=0;
       return true;
-}
+} /* the function threadInit() finishes here */
 \endcode
 
 It is now time to implement the run function. This function is the thread's body, and perform 
 the real control task:
 
-\code
+\code{.cpp}
 void run()
 {
-      //reads encoders
+      /* reads encoders */
       iencs->getEncoders(encoders.data());
 
       count++;
@@ -130,8 +129,7 @@ void run()
     
       ivel->velocityMove(commands.data());
 
-	//print something at each iteration so we see when the
-	//thread runs
+	/* print something at each iteration so we see when the thread runs */
 	printf(".");
 }
 \endcode
@@ -139,8 +137,8 @@ void run()
 When the thread will quit we have to make sure that we stop the head and release used resources. 
 We put this code in threadRelease():
 
-\code
- void threadRelease()
+\code{.cpp}
+void threadRelease()
 {
       printf("ControlThread:stopping the robot\n");
         
@@ -170,7 +168,7 @@ thread executes run() periodically. In the meanwhile the main thread can perform
 operations. In this example we do not do anything smarter than just sitting idle for
 10 seconds:
 
-\code
+\code{.cpp}
     bool done=false;
     double startTime=Time::now();
     const int SOME_TIME=10;
