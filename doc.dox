@@ -3,6 +3,7 @@
 /**
 @page icub_tutorials Tutorials
 
+\section sec_cpp C++ tutorials
 - \ref icub_hello_icub - how to write the very first program
 - \ref icub_motor_control_tutorial - a tutorial on how to use the motor interfaces
 - \ref icub_impedance_control_tutorial - a tutorial on how to use the joint level torque/impedance interface
@@ -17,7 +18,9 @@
 - \ref idyn_introduction - a short introduction to the iDyn library
 - \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using iDyn library
 
+\section sec_python Python Tutorials
 - \ref icub_python_basic_motor - a tutorial on how to use the motor interfaces in Python
+
 * This file can be edited at tutorials/doc.dox
 *
 **/
