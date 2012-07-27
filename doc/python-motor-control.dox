@@ -6,7 +6,7 @@ The goal of this tutorial is to show how to use Python to interface with the iCu
 
 We start by showing how to use joint level motor control interfaces.
 
-\section Joint level motor control
+\section sec_python-ll Joint level motor control
 
 For this tutorial we only need the yarp python bindings.
 
@@ -56,6 +56,7 @@ We are now ready to retrive the number of joints, create vectors to store the po
   #initialize a new tmp vector identical to encs
   tmp=yarp.Vector(jnts)
 
+  # add 10 degrees to the first four joints
   tmp.set(0, tmp.get(0)+10)
   tmp.set(1, tmp.get(1)+10)
   tmp.set(2, tmp.get(2)+10)
@@ -71,8 +72,8 @@ Now wait some time and go back to home position with the command:
   iPos.positionMove(home.data())
 \endcode
 
-This file can be edited at tutorials/doc/python-motor-control.dox
-
 Code can be found at tutorials/python/python-motor-control.py
+
+This file can be edited at tutorials/doc/python-motor-control.dox
 
 **/
