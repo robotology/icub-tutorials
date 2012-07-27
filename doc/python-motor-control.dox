@@ -2,9 +2,9 @@
 @page icub_python_basic_motor Using Motor Control Interfaces in Python
 
 \section sec_goal Goal
-The goal of this tutorial is to show how to use Python to interface with the iCub. 
+This tutorial shows how to use Python to interface with the iCub. In particular we focus on controlling the motors using the motor control interfaces. We assume that you have already compiled or installed the Python bingings. This tutorial assume basic knowledge of how YARP works in C++. We just show how the robot C++ interface can be used in Python.
 
-We start by showing how to use joint level motor control interfaces. We assume that you have already compiled or installed the Python bingings.
+Dislaimer: this code does not do anything fancy with the robot. We let you have fun with the robot and Python once you know how the interface works.
 
 \section sec_python-ll Joint level motor control
 
