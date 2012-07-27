@@ -113,8 +113,8 @@ Let's create some vectors for later use:
 Let's now initialize the controllers and start up the amplifiers:
 
 \code
-    // we need to set reference accelerations used to generate the velocity
-    // profile, here 50 degrees/sec^2
+    /* we need to set reference accelerations used to generate the velocity */
+    /* profile, here 50 degrees/sec^2 */
     int i;
     for (i = 0; i < jnts; i++) {
         tmp[i] = 50.0;
@@ -173,7 +173,7 @@ When you are done with controlling the robot don't forget to close the device:
 Typically before moving the robot you have to enable the amplifiers and start the pids controllers:
 
 \code
-    // enable the amplifier and the pid controller on each joint
+    /* enable the amplifier and the pid controller on each joint */
     for (i = 0; i < jnts; i++) {
         amp->enableAmp(i);
         pid->enablePid(i);
