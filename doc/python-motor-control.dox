@@ -10,7 +10,7 @@ Dislaimer: this code does not do anything fancy with the robot. We let you have 
 
 For this tutorial we only need the yarp python bindings.
 
-Firt initialize yarp.
+First initialize yarp.
 
 \code 
  import yarp;
@@ -62,11 +62,12 @@ We are now ready to retrive the number of joints, create vectors to store the po
   tmp.set(2, tmp.get(2)+10)
   tmp.set(3, tmp.get(3)+10)
 
+  # move to new position
   iPos.positionMove(tmp.data())
 
 \endcode
 
-Now wait some time and go back to home position with the command:
+Now wait some time and go back to home position:
 
 \code
   iPos.positionMove(home.data())
