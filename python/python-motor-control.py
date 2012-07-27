@@ -1,3 +1,15 @@
+/**
+ * @ingroup icub_tutorials
+ *
+ * \defgroup icub_python_motor_interfaces Using motor interfaces with Python
+ *
+ * Shows how to control the robot using motor interfaces within Python.
+ *
+ * \author Lorenzo Natale
+ * 
+ * CopyPolicy: Released under the terms of GPL 2.0 or later
+ */ 
+
 import yarp;
 yarp.Network.init();
 
