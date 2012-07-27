@@ -1,0 +1,78 @@
+/**
+@page icub_python_basic_motor Using Motor Control Interfaces in Python
+
+\section sec_goal Goal
+The goal of this tutorial is to show how to use Python to interface with the iCub. 
+
+We start by showing how to use joint level motor control interfaces.
+
+\section Joint level motor control
+
+For this tutorial we only need the yarp python bindings.
+
+Firt initialize yarp.
+
+\code 
+ import yarp;
+ yarp.Network.init();
+\endcode
+
+We know initialize a remote_controlboard object connected to the right_arm.
+
+\code 
+ # prepare a property object
+ props = yarp.Property()
+ props.put("device","remote_controlboard")
+ props.put("local","/client/right_arm")
+ props.put("remote","/icubSim/right_arm")
+ 
+ # create remote driver
+ armDriver = yarp.PolyDriver(props)
+\endcode
+
+Now we can query the motor interfaces.
+
+\code
+ #query motor control interfaces
+ iPos = armDriver.viewIPositionControl()
+ iEnc = armDriver.viewIEncoders()
+\endcode
+
+We are now ready to retrive the number of joints, create vectors to store the position commands and move the arm.
+
+\code
+  #retrieve number of joints
+  jnts=iPos.getAxes()
+
+  print 'Controlling', jnts, 'joints'
+
+  # read encoders
+  encs=yarp.Vector(jnts)
+  iEnc.getEncoders(encs.data())
+ 
+  # store as home position
+  home=yarp.Vector(jnts, encs.data())
+
+  #initialize a new tmp vector identical to encs
+  tmp=yarp.Vector(jnts)
+
+  tmp.set(0, tmp.get(0)+10)
+  tmp.set(1, tmp.get(1)+10)
+  tmp.set(2, tmp.get(2)+10)
+  tmp.set(3, tmp.get(3)+10)
+
+  iPos.positionMove(tmp.data())
+
+\endcode
+
+Now wait some time and go back to home position with the command:
+
+\code
+  iPos.positionMove(home.data())
+\endcode
+
+This file can be edited at tutorials/doc/python-motor-control.dox
+
+Code can be found at tutorials/python/python-motor-control.py
+
+**/

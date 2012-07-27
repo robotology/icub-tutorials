@@ -17,6 +17,7 @@
 - \ref idyn_introduction - a short introduction to the iDyn library
 - \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using iDyn library
 
+- \ref icub_python_basic_motor - a tutorial on how to use the motor interfaces in Python
 * This file can be edited at tutorials/doc.dox
 *
 **/
