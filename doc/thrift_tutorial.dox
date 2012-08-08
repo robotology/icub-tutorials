@@ -154,7 +154,7 @@ service Demo {
 
 \endcode
 
-A method definition has a return type and arguments, like C code. Note that argument lists are specified using the exact same syntax as field lists in structs.
+A method definition has a return type and arguments, like C code. Note that argument lists are specified using the exact same syntax as field lists in structs. Return types can be primitive types or structs; the  \c oneway modifier can precede a \c void return type to indicate that the client only makes a request and does not wait for any response at all. 
 
 Services support inheritance: a service may optionally inherit from another service using the \c extends keyword.
 
