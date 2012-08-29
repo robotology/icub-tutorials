@@ -1,2 +1,0 @@
-set(headers include/firstInterface/PointQuality.h;include/firstInterface/PointD.h;include/firstInterface/PointDLists.h;include/firstInterface/PointWithQuality.h)
-set(sources src/firstInterface/PointQuality.cpp)
