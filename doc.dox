@@ -23,6 +23,7 @@
 These tutorials assume you installed the YARP and iCub bindings for Python. Follow installation instructions reported in the manual at <a href="http://eris.liralab.it/wiki/Interoperability_with_other_languages_and_middleware">Interoperability with other languages and middleware</a>.
 
 - \ref icub_python_basic_motor - a tutorial on how to use the motor interfaces in Python
+- \ref icub_python_simworld_control - a tutorial on how to control the iCub simulator from Python via its RPC interface
 
 * This file can be edited at tutorials/doc.dox
 *
