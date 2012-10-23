@@ -25,7 +25,9 @@ Essentially the interface exports all the functionalities given by the \ref iKin
 code without having to be concerned with the communication protocol done via YARP ports. Thus, the user is warmly invited
 to visit the iKinGazeCtrl \ref iKinGazeCtrl "page" where more detailed descriptions can be found.
 
-\note <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>.
+\note <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>: U. Pattacini,
+"Modular Cartesian Controllers for Humanoid Robots: Design and Implementation on the iCub," <i>Ph.D. dissertation</i>, RBCS,
+Istituto Italiano di Tecnologia, Genova, 2010.
 
 
 \section sec_gaze_dependencies Dependencies
