@@ -362,5 +362,7 @@ You are warmly encouraged to add up below your case study on the use of Cartesia
   <a href="http://mediawiki.isr.ist.utl.pt/wiki/Vizzy_Cartesian_Interface">here</a>.
 - Juan G. Victores managed to replicate the Cartesian Interface functionalities for Asibot whose server part is documented
   <a href="http://roboticslab.sourceforge.net/asibot/group__cartesianServer.html">here</a>.
+- Elena Ceseracciu customized the Cartesian Solver for the ARMAR III robot. Relevant info can be browsed
+  <a href="http://eris.liralab.it/xperience/dox/html/group__ArmarIIICartesianSolver.html">here</a>.
 */
 
