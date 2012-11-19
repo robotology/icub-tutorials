@@ -84,7 +84,7 @@ In order to use the iDyn library, make sure that the following steps are done: \
 -# Compile YARP and iCub (always a good practice).
 -# Try first the tutorial examples, located in 
 \code
-iCub/main/src/libraries/iDyn/tutorials/
+iCub/tutorials/iDyn
 \endcode
 
 iDyn depends only on YARP and iKin. In order to include iDyn and use it in your software, make sure you include the following line in the <i>CMakeLists.txt</i>:
@@ -145,7 +145,7 @@ A more detailed description of the library, along with tutorial slides, is avail
 
 Some working examples are available under
 \code
-iCub/main/src/libraries/iDyn/tutorials/
+iCub/tutorials/iDyn
 \endcode
 
 The detailed code documentation is available \ref iDyn "here".
