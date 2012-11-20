@@ -47,6 +47,11 @@ TARGET_LINK_LIBRARIES(tutorial_module ${YARP_LIBRARIES})
 TARGET_LINK_LIBRARIES(tutorial_cartesian_interface ${YARP_LIBRARIES} icubmod)
 TARGET_LINK_LIBRARIES(tutorial_gaze_interface ${YARP_LIBRARIES} icubmod)
 
+# go by subdirectories
+add_subdirectory(iKin)
+add_subdirectory(iDyn)
+add_subdirectory(ctrlLib)
+add_subdirectory(optimization)
 
 ## again this is for testing only, please ignore if you are reading tutorials
 ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
