@@ -1,14 +1,16 @@
-/*
- * Copyright (C) 2008 RobotCub Consortium
- * Author: Ugo Pattacini
- * CopyPolicy: Released under the terms of the GNU GPL v2.0.
+/**
+ * @ingroup icub_tutorials
  *
- */
-
-//
-// A tutorial on how to use iKin library for forward/inverse kinematics.
-//
-// Author: Ugo Pattacini - <ugo.pattacini@iit.it>
+ * \defgroup icub_fwInvKinematics Forward/Inverse Kinematics 
+ *           Example
+ *
+ * A tutorial on how to use iKin library for forward/inverse 
+ * kinematics. 
+ *
+ * \author Ugo Pattacini
+ * 
+ * CopyPolicy: Released under the terms of GPL 2.0 or later
+ */ 
 
 #include <iostream>
 #include <iomanip>

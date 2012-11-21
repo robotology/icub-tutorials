@@ -1,23 +1,25 @@
-/*
- * Copyright (C) 2008 RobotCub Consortium
- * Author: Ugo Pattacini
- * CopyPolicy: Released under the terms of the GNU GPL v2.0.
+/**
+ * @ingroup icub_tutorials
  *
- */
-
-//
-// A tutorial on how to control a generic serial kinematic chain
-// relying only on yarp ports
-// 
-// Open ports:
-// 
-// -) /ctrl/q:i    receive the joints angles feedback [deg] from the robot
-// -) /ctrl/xd:i   receive the target pose in axis-angle format ([x y z ax ay az theta]) from the user
-// -) /ctrl/qd:i   output the joints configuration where to move (as result of the inverse kinematics)
-// -) /ctrl/v:o    output the velocity profiles that steer the joints to the final configuration [deg/s] (to be connected to the robot)
-// -) /ctrl/x:o    output the current end-effector position in axis-angle format
-//
-// Author: Ugo Pattacini - <ugo.pattacini@iit.it>
+ * \defgroup icub_genericChainController Controller for a 
+ *           Generic Kinematic Chain
+ *
+ * A tutorial on how to control a generic serial kinematic 
+ * chain relying only on yarp ports. 
+ *  
+ * Open ports:
+ * 
+ * -) /ctrl/q:i    receive the joints angles feedback [deg] from the robot
+ * -) /ctrl/xd:i   receive the target pose in axis-angle format ([x y z ax ay az theta]) from the user
+ * -) /ctrl/qd:i   output the joints configuration where to move (as result of the inverse kinematics)
+ * -) /ctrl/v:o    output the velocity profiles that steer the joints to the final configuration [deg/s] (to be connected to the robot)
+ * -) /ctrl/x:o    output the current end-effector position in axis-angle format
+ *
+ *
+ * \author Ugo Pattacini
+ * 
+ * CopyPolicy: Released under the terms of GPL 2.0 or later
+ */ 
 
 #include <yarp/os/Network.h>
 #include <yarp/os/Semaphore.h>

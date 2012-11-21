@@ -1,15 +1,17 @@
-/*
- * Copyright: (C) 2012 Department of Robotics Brain and Cognitive Sciences - Istituto Italiano di Tecnologia
- * Author: Ugo Pattacini
- * CopyPolicy: Released under the terms of the GNU GPL v2.0.
+/**
+ * @ingroup icub_tutorials
  *
- */
-
-//
-// A tutorial on how to use the calibration procedure to find out
-// the roto-translation matrix of two sets of matching 3D points.
-//
-// Author: Ugo Pattacini - <ugo.pattacini@iit.it>
+ * \defgroup icub_calibReference Calibration of Reference 
+ *           Frames
+ *
+ * A tutorial on how to use the calibration procedure to find 
+ * out the roto-translation matrix of two sets of matching 3D 
+ * points. 
+ *
+ * \author Ugo Pattacini
+ * 
+ * CopyPolicy: Released under the terms of GPL 2.0 or later
+ */ 
 
 #include <iostream>
 #include <iomanip>

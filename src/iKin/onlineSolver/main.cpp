@@ -1,14 +1,14 @@
-/*
- * Copyright (C) 2008 RobotCub Consortium
- * Author: Ugo Pattacini
- * CopyPolicy: Released under the terms of the GNU GPL v2.0.
+/**
+ * @ingroup icub_tutorials
  *
- */
-
-//
-// A tutorial on how to use the iKin on-line solver.
-//
-// Author: Ugo Pattacini - <ugo.pattacini@iit.it>
+ * \defgroup icub_onlineSolver Example for iKin online Solver
+ *
+ * A tutorial on how to use the iKin online solver.
+ *  
+ * \author Ugo Pattacini
+ * 
+ * CopyPolicy: Released under the terms of GPL 2.0 or later
+ */ 
 
 #include <yarp/os/Network.h>
 #include <yarp/os/Port.h>

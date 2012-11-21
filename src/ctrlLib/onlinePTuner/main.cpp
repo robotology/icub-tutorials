@@ -1,14 +1,15 @@
-/*
- * Copyright (C) 2012 Department of Robotics Brain and Cognitive Sciences - Istituto Italiano di Tecnologia
- * Author: Ugo Pattacini
- * CopyPolicy: Released under the terms of the GNU GPL v2.0.
+/**
+ * @ingroup icub_tutorials
  *
- */
-
-//
-// A tutorial on how to use ctrlLib library for online tuning of low-level P controllers.
-//
-// Author: Ugo Pattacini - <ugo.pattacini@iit.it>
+ * \defgroup icub_onlinePTuner Online Tuning of P Controller
+ *
+ * A tutorial on how to use ctrlLib library for online tuning of 
+ * low-level P controllers. 
+ *
+ * \author Ugo Pattacini
+ * 
+ * CopyPolicy: Released under the terms of GPL 2.0 or later
+ */ 
 
 #include <stdio.h>
 #include <math.h>
