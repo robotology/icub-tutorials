@@ -48,8 +48,6 @@ TARGET_LINK_LIBRARIES(tutorial_cartesian_interface ${YARP_LIBRARIES} icubmod)
 TARGET_LINK_LIBRARIES(tutorial_gaze_interface ${YARP_LIBRARIES} icubmod)
 
 # go by subdirectories
-add_subdirectory(iKin)
-
 #removing until fixed
 # add_subdirectory(iDyn)
 
@@ -72,6 +70,9 @@ IF(ICUB_USE_IPOPT)
 
     GET_TARGET_PROPERTY(EXELOC test_ipopt LOCATION_RELEASE)
     ADD_TEST(test_ipopt ${EXELOC})
+    
+    add_subdirectory(iKin)
+
 ENDIF()
 
 ###################### end of test specific code
