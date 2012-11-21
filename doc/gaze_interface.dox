@@ -36,7 +36,7 @@ In order to use the Gaze Interface, make sure that the following steps are done:
 
 -# Update YARP and iCub repositories.
 -# Compile YARP (always a good practice).
--# Install <a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a>.
+-# Install <a href="http://wiki.icub.org/wiki/Installing_IPOPT">Ipopt</a>.
 -# Compile the iCub repository with the switch <b>ENABLE_icubmod_gazecontrollerclient</b> enabled: this will make
    the client part of the interface available. The server part is represented by the module \ref iKinGazeCtrl itself.
 
@@ -115,12 +115,12 @@ clientGazeCtrl.close();
 
 \section sec_gaze_useinterface Using the Gaze Interface
 
-The YARP Gaze Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/classyarp_1_1dev_1_1IGazeControl.html">here</a>.
+The YARP Gaze Interface is fully documented <a href="http://wiki.icub.org/yarpdoc/classyarp_1_1dev_1_1IGazeControl.html">here</a>.
 It makes use of three different coordinate systems that enable the user to control the robot's gaze as detailed hereafter.
 
 \subsection subsec_gaze_cartcoorsystem Expressing the fixation point in Cartesian Coordinates
 This coordinate system is the same as the one the \ref icub_cartesian_interface "Cartesian Interface" relies on and complies with the
-<a href="http://eris.liralab.it/wiki/ICubForwardKinematics">wiki</a> specifications; it lets the user to give the target
+<a href="http://wiki.icub.org/wiki/ICubForwardKinematics">wiki</a> specifications; it lets the user to give the target
 location where to gaze at with respect to the root reference frame attached to the robot's waist.
 
 The following snippet of code shows how to command the gaze in the cartesian space and to retrieve the current configuration.

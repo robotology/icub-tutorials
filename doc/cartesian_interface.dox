@@ -36,7 +36,7 @@ Alternatively, the client can act as a pure wrapper over the solver coping with 
 meeting some specific requirements. However, also in this configuration, the server part needs to be launched (even if not employed) as a gateway to let the client
 communicate with the solver.
 
-\note A paper that describes how the controller works can be downloaded <a href="http://eris.liralab.it/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
+\note A paper that describes how the controller works can be downloaded <a href="http://wiki.icub.org/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
 <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>: U. Pattacini, F. Nori, L. Natale, G. Metta, G. Sandini,
 "An Experimental Evaluation of a Novel Minimum-Jerk Cartesian Controller for Humanoid Robots", <i>IEEE/RSJ International Conference on Intelligent Robots and Systems</i>,
 Taipei, Taiwan, 2010.
@@ -50,7 +50,7 @@ indicates the hub board mounted on the robot]
 
 -# Update YARP and iCub repositories.
 -# Compile YARP (always a good practice).
--# Install <a href="http://eris.liralab.it/wiki/Installing_IPOPT">Ipopt</a> on the cluster.
+-# Install <a href="http://wiki.icub.org/wiki/Installing_IPOPT">Ipopt</a> on the cluster.
 -# On the cluster: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled. This will make
    the client part of the interface available.
 -# On PC104: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled. This will make the
@@ -156,7 +156,7 @@ Central for a correct usage of the cartesian controller is the knowledge of the 
 that shall be adopted to describe any desired limb pose.
 
 Positions (in meters) and orientation refer to the root frame attached to the waist as in the
-<a href="http://eris.liralab.it/wiki/ICubForwardKinematics">wiki</a> page. \n
+<a href="http://wiki.icub.org/wiki/ICubForwardKinematics">wiki</a> page. \n
 The root <b>x-axis</b> points backward, the <b>y-axis</b> points rightward, while the <b>z-axis</b> points upward.
  
 To specify a target orientation of the end-effector, you have to provide three components for the rotation
@@ -191,7 +191,7 @@ The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]
 
 \section sec_cart_useinterface Using the Cartesian Interface
 
-The YARP Cartesian Interface is fully documented <a href="http://eris.liralab.it/yarpdoc/classyarp_1_1dev_1_1ICartesianControl.html">here</a>.
+The YARP Cartesian Interface is fully documented <a href="http://wiki.icub.org/yarpdoc/classyarp_1_1dev_1_1ICartesianControl.html">here</a>.
 Moreover, some examples are also reported hereafter to gain a deeper insight into the cartesian device.
 
 Imagine that we want to get the actual arm pose from within our code. What we have to write is just:

@@ -199,7 +199,7 @@ be responsible for turning off the robot so you '''don't''' have to bother with 
 \section sec_more_interfaces More interfaces
 
 To read more about the interfaces that are available in YARP read the online documentation:
-[http://eris.liralab.it/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html documentation on interfaces].
+[http://wiki.icub.org/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html documentation on interfaces].
 
 \section sec_notes Notes on the local device
 The CanMotionControl class in ICUB_ROOT/src/modules is an example of a local device driver. 

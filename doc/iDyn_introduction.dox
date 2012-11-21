@@ -141,7 +141,7 @@ iDyn provides Newton-Euler recursive algorithm computations for the classical ca
 
 \section sec_more_info More about iDyn
 
-A more detailed description of the library, along with tutorial slides, is available in the <a href="http://eris.liralab.it/wiki/iDyn">wiki page on iDyn</a>.
+A more detailed description of the library, along with tutorial slides, is available in the <a href="http://wiki.icub.org/wiki/iDyn">wiki page on iDyn</a>.
 
 Some working examples are available under
 \code
