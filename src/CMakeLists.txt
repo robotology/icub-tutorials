@@ -49,7 +49,10 @@ TARGET_LINK_LIBRARIES(tutorial_gaze_interface ${YARP_LIBRARIES} icubmod)
 
 # go by subdirectories
 add_subdirectory(iKin)
-add_subdirectory(iDyn)
+
+#removing until fixed
+# add_subdirectory(iDyn)
+
 add_subdirectory(ctrlLib)
 add_subdirectory(optimization)
 
