@@ -52,7 +52,6 @@ TARGET_LINK_LIBRARIES(tutorial_gaze_interface ${YARP_LIBRARIES} icubmod)
 # add_subdirectory(iDyn)
 
 add_subdirectory(ctrlLib)
-add_subdirectory(optimization)
 
 ## again this is for testing only, please ignore if you are reading tutorials
 ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
@@ -72,7 +71,7 @@ IF(ICUB_USE_IPOPT)
     ADD_TEST(test_ipopt ${EXELOC})
     
     add_subdirectory(iKin)
-
+    add_subdirectory(optimization)
 ENDIF()
 
 ###################### end of test specific code
