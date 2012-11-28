@@ -15,7 +15,16 @@
 - \ref icub_cartesian_interface - a tutorial on how to control a robot's limb in the operational space
 - \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface 
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a Yarp interface
-- <a href="http://wiki.icub.org/iCub/main/dox/html/tutorials_2src_2ctrlLib_2onlinePTuner_2main_8cpp_source.html">Online Tuning</a> - a tutorial on online tuning o a P controller
+
+\section sec_lib_tutorials Libraries based Tutorials
+
+These tutorials demonstrate the use of components provided from within libraries
+
+- <a href="http://wiki.icub.org/iCub/main/dox/html/tutorials_2src_2ctrlLib_2onlinePTuner_2main_8cpp_source.html">Online Tuning</a> - a tutorial on online tuning of a P controller
+- <a href="http://wiki.icub.org/iCub/main/dox/html/tutorials_2src_2optimization_2calibReference_2main_8cpp_source.html">Calibration of Reference Frames</a> - a tutorial on how to calibrate two reference frames from a cloud of matching points
+- <a href="http://wiki.icub.org/iCub/main/dox/html/tutorials_2src_2iKin_2fwInvKinematics_2main_8cpp_source.html">Forward/Inverse Kinematics</a> - a tutorial on how to use directly iKin for coping to forward/inverse kinematics
+- <a href="http://wiki.icub.org/iCub/main/dox/html/tutorials_2src_2iKin_2onlineSolver_2main_8cpp_source.html">Kinematic Solver</a> - a tutorial on how to solve online inverse kinematics of a generic kinematic chain
+- <a href="http://wiki.icub.org/iCub/main/dox/html/tutorials_2src_2iKin_2genericChainController_2main_8cpp_source.html">Kinematic Controller</a> - a tutorial on how to control a generic kinematic chain
 - \ref idyn_introduction - a short introduction to the iDyn library
 - \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using iDyn library
 
