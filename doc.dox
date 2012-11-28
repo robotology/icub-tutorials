@@ -22,11 +22,11 @@ These tutorials demonstrate the use of components provided from within libraries
 
 - tutorials/src/ctrlLib/onlinePTuner/main.cpp - a tutorial on online tuning of a P controller
 - tutorials/src/optimization/calibReference/main.cpp - a tutorial on how to calibrate two reference frames from a cloud of matching points
-- tutorials/src/iKin/fwInvKinematics/main.cpp - a tutorial on how to use \ref iKin directly for coping to forward/inverse kinematics
+- tutorials/src/iKin/fwInvKinematics/main.cpp - a tutorial on how to directly use \ref iKin to cope with forward/inverse kinematics problems
 - tutorials/src/iKin/onlineSolver/main.cpp - a tutorial on how to solve online inverse kinematics of a generic robot limb
 - tutorials/src/iKin/genericChainController/main.cpp - a tutorial on how to control a generic kinematic chain
-- \ref idyn_introduction - a short introduction to the iDyn library
-- \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using iDyn library
+- \ref idyn_introduction - a short introduction to the \ref iDyn library
+- \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using \ref iDyn library
 
 \section sec_python Python Tutorials
 
