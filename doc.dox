@@ -3,7 +3,7 @@
 /**
 @page icub_tutorials Tutorials
 
-\section sec_cpp C++ tutorials
+\section sec_cpp C++ Tutorials
 - \ref icub_hello_icub - how to write the very first program
 - \ref icub_motor_control_tutorial - a tutorial on how to use the motor interfaces
 - \ref icub_impedance_control_tutorial - a tutorial on how to use the joint level torque/impedance interface
@@ -16,7 +16,7 @@
 - \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface 
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a Yarp interface
 
-\section sec_lib_tutorials C++ Libraries based Tutorials
+\section sec_lib_tutorials C++ Libraries-based Tutorials
 
 These tutorials demonstrate the use of components provided from within libraries.
 
