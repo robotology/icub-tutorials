@@ -15,6 +15,7 @@
 - \ref icub_cartesian_interface - a tutorial on how to control a robot's limb in the operational space
 - \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface 
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a Yarp interface
+- <a href="http://wiki.icub.org/iCub/main/dox/html/tutorials_2src_2ctrlLib_2onlinePTuner_2main_8cpp_source.html">Online Tuning</a> - a tutorial on online tuning o a P controller
 - \ref idyn_introduction - a short introduction to the iDyn library
 - \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using iDyn library
 
