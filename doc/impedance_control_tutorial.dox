@@ -24,8 +24,7 @@ The example is based on the previous tutorial:
 
 The example shows how to open the ITorqueControl to show the arm joint torques and how to change the control mode of the elbow joint from position to impedance control. 
 
-A detailed reference of the yarp interfaces used in this tutorial(IControlMode,ITorqueControl,IImpedanceControl) can be found at:
-http://wiki.icub.org/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html
+A detailed reference of the yarp interfaces used in this tutorial (IControlMode, ITorqueControl, IImpedanceControl) can be found <a href="http://wiki.icub.org/yarpdoc/namespaceyarp_1_1dev.html">here</a>.
 
 \section sec_initialization Initialization
 
@@ -204,8 +203,7 @@ When you are done with controlling the robot don't forget to close the device:
 
 \section sec_more_interfaces More interfaces
 
-To read more about the interfaces that are available in YARP read the online documentation:
-http://wiki.icub.org/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html
+To read more about the interfaces that are available in YARP read the <a href="http://wiki.icub.org/yarpdoc/namespaceyarp_1_1dev.html">online documentation</a>.
 
 \section sec_code Code
 
