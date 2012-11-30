@@ -5,7 +5,7 @@
 
 \section sec_cpp C++ Tutorials
 
-A list of main tutorials ranging from very basic purposes to high-level functionalities.
+A list of tutorials from basic to high-level functionalities.
 
 - \ref icub_hello_icub - how to write the very first program
 - \ref icub_motor_control_tutorial - a tutorial on how to use the motor interfaces
@@ -19,7 +19,7 @@ A list of main tutorials ranging from very basic purposes to high-level function
 - \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface 
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a Yarp interface
 
-\section sec_lib_cpp C++ Libraries-based Tutorials
+\section sec_lib_cpp C++ Tutorials related to specific libraries
 
 These tutorials demonstrate the use of components provided from within iCub libraries.
 

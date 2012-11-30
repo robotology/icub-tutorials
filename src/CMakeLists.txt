@@ -14,17 +14,16 @@ INCLUDE(iCubHelpers)
 INCLUDE_DIRECTORIES(${ICUB_INCLUDE_DIRS}
                     ${YARP_INCLUDE_DIRS})
 
-## this is for testing only, please ignore if you are reading tutorials				
+## this is for testing only, please ignore if you are reading tutorials	
 INCLUDE(CTest)
 ### end test specific code
-
-SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${ICUB_LINK_FLAGS}")					
 
 # go by subdirectories
 add_subdirectory(imageProcessing)
 add_subdirectory(resourceFinder)
 add_subdirectory(module)
-add_subdirectory(advancedMotorControl)
+add_subdirectory(motorControlBasic)
+add_subdirectory(motorControlAdvanced)
 add_subdirectory(rateThread)
 add_subdirectory(iDyn)
 add_subdirectory(ctrlLib)
