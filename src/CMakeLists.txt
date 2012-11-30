@@ -48,8 +48,7 @@ TARGET_LINK_LIBRARIES(tutorial_cartesian_interface ${YARP_LIBRARIES} icubmod)
 TARGET_LINK_LIBRARIES(tutorial_gaze_interface ${YARP_LIBRARIES} icubmod)
 
 # go by subdirectories
-#removing until fixed
-# add_subdirectory(iDyn)
+add_subdirectory(iDyn)
 
 add_subdirectory(ctrlLib)
 
