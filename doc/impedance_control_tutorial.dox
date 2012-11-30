@@ -12,8 +12,7 @@ yarp::dev::IImpedanceControl
 
 
 \section sec_intro Introduction
-Prerequisites:
-http://wiki.icub.org/iCub/main/dox/html/icub_motor_control_tutorial.html
+Prerequisites, see \ref icub_motor_control_tutorial
 
 The code described in this tutorial can be found at:
 
@@ -210,9 +209,5 @@ http://wiki.icub.org/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html
 
 \section sec_code Code
 
-See code in:
-\code
- tutorials/src/motorControlBasic/tutorial_arm.cpp
- tutorials/src/motorControlImpedance/tutorial_arm_joint_impedance.cpp
-\endcode
+See code in: tutorials/src/motorControlImpedance/tutorial_arm_joint_impedance.cpp 
 **/

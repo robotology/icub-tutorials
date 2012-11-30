@@ -6,13 +6,10 @@ This tutorial shows how to get interfaces to control the arm.
 
 \section sec_intro Introduction
 
-Motor control in Yarp is done through a device driver. For more documentation 
-please see: [http://yarp0.sourceforge.net/specs/dox/dev/html/yarp_motor_control.html 
-yarp2 documentation] and the related classes. 
+Motor control in YARP is done through a motor control device. 
 
-The code in tutorials/src/motorControlBaisc/motorControlBasic_arm.cpp is a good example to 
-start playing with motor control. This example uses a remoted device driver which exports 
-exactly the same interfaces of the actual device driver (initialization is different). The 
+The code in this tutorial is a good example to start playing with motor control. This example uses a remoted device driver which exports 
+exactly the same interfaces of the actual device driver (only initialization is different). The 
 main difference between the two is in terms of efficiency, if you're developing a low-level 
 control loop you might want to be local, on the other hand a simple sporadic position control 
 can be effected through the remote device driver. Let's assume we have started the server side 
@@ -67,9 +64,6 @@ which instantiates the driver. If the parameters are correct and the server side
     IPositionControl *pos;
     IVelocityControl *vel;
     IEncoders *enc;
-    IPidControl *pid;
-    IAmplifierControl *amp;
-    IControlLimits *lim;
 \endcode
 
 and:
@@ -78,9 +72,6 @@ and:
     robotDevice.view(pos);
     robotDevice.view(vel);
     robotDevice.view(enc);
-    robotDevice.view(pid);
-    robotDevice.view(amp);
-    robotDevice.view(lim);
 \endcode
 
 if everything went ok the pointers are valid pointers (check it!). For example:
@@ -171,18 +162,10 @@ When you are done with controlling the robot don't forget to close the device:
 \section sec_more_interfaces More interfaces
 
 To read more about the interfaces that are available in YARP read the online documentation:
-[http://wiki.icub.org/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html documentation on interfaces].
-
-\section sec_notes Notes on the local device
-The CanMotionControl class in ICUB_ROOT/src/modules is an example of a local device driver. 
-The procedure to instantiate it is conceptually identical to the sequence illustrated here apart 
-from the parameters passed to open() which are more numerous and complicated. These are typically 
-stored in a .ini file and loaded through the Property class and the fromConfigFile() method.
+http://eris.liralab.it/yarpdoc/namespaceyarp_1_1dev.html
 
 \section sec_code Code
 
-See code in:
-\code
- tutorials/src/motorControlBasic/tutorial_arm.cpp
-\endcode
+See code in: tutorials/src/motorControlBasic/tutorial_arm.cpp
+
 **/

@@ -65,7 +65,7 @@ Here's a basic program to get images repeatedly:
 \endcode
 
 You can compile this any way you like.  One quick way to do it is to go into the directory where 
-you saved this program (call it "find_location.cpp") and type:
+you saved this program (in a file called for example "find_location.cpp") and type:
 
 \code  
 yarp cmake
@@ -95,7 +95,7 @@ you should now see messages like this:
 \endverbatim
 
 Now let's extend our program a bit, to pick up blueish objects (for example):
-\code{.cpp}
+\code
   #include <stdio.h>
   // Get all OS and signal processing YARP classes
   #include <yarp/os/all.h>
@@ -173,7 +173,7 @@ no output rather than just remaining silent (which is hard to distinguish from t
 stopping or not running).
 
 \code
-    // add this for the condition where no target is picked
+    /* dd this for the condition where no target is picked */
     Vector& v = targetPort.prepare();
     v.resize(3);
     v[0] = 0;
@@ -254,7 +254,7 @@ or
 
 if no target is visible.
 
-Now we need to drive the motors (see tutorials/src/motorControlBasic/tutorial_arm.cpp).  For this, we need the YARP device classes, so we add another header file at the start of our program:
+Now we need to drive the motors (see \ref icub_motor_control_tutorial).  For this, we need the YARP device classes, so we add another header file at the start of our program:
 
 \code
   #include <yarp/dev/all.h>
@@ -479,4 +479,10 @@ Complete look_at_location.cpp:
 
 \endcode
 
+See code at:
+
+  tutorials/src/imageProcessing/findLocation.cpp
+ 
+  tutorials/src/imageProcessing/lookAtLocation.cpp
+  
 **/
