@@ -485,10 +485,7 @@ public:
 To have the Cartesian Interface fully operative together with the robot simulator, please have a look \ref simCartesianControl "here".
 You will need to compile the server part of the interface also on the cluster where the simulator is supposed to run.
 
-A working example is available under
-\code
-tutorials/src/tutorial_cartesian_interface.cpp
-\endcode
-which makes the left hand follow a circular trajectory located in front of the simulated robot.
+A working example is available under tutorials/src/motorControlAdvanced/tutorial_cartesian_interface.cpp which makes the left hand follow
+a circular trajectory located in front of the simulated robot.
 */
 
