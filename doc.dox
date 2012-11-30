@@ -5,7 +5,7 @@
 
 \section sec_cpp C++ Tutorials
 
-A list of tutorials from basic to high-level functionalities.
+A list of tutorials on various topics from basic compilation, visual processing, to control in the operational space.
 
 - \ref icub_hello_icub - how to write the very first program
 - \ref icub_motor_control_tutorial - a tutorial on how to use the motor interfaces
