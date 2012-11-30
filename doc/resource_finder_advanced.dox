@@ -96,9 +96,6 @@ more appropriate depends on the specific case.
 
 \section sec_code Code
 
-See code in:
-\code
- tutorials/src/resourceFinder/tutorial_rf_advanced.cpp
-\endcode
+See code in: tutorials/src/resourceFinder/tutorial_rf_advanced.cpp
 *
 **/

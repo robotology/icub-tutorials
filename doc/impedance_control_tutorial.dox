@@ -31,7 +31,7 @@ http://wiki.icub.org/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html
 
 Let us assume the module wholeBodyTorqueObserver is up and running. The wholeBodyTorqueObserver module, based on the iDyn library (http://wiki.icub.org/iCub/dox/html/group__iDyn.html) acts as a server and is responsibile for the calculation of the joint torques.
 In order to access to the torque values, our program has to declare and open the yarp ITorqueControl interface, in the same manner as you
-open the iPositionControl interface (see previous tutorial: http://wiki.icub.org/iCub/dox/html/icub_motor_control_tutorial.html).
+open the iPositionControl interface (see previous tutorial: \ref icub_motor_control_tutorial).
 We can also open the IControlMode interface (resposibile to set the control mode of each joint (position/velocity/impedance etc.) and the IImpedanceControl interface, used to set the impedance paramteres (joint stiffness/ joint damping etc). 
 
 \code

@@ -118,9 +118,6 @@ To see why all this is useful you should have a look at the next tutorial \ref i
  
 \section sec_code Code
 
-See code in:
-\code
- tutorials/src/resourceFinder/tutorial_rf_basic.cpp
-\endcode
+See code in: tutorials/src/resourceFinder/tutorial_rf_basic.cpp
 *
 **/
