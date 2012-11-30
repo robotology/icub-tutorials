@@ -123,7 +123,7 @@ int main(int argc, char * argv[])
 
 See code in:
 \code
- tutorials/src/tutorial_module.cpp
+ tutorials/src/module/tutorial_module.cpp
 \endcode
 *
 **/

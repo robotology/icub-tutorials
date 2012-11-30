@@ -120,7 +120,7 @@ To see why all this is useful you should have a look at the next tutorial \ref i
 
 See code in:
 \code
- tutorials/src/tutorial_rf_basic.cpp
+ tutorials/src/resourceFinder/tutorial_rf_basic.cpp
 \endcode
 *
 **/

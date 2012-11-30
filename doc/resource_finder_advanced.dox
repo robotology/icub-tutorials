@@ -98,7 +98,7 @@ more appropriate depends on the specific case.
 
 See code in:
 \code
- tutorials/src/tutorial_rf_advanced.cpp
+ tutorials/src/resourceFinder/tutorial_rf_advanced.cpp
 \endcode
 *
 **/

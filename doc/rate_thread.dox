@@ -191,7 +191,7 @@ after which we can safely return.
 
 Full working code of this tutorial is available here:
 \code
- tutorials/src/tutorial_rate_thread.cpp
+ tutorials/src/rateThread/tutorial_rate_thread.cpp
 \endcode
 *
 **/

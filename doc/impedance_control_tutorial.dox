@@ -17,11 +17,11 @@ http://wiki.icub.org/iCub/main/dox/html/icub_motor_control_tutorial.html
 
 The code described in this tutorial can be found at:
 
-<b>$ICUB_ROOT/tutorials/src/tutorial_arm_joint_impedance.cpp</b>
+<b>$ICUB_ROOT/tutorials/src/motorControlImpedance/tutorial_arm_joint_impedance.cpp</b>
 
 The example is based on the previous tutorial:
 
-<b>$ICUB_ROOT/tutorials/src/tutorial_arm.cpp</b>
+<b>$ICUB_ROOT/tutorials/src/motorControlBasic/tutorial_arm.cpp</b>
 
 The example shows how to open the ITorqueControl to show the arm joint torques and how to change the control mode of the elbow joint from position to impedance control. 
 
