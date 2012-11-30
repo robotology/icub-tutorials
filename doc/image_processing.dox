@@ -36,14 +36,14 @@ and typing:
 
 In YARP, camera images are sent from one program to another using ports.  In C++, we can create a port for reading or writing images like this:
 
-\code{.cpp}  
+\code
 BufferedPort<ImageOf<PixelRgb> > port;
 \endcode
 
 This means "make a port with buffering for sending/receiving images in RGB format".
 
 Here's a basic program to get images repeatedly:
-\code{.cpp}
+\code
   #include <stdio.h>
   /* Get all OS and signal processing YARP classes */
   #include <yarp/os/all.h>
@@ -190,7 +190,7 @@ Now we can read from this port (just to test) with yarp read:
 \section sec_look_at Look at Location
 
 Now let's write a separate program that takes the target location computed in find_location.cpp and drives the real of simulated camera to look towards that location.  First, we need to read our vector:
-\code{.cpp}
+\code
   #include <stdio.h>
   #include <yarp/os/all.h>
   #include <yarp/sig/all.h>
@@ -254,16 +254,15 @@ or
 
 if no target is visible.
 
-Now we need to drive the motors, using either of the methods Lorenzo demonstrated on Day 2.  We'll use 
-the "device" method.  For this, we need the YARP device classes, so we add another header file at 
-the start of our program:
-\code{.cpp}
+Now we need to drive the motors (see tutorials/src/motorControlBasic/tutorial_arm.cpp).  For this, we need the YARP device classes, so we add another header file at the start of our program:
+
+\code
   #include <yarp/dev/all.h>
   using namespace yarp::dev;
 \endcode
 
-We connect to the simulator head, as Lorenzo showed (this should go *before* the while loop):
-\code{.cpp}
+We connect to the simulator head:
+\code
     Property options;
     options.put("device", "remote_controlboard");
     options.put("local", "/tutorial/motor/client");
@@ -336,9 +335,11 @@ The simulated robot should now successfully center the blue ball on the table, o
 
 Complete code for finding the blue ball:
 
-\code{.cpp}
+\code
   #include <stdio.h>
-  // Get all OS and signal processing YARP classes
+  
+  /* Get all OS and signal processing YARP classes */
+  
   #include <yarp/os/all.h>
   #include <yarp/sig/all.h>
   using namespace yarp::os;
@@ -400,7 +401,7 @@ Complete code for finding the blue ball:
 
 Complete look_at_location.cpp:
 
-\code{.cpp}
+\code
  #include <stdio.h>
  #include <yarp/os/all.h>
  #include <yarp/sig/all.h>

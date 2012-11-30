@@ -212,7 +212,7 @@ http://wiki.icub.org/yarpdoc/d1/dd6/namespaceyarp_1_1dev.html
 
 See code in:
 \code
- tutorials/src/tutorial_arm.cpp
- tutorials/src/tutorial_arm_joint_impedance.cpp
+ tutorials/src/motorControlBasic/tutorial_arm.cpp
+ tutorials/src/motorControlImpedance/tutorial_arm_joint_impedance.cpp
 \endcode
 **/

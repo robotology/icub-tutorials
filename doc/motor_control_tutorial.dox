@@ -10,7 +10,7 @@ Motor control in Yarp is done through a device driver. For more documentation
 please see: [http://yarp0.sourceforge.net/specs/dox/dev/html/yarp_motor_control.html 
 yarp2 documentation] and the related classes. 
 
-The code in src/tutorials/src/tutorial_arm.cpp is a good example to 
+The code in tutorials/src/motorControlBaisc/motorControlBasic_arm.cpp is a good example to 
 start playing with motor control. This example uses a remoted device driver which exports 
 exactly the same interfaces of the actual device driver (initialization is different). The 
 main difference between the two is in terms of efficiency, if you're developing a low-level 
@@ -154,12 +154,12 @@ the desired position.
 
 \section sec_velocity Velocity control
 
-Issue a:
+To send velocity commands do:
 \code
   bool ok = vel->velocityMove(command_velocity.data());
 \endcode
 
-which for example accelerates all axes to the velocity described by the vector ''command_velocity'' (in degrees per second). 
+which accelerates all axes to the velocity described by the vector ''command_velocity'' (in degrees per second). 
 
 \section sec_closing Closing the device
 
@@ -167,34 +167,6 @@ When you are done with controlling the robot don't forget to close the device:
 \code
   robotDevice.close();
 \endcode
-
-\section sec_caveats Caveats: starting and stopping the amplifiers
-
-Typically before moving the robot you have to enable the amplifiers and start the pids controllers:
-
-\code
-    /* enable the amplifier and the pid controller on each joint */
-    for (i = 0; i < jnts; i++) {
-        amp->enableAmp(i);
-        pid->enablePid(i);
-    }
-\endcode
-
-However often (and in the simulator) the robot will be already started, with amplifiers and pids 
-already running, so you '''don't''' need to do it.
-
-Usually to close the robot you have to disable the amplifiers and stop the pid controllers:
-
-\code
-  for (i = 0; i < jnts; i++) {
-      amp->disableAmp(i);
-      pid->disablePid(i);
-  }
-\endcode
-
-however before before doing this you have to make sure the robot is in a safe 
-configuration (the robot might fall when the amplifiers are disabled). Again we will 
-be responsible for turning off the robot so you '''don't''' have to bother with this.
 
 \section sec_more_interfaces More interfaces
 
@@ -211,6 +183,6 @@ stored in a .ini file and loaded through the Property class and the fromConfigFi
 
 See code in:
 \code
- tutorials/src/tutorial_arm.cpp
+ tutorials/src/motorControlBasic/tutorial_arm.cpp
 \endcode
 **/
