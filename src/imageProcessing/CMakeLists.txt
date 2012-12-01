@@ -9,15 +9,10 @@ PROJECT(${PROJECTNAME})
 
 FIND_PACKAGE(YARP)
 
-add_executable(imageProc imageProc.cpp)
-target_link_libraries(imageProc ${YARP_LIBRARIES})
-
 add_executable(findLocation findLocation.cpp)
 target_link_libraries(findLocation ${YARP_LIBRARIES})
 
 add_executable(lookAtLocation lookAtLocation.cpp)
 target_link_libraries(lookAtLocation ${YARP_LIBRARIES})
-
-
 
 
