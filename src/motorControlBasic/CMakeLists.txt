@@ -1,0 +1,15 @@
+# Copyright: 2012 iCub Facility, Istituto Italiano di Tecnologia
+# Author: Lorenzo Natale
+# CopyPolicy: Released under the terms of the GNU GPL v2.0.
+# 
+
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+SET(PROJECTNAME basicMotorControl)
+PROJECT(${PROJECTNAME})
+
+FIND_PACKAGE(YARP)
+
+add_executable(tutorial_arm tutorial_arm.pp)
+target_link_libraries(tutorial_arm ${YARP_LIBRARIES})
+
+

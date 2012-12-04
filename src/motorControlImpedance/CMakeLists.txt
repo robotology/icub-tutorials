@@ -1,0 +1,16 @@
+# Copyright: 2012 iCub Facility, Istituto Italiano di Tecnologia
+# Author: Lorenzo Natale
+# CopyPolicy: Released under the terms of the GNU GPL v2.0.
+# 
+
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+SET(PROJECTNAME motorControlImpedance)
+PROJECT(${PROJECTNAME})
+
+FIND_PACKAGE(YARP)
+
+add_executable(motorControlImpedance tutorial_arm_joint_impedance.pp)
+target_link_libraries(motorControlImpedance ${YARP_LIBRARIES})
+
+
+
