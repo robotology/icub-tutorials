@@ -9,7 +9,7 @@ PROJECT(${PROJECTNAME})
 
 FIND_PACKAGE(YARP)
 
-add_executable(tutorial_arm tutorial_arm.pp)
+add_executable(tutorial_arm tutorial_arm.cpp)
 target_link_libraries(tutorial_arm ${YARP_LIBRARIES})
 
 
