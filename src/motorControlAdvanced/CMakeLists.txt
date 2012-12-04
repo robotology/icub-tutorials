@@ -4,7 +4,7 @@
 # 
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-SET(PROJECTNAME advancedMotorControl)
+SET(PROJECTNAME motorControlAdvanced)
 PROJECT(${PROJECTNAME})
 
 find_package(YARP)
