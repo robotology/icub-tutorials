@@ -1,0 +1,127 @@
+/**
+@page icub_python_imaging Handling YARP images in Python
+
+\author Marek Rucinski
+
+\section sec_goal Goal
+This tutorial shows how to handle YARP images in Python. The most important issue is fast two-way conversion between image data structures from YARP and those native for Python.
+
+We assume that you have already compiled or installed the Python bindings. Moreover this tutorial assumes basic knowledge of how YARP works in C++ as well as of the referenced python libraries (especially the NumPy-SciPy-Matplotlib trinity).
+
+\section sec_there-and-back-again Conversion between YARP image types and Python types (and back)
+
+The key to obtain high performance in any image processing software is to avoid copying the data back and forth whenever possible. Ideally, having received an image through a YARP port, we would modify it <em>in place</em> and then pass the very same image to the output port. To facilitate this, \c yarp::sig::Image class implements a method called \c setExternal() which allows an Image object to "wrap around" an already existing data buffer. Therefore the key element of image processing in Python is creating a YARP image object that wraps around a data structure native to Python, which then can be then conveniently manipulated using Python-specific means. Due to its popularity and mature stage of development, in this tutorial we consider NumPy arrays as the substrate for image processing within Python (see for instance <a href="docs.scipy.org/doc/scipy/reference/ndimage.html">\c scipy.ndimage </a> or <a href="http://scikit-image.org/">\c scikit-image </a> modules for off-the-shelf image processing routines operating on NumPy arrays). However, the concepts presented here may be applied to other Python frameworks as well (e.g. PIL, PyQt), provided certain requirements discussed below are fulfilled.
+
+\section sec_python_to_yarp Sending data from Python to YARP
+
+If you're using Python 3.x and the data structure you want to receive the image data into supports the Python <a href="http://docs.python.org/2/c-api/buffer.html">buffer protocol</a> (which is the case for NumPy arrays), all you have to do is to call the \c setExternal method of an YARP image object, specifying your python object as its first argument.
+
+In the following example, a NumPy array with random contents is created, a YARP image is wrapped around it and sent to a YARP port. It is assumed that there is an instance of \c yarpview running with associated port name \c "/view01".
+
+\code{.py}
+  import numpy
+  import yarp
+  
+  # Initialise YARP
+  yarp.Network.init()
+  
+  # Create the array with random data
+  img_array = numpy.random.uniform(0., 255., (240, 320)).astype(numpy.float32)
+  
+  # Create the yarp image and wrap it around the array  
+  yarp_image = yarp.ImageFloat()
+  yarp_image.setExternal(img_array, img_array.shape[1], img_array.shape[0])
+  
+  # Create the yarp port, connect it to the running instance of yarpview and send the image
+  output_port = yarp.Port()
+  output_port.open("/python-image-port")
+  yarp.Network.connect("/python-image-port", "/view01")
+  output_port.write(yarp_image)
+  
+  # Cleanup
+  output_port.close()
+\endcode
+
+There is a number of crucial things that need to be kept in mind:
+
+1. <em>NumPy array shape, data type and value range must be compatible with the type of YARP image to be wrapped around it</em>. Below is the list of YARP image types exposed by YARP bindings and corresponding requirements for the underlying NumPy array:
+  - \c yarp.ImageMono - array data type: \c uint8, shape: (<image-height>, <image-width>), values range: 0 to 255
+  - \c yarp.ImageFloat - array data type: \c float32, shape: (<image-height>, <image-width>), values range: 0. to 255. (Note: this is \em different from 0. to 1. range, assumed by default e.g. by \c scipy.ndimage routines!)
+  - \c yarp.ImageRgb - array data type: \c uint8, shape: (<image-height>, <image-width>, 3), values range: 0 to 255
+  - \c yarp.ImageRgbFloat - array data type: \c float32, shape: (<image-height>, <image-width>, 3), values range: 0. to 255.
+  - \c yarp.ImageRgba - array data type: \c uint8, shape: (<image-height>, <image-width>, 4), values range: 0 to 255
+
+  In the example above the result of calling numpy.random.uniform() had to be explicitly cast to \c float32, since by default it returned \c float64. This may very well be architecture-dependent, so it's best to specify the array data type explicitly (tip: most NumPy array creation routines accept the \c dtype parameter).
+2. <em>NumPy array being wrapped around must be contiguous in the memory</em>. This is usually the case for newly created arrays, but if the array you want to send is a result of some computation process (especially one involving operations like transposing, slicing, etc.), make sure to call \c numpy.ascontiguousarray() before passing the array to \c setExternal().
+3. <em>Image dimensions specified in \c setExternal call must match actual dimensions of the array</em>. Using the array's shape attribute as in the example above is the most fool-proof way to go, but note the order in which the array dimensions are specified in this attribute. Rows (corresponding to image height) come first, then columns (image width).
+4. <em>Underlying array must outlive the Image object wrapping around it</em>. Make sure the array exists as long as the image object is being used. It may be a good practice to delete the image object explicitly (tip: Python \c del statement) as soon as it is no longer needed.
+
+\section sec_yarp_to_python Receiving data from YARP to Python
+
+The idea is pretty much the same as when sending an image to the port. In order to minimize the number of copy operations, we wrap the YARP image around a NumPy array before reading an image from the port. The example below assumes that iCub simulator is running and that the world camera is available at port \c "/icubSim/cam"
+
+\code{.py}
+  import numpy
+  import yarp
+  import matplotlib.pylab
+  
+  # Initialise YARP
+  yarp.Network.init()
+  
+  # Create a port and connect it to the iCub simulator virtual camera
+  input_port = yarp.Port()
+  input_port.open("/python-image-port")
+  yarp.Network.connect("/icubSim/cam", "/python-image-port")
+  
+  # Create numpy array to receive the image and the YARP image wrapped around it
+  img_array = numpy.zeros((240, 320, 3), dtype=numpy.uint8)
+  yarp_image = yarp.ImageRgb()
+  yarp_image.resize(320, 240)
+  yarp_image.setExternal(img_array, img_array.shape[1], img_array.shape[0])
+  
+  # Read the data from the port into the image
+  input_port.read(yarp_image)
+  
+  # display the image that has been read
+  matplotlib.pylab.imshow(img_array)
+  
+  # Cleanup
+  input_port.close()
+\endcode
+
+All remarks mentioned in section \ref sec_python_to_yarp are also valid here.
+
+The method above minimizes the number of performed copy operations however it comes with a serious limitation: the exact size and type of the incoming image must be known beforehand. If the image coming through the port does not match the dimensions, pixel type or quantum of the prepared \c yarp_image, the latter will be automatically re-allocated when \c read() is called and association with \c img_array will be covertly lost. Note that before calling \c setExternal() we call \c resize() on the \c yarp_image. This is required because just calling \c setExternal will not set internal variables of the image class properly (namely the pixel size and the quantum), and the \c yarp_image's buffer will also be re-allocated by \c read().
+
+If the size and type of the incoming image is not known or when greater flexibility is required, we won't get away without copying the image, at least when a frame with new size or format is retrieved. One must detect such situation, adjust the receiving array accordingly and copy the image contents.
+
+As an alternative to using the bare \c yarp.Port class, one can also use one of the specialized instantiations of the of the \c BufferedPort template exposed by the YARP bindings, e.g. \c BufferedPortImageRgb. The \c read() method of this class returns a yarp image of an appropriate type, which then must be copied to another yarp image, associated with a NumPy array. Although this introduces one additional copy operation, this facilitates adjusting the receiving NumPy array to potentially changing image size, as discussed in the previous paragraph.
+
+\section array_interface YARP images with Python 2.x / array interface
+
+As noted at the beginning, \c setExternal() can be called for any Python object which supports the buffer protocol \em if you're using Python version 3.0 or greater. If you are using an older version of Python you must try another approach. YARP bindings export another variant of the \c setExternal method which accepts \c long value (as well as \c long \c long for 64-bit systems), which is then explicitly cast to \c void* before being passed to the default \c setExternal implementation. Thus, if your Python object enables you to obtain the physical value of the pointer to the buffer you want the image data to be written to, the requirement of supporting the buffer protocol can be circumnavigated.
+
+For example, NumPy arrays implement what is called an <a href="http://docs.scipy.org/doc/numpy/reference/arrays.interface.html">array interface</a>. It is essentially a dictionary which contains a bunch of information about the underlying buffer, one of them being a raw value of the pointer to the data. This value can be used in an alternative call to \c setExternal:
+
+\code{.py}
+	yarp_image.setExternal(img_array.__array_interface__['data'][0], img_array.shape[1], img_array.shape[0])
+\endcode
+
+Obviously, since this means playing around with memory addresses, a great deal of caution is advised. If supported, buffer protocol should be preferred.
+
+Array interface can also be used to easily detect whether the image has been, for whatever reason, re-allocated behind the scenes, e.g. by the \c Port.read() method (see section \ref sec_yarp_to_python). In the example below it is assumed that \c yarp_image has been associated with \c img_array via \c setExternal() before \c Port.read() is called:
+
+\code{.py}
+	input_port.read(yarp_image)
+	
+	if yarp_image.getRawImage().__long__() <> img_array.__array_interface__['data'][0]:
+		print "read() reallocated my yarp_image!"
+\endcode
+
+\section final_example Real-world example
+
+Code used in this tutorial can be found at tutorials/python/python_imaging.py In addition, the file contains a class implementing a simple image filter, which retrieves images through one YARP port, computes a Sobel operator, and sends the result to another port. To run this example, make sure you have the iCub simulator and yarpview instance running as in examples above, and simply execute the \c python_image.py module as a regular python program.
+
+This file can be edited at tutorials/doc/python-imaging.dox
+
+**/
