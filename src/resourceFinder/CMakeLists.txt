@@ -8,6 +8,9 @@ SET(PROJECTNAME resourceFinder)
 PROJECT(${PROJECTNAME})
 
 FIND_PACKAGE(YARP)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
+
+include_directories(${YARP_INCLUDE_DIRS})
 
 add_executable(rf_basic tutorial_rf_basic.cpp)
 target_link_libraries(rf_basic ${YARP_LIBRARIES})

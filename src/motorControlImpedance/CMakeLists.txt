@@ -8,7 +8,9 @@ SET(PROJECTNAME motorControlImpedance)
 PROJECT(${PROJECTNAME})
 
 FIND_PACKAGE(YARP)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 
+include_directories(${YARP_INCLUDE_DIRS})
 add_executable(motorControlImpedance tutorial_arm_joint_impedance.pp)
 target_link_libraries(motorControlImpedance ${YARP_LIBRARIES})
 

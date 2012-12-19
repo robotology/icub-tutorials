@@ -7,7 +7,10 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 SET(PROJECTNAME imageProcessing)
 PROJECT(${PROJECTNAME})
 
-FIND_PACKAGE(YARP)
+find_package(YARP)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
+
+include_directories(${YARP_INCLUDE_DIRS})
 
 add_executable(findLocation findLocation.cpp)
 target_link_libraries(findLocation ${YARP_LIBRARIES})

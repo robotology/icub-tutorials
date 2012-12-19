@@ -8,7 +8,13 @@ SET(PROJECTNAME motorControlAdvanced)
 PROJECT(${PROJECTNAME})
 
 find_package(YARP)
-find_package(iCub)
+find_package(ICUB)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
+include(iCubHelpers)
+
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${ICUB_LINK_FLAGS}")
+include_directories(${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
 add_executable(tutorial_cartesian_interface tutorial_cartesian_interface.cpp)
 target_link_libraries(tutorial_cartesian_interface ${YARP_LIBRARIES} icubmod)
