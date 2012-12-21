@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
     // of the internal model principle the steady-state error can be already 
     // compensated thanks to the presence of the integrator in the plant. On the
     // other hand, this principle holds only for linear systems and indeed,
-    // nonlinear effects - such as the stiction - make the final behaviour deviate
+    // nonlinear effects - such as the stiction - make the final behavior deviate
     // from this baseline, eventually requiring the integral part. Nonetheless,
     // if stiction is compensated separately, I is again not strictly needed.
     // 
