@@ -207,9 +207,9 @@ int main(int argc, char *argv[])
     // we can specify either the natural frequency (in Hz) or
     // the damping ratio - since we have just one degree
     // of freedom controller (P). Therefore it is a common
-    // rule to specify the crossover frequency (in Hz) which
+    // rule to specify the gain crossover frequency (in Hz) which
     // amounts to the frequency where the open loop response
-    // given by Kp * plant has a unity-gain; f_c determines
+    // given by Kp * plant has a unity-gain; f_c roughly determines
     // the bandwidth of the closed loop response.
     // Requirements: track min-jerk profiles whose trajectory
     // time is 2.0 seconds.
