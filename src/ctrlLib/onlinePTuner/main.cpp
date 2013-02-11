@@ -65,9 +65,7 @@ int main(int argc, char *argv[])
 
     // ##### Preamble
     // The objective is to tune online a P controller that will make 
-    // the joint plant behave as the well known second order dynamics:
-    //
-    // w_n^2 / (s^2 + 2*zeta*w_n*s + w_n^2).
+    // the joint move complying with some given bandwidth specification.
     //
     // The plant is to be identified using an Extended-Kalman-Filter (EKF)
     // under the assumption that the adopted model obeys to the following
@@ -204,13 +202,10 @@ int main(int argc, char *argv[])
     Property pControllerRequirements,pController;
     pControllerRequirements.put("tau",tau);
     pControllerRequirements.put("K",K);
-    // we can specify either the natural frequency (in Hz) or
-    // the damping ratio - since we have just one degree
-    // of freedom controller (P). Therefore it is a common
-    // rule to specify the gain crossover frequency (in Hz) which
-    // amounts to the frequency where the open loop response
-    // given by Kp * plant has a unity-gain; f_c roughly determines
-    // the bandwidth of the closed loop response.
+    // The bandwidth specification is provided in terms of gain crossover
+    // frequency (in Hz) which amounts to the frequency where the
+    // open loop response given by Kp * plant has a unity-gain;
+    // f_c roughly determines the bandwidth of the closed loop response.
     // Requirements: track min-jerk profiles whose trajectory
     // time is 2.0 seconds.
     // From spectral analysis we know that the most of the
