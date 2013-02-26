@@ -10,7 +10,7 @@ find_package(YARP)
 find_package(ICUB)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
-include(iCubHelpers)
+#include(iCubHelpers)
 
 set(folder_source main.cpp)
 source_group("Source Files" FILES ${folder_source})
