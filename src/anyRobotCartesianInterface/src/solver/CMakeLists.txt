@@ -27,5 +27,5 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${ICUB_LINK_FLAGS}")
 add_executable(${PROJECTNAME} ${folder_source})
 target_link_libraries(${PROJECTNAME} fakeMotorDevice iKin ${YARP_LIBRARIES})
 install(TARGETS ${PROJECTNAME} DESTINATION ${ICUB_APPLICATIONS_PREFIX})
-
+icub_install_with_rpath()
 

@@ -20,4 +20,4 @@ source_group("Source Files" FILES ${folder_source})
 add_executable(${PROJECTNAME} ${folder_source})
 target_link_libraries(${PROJECTNAME} fakeMotorDevice ${YARP_LIBRARIES})
 install(TARGETS ${PROJECTNAME} DESTINATION ${ICUB_APPLICATIONS_PREFIX})
-
+icub_install_with_rpath()
