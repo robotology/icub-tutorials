@@ -12,6 +12,7 @@ find_package(ICUB)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
 include(iCubHelpers)
+icub_install_with_rpath()
 
 set(folder_source main.cpp)
 source_group("Source Files" FILES ${folder_source})
@@ -23,5 +24,5 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${ICUB_LINK_FLAGS}")
 add_executable(${PROJECTNAME} ${folder_source})
 target_link_libraries(${PROJECTNAME} icubmod ${YARP_LIBRARIES})
 install(TARGETS ${PROJECTNAME} DESTINATION ${ICUB_APPLICATIONS_PREFIX})
-icub_install_with_rpath()
+
 

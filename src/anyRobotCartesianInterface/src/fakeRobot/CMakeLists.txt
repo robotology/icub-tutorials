@@ -11,6 +11,7 @@ find_package(ICUB)
 set(CMAKE_MODULE_PATH ${YARP_MODULE_PATH} ${CMAKE_MODULE_PATH})
 set(CMAKE_MODULE_PATH ${ICUB_MODULE_PATH} ${CMAKE_MODULE_PATH})
 include(iCubHelpers)
+icub_install_with_rpath()
 
 include_directories(${fakeMotorDevice_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
@@ -20,4 +21,4 @@ source_group("Source Files" FILES ${folder_source})
 add_executable(${PROJECTNAME} ${folder_source})
 target_link_libraries(${PROJECTNAME} fakeMotorDevice ${YARP_LIBRARIES})
 install(TARGETS ${PROJECTNAME} DESTINATION ${ICUB_APPLICATIONS_PREFIX})
-icub_install_with_rpath()
+
