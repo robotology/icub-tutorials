@@ -11,8 +11,8 @@ find_package(ICUB)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
+INCLUDE(iCubOptions)
 include(iCubHelpers)
-icub_install_with_rpath()
 
 if(NOT ICUB_USE_IPOPT)
    message(FATAL_ERROR "${PROJECTNAME}: IPOPT is strictly required!")

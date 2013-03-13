@@ -10,8 +10,8 @@ find_package(YARP)
 find_package(ICUB)
 set(CMAKE_MODULE_PATH ${YARP_MODULE_PATH} ${CMAKE_MODULE_PATH})
 set(CMAKE_MODULE_PATH ${ICUB_MODULE_PATH} ${CMAKE_MODULE_PATH})
+INCLUDE(iCubOptions)
 include(iCubHelpers)
-icub_install_with_rpath()
 
 include_directories(${fakeMotorDevice_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
