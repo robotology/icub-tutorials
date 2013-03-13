@@ -19,7 +19,7 @@ A list of tutorials on various topics from basic compilation, visual processing,
 - \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface 
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a YARP interface
 
-\section sec_lib_cpp C++ C++ tutorials related to specific libraries
+\section sec_lib_cpp C++ tutorials related to specific libraries
 
 - tutorials/src/ctrlLib/onlinePTuner/main.cpp - a tutorial on online tuning of a P controller
 - tutorials/src/optimization/calibReference/main.cpp - a tutorial on how to calibrate two reference frames from a cloud of matching points
