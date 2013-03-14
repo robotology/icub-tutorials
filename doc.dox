@@ -30,7 +30,7 @@ A list of tutorials on various topics from basic compilation, visual processing,
 - tutorials/src/iKin/onlineSolver/main.cpp - a tutorial on how to solve online inverse kinematics of a generic robot limb
 - tutorials/src/iKin/genericChainController/main.cpp - a tutorial on how to control a generic kinematic chain
 
-\subsection sec_ikin_lib_cpp  iDyn library
+\subsection sec_idyn_lib_cpp  iDyn library
 
 - \ref idyn_introduction - a short introduction to the \ref iDyn library
 - \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using \ref iDyn library
