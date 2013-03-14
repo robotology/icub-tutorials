@@ -35,6 +35,17 @@ A list of tutorials on various topics from basic compilation, visual processing,
 - \ref idyn_introduction - a short introduction to the \ref iDyn library
 - \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using \ref iDyn library
 
+\subsection sec_ml_lib_cpp Learning Machine Library
+
+These tutorials demonstrate how to interface with the learningMachine library. The easiest 
+way is to use machine learning classes directly. The library also provide C++ abstract interfaces
+that facilitate migration to ther learning methods; their use is illustrated in the intermediate and
+advanced tutorials. You should check all examples and choose the method that better suits your application. 
+ 
+- Basic tutorial. Use learning machines directly: tutorials/src/learningMachine/lmlibdirect.cpp
+- Intermediate tutotial. Use learning machines thourgh abstract interfaces: tutorials/src/learningMachine/lmlibindirect.cpp 
+- Advanced tutorial. Use learning machines through abstract interfnaces and factory: tutorials/src/iKin/fwInvKinematics/lmlibportable.cpp
+
 \section sec_python Python Tutorials
 
 These tutorials assume you installed the YARP and iCub bindings for Python. Follow installation instructions reported in the manual at <a href="http://wiki.icub.org/wiki/Interoperability_with_other_languages_and_middleware">Interoperability with other languages and middleware</a>.

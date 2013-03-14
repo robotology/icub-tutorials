@@ -9,7 +9,7 @@ FIND_PACKAGE(ICUB)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
-INCLUDE(iCubHelpers)
+INCLUDE(iCubOptions)
 
 INCLUDE_DIRECTORIES(${ICUB_INCLUDE_DIRS}
                     ${YARP_INCLUDE_DIRS})
@@ -27,6 +27,7 @@ add_subdirectory(motorControlAdvanced)
 add_subdirectory(rateThread)
 add_subdirectory(iDyn)
 add_subdirectory(ctrlLib)
+add_subdirectory(learningMachines)
 
 ## again this is for testing only, please ignore if you are reading tutorials
 ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
