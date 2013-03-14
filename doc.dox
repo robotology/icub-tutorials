@@ -21,9 +21,6 @@ A list of tutorials on various topics from basic compilation, visual processing,
 
 \section sec_lib_cpp C++ tutorials related to specific libraries
 
-- tutorials/src/ctrlLib/onlinePTuner/main.cpp - a tutorial on online tuning of a P controller
-- tutorials/src/optimization/calibReference/main.cpp - a tutorial on how to calibrate two reference frames from a cloud of matching points
-
 \subsection sec_ikin_lib_cpp  iKin library
 
 - tutorials/src/iKin/fwInvKinematics/main.cpp - a tutorial on how to directly use \ref iKin to cope with forward/inverse kinematics problems
@@ -41,10 +38,16 @@ These tutorials demonstrate how to interface with the learningMachine library. T
 way is to use machine learning classes directly. The library also provide C++ abstract interfaces
 that facilitate migration to ther learning methods; their use is illustrated in the intermediate and
 advanced tutorials. You should check all examples and choose the method that better suits your application. 
+
  
-- Basic tutorial. Use learning machines directly: tutorials/src/learningMachine/lmlibdirect.cpp
-- Intermediate tutotial. Use learning machines thourgh abstract interfaces: tutorials/src/learningMachine/lmlibindirect.cpp 
-- Advanced tutorial. Use learning machines through abstract interfnaces and factory: tutorials/src/iKin/fwInvKinematics/lmlibportable.cpp
+- Basic tutorial. Use learning machines directly: tutorials/src/learningMachines/lmlibdirect.cpp
+- Intermediate tutotial. Use learning machines thourgh abstract interfaces: tutorials/src/learningMachines/lmlibindirect.cpp 
+- Advanced tutorial. Use learning machines through abstract interfaces and factory: tutorials/src/learningMachines/lmlibportable.cpp
+
+\subsection sec_other_lis_cpp Other libraries
+
+- tutorials/src/ctrlLib/onlinePTuner/main.cpp - a tutorial on online tuning of a P controller
+- tutorials/src/optimization/calibReference/main.cpp - a tutorial on how to calibrate two reference frames from a cloud of matching points
 
 \section sec_python Python Tutorials
 
