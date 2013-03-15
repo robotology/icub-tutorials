@@ -8,7 +8,6 @@
 #include <iostream>
 #include <cmath>
 #include <iCub/learningMachine/LSSVMLearner.h>
-#include <iCub/learningMachine/LinearGPRLearner.h>
 #include <iCub/learningMachine/FixedRangeScaler.h>
 #include <yarp/sig/Vector.h>
 #include <yarp/math/Rand.h>
@@ -45,9 +44,7 @@ int main(int argc, char** argv) {
   std::cout << "LearningMachine library example (direct)" << std::endl;
 
   // one dimensional input, one dimensional output, c = 1.0
-  // LSSVMLearner lssvm = LSSVMLearner(1, 1, 2.);
-
-  LinearGPRLearner lssvm = LinearGPRLearner(1, 1, 2);
+  LSSVMLearner lssvm = LSSVMLearner(1, 1, 2.);
   // lssvm.getKernel()->setGamma(32.);
 
   // normalizer that scales [-10,10] -> [-1,1]
