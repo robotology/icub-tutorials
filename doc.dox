@@ -21,16 +21,27 @@ A list of tutorials on various topics from basic compilation, visual processing,
 
 \section sec_lib_cpp C++ tutorials related to specific libraries
 
+Online documentation for the libraries is available here:
+<a href="http://wiki.icub.org/iCub/main/dox/html/group__icub__libraries.html">iCub libraries</a>.
+
+The following are some specific tutorials.
+
 \subsection sec_ikin_lib_cpp  iKin library
 
 - tutorials/src/iKin/fwInvKinematics/main.cpp - a tutorial on how to directly use \ref iKin to cope with forward/inverse kinematics problems
 - tutorials/src/iKin/onlineSolver/main.cpp - a tutorial on how to solve online inverse kinematics of a generic robot limb
 - tutorials/src/iKin/genericChainController/main.cpp - a tutorial on how to control a generic kinematic chain
 
+Online documentation is available here:
+<a href="http://wiki.icub.org/iCub_documentation/group__iKin.html">iKin online documentation</a>.
+
 \subsection sec_idyn_lib_cpp  iDyn library
 
 - \ref idyn_introduction - a short introduction to the \ref iDyn library
 - \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using \ref iDyn library
+
+Online documentation is available here:
+<a href="http://wiki.icub.org/iCub_documentation/group__iDyn.html">iDyn online documentation</a>.
 
 \subsection sec_ml_lib_cpp Learning Machine Library
 
@@ -39,10 +50,12 @@ way is to use machine learning classes directly. The library also provide C++ ab
 that facilitate migration to ther learning methods; their use is illustrated in the intermediate and
 advanced tutorials. You should check all examples and choose the method that better suits your application. 
 
- 
 - Basic tutorial. Use learning machines directly: tutorials/src/learningMachines/lmlibdirect.cpp
 - Intermediate tutotial. Use learning machines thourgh abstract interfaces: tutorials/src/learningMachines/lmlibindirect.cpp 
 - Advanced tutorial. Use learning machines through abstract interfaces and factory: tutorials/src/learningMachines/lmlibportable.cpp
+
+Online documentation is available here:
+<a href="http://wiki.icub.org/iCub_documentation/group__icub__libLearningMachine.html">learningMachines online documentation</a>.
 
 \subsection sec_other_lis_cpp Other libraries
 
