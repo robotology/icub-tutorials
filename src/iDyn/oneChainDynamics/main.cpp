@@ -25,21 +25,21 @@ using namespace iCub::iDyn;
 // print a matrix nicely
 void printMatrix(string s, Matrix &m)
 {
-	cout<<s<<endl;
-	for(int i=0;i<m.rows();i++)
-	{
-		for(int j=0;j<m.cols();j++)
-			cout<<setw(15)<<m(i,j);
-		cout<<endl;
-	}
+    cout<<s<<endl;
+    for(int i=0;i<m.rows();i++)
+    {
+        for(int j=0;j<m.cols();j++)
+            cout<<setw(15)<<m(i,j);
+        cout<<endl;
+    }
 }
 // print a vector nicely
 void printVector(string s, Vector &v)
 {
-	cout<<s<<endl;
-	for(int j=0;j<v.length();j++)
-		cout<<setw(15)<<v(j);
-	cout<<endl;
+    cout<<s<<endl;
+    for(size_t j=0;j<v.length();j++)
+        cout<<setw(15)<<v(j);
+    cout<<endl;
 }
 
 
@@ -49,29 +49,29 @@ void printVector(string s, Vector &v)
 
 int main()
 {
-	// we create a iDyn::iCubArmDyn = arm+torso
+    // we create a iDyn::iCubArmDyn = arm+torso
     // if you are familiar with iKin, it is exactly the same limb type, with the same kinematic properties..
     // .. but it also has dynamics ^_^
-	iCubArmDyn armTorsoDyn("right");
+    iCubArmDyn armTorsoDyn("right");
 
-	// by default in iCubArmDyn the torso is blocked, as it is in its corresponding iKin limb, iCubArm;
+    // by default in iCubArmDyn the torso is blocked, as it is in its corresponding iKin limb, iCubArm;
     // we unblock it, so we can also use the torso links
     // note: releasing the links we have N==DOF
-	armTorsoDyn.releaseLink(0);
-	armTorsoDyn.releaseLink(1);
-	armTorsoDyn.releaseLink(2);
+    armTorsoDyn.releaseLink(0);
+    armTorsoDyn.releaseLink(1);
+    armTorsoDyn.releaseLink(2);
 
-	// we prepare the necessary variables for our computations
+    // we prepare the necessary variables for our computations
     // 1) the joint angles (pos, vel, acc) of the limbs: we can take this values from the encoders..
     Vector q(armTorsoDyn.getN()); q.zero();
     Vector dq(q); Vector ddq(q);
-	
+    
     // 2) the inertial information to initialize the kinematic phase
     // this information must be set at the base of the chain, where the base is intended to be the first link (first.. in the Denavit
     // Hartenberg convention)
     // note: if nothing is moving, it can be simply zero, but ddp0 must provide the gravity information :)
-	Vector w0(3); Vector dw0(3); Vector ddp0(3);
-	w0=dw0=ddp0=0.0; ddp0[2]=9.81;
+    Vector w0(3); Vector dw0(3); Vector ddp0(3);
+    w0=dw0=ddp0=0.0; ddp0[2]=9.81;
     
     // 3) the end-effector external wrench (force/moment), to initialize the wrench phase
     //    the end-effector wrench is zero by default, if we are not touching anything..
@@ -107,7 +107,7 @@ int main()
     // 2) Wrench Phase
     // the computeNewtonEuler() methoddo everything autonomously!
     armTorsoDyn.computeNewtonEuler(w0,dw0,ddp0,Fend,Muend);
-	
+    
     // then we can retrieve our results...
     // forces moments and torques
     Matrix F = armTorsoDyn.getForces();
@@ -131,7 +131,7 @@ int main()
 
 
     //exit
-	cin.get();
+    cin.get();
     return 0;
 }
       

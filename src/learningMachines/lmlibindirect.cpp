@@ -42,14 +42,14 @@ double sin2d(double x1, double x2) {
 }
 
 void elementProd(const Vector& v1, Vector& v2) {
-  for(int i = 0; i < MIN(v1.size(), v2.size()); i++) {
+  for(size_t i = 0; i < MIN(v1.size(), v2.size()); i++) {
     v2[i] = v1[i] * v2[i];
   }
 }
 
 Vector elementDiv(const Vector& v, double d) {
   Vector ret(v.size());
-  for(int i = 0; i < v.size(); i++) {
+  for(size_t i = 0; i < v.size(); i++) {
     ret[i] = (d == 0.) ? v[i] : v[i] / d;
   }
   return ret;
