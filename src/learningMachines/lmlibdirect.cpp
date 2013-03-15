@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
 
   // one dimensional input, one dimensional output, c = 1.0
   LSSVMLearner lssvm = LSSVMLearner(1, 1, 2.);
-  // lssvm.getKernel()->setGamma(32.);
+  lssvm.getKernel()->setGamma(32.);
 
   // normalizer that scales [-10,10] -> [-1,1]
   // IScalers only do R^1 -> R^1, for higher dimensions use ScaleTransformer
@@ -72,5 +72,6 @@ int main(int argc, char** argv) {
   }
   MSE /= NO_TEST;
   std::cout << "MSE on test data after " << NO_TEST << " samples: " << MSE << std::endl;
-
 }
+
+
