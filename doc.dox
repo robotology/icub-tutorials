@@ -47,7 +47,7 @@ Online documentation is available here:
 
 These tutorials demonstrate how to interface with the learningMachine library. The easiest 
 way is to use machine learning classes directly. The library also provides C++ abstract interfaces
-that facilitate migration to ther learning methods; their use is illustrated in the intermediate and
+that facilitate migration to their learning methods; their use is illustrated in the intermediate and
 advanced tutorials. You should check all examples and choose the method that better suits your application. 
 
 - Basic tutorial. Use learning machines directly: tutorials/src/learningMachines/lmlibdirect.cpp
