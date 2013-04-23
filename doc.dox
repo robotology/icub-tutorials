@@ -16,8 +16,8 @@ A list of tutorials on various topics from basic compilation, visual processing,
 - \ref icub_tutorial_module - a tutorial on how to use the module helper class to write a program
 - \ref icub_rate_thread - a tutorial on how to write a control loop using threads
 - \ref icub_cartesian_interface - a tutorial on how to control a robot's limb in the operational space
-- \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface 
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a YARP interface
+- \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface 
 
 \section sec_lib_cpp C++ tutorials related to specific libraries
 
