@@ -123,8 +123,16 @@ int main(int argc, char *argv[])
         while(count--)
             {
                 Time::delay(0.1);
-                encs->getEncoders(encoders.data());
-                printf("%.1lf %.1lf %.1lf %.1lf\n", encoders[0], encoders[1], encoders[2], encoders[3]);
+                bool ret=encs->getEncoders(encoders.data());
+                
+                if (!ret)
+                {
+                    fprintf(stderr, "Error receiving encoders, check connectivity with the robot\n");
+                }
+                else
+                { 
+                    printf("%.1lf %.1lf %.1lf %.1lf\n", encoders[0], encoders[1], encoders[2], encoders[3]);
+                }
             }
     }
 

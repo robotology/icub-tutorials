@@ -116,10 +116,25 @@ Let's now initialize the controllers and start up the amplifiers:
 if needed we can check the position of our axes by doing:
 
 \code
-  enc->getEncoders(encoders.data());
+   enc->getEncoders(encoders.data());
 \endcode
 
 which reads the values of the motor encoders into a vector of doubles of size ''jnts''. 
+
+Important: it is important to check the return value of this function to ensure that communication 
+with the robot is sane and that the function returned updated values.
+
+\code
+   bool ret=enc->getEncoders(encoders.data());
+   if (!ret)
+   {
+        fprintf(stderr, "Error reading encoders, check connectivity with the robot\n");
+   }
+   else
+   {
+        //use encoders
+   }
+\endcode
 
 \section sec_position Position control
 
