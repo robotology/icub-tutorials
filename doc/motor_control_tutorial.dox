@@ -121,8 +121,8 @@ if needed we can check the position of our axes by doing:
 
 which reads the values of the motor encoders into a vector of doubles of size ''jnts''. 
 
-Important: it is important to check the return value of this function to ensure that communication 
-with the robot is sane and that the function returned updated values.
+Important: check the return value of this function to ensure that communication 
+with the robot is sane and that the function can return updated values.
 
 \code
    bool ret=enc->getEncoders(encoders.data());
@@ -132,7 +132,7 @@ with the robot is sane and that the function returned updated values.
    }
    else
    {
-        //use encoders
+        /* use encoders */
    }
 \endcode
 
