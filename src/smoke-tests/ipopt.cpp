@@ -32,12 +32,12 @@ int main()
     slv.setTranslationalTol(1e-8);
     slv.setUserScaling(true,100.0,100.0,100.0);
 
-    Vector xf(7); xf=0.0;
+    Vector xf(7,0.0);
     xf[0]=-0.3;
     xf[1]=+0.1;
     xf[2]=+0.1;
 
-    slv.solve(chain->getAng(),xf);    
+    slv.solve(chain->getAng(),xf);
     Vector xhat=chain->EndEffPose().subVector(0,2);
     xf=xf.subVector(0,2);
     double dist=norm(xf-xhat);
