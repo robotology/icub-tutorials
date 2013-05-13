@@ -30,6 +30,27 @@ add_subdirectory(ctrlLib)
 add_subdirectory(learningMachines)
 
 ## again this is for testing only, please ignore if you are reading tutorials
+## Check that all dependecies have bene found.
+if (NOT ICUB_USE_OPENCV)
+    message(FATAL_ERROR "OpenCV not found")
+endif()
+if (NOT ICUB_USE_IPOPT)
+    message(FATAL_ERROR "Ipopt not found")
+endif()
+#set(ICUB_USE_GSL "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_GLUT "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_OpenGL "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_ODE "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_SDL "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_GtkMM "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_GtkPlus "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_Gthread "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_ACE "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_IPOPT "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_IPP "OFF" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_OpenCV "ON" CACHE BOOL "dependency flag" FORCE)
+#set(ICUB_USE_Qt3 "ON" CACHE BOOL "dependency flag" FORCE)
+
 ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
 TARGET_LINK_LIBRARIES(test_icubVis ${YARP_LIBRARIES} iCubVis)
 
