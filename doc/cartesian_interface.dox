@@ -36,7 +36,7 @@ Alternatively, the client can act as a pure wrapper over the solver coping with 
 meeting some specific requirements. However, also in this configuration, the server part needs to be launched (even if not employed) as a gateway to let the client
 communicate with the solver.
 
-\note A paper that describes how the controller works can be downloaded <a href="http://wiki.icub.org/viki/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
+\note A paper that describes how the controller works can be downloaded <a href="http://wiki.icub.org/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
 <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>: U. Pattacini, F. Nori, L. Natale, G. Metta, G. Sandini,
 "An Experimental Evaluation of a Novel Minimum-Jerk Cartesian Controller for Humanoid Robots", <i>IEEE/RSJ International Conference on Intelligent Robots and Systems</i>,
 Taipei, Taiwan, 2010.
