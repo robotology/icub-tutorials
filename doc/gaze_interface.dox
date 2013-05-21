@@ -200,7 +200,7 @@ The benefit of <i>lookAtMonoPixel()</i> method is clearly that the time for the 
 in streaming mode; on the other hand, the knowledge of the cartesian point remains hidden to the user, unless it is retrieved at the end of the
 motion through a call to <i>getFixationPoint()</i>. \n
 Alternatively, one can think to rely on the vergence angle given in degree in place of the the component z, accounting for a different way of expressing
-distances from the eyes. To this end, the user can call the proper method <i>lootAtMonoPixelWithVergence(camSel,px,ver)</i>.
+distances from the eyes. To this end, the user can call the proper method <i>lookAtMonoPixelWithVergence(camSel,px,ver)</i>.
 
 
 \subsection subsec_gaze_stereopixelcoorsystem Expressing the fixation point in pixel coordinates (stereo approach)
@@ -329,7 +329,7 @@ public:
 
 MotionDoneEvent event;
 igaze->registerEvent(event);                       // the tag "motion-done" identifies the event to be notified
-igaze->lootAtFixationPoint(fp);                    // as soon as the motion is complete, the callback will print out the message
+igaze->lookAtFixationPoint(fp);                    // as soon as the motion is complete, the callback will print out the message
 \endcode
 
 To know which events are available for notification, the user can do:
