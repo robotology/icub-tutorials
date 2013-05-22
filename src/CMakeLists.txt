@@ -31,7 +31,7 @@ add_subdirectory(learningMachines)
 
 ## again this is for testing only, please ignore if you are reading tutorials
 ## Check that all dependecies have bene found.
-if (NOT ICUB_USE_OPENCV)
+if (NOT ICUB_USE_OpenCV)
     message(FATAL_ERROR "OpenCV not found")
 endif()
 if (NOT ICUB_USE_IPOPT)
