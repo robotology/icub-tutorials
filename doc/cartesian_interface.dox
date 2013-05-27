@@ -13,6 +13,7 @@
 - \ref sec_cart_nonlineardesign
 - \ref sec_cart_contextswitch
 - \ref sec_cart_taskrefvel
+- \ref sec_cart_tipframe
 - \ref sec_cart_eventscallbacks
 - \ref sec_cart_siminterface
 
@@ -404,6 +405,36 @@ The solver still plays a meaningful role in this command mode so that the whole 
 are taken into account. Moreover, the task-space reference velocity will be tracked according to the reactivity level of the internal controller
 which is basically determined by the current trajectory time; thus, for executing high task-space velocity the trajectory time should be tuned
 towards lower values, whereas it should be increased to track low task-space reference velocity.
+
+
+\section sec_cart_tipframe Defining a Different Effector
+
+The cartesian controller can be also instructed to control a point (and generally an orientation too) expressed in the end-effector reference frame.
+This is equivalent to rigidly attaching a tip to the end-effector. Therefore, to achieve such extension it is required to call the <i>attechTipFrame()</i>
+method of the interface as done in the following example, where the aim is to control the tip of the index finger rather than the center of the palm:
+\code
+IEncoders *iencs;
+...
+
+int nEncs;
+iencs->getAxes(&nEncs);
+Vector encs(nEncs);
+iencs->getEncoders(encs.data());
+...
+
+Vector joints;
+iCubFinger finger("right_index");                  // relevant code to get the position of the finger tip
+finger.getChainJoints(encs,joints);                // wrt the end-effector frame
+Matrix tipFrame=finger.getH((M_PI/180.0)*joints);  
+
+Vector tip_x=tipFrame.getCol(3);
+Vector tip_o=dcm2axis(tipFrame);
+icart->attachTipFrame(tip_x,tip_o);                // establish the new controlled frame
+...
+
+icart->getPose(x,o);                               // now the pose refers to the finger tip frame
+icart->goToPose(xd,od);                            // so as the target will be attained with the finger
+\endcode
 
 
 \section sec_cart_eventscallbacks Events Callbacks
