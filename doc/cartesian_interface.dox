@@ -409,9 +409,10 @@ towards lower values, whereas it should be increased to track low task-space ref
 
 \section sec_cart_tipframe Defining a Different Effector
 
-The cartesian controller can be also instructed to control a point (and generally an orientation too) expressed in the end-effector reference frame.
-This is equivalent to rigidly attaching a tip to the end-effector. Therefore, to achieve such extension it is required to call the <i>attachTipFrame()</i>
-method of the interface as done in the following example, where the aim is to control the tip of the index finger rather than the center of the palm:
+The cartesian controller can be also instructed to control a different effector that can be suitably expressed with respect to the standard end-effector
+reference frame. This is thus equivalent to rigidly attaching a tip to the standard end-effector.
+Therefore, to achieve such extension, it is required to call the <i>attachTipFrame()</i> method of the interface as done in the following example,
+where the aim is to control the tip of the index finger rather than the center of the palm:
 \code
 IEncoders *iencs;
 ...
@@ -433,7 +434,10 @@ icart->attachTipFrame(tip_x,tip_o);                // establish the new controll
 ...
 
 icart->getPose(x,o);                               // now the pose refers to the finger tip frame
-icart->goToPose(xd,od);                            // so as the target will be attained with the finger
+icart->goToPose(xd,od);                            // so as the target will be attained with the finger tip
+...
+
+icart->removeTipFrame();                           // to restore the center of the palm as actual end-effector
 \endcode
 
 
