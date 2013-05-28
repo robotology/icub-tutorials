@@ -410,7 +410,7 @@ towards lower values, whereas it should be increased to track low task-space ref
 \section sec_cart_tipframe Defining a Different Effector
 
 The cartesian controller can be also instructed to control a point (and generally an orientation too) expressed in the end-effector reference frame.
-This is equivalent to rigidly attaching a tip to the end-effector. Therefore, to achieve such extension it is required to call the <i>attechTipFrame()</i>
+This is equivalent to rigidly attaching a tip to the end-effector. Therefore, to achieve such extension it is required to call the <i>attachTipFrame()</i>
 method of the interface as done in the following example, where the aim is to control the tip of the index finger rather than the center of the palm:
 \code
 IEncoders *iencs;
