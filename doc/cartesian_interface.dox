@@ -439,6 +439,8 @@ icart->goToPose(xd,od);                            // so as the target will be a
 
 icart->removeTipFrame();                           // to restore the center of the palm as actual end-effector
 \endcode
+Importantly, the tip frame is part of the current context, hence it might happen that several tip frames are attached or removed as result of the
+user context switching requests.
 
 
 \section sec_cart_eventscallbacks Events Callbacks
