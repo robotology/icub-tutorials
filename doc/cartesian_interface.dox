@@ -429,7 +429,7 @@ finger.getChainJoints(encs,joints);                // wrt the end-effector frame
 Matrix tipFrame=finger.getH((M_PI/180.0)*joints);  
 
 Vector tip_x=tipFrame.getCol(3);
-Vector tip_o=dcm2axis(tipFrame);
+Vector tip_o=ctrl::dcm2axis(tipFrame);
 icart->attachTipFrame(tip_x,tip_o);                // establish the new controlled frame
 ...
 
