@@ -180,11 +180,6 @@ public:
         od[0]=0.0; od[1]=0.0; od[2]=1.0; od[3]=M_PI;
     }
 
-    double norm(const Vector &v)
-    {
-        return sqrt(dot(v,v));
-    }
-
     void limitTorsoPitch()
     {
         int axis=0; // pitch joint

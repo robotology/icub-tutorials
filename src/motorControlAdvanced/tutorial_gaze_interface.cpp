@@ -272,11 +272,6 @@ public:
         }
     }
 
-    double norm(const Vector &v)
-    {
-        return sqrt(dot(v,v));
-    }
-
     void printStatus()
     {        
         if (t-t1>=PRINT_STATUS_PER)
