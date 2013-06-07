@@ -102,10 +102,9 @@ public:
     {
         // open a client interface to connect to the gaze server
         // we suppose that:
-        // 1 - the iCub simulator (icubSim) is running
+        // 1 - the iCub simulator is running;
         // 2 - the gaze server iKinGazeCtrl is running and
-        //     launched with the following options:
-        //     --robot icubSim --context cameraCalibration/conf --config icubSimEyes.ini
+        //     launched with the following options: "--from configSim.ini"
         Property optGaze("(device gazecontrollerclient)");
         optGaze.put("remote","/iKinGazeCtrl");
         optGaze.put("local","/gaze_client");
@@ -276,10 +275,9 @@ public:
     {        
         if (t-t1>=PRINT_STATUS_PER)
         {
-            Vector x;
-
             // we get the current fixation point in the
             // operational space
+            Vector x;
             igaze->getFixationPoint(x);
 
             fprintf(stdout,"+++++++++\n");
