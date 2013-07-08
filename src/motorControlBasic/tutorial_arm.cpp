@@ -80,9 +80,17 @@ int main(int argc, char *argv[])
 
     //pos->setRefSpeeds(tmp.data()))
     
-    //fisrst zero all joints
+    //fisrst read all encoders
     //
-    command=0;
+    printf("waiting for encoders");
+    while(!encs->getEncoders(encoders.data()))
+    {
+        Time::delay(0.1);
+        printf(".");
+    }
+    printf("\n;");
+
+    command=encoders;
     //now set the shoulder to some value
     command[0]=-50;
     command[1]=20;
