@@ -11,7 +11,7 @@
  * 
  * -) /ctrl/q:i    receive the joints angles feedback [deg] from the robot
  * -) /ctrl/xd:i   receive the target pose in axis-angle format ([x y z ax ay az theta]) from the user
- * -) /ctrl/qd:i   output the joints configuration where to move (as result of the inverse kinematics)
+ * -) /ctrl/qd:o   output the joints configuration where to move (as result of the inverse kinematics)
  * -) /ctrl/v:o    output the velocity profiles that steer the joints to the final configuration [deg/s] (to be connected to the robot)
  * -) /ctrl/x:o    output the current end-effector position in axis-angle format
  *
