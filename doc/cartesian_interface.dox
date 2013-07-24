@@ -110,6 +110,8 @@ client controller:
 #include <yarp/dev/all.h>
 YARP_DECLARE_DEVICES(icubmod)
 ...
+using namespace yarp::dev;
+...
 
 int main()
 {
