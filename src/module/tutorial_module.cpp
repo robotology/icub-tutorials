@@ -82,7 +82,7 @@ int main(int argc, char * argv[])
 
     MyModule module;
     ResourceFinder rf;
-    rf.configure("ICUB_ROOT", argc, argv);
+    rf.configure(argc, argv);
     rf.setVerbose(true);
 
     cout<<"Configure module..."<<endl;

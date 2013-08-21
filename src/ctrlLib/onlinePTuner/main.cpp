@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     }
 
     ResourceFinder rf;
-    rf.configure("ICUB_ROOT",argc,argv);
+    rf.configure(argc,argv);
 
     string name=rf.check("name",Value("tuner")).asString().c_str();
     string robot=rf.check("robot",Value("icub")).asString().c_str();

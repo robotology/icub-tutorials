@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     rf.setVerbose();
     rf.setDefaultConfigFile("or.ini");
     rf.setDefaultContext("tutorials/orBottle");
-    rf.configure("ICUB_ROOT", argc, argv);
+    rf.configure(argc, argv);
         
     ConstString robotName=rf.find("robot").asString();
     ConstString model=rf.findFile("model");

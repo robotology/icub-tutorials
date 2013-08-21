@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     rf.setVerbose();
     rf.setDefaultConfigFile("random.ini");
     rf.setDefaultContext("tutorials/randomMotion");
-    rf.configure("ICUB_ROOT", argc, argv);
+    rf.configure(argc, argv);
         
     ConstString robotName=rf.find("robot").asString();
     ConstString partName=rf.find("part").asString();

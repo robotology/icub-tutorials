@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
     rf.setDefault("part","fake_part");
     rf.setDefault("local","server");
     rf.setDefault("kinematics_file","kinematics.ini");
-    rf.configure("ICUB_ROOT",argc,argv);
+    rf.configure(argc,argv);
 
     ServerModule server;
     return server.runModule(rf);

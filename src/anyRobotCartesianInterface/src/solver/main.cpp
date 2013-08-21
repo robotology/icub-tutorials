@@ -186,7 +186,7 @@ int main(int argc, char *argv[])
     rf.setVerbose(true);
     rf.setDefaultConfigFile("solver.ini");
     rf.setDefault("kinematics_file","kinematics.ini");
-    rf.configure("ICUB_ROOT",argc,argv);
+    rf.configure(argc,argv);
 
     SolverModule solver;
     return solver.runModule(rf);

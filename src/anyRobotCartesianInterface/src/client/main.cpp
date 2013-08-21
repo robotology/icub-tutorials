@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
     rf.setVerbose(true);
     rf.setDefault("remote","server");
     rf.setDefault("local","client");
-    rf.configure("ICUB_ROOT",argc,argv);
+    rf.configure(argc,argv);
 
     ClientModule client;
     return client.runModule(rf);
