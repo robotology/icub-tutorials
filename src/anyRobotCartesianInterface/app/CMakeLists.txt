@@ -2,18 +2,9 @@
 # Authors: Ugo Pattacini
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-set(appname ${PROJECTNAME})
-icub_app(${appname})
-
 file(GLOB conf    ${CMAKE_CURRENT_SOURCE_DIR}/conf/*.ini)
 file(GLOB scripts ${CMAKE_CURRENT_SOURCE_DIR}/scripts/*.xml)
 
-icub_app_install(${appname} 
-                 ROOT
-                 FILES ${conf}
-                 DESTINATION ./)
+yarp_install(FILES ${conf}    DESTINATION ${TUTORIAL_INSTALL_DIR})
+yarp_install(FILES ${scripts} DESTINATION ${TUTORIAL_INSTALL_DIR})
 
-icub_app_install(${appname} 
-                 ROOT
-                 FILES ${scripts}
-                 DESTINATION ./)

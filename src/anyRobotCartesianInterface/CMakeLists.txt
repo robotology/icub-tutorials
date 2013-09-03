@@ -6,11 +6,14 @@ cmake_minimum_required(VERSION 2.6)
 set(PROJECTNAME anyRobotCartesianInterface)
 project(${PROJECTNAME})
 
+find_package(YARP)
 find_package(ICUB)
-set(CMAKE_MODULE_PATH ${ICUB_MODULE_PATH} ${CMAKE_MODULE_PATH})
+list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH})
+list(APPEND CMAKE_MODULE_PATH ${ICUB_MODULE_PATH})
+include(YarpInstallationHelpers)
 include(iCubHelpers)
 
-set(ICUB_APPLICATIONS_PREFIX "${CMAKE_SOURCE_DIR}/bin"  CACHE PATH "Application path prefix")
+set(TUTORIAL_INSTALL_DIR "${CMAKE_SOURCE_DIR}/bin" CACHE PATH "Tutorial installation directory")
 
 add_subdirectory(src)
 add_subdirectory(app)
