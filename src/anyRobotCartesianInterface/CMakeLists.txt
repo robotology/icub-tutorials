@@ -13,8 +13,6 @@ list(APPEND CMAKE_MODULE_PATH ${ICUB_MODULE_PATH})
 include(YarpInstallationHelpers)
 include(iCubHelpers)
 
-set(TUTORIAL_INSTALL_DIR "${CMAKE_SOURCE_DIR}/bin" CACHE PATH "Tutorial installation directory")
-
 add_subdirectory(src)
 add_subdirectory(app)
 

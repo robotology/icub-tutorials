@@ -14,5 +14,5 @@ source_group("Source Files" FILES ${folder_source})
 include_directories(${fakeMotorDevice_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 add_executable(${PROJECTNAME} ${folder_source})
 target_link_libraries(${PROJECTNAME} fakeMotorDevice ${YARP_LIBRARIES})
-install(TARGETS ${PROJECTNAME} DESTINATION ${TUTORIAL_INSTALL_DIR})
+install(TARGETS ${PROJECTNAME} DESTINATION ${CMAKE_BINARY_DIR}/bin)
 
