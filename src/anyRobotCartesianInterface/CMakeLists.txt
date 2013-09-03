@@ -13,6 +13,8 @@ list(APPEND CMAKE_MODULE_PATH ${ICUB_MODULE_PATH})
 include(YarpInstallationHelpers)
 include(iCubHelpers)
 
+set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH "Installation directory" FORCE)
+
 add_subdirectory(src)
 add_subdirectory(app)
 
