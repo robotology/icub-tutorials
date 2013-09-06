@@ -56,27 +56,17 @@ indicates the hub board mounted on the robot]
    the client part of the interface available.
 -# On PC104: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled. This will make the
    server part of the interface available on the hub.
--# On PC104: create the files to configure the cartesian controllers.
-   For example, to configure the cartesian arm controllers do:
-   - copy the files <i>cartesianLeftArm.ini</i> and <i>cartesianRightArm.ini</i> from <i>$ICUB_ROOT/main/app/robots/iCubGenova01/conf</i>
-     to <i>$ICUB_ROOT/main/app/robots/$ICUB_ROBOTNAME/conf</i>.
-   - create/update the file <i>$ICUB_ROOT/main/app/robots/$ICUB_ROBOTNAME/conf/iCubInterface.ini</i> containing the following lines:
-     \code
-     config icub.ini    // or the current main configuration file
-     cartLeftArm cartesianLeftArm.ini
-     cartRightArm cartesianRightArm.ini
-     \endcode
 
 
 <b>iCubStartup Application Launcher</b> \n
 
 Henceforth rely on the installed copy of <i>$ICUB_ROOT/main/app/iCubStartup/scripts/iCubStartup.xml.template</i> application
-to launch both the iCubInterface and the cartesian solvers (and other useful tools as well). \n
+to launch both the cartesian solvers (and other useful tools as well). \n
 The \ref iKinCartesianSolver "Cartesian Solvers" are required to invert the kinematics using Ipopt and they are meant to run
-on the cluster to avoid overloading the PC104 core. The solvers need the iCubInterface to connect to the robot to get useful
-data to operate (e.g. the joints bounds) and also iCubInterface needs them to open the server side of the Cartesian Interface.
+on the cluster to avoid overloading the PC104 core. The solvers need the robotInterface to connect to the robot to get useful
+data to operate (e.g. the joints bounds) and also the robotInterface needs them to open the server side of the Cartesian Interface.
 Therefore the <i>chicken-egg</i> problem is solved by applying proper connection timeout to the solvers and to keep them as
-close as possible to the iCubInterface by using the application.
+close as possible to the robotInterface by using the application.
 Moreover, once everything is launched from within the application, if the user <i>accidentally</i> stops one of these modules,
 it turns to be mandatory to restart all of them from the beginning; this comes from the requirement to keep the communication
 protocol as light as possible, avoiding requests for integrity check and reinitialization. \n

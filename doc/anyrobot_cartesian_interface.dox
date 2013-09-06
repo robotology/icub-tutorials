@@ -72,6 +72,8 @@ Alternatively, user might consider implementing the newest <b>IEncodersTimed</b>
 providing also information about the time stamps of the encoders that in turn will be attached to the pose information for
 synchronization purpose. At startup, the cartesian server will check accordingly the availability of the most suitable encoders
 interface. \n
+Moreover, as enhanced option, the server is also capable of automatically detecting the availability of the <b>IPositionDirect</b>
+interface, through which the low-level velocity control is replaced by the faster and more accurate streaming position control. \n
 This is not the right place where to tell about how to deal with these interfaces, but please find out more on the topic
 of making a new device in yarp <a href="http://wiki.icub.org/wiki/Making_a_new_device_in_YARP">here</a>.
 
@@ -259,21 +261,28 @@ ControllerName      server              // the yarp stem-name of the controller
 ControllerPeriod    20                  // the period of the control thread
 SolverNameToConnect solver              // the yarp stem-name of the solver to connect to
 KinematicPart       custom              // this is a special keyword that tells the server to open custom kinematics
+PositionControl     off                 // (*)
 NumberOfDrivers     1                   // the number of parts composing the structure
 
 [DRIVER_0]                              // here come the parameters for each part driver
 Key                 fake_part           // the tag-name assigned to the part within the code
 JointsOrder         direct              // the joints order: [direct] or [reversed] (see explanation above)
-MinAbsVels          (0.0 0.0 0.0)       // (*)
+MinAbsVels          (0.0 0.0 0.0)       // (**)
 \endcode
-(*) This is an optional parameter that accounts joint by joint for the minimum velocity (in [deg/s]) the motors can somehow achieve,
+(*) When "on" this parameter enables the low-level streaming position control of the robot's joints, meaning that the server will
+provide as output the position set-points straightaway instead of the velocity commands. As result, we gain much faster and more accurate
+movements, without requiring any <i>ad-hoc</i> dynamics compensation (see below). To do that, the <b>IPositionDirect</b> interface
+needs to be available. \n
+(**) This is an optional parameter that accounts joint by joint for the minimum velocity (in [deg/s]) the motors can somehow achieve,
 and are meant to be provided in absolute values. Whenever the controller tries to deliver velocities under these thresholds, then
 it switches in a bang-bang mode to finally attain the target positions.
 
 \subsection subsec_customcart_server_plantident Plant Identification (Advanced)
 
 This topic is somewhat advanced and is concerned with the possibility to improve the controller's performance, so that it is not strictly
-required for normal operations and the user might consider skipping it at the early stage of his implementation. \n
+required for normal operations and the user might consider skipping it at the early stage of his implementation. Further, if the <b>IPositionDirect</b>
+interface is detected as available by the server and the <b>PositionControl</b> configuration switch is set to "on", then the presence of the section
+[PLANT_MODEL] described hereinafter will turn to be irrilevant to the control. \n
 The closed-loop joint controller is designed in such a way that it delivers velocity commands to shape the system response as to follow a
 trajectory that resembles a minimum-jerk profile. To this end, the strong assumption is that the joint itself behaves like a pure integrator.
 Of course the real world deviates - sometimes significantly - from the ideal conditions and a number of unmodelled factors starts taking place.
