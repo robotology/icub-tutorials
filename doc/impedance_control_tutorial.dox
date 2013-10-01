@@ -129,9 +129,9 @@ itrq->getTorques(torques.data());
 
 You can change the impedence parameters of a joint at any time:
 \code
-  double stiffness = 0.111;   // stiffness coefficient, units are Nm/deg
-  double damping =  0.014;    // damping coefficient,   units are Nm/(deg/s)
-  double offset = 0.0;		  // torque offset,         units are Nm
+  double stiffness = 0.111;          // stiffness coefficient, units are Nm/deg
+  double damping =  0.014;           // damping coefficient,   units are Nm/(deg/s)
+  double offset = 0.0;               // torque offset,         units are Nm
   bool ok = iimp->setImpedance(joint, stiffness, damping, offset);
 \endcode
 
@@ -143,7 +143,7 @@ ictrl->setImpedancePositionMode(3);
 
 When in impedance position mode, the low level controller (DSP) computes a refence torque Td as:
 
-\f[ T_d = K_{spring} * (q-q_d) + K_{damp} * \dot{q} + F_{offset} \f]
+\f[ T_d = K_{spring} * (q_d-q) - K_{damp} * \dot{q} + F_{offset} \f]
 
 which is tracked by the internal PID regulator.
 
