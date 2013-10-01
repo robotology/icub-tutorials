@@ -14,7 +14,7 @@ yarp::dev::IImpedanceControl
 \section sec_intro Introduction
 Prerequisites, see \ref icub_motor_control_tutorial
 
-The code described in this tutorial can be found at tutorials/src/motorControlImpedance/tutorial_arm_joint_impedance.cpp
+The code described in this tutorial can be found at tutorials/src/motorControlImpedance/tutorial_arm_joint_impedance.cpp \n
 The example is based on the previous tutorial tutorials/src/motorControlBasic/tutorial_arm.cpp
 
 The example shows how to open the ITorqueControl to show the arm joint torques and how to change the control mode of the elbow joint from position to impedance control. 
