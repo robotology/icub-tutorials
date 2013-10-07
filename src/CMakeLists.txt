@@ -43,12 +43,8 @@ add_subdirectory(learningMachines)
 #set(ICUB_USE_OpenCV "ON" CACHE BOOL "dependency flag" FORCE)
 #set(ICUB_USE_Qt3 "ON" CACHE BOOL "dependency flag" FORCE)
 
-IF(ICUB_USE_OpenCV)
-    ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
-    TARGET_LINK_LIBRARIES(test_icubVis ${YARP_LIBRARIES} iCubVis)
-ELSE()
-    MESSAGE(STATUS "OpenCV not found")
-ENDIF()
+ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
+TARGET_LINK_LIBRARIES(test_icubVis ${YARP_LIBRARIES} iCubVis)
 
 ### execute tests
 GET_TARGET_PROPERTY(EXELOC test_icubVis LOCATION_RELEASE)
