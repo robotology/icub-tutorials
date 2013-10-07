@@ -29,14 +29,6 @@ add_subdirectory(iDyn)
 add_subdirectory(ctrlLib)
 add_subdirectory(learningMachines)
 
-## again this is for testing only, please ignore if you are reading tutorials
-## Check that all dependecies have bene found.
-if (NOT ICUB_USE_OpenCV)
-    message(FATAL_ERROR "OpenCV not found")
-endif()
-if (NOT ICUB_USE_IPOPT)
-    message(FATAL_ERROR "Ipopt not found")
-endif()
 #set(ICUB_USE_GSL "ON" CACHE BOOL "dependency flag" FORCE)
 #set(ICUB_USE_GLUT "ON" CACHE BOOL "dependency flag" FORCE)
 #set(ICUB_USE_OpenGL "ON" CACHE BOOL "dependency flag" FORCE)
@@ -51,15 +43,19 @@ endif()
 #set(ICUB_USE_OpenCV "ON" CACHE BOOL "dependency flag" FORCE)
 #set(ICUB_USE_Qt3 "ON" CACHE BOOL "dependency flag" FORCE)
 
-ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
-TARGET_LINK_LIBRARIES(test_icubVis ${YARP_LIBRARIES} iCubVis)
+IF(ICUB_USE_OpenCV)
+    ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
+    TARGET_LINK_LIBRARIES(test_icubVis ${YARP_LIBRARIES} iCubVis)
+ELSE()
+    MESSAGE(STATUS "OpenCV not found")
+ENDIF()
 
 ### execute tests
 GET_TARGET_PROPERTY(EXELOC test_icubVis LOCATION_RELEASE)
 ADD_TEST(test_icubVis ${EXELOC})
 
 IF(ICUB_USE_IPOPT)
-    message(STATUS "Testing IPOPT dependent code")
+    MESSAGE(STATUS "Testing IPOPT dependent code")
 
     ADD_EXECUTABLE(test_ipopt smoke-tests/ipopt.cpp)
     TARGET_LINK_LIBRARIES(test_ipopt ${YARP_LIBRARIES} iKin)
@@ -69,6 +65,8 @@ IF(ICUB_USE_IPOPT)
     
     add_subdirectory(iKin)
     add_subdirectory(optimization)
+ELSE()
+    MESSAGE(STATUS "Ipopt not found")
 ENDIF()
 
 ###################### end of test specific code
