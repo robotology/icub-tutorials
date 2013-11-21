@@ -63,10 +63,12 @@ indicates the hub board mounted on the robot]
 Henceforth rely on the installed copy of <i>$ICUB_ROOT/main/app/iCubStartup/scripts/iCubStartup.xml.template</i> application
 to launch both the cartesian solvers (and other useful tools as well). \n
 The \ref iKinCartesianSolver "Cartesian Solvers" are required to invert the kinematics using Ipopt and they are meant to run
-on the cluster to avoid overloading the PC104 core. The solvers need the robotInterface to connect to the robot to get useful
-data to operate (e.g. the joints bounds) and also the robotInterface needs them to open the server side of the Cartesian Interface.
-Therefore the <i>chicken-egg</i> problem is solved by applying proper connection timeout to the solvers and to keep them as
-close as possible to the robotInterface by using the application.
+on the cluster to avoid overloading the PC104 core. Make sure that the machines where the solvers will be running are configured
+properly to work with the specific robot (e.g. the <b>YARP_ROBOT_NAME</b> correctly points to the name of the robot) in order
+to load at start-up the robot dependent kinematics. \n
+The solvers need the robotInterface to connect to the robot to get useful data to operate (e.g. the joints bounds) and also the
+robotInterface needs them to open the server side of the Cartesian Interface. Therefore the <i>chicken-egg</i> problem is solved
+by applying proper connection timeout to the solvers and to keep them as close as possible to the robotInterface by using the application.
 Moreover, once everything is launched from within the application, if the user <i>accidentally</i> stops one of these modules,
 it turns to be mandatory to restart all of them from the beginning; this comes from the requirement to keep the communication
 protocol as light as possible, avoiding requests for integrity check and reinitialization. \n
