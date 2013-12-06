@@ -175,7 +175,7 @@ oz[0]=0.0; oz[1]=0.0; oz[2]=1.0; oz[3]=-M_PI/2.0;
 Matrix Ry=ctrl::axis2dcm(oy);   // from axis/angle to rotation matrix notation
 Matrix Rz=ctrl::axis2dcm(oz);
 
-Matrix R=Rz*Ry;
+Matrix R=Rz*Ry;                 // compose the two rotations keeping the order
 Vector o=ctrl::dcm2axis(R);     // from rotation matrix back to the axis/angle notation
 \endcode
 
