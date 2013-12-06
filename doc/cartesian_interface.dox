@@ -164,18 +164,18 @@ transformation formulas from one domain to another (e.g. look at ctrl::dcm2axis 
 We want to represent the orientation of the right hand when the arm is in the rest position (the torso and arm joints are zeroed),
 for which the x-axis attached to the center of the palm points downward, the y-axis points backward, while the z-axis
 points leftward. Hence, to transform the root reference frame in the end-effector frame, one solution is to rotate of pi/2
-around the y-axis and then of pi/2 around the resulting x-axis.
+around the y-axis and then of -pi/2 around the z-axis.
 
 In formulas:
 \code
-Vector oy(4), ox(4);
-oy[0]=0.0; oy[1]=1.0; oy[2]=0.0; oy[3]=M_PI/2.0;
-ox[0]=1.0; ox[1]=0.0; ox[2]=0.0; ox[3]=M_PI/2.0;
+Vector oy(4), oz(4);
+oy[0]=0.0; oy[1]=1.0; oy[2]=0.0; oy[3]=+M_PI/2.0;
+oz[0]=0.0; oz[1]=0.0; oz[2]=1.0; oz[3]=-M_PI/2.0;
 
 Matrix Ry=ctrl::axis2dcm(oy);   // from axis/angle to rotation matrix notation
-Matrix Rx=ctrl::axis2dcm(ox);
+Matrix Rz=ctrl::axis2dcm(oz);
 
-Matrix R=Ry*Rx;
+Matrix R=Rz*Ry;
 Vector o=ctrl::dcm2axis(R);     // from rotation matrix back to the axis/angle notation
 \endcode
 
