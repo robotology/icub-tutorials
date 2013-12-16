@@ -7,7 +7,7 @@ In this tutorial we show more details of how to use the ResourceFinder to locate
 \section sec_intro Introduction
 
 In a previous tutorial (\ref icub_resource_finder_basic) we showed how to use the ResourceFinder 
-to organize modules parameters in files and place them in directories in $ICUB_ROOT/app.
+to organize modules parameters in files and place them in directories in $YARP_DATA_HOME/contexts.
 
 We show here that the ResourceFinder is also useful to handle access to all files needed by a module.
 
@@ -27,14 +27,14 @@ robot icub
 model bottle.ppm
 \endcode
 
-we place this file together with the template bottle.ppm in a directory called 'orBottle' in $ICUB_ROOT/app/tutorials.
+we place this file together with the template bottle.ppm in a directory called 'orBottle' in $YARP_DATA_HOME/contexts/tutorials.
 
 main.cpp is something like:
 
 \code
 ResourceFinder rf;
 rf.setVerbose();
-rf.configure("ICUB_ROOT", argc, argv);
+rf.configure(argc, argv);
 rf.setDefaultConfigFile("or.ini");
 \endcode
 
@@ -91,7 +91,7 @@ From these tutorials you might have had the feeling it is better to create a new
 configuration file for a module. This is not always the case. For simple modules (i.e. modules
 that require only a limited set of paramters to run) it will be much better to just use one context and 
 separate configuration files. In other cases, especially when a module uses several resource files, it is 
-more appropriate to duplicate all files in a different context directory in $ICUB_ROOT/app. What solution is 
+more appropriate to duplicate all files in a different context directory in $YARP_DATA_HOME/contexts. What solution is 
 more appropriate depends on the specific case.
 
 \section sec_code Code
