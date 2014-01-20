@@ -481,8 +481,7 @@ Complete look_at_location.cpp:
 
 See code at:
 
-  tutorials/src/imageProcessing/findLocation.cpp
- 
-  tutorials/src/imageProcessing/lookAtLocation.cpp
+  src/imageProcessing/findLocation.cpp
+  src/imageProcessing/lookAtLocation.cpp
   
 **/

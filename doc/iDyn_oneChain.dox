@@ -112,7 +112,7 @@ We can now retrieve the results: forces, moments and joint torques. In particula
 
 Full working code of this tutorial is available here:
 \code
-   iCub/tutorials/src/iDyn/oneChainDynamics/main.cpp
+   icub-tutorials/src/iDyn/oneChainDynamics/main.cpp
 \endcode
 
 \author Serena Ivaldi

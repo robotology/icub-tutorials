@@ -73,8 +73,8 @@ Now wait some time and go back to home position:
   iPos.positionMove(home.data())
 \endcode
 
-Code can be found at tutorials/python/python-motor-control.py
+Code can be found at python/python-motor-control.py
 
-This file can be edited at tutorials/doc/python-motor-control.dox
+This file can be edited at doc/python-motor-control.dox
 
 **/

@@ -388,6 +388,6 @@ To do that, type the following:
 iKinGazeCtrl --from configSim.ini
 \endcode
 
-A working example is available here: tutorials/src/motorControlAdvanced/tutorial_gaze_interface.cpp
+A working example is available here: src/motorControlAdvanced/tutorial_gaze_interface.cpp
 */
 

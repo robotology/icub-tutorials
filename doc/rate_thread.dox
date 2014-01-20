@@ -189,6 +189,6 @@ myThread.stop();
 stop() blocks and waits that the thread performs the last run() function, and threadRelease(), 
 after which we can safely return.
 
-Full working code of this tutorial is available here: tutorials/src/rateThread/tutorial_rate_thread.cpp
+Full working code of this tutorial is available here: src/rateThread/tutorial_rate_thread.cpp
 *
 **/

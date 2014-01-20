@@ -120,8 +120,8 @@ Array interface can also be used to easily detect whether the image has been, fo
 
 \section final_example Real-world example
 
-Code used in this tutorial can be found at tutorials/python/python_imaging.py In addition, the file contains a class implementing a simple image filter, which retrieves images through one YARP port, computes a Sobel operator, and sends the result to another port. To run this example, make sure you have the iCub simulator and yarpview instance running as in examples above, and simply execute the \c python_image.py module as a regular python program.
+Code used in this tutorial can be found at python/python_imaging.py In addition, the file contains a class implementing a simple image filter, which retrieves images through one YARP port, computes a Sobel operator, and sends the result to another port. To run this example, make sure you have the iCub simulator and yarpview instance running as in examples above, and simply execute the \c python_image.py module as a regular python program.
 
-This file can be edited at tutorials/doc/python-imaging.dox
+This file can be edited at doc/python-imaging.dox
 
 **/

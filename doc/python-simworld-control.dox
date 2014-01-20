@@ -8,7 +8,7 @@ This tutorial shows how to control the iCub simulator via YARP bindings for Pyth
 
 It is assumed that you have already compiled or installed the Python bindings. This tutorial assumes basic knowledge of how YARP works in C++, familiarity with YARP RPC mechanism, the specific RPC interface of the iCub simulator (described in the simulator README) as well as some basic knowledge of Python, it's essential packages and functions.
 
-This tutorial has the form of a small Python module which implements a WorldController class used to communicate with the iCub simulator. Full code of this module can be found in  tutorials/python/python_simworld_control.py
+This tutorial has the form of a small Python module which implements a WorldController class used to communicate with the iCub simulator. Full code of this module can be found in python/python_simworld_control.py
 
 \section sec_start Module initialisation
 
@@ -257,6 +257,6 @@ del wc
 
 \endcode
 
-This file can be edited at tutorials/doc/python-simworld-control.dox
+This file can be edited at doc/python-simworld-control.dox
 
 **/

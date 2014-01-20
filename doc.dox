@@ -28,9 +28,9 @@ The following are some specific tutorials.
 
 \subsection sec_ikin_lib_cpp  iKin library
 
-- tutorials/src/iKin/fwInvKinematics/main.cpp - a tutorial on how to directly use \ref iKin to cope with forward/inverse kinematics problems
-- tutorials/src/iKin/onlineSolver/main.cpp - a tutorial on how to solve online inverse kinematics of a generic robot limb
-- tutorials/src/iKin/genericChainController/main.cpp - a tutorial on how to control a generic kinematic chain
+- src/iKin/fwInvKinematics/main.cpp - a tutorial on how to directly use \ref iKin to cope with forward/inverse kinematics problems
+- src/iKin/onlineSolver/main.cpp - a tutorial on how to solve online inverse kinematics of a generic robot limb
+- src/iKin/genericChainController/main.cpp - a tutorial on how to control a generic kinematic chain
 
 Online documentation is available here:
 <a href="http://wiki.icub.org/iCub_documentation/group__iKin.html">iKin online documentation</a>.
@@ -50,17 +50,17 @@ way is to use machine learning classes directly. The library also provides C++ a
 that facilitate migration to their learning methods; their use is illustrated in the intermediate and
 advanced tutorials. You should check all examples and choose the method that better suits your application. 
 
-- Basic tutorial. Use learning machines directly: tutorials/src/learningMachines/lmlibdirect.cpp
-- Intermediate tutotial. Use learning machines thourgh abstract interfaces: tutorials/src/learningMachines/lmlibindirect.cpp 
-- Advanced tutorial. Use learning machines through abstract interfaces and factory: tutorials/src/learningMachines/lmlibportable.cpp
+- Basic tutorial. Use learning machines directly: src/learningMachines/lmlibdirect.cpp
+- Intermediate tutotial. Use learning machines thourgh abstract interfaces: src/learningMachines/lmlibindirect.cpp 
+- Advanced tutorial. Use learning machines through abstract interfaces and factory: src/learningMachines/lmlibportable.cpp
 
 Online documentation is available here:
 <a href="http://wiki.icub.org/iCub_documentation/group__icub__libLearningMachine.html">learningMachines online documentation</a>.
 
 \subsection sec_other_lis_cpp Other libraries
 
-- tutorials/src/ctrlLib/onlinePTuner/main.cpp - a tutorial on online tuning of a P controller
-- tutorials/src/optimization/calibReference/main.cpp - a tutorial on how to calibrate two reference frames from a cloud of matching points
+- src/ctrlLib/onlinePTuner/main.cpp - a tutorial on online tuning of a P controller
+- src/optimization/calibReference/main.cpp - a tutorial on how to calibrate two reference frames from a cloud of matching points
 
 \section sec_python Python Tutorials
 
@@ -70,7 +70,7 @@ These tutorials assume you installed the YARP and iCub bindings for Python. Foll
 - \ref icub_python_simworld_control - a tutorial on how to control the iCub simulator from Python via its RPC interface
 - \ref icub_python_imaging - a tutorial on processing YARP images in Python
 
-* This file can be edited at tutorials/doc.dox
+* This file can be edited at doc.dox
 *
 **/
 

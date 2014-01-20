@@ -181,6 +181,6 @@ http://eris.liralab.it/yarpdoc/namespaceyarp_1_1dev.html
 
 \section sec_code Code
 
-See code in: tutorials/src/motorControlBasic/tutorial_arm.cpp
+See code in: src/motorControlBasic/tutorial_arm.cpp
 
 **/

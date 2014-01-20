@@ -82,7 +82,7 @@ of making a new device in yarp <a href="http://wiki.icub.org/wiki/Making_a_new_d
 
 Let's explain how to configure all the components for your robot through an example, whose code is available under
 \code
-tutorials/src/anyRobotCartesianInterface.
+src/anyRobotCartesianInterface.
 \endcode
 Imagine you're done with coding the basic motor interfaces for your robot, which is not as cute as iCub: it is equipped
 indeed with just three degrees-of-freedom represented by three joints controlled by three independent motors. You'll probably
