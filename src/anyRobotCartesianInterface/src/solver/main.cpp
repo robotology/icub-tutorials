@@ -146,9 +146,7 @@ public:
     /**********************************************************/
     bool close()
     {
-        if (solver!=NULL)
-            delete solver;
-
+        delete solver;
         return true;
     }
 
