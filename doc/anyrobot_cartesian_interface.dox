@@ -218,7 +218,8 @@ p->rvs.push_back(false);
 p->num=2;
 \endcode
 Intuitively, the insertion order depends on the links of the chain. In iCub the three links of torso come first, hence <i>optTorso</i> is
-the first object to be pushed in the queue.
+the first object to be pushed in the queue. \n
+To conclude, it is worth pointing out how all the steps described above can be conveniently handled also by means of the \ref iKinCartesianSolver module.
 
 
 \section sec_customcart_server_configuration Configuring the Server
