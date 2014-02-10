@@ -85,10 +85,8 @@ int main(int argc, char * argv[])
     rf.configure(argc, argv);
     rf.setVerbose(true);
 
-    cout<<"Configure module..."<<endl;
-    module.configure(rf);
-    cout<<"Start module..."<<endl;
-    module.runModule();
+    cout << "Configuring and starting module. \n";
+    module.runModule(rf);   // This calls configure(rf) and, upon success, the module execution begins with a call to updateModule()
 
     cout<<"Main returning..."<<endl;
     return 0;
