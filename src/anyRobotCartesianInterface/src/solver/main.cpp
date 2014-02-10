@@ -58,8 +58,8 @@ protected:
         // the device driver to access the fake robot
         Property optPart;
         optPart.put("device","fakeyClient");
-        optPart.put("remote",(robot+"/"+part).c_str());
-        optPart.put("local",(slvName+"/"+part).c_str());
+        optPart.put("remote",("/"+robot+"/"+part).c_str());
+        optPart.put("local",("/"+slvName+"/"+part).c_str());
         optPart.put("part",part.c_str());
 
         // we grab info on the fake robot's kinematics
@@ -96,7 +96,7 @@ protected:
 
 public:
     /**********************************************************/
-    fakeRobotCartesianSolver(const string &_slvName="solver") : CartesianSolver(_slvName) { }
+    fakeRobotCartesianSolver(const string &name) : CartesianSolver(name) { }
 };
 
 class SolverModule: public RFModule

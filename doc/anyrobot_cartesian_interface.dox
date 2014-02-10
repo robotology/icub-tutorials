@@ -171,8 +171,8 @@ In the current example the fake manipulator is represented by just one motor par
 \code
 Property optPart;
 optPart.put("device","fakeyClient");                    // the name of the device
-optPart.put("remote",(robot+"/"+part).c_str());         // the stem-name of the server remote yarp port
-optPart.put("local",(slvName+"/"+part).c_str());        // the tag used as stem-name for the local ports
+optPart.put("remote",("/"+robot+"/"+part).c_str());     // the stem-name of the server remote yarp port
+optPart.put("local",("/"+slvName+"/"+part).c_str());    // the tag used as stem-name for the local ports
 optPart.put("part",part.c_str());                       // just the name of the part for displaying purpose
 \endcode
 
@@ -219,6 +219,8 @@ p->num=2;
 \endcode
 Intuitively, the insertion order depends on the links of the chain. In iCub the three links of torso come first, hence <i>optTorso</i> is
 the first object to be pushed in the queue.
+
+To conclude, it is worth pointing out how all the steps described above can be conveniently handled also by means of the \ref iKinCartesianSolver module.
 
 
 \section sec_customcart_server_configuration Configuring the Server
