@@ -20,7 +20,6 @@ INCLUDE(CTest)
 
 # go by subdirectories
 add_subdirectory(imageProcessing)
-add_subdirectory(resourceFinder)
 add_subdirectory(module)
 add_subdirectory(motorControlBasic)
 add_subdirectory(motorControlAdvanced)
