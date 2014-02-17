@@ -16,7 +16,6 @@ This is how a module will look like:
 \code
 #include <iostream>
 #include <yarp/os/RFModule.h>
-#include <yarp/os/Module.h>
 #include <yarp/os/Network.h>
 
 using namespace std;
