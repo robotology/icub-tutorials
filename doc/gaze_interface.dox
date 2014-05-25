@@ -34,8 +34,7 @@ Istituto Italiano di Tecnologia, Genova, 2010.
 
 In order to use the Gaze Interface, make sure that the following steps are done:
 
--# Update YARP and iCub repositories.
--# Compile YARP (always a good practice).
+-# Update YARP and iCub repositories and compile them (always a good practice).
 -# Install <a href="http://wiki.icub.org/wiki/Installing_IPOPT">Ipopt</a>.
 -# Compile the iCub repository with the switch <b>ENABLE_icubmod_gazecontrollerclient</b> enabled: this will make
    the client part of the interface available. The server part is represented by the module \ref iKinGazeCtrl itself.

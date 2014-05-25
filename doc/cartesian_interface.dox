@@ -49,8 +49,7 @@ In order to use the Cartesian Interface, make sure that the following steps are 
 [Note that the term <i>cluster</i> refers to the set of computers directly connected to the robot network, whereas <i>PC104</i>
 indicates the hub board mounted on the robot]
 
--# Update YARP and iCub repositories.
--# Compile YARP (always a good practice).
+-# Update YARP and iCub repositories and compile them (always a good practice).
 -# Install <a href="http://wiki.icub.org/wiki/Installing_IPOPT">Ipopt</a> on the cluster.
 -# On the cluster: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled. This will make
    the client part of the interface available.
