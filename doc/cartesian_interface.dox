@@ -307,10 +307,10 @@ Briefly (a detailed description is given in the \ref iKinSlv "solver page"), the
 that can be described in this way:
 
 \f[
-\mathbf{q}=\arg\min_{\mathbf{q}\in R^{n} }\left(\frac{1}{2}\left\|\mathbf{\alpha}_d-\mathit{K_{\alpha}}\left(\mathbf{q}\right)\right\|^2+\mathit{w}\cdot\frac{1}{2}\left(\mathbf{q}_r-\mathbf{q}\right)^{\top}\mathit{W}_r\left(\mathbf{q}_r-\mathbf{q}\right)\right) \quad s.t.\,\left\{\begin{array}{l}\left\|\mathbf{x}_d-\mathit{K_x}\left(\mathbf{q}\right)\right\|^2<\epsilon\\\mathbf{q}_L<\mathbf{q}<\mathbf{q}_U\end{array}\right.
+\mathbf{q}=\arg\min_{\mathbf{q}\in R^{n} }\left(\left\|\mathbf{\alpha}_d-\mathit{K_{\alpha}}\left(\mathbf{q}\right)\right\|^2+\mathit{w}\cdot\left(\mathbf{q}_r-\mathbf{q}\right)^{\top}\mathit{W}_r\left(\mathbf{q}_r-\mathbf{q}\right)\right) \quad s.t.\,\left\{\begin{array}{l}\left\|\mathbf{x}_d-\mathit{K_x}\left(\mathbf{q}\right)\right\|^2<\epsilon\\\mathbf{q}_L<\mathbf{q}<\mathbf{q}_U\end{array}\right.
 \f]
 
-The term \f$ \frac{1}{2}\left(\mathbf{q}_r-\mathbf{q}\right)^{\top}\mathit{W}_r\left(\mathbf{q}_r-\mathbf{q}\right) \f$ represents
+The term \f$ \left(\mathbf{q}_r-\mathbf{q}\right)^{\top}\mathit{W}_r\left(\mathbf{q}_r-\mathbf{q}\right) \f$ represents
 the aforementioned secondary task, where \f$ \mathbf{q}_r \f$ is used to keep the solution as close as possible to a given rest
 position in the joint space, weighting component by component with the diagonal matrix \f$ \mathit{W}_r \f$. \n
 Thereby, to access the elements of \f$ \mathbf{q}_r \f$ and \f$ \mathit{W}_r \f$ one should call the following methods:
