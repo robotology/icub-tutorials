@@ -344,16 +344,21 @@ together with a given orientation, it turns that the robot will stretch its body
 enabled) almost irrespective of the final orientation. As consequence, bear always in mind to enable the torso to enlarge as much as possible
 the dexterous space of the iCub.
 
-If, for any reason, the orientation is meant to be handled with higher priority with respect to position, user can then call the following method:
+Conversely, if for any reason the orientation is meant to be handled with higher priority with respect to position, user can then declare the
+reaching in orientation as a contraint and the reaching in position as an objective, respectively. This swap is performed by the following call:
 \code
 icart->setPosePriority("orientation");
+\endcode
+To switch back to the normal configuration where position is again predominant:
+\code
+icart->setPosePriority("position");
 \endcode
 
 
 \section sec_cart_contextswitch Context Switch
 
 We define here the <i>context</i> as the configuration in which the controller operates: therefore the context includes the actual number of DOF's,
-their angular bounds, the resting positions and weights, the trajectory execution time, the current tracking mode and so on.
+their angular bounds, the resting positions and weights, the trajectory execution time, the current tracking mode, the pose priority and so on.
 Obviously the controller performs the same action differently depending on the current context.
 A way to easily switch among contexts is to rely on <i>storeContext()</i> and <i>restoreContext()</i> methods as follows:
 \code
