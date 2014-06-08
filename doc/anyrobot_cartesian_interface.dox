@@ -325,9 +325,9 @@ commanded by our velocity controller (dashed black) is depicted against the two 
 
 \image html cartIFPlantResponse.jpg "System Response with and without Plant Compensantion"
 
-Interestingly, the application <i>jointVelCtrlIdent</i> available from <a href="https://github.com/pattacini/icub-contrib.git"></a> lets you collect
-information about the system response to the chirp command. You can then think of employing the <i>System Identification Toolbox</i> from MATLAB to
-find out where these unwanted poles and zero are located in the complex plane. In fact, the <i>ident</i> tool contained whithin the MATLAB package
+Interestingly, the application <i>jointVelCtrlIdent</i> available from this <a href="https://github.com/pattacini/icub-contrib.git">GitHub repository</a>
+lets you collect information about the system response to the chirp command. You can then think of employing the <i>System Identification Toolbox</i> from
+MATLAB to find out where these unwanted poles and zero are located in the complex plane. In fact, the <i>ident</i> tool contained whithin the MATLAB package
 allows you to go through an identification session for the process <i>P(s)</i> specified above.
 
 Finally, as very last step, one can try also to compensate the lag of the control system represented by the exponential term in the transfer function. \n
