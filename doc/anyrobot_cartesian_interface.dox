@@ -277,7 +277,7 @@ provide as output the position set-points straightaway instead of the velocity c
 movements, without requiring any <i>ad-hoc</i> dynamics compensation (see below). To do that, the <b>IPositionDirect</b> interface
 needs to be available. \n
 (**) When "on" allows sending references to multiple joints with one yarp command saving bandwidth; when "off" each yarp command carries
-reference for one single joint.
+reference for one single joint. \n
 (***) This is an optional parameter that accounts joint by joint for the minimum velocity (in [deg/s]) the motors can somehow achieve,
 and are meant to be provided in absolute values. Whenever the controller tries to deliver velocities under these thresholds, then
 it switches in a bang-bang mode to finally attain the target positions.
