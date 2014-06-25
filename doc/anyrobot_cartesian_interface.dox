@@ -259,23 +259,26 @@ wrapper->attachAll(list);                                       // attach the li
 The configuration parameters of the server are the following:
 \code
 [GENERAL]
-ControllerName      server              // the yarp stem-name of the controller
-ControllerPeriod    20                  // the period of the control thread
-SolverNameToConnect solver              // the yarp stem-name of the solver to connect to
-KinematicPart       custom              // this is a special keyword that tells the server to open custom kinematics
-PositionControl     off                 // (*)
-NumberOfDrivers     1                   // the number of parts composing the structure
+ControllerName        server              // the yarp stem-name of the controller
+ControllerPeriod      20                  // the period of the control thread
+SolverNameToConnect   solver              // the yarp stem-name of the solver to connect to
+KinematicPart         custom              // this is a special keyword that tells the server to open custom kinematics
+PositionControl       off                 // (*)
+MultipleJointsControl on                  // (**)
+NumberOfDrivers       1                   // the number of parts composing the structure
 
-[DRIVER_0]                              // here come the parameters for each part driver
-Key                 fake_part           // the tag-name assigned to the part within the code
-JointsOrder         direct              // the joints order: [direct] or [reversed] (see explanation above)
-MinAbsVels          (0.0 0.0 0.0)       // (**)
+[DRIVER_0]                                // here come the parameters for each part driver
+Key                   fake_part           // the tag-name assigned to the part within the code
+JointsOrder           direct              // the joints order: [direct] or [reversed] (see explanation above)
+MinAbsVels            (0.0 0.0 0.0)       // (***)
 \endcode
 (*) When "on" this parameter enables the low-level streaming position control of the robot's joints, meaning that the server will
 provide as output the position set-points straightaway instead of the velocity commands. As result, we gain much faster and more accurate
 movements, without requiring any <i>ad-hoc</i> dynamics compensation (see below). To do that, the <b>IPositionDirect</b> interface
 needs to be available. \n
-(**) This is an optional parameter that accounts joint by joint for the minimum velocity (in [deg/s]) the motors can somehow achieve,
+(**) When "on" allows sending references to multiple joints with one yarp command saving bandwidth; when "off" each yarp command carries
+reference for one single joint.
+(***) This is an optional parameter that accounts joint by joint for the minimum velocity (in [deg/s]) the motors can somehow achieve,
 and are meant to be provided in absolute values. Whenever the controller tries to deliver velocities under these thresholds, then
 it switches in a bang-bang mode to finally attain the target positions.
 
