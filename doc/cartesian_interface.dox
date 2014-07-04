@@ -179,8 +179,8 @@ Vector o=ctrl::dcm2axis(R);     // from rotation matrix back to the axis/angle n
 \endcode
 
 The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]. \n
-Alternatively, one can specify directly the matrix R as a collection of column vectors, each representing the axes of the goal pose
-whose coordinates are expressed in the root reference frame:
+Alternatively, one can specify directly the matrix R as a collection of column vectors representing the axes of the goal pose
+expressed in the root reference frame:
 \code
 Matrix R(3,3);
 // pose x-axis   y-axis        z-axis
