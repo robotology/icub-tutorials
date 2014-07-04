@@ -26,7 +26,7 @@ for the joints, user can require for instance the arm to reach a specified pose 
 as a combination of a 3d point to be attained by the end-effector (the center of the palm in this case) along with
 the desired orientation given in axis-angle representation.
 
-Before proceeding, the reader might find helpful to recap some motor control fundamentals (click \ref icub_motor_control_tutorial "here")
+Before proceeding, the reader might find helpful to recap some motor control fundamentals (see \ref icub_motor_control_tutorial "here")
 as well as to be introduced to the underneath topic of forward and inverse kinematics by going through the \ref iKin documentation and tutorials.
 
 The architecture of the Cartesian Interface is based on three components: 1) a complex nonlinear <b>optimizer</b> that handles the inverse kinematics problem;
@@ -153,7 +153,7 @@ The root <b>x-axis</b> points backward, the <b>y-axis</b> points rightward, whil
  
 To specify a target orientation of the end-effector, you have to provide three components for the rotation
 axis (whose norm is 1) and a fourth component for the rotation angle expressed in radians as required by the
-axis/angle notation (click <a href="http://en.wikipedia.org/wiki/Axis_angle">here</a>). \n
+axis/angle notation (see <a href="http://en.wikipedia.org/wiki/Axis_angle">here</a>). \n
 The axis/angle format compacts the notation and protects from some singularities that might appear when the
 Euler angles are adopted, but obviously one can still use his most preferable representation since there exist
 transformation formulas from one domain to another (e.g. look at ctrl::dcm2axis or ctrl::axis2dcm documentation). 
@@ -178,7 +178,18 @@ Matrix R=Rz*Ry;                 // compose the two rotations keeping the order
 Vector o=ctrl::dcm2axis(R);     // from rotation matrix back to the axis/angle notation
 \endcode
 
-The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]
+The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]. \n
+Alternatively, one can specify directly the matrix R as a collection of column vectors, each representing the axes of the goal pose
+whose coordinates are expressed in the root reference frame:
+\code
+Matrix R(3,3);
+//  x          y          z
+R(0,0)= 0; R(0,1)= 1; R(0,2)= 0;   // x
+R(1,0)= 0; R(1,1)= 0; R(1,2)=-1;   // y
+R(2,0)=-1; R(2,1)= 0; R(2,2)= 0;   // z
+
+Vector o=ctrl::dcm2axis(R);
+\endcode
 
 
 \section sec_cart_useinterface Using the Cartesian Interface
