@@ -62,7 +62,7 @@ this the user has to enforce the dependency of his project from the iCub hardwar
 To achieve that, the following lines have to be included in the <i>CMakeLists.txt</i> file whenever you intend to put
 your project within the iCub repository:
 \code
-target_link_libraries(${PROJECTNAME} ... icubmod ...)
+target_link_libraries(${PROJECTNAME} icubmod)
 \endcode 
 
 On the contrary, if you are developing your module externally to the iCub repository, make sure to include the 
@@ -70,9 +70,9 @@ following lines:
 \code
 find_package(ICUB)
 ...
-include_directories(... ${ICUB_INCLUDE_DIRS} ...)
+include_directories(${ICUB_INCLUDE_DIRS})
 ...
-target_link_libraries(${PROJECTNAME} ... icubmod ...)
+target_link_libraries(${PROJECTNAME} icubmod)
 \endcode 
 
 Besides, it is also required to insert the following lines within the code in order to correctly initialize the cartesian
