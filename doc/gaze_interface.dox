@@ -192,7 +192,7 @@ What the interface will internally execute is to retrieve the corresponding 3D p
 this result to command an equivalent cartesian displacement as in the following:
 \code
 Vector x;
-igaze->get3Dpoint(camSel,px,z,x);
+igaze->get3DPoint(camSel,px,z,x);
 igaze->lookAtFixationPoint(x);
 \endcode
 The benefit of <i>lookAtMonoPixel()</i> method is clearly that the time for the rpc communication is saved, hence it is particularly designed for control
