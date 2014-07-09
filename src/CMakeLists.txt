@@ -42,12 +42,18 @@ add_subdirectory(learningMachines)
 #set(ICUB_USE_OpenCV "ON" CACHE BOOL "dependency flag" FORCE)
 #set(ICUB_USE_Qt3 "ON" CACHE BOOL "dependency flag" FORCE)
 
-ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
-TARGET_LINK_LIBRARIES(test_icubVis ${YARP_LIBRARIES} iCubVis)
+IF(ICUB_USE_OpenCV)
+    MESSAGE(STATUS "Testing iCubVis dependent code")
 
-### execute tests
-GET_TARGET_PROPERTY(EXELOC test_icubVis LOCATION_RELEASE)
-ADD_TEST(test_icubVis ${EXELOC})
+    ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
+    TARGET_LINK_LIBRARIES(test_icubVis ${YARP_LIBRARIES} iCubVis)
+
+    ### execute tests
+    GET_TARGET_PROPERTY(EXELOC test_icubVis LOCATION_RELEASE)
+    ADD_TEST(test_icubVis ${EXELOC})
+ELSE()
+    MESSAGE(STATUS "OpenCV not found")
+ENDIF()
 
 IF(ICUB_USE_IPOPT)
     MESSAGE(STATUS "Testing IPOPT dependent code")
@@ -55,13 +61,14 @@ IF(ICUB_USE_IPOPT)
     ADD_EXECUTABLE(test_ipopt smoke-tests/ipopt.cpp)
     TARGET_LINK_LIBRARIES(test_ipopt ${YARP_LIBRARIES} iKin)
 
+    ### execute tests
     GET_TARGET_PROPERTY(EXELOC test_ipopt LOCATION_RELEASE)
     ADD_TEST(test_ipopt ${EXELOC})
     
     add_subdirectory(iKin)
     add_subdirectory(optimization)
 ELSE()
-    MESSAGE(STATUS "Ipopt not found")
+    MESSAGE(STATUS "IPOPT not found")
 ENDIF()
 
 ###################### end of test specific code
