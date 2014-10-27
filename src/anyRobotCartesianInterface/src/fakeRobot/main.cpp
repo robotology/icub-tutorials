@@ -44,7 +44,7 @@ public:
 
         Property options;
         options.put("device","fakeyServer");
-        options.put("local","fake_robot/fake_part");
+        options.put("local","/fake_robot/fake_part");
 
         driver.open(options);
         return driver.isValid();

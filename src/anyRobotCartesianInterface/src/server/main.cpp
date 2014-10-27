@@ -52,8 +52,8 @@ public:
         // access the fake robot
         Property optPart;
         optPart.put("device","fakeyClient");
-        optPart.put("remote",(robot+"/"+part).c_str());
-        optPart.put("local",(local+"/"+part).c_str());
+        optPart.put("remote",("/"+robot+"/"+part).c_str());
+        optPart.put("local",("/"+local+"/"+part).c_str());
         optPart.put("part",part.c_str());
 
         // open the device driver
