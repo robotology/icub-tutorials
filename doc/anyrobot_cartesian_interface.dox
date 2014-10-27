@@ -73,7 +73,8 @@ providing also information about the time stamps of the encoders that in turn wi
 synchronization purpose. At startup, the cartesian server will check accordingly the availability of the most suitable encoders
 interface. \n
 Moreover, as enhanced option, the server is also capable of automatically detecting the availability of the <b>IPositionDirect</b>
-interface, through which the low-level velocity control is replaced by the faster and more accurate streaming position control. \n
+interface, through which the low-level velocity control is replaced by the faster and more accurate streaming position control.
+In this latter modality, also the standard <b>IPositionControl</b> interface is required to be implemented. \n
 This is not the right place where to tell about how to deal with these interfaces, but please find out more on the topic
 of making a new device in yarp <a href="http://wiki.icub.org/wiki/Making_a_new_device_in_YARP">here</a>.
 
