@@ -42,7 +42,7 @@ public:
     /**********************************************************/
     bool configure(ResourceFinder &rf)
     {   
-        // grab parameters from the congiguration file
+        // grab parameters from the configuration file
         string robot=rf.find("robot").asString().c_str();
         string part=rf.find("part").asString().c_str();
         string local=rf.find("local").asString().c_str();
