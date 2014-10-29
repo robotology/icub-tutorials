@@ -45,9 +45,9 @@ protected:
      */
     PartDescriptor *getPartDesc(Searchable &options)
     {
-        if (!options.check("customKinFile"))
+        if (!options.check("CustomKinFile"))
         {
-            cout<<"Error: \"customKinFile\" option is missing!"<<endl;
+            cout<<"Error: \"CustomKinFile\" option is missing!"<<endl;
             return NULL;
         }
 
@@ -64,7 +64,7 @@ protected:
 
         // we grab info on the fake robot's kinematics
         Property linksOptions;
-        linksOptions.fromConfigFile(options.find("customKinFile").asString().c_str());
+        linksOptions.fromConfigFile(options.find("CustomKinFile").asString().c_str());
         iKinLimb *limb=new iKinLimb(linksOptions);
         if (!limb->isValid())
         {
@@ -122,7 +122,7 @@ public:
 
         Property config;
         config.fromConfigFile(rf.findFile("from").c_str());
-        config.put("customKinFile",pathToKin.c_str());
+        config.put("CustomKinFile",pathToKin.c_str());
 
         solver=new fakeRobotCartesianSolver(solverName);
         if (!solver->open(config))

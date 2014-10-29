@@ -180,18 +180,18 @@ optPart.put("part",part.c_str());                       // just the name of the 
 \subsection subsec_customcart_solver_kininfo 3. Retrieving Kinematics Info
 
 There is a special key in the configuration file <i>solver.ini</i> which is missing: the one that tells the solver how to retrieve the
-kinematics description. Its tag is "customKinFile" and must point to the <i>kinematics.ini</i> file. The path has to be absolute and
+kinematics description. Its tag is "CustomKinFile" and must point to the <i>kinematics.ini</i> file. The path has to be absolute and
 can be easily completed automatically by the <i>ResourceFinder</i> class - as you know: that's why we code it like the following:
 \code
 Property config;
 config.fromConfigFile(rf.findFile("from").c_str());
-config.put("customKinFile",pathToKin.c_str());
+config.put("CustomKinFile",pathToKin.c_str());
 \endcode
 
 We then build up the kinematic structure by populating an <i>iKinLimb</i> object with such information:
 \code
 Property linksOptions;
-linksOptions.fromConfigFile(options.find("customKinFile").asString().c_str());
+linksOptions.fromConfigFile(options.find("CustomKinFile").asString().c_str());
 iKinLimb *limb=new iKinLimb(linksOptions);
 \endcode
 
@@ -242,8 +242,8 @@ partDrv.open(optPart);                                          // open the devi
 
 Property optServer("(device cartesiancontrollerserver)");
 optServer.fromConfigFile(rf.findFile("from").c_str(),false);    // init the server options from the ResourceFinder
-Bottle &kinInfo=optServer.findGroup("GENERAL").addList();       // append something like "customKinFile <actual_file>"
-kinInfo.addString("customKinFile");
+Bottle &kinInfo=optServer.findGroup("GENERAL").addList();       // append something like "CustomKinFile <actual_file>"
+kinInfo.addString("CustomKinFile");
 kinInfo.addString(pathToKin.c_str());
 
 PolyDriver server;

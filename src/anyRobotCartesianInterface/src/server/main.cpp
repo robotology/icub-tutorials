@@ -72,7 +72,7 @@ public:
         Property optServer("(device cartesiancontrollerserver)");
         optServer.fromConfigFile(rf.findFile("from").c_str(),false);
         Bottle &kinInfo=optServer.findGroup("GENERAL").addList();
-        kinInfo.addString("customKinFile");
+        kinInfo.addString("CustomKinFile");
         kinInfo.addString(pathToKin.c_str());
 
         if (!server.open(optServer))
