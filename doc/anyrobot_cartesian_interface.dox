@@ -233,8 +233,8 @@ The code is worth a thousand words ...
 \code
 Property optPart("(device fakeyClient)");        
 optPart.put("device","fakeyClient");
-optPart.put("remote","fake_robot/fake_part");
-optPart.put("local","server/fake_part");
+optPart.put("remote","/fake_robot/fake_part");
+optPart.put("local","/server/fake_part");
 optPart.put("part","fake_part");
 
 PolyDriver partDrv;
@@ -242,9 +242,6 @@ partDrv.open(optPart);                                          // open the devi
 
 Property optServer("(device cartesiancontrollerserver)");
 optServer.fromConfigFile(rf.findFile("from").c_str(),false);    // init the server options from the ResourceFinder
-Bottle &kinInfo=optServer.findGroup("GENERAL").addList();       // append something like "CustomKinFile <actual_file>"
-kinInfo.addString("CustomKinFile");
-kinInfo.addString(pathToKin.c_str());
 
 PolyDriver server;
 server.open(optServer);                                         // open the cartesian controller server
@@ -264,6 +261,8 @@ ControllerName        server              // the yarp stem-name of the controlle
 ControllerPeriod      20                  // the period of the control thread
 SolverNameToConnect   solver              // the yarp stem-name of the solver to connect to
 KinematicPart         custom              // this is a special keyword that tells the server to open custom kinematics
+CustomKinFile         kinematics.ini      // the file containing the description of the kinematics (full path or relative to CustomKinContext)
+CustomKinContext      context             // the context to locate the kinematics.ini file (optional)
 PositionControl       off                 // (*)
 MultipleJointsControl on                  // (**)
 NumberOfDrivers       1                   // the number of parts composing the structure
