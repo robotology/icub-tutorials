@@ -156,7 +156,7 @@ axis (whose norm is 1) and a fourth component for the rotation angle expressed i
 axis/angle notation (see <a href="http://en.wikipedia.org/wiki/Axis_angle">here</a>). \n
 The axis/angle format compacts the notation and protects from some singularities that might appear when the
 Euler angles are adopted, but obviously one can still use his most preferable representation since there exist
-transformation formulas from one domain to another (e.g. look at ctrl::dcm2axis or ctrl::axis2dcm documentation). 
+transformation formulas from one domain to another (e.g. look at yarp::math::dcm2axis or yarp::math::axis2dcm documentation). 
 
 <b>Example</b> \n
 
@@ -171,11 +171,11 @@ Vector oy(4), oz(4);
 oy[0]=0.0; oy[1]=1.0; oy[2]=0.0; oy[3]=+M_PI/2.0;
 oz[0]=0.0; oz[1]=0.0; oz[2]=1.0; oz[3]=-M_PI/2.0;
 
-Matrix Ry=ctrl::axis2dcm(oy);   // from axis/angle to rotation matrix notation
-Matrix Rz=ctrl::axis2dcm(oz);
+Matrix Ry=yarp::math::axis2dcm(oy);        // from axis/angle to rotation matrix notation
+Matrix Rz=yarp::math::axis2dcm(oz);
 
-Matrix R=Rz*Ry;                 // compose the two rotations keeping the order
-Vector o=ctrl::dcm2axis(R);     // from rotation matrix back to the axis/angle notation
+Matrix R=Rz*Ry;                            // compose the two rotations keeping the order
+Vector o=yarp::math::dcm2axis(R);          // from rotation matrix back to the axis/angle notation
 \endcode
 
 The outcome is: o = [0.57735 0.57735 -0.57735 2.094395]. \n
@@ -188,7 +188,7 @@ Matrix R(3,3);
    R(1,0)= 0.0;  R(1,1)= 0.0;  R(1,2)=-1.0;    // y-coordinate    "
    R(2,0)=-1.0;  R(2,1)= 0.0;  R(2,2)= 0.0;    // z-coordinate    "
 
-Vector o=ctrl::dcm2axis(R);
+Vector o=yarp::math::dcm2axis(R);
 \endcode
 
 
@@ -434,7 +434,7 @@ finger.getChainJoints(encs,joints);                // wrt the end-effector frame
 Matrix tipFrame=finger.getH((M_PI/180.0)*joints);  
 
 Vector tip_x=tipFrame.getCol(3);
-Vector tip_o=ctrl::dcm2axis(tipFrame);
+Vector tip_o=yarp::math::dcm2axis(tipFrame);
 icart->attachTipFrame(tip_x,tip_o);                // establish the new controlled frame
 ...
 
