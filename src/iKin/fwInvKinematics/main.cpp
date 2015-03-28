@@ -36,7 +36,7 @@ using namespace iCub::iKin;
 class genericRightArm : public iKinLimb
 {
 public:
-    genericRightArm() 
+    genericRightArm() : iKinLimb()
     {
          allocate("don't care");
     }
@@ -45,9 +45,6 @@ protected:
     virtual void allocate(const string &_type)
     {
         // the type is used to discriminate between left and right limb
-
-        // remind to call the father's method
-        iKinLimb::allocate(_type);
 
         // you have to specify the rototranslational matrix H0 from the origin
         // to the root reference so as from iCub specs.
