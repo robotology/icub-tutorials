@@ -1,21 +1,21 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.9)
 
-SET(PROJECTNAME tutorials)
+set(PROJECTNAME tutorials)
 
-PROJECT(${PROJECTNAME})
+project(${PROJECTNAME})
 
-FIND_PACKAGE(YARP)
-FIND_PACKAGE(ICUB)
+find_package(YARP REQUIRED)
+find_package(ICUB REQUIRED)
 
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
-INCLUDE(iCubOptions)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
+include(iCubOptions)
 
-INCLUDE_DIRECTORIES(${ICUB_INCLUDE_DIRS}
+include_directories(${ICUB_INCLUDE_DIRS}
                     ${YARP_INCLUDE_DIRS})
 
 ## this is for testing only, please ignore if you are reading tutorials	
-INCLUDE(CTest)
+include(CTest)
 ### end test specific code
 
 # go by subdirectories
@@ -42,34 +42,34 @@ add_subdirectory(learningMachines)
 #set(ICUB_USE_OpenCV "ON" CACHE BOOL "dependency flag" FORCE)
 #set(ICUB_USE_Qt3 "ON" CACHE BOOL "dependency flag" FORCE)
 
-IF(ICUB_USE_OpenCV)
-    MESSAGE(STATUS "Testing iCubVis dependent code")
+if(ICUB_USE_OpenCV)
+    message(STATUS "Testing iCubVis dependent code")
 
-    ADD_EXECUTABLE(test_icubVis smoke-tests/icubVis.cpp)
-    TARGET_LINK_LIBRARIES(test_icubVis ${YARP_LIBRARIES} iCubVis)
-
-    ### execute tests
-    GET_TARGET_PROPERTY(EXELOC test_icubVis LOCATION_RELEASE)
-    ADD_TEST(test_icubVis ${EXELOC})
-ELSE()
-    MESSAGE(STATUS "OpenCV not found")
-ENDIF()
-
-IF(ICUB_USE_IPOPT)
-    MESSAGE(STATUS "Testing IPOPT dependent code")
-
-    ADD_EXECUTABLE(test_ipopt smoke-tests/ipopt.cpp)
-    TARGET_LINK_LIBRARIES(test_ipopt ${YARP_LIBRARIES} iKin)
+    add_executable(test_icubVis smoke-tests/icubVis.cpp)
+    target_link_libraries(test_icubVis ${YARP_LIBRARIES} iCubVis)
 
     ### execute tests
-    GET_TARGET_PROPERTY(EXELOC test_ipopt LOCATION_RELEASE)
-    ADD_TEST(test_ipopt ${EXELOC})
-    
+    add_test(NAME test_icubVis
+             COMMAND test_icubVis)
+else()
+    message(STATUS "OpenCV not found")
+endif()
+
+if(ICUB_USE_IPOPT)
+    message(STATUS "Testing IPOPT dependent code")
+
+    add_executable(test_ipopt smoke-tests/ipopt.cpp)
+    target_link_libraries(test_ipopt ${YARP_LIBRARIES} iKin)
+
+    ### execute tests
+    add_test(NAME test_ipopt
+             COMMAND test_ipopt)
+
     add_subdirectory(iKin)
     add_subdirectory(optimization)
-ELSE()
-    MESSAGE(STATUS "IPOPT not found")
-ENDIF()
+else()
+    message(STATUS "IPOPT not found")
+endif()
 
 ###################### end of test specific code
 
