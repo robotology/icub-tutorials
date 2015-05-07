@@ -43,6 +43,7 @@ add_subdirectory(learningMachines)
 #set(ICUB_USE_Qt3 "ON" CACHE BOOL "dependency flag" FORCE)
 
 if(ICUB_USE_OpenCV)
+	find_package(OpenCV)
     message(STATUS "Testing iCubVis dependent code")
 
     add_executable(test_icubVis smoke-tests/icubVis.cpp)
@@ -56,6 +57,7 @@ else()
 endif()
 
 if(ICUB_USE_IPOPT)
+	find_package(IPOPT)
     message(STATUS "Testing IPOPT dependent code")
 
     add_executable(test_ipopt smoke-tests/ipopt.cpp)
