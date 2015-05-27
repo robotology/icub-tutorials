@@ -75,41 +75,7 @@ protocol as light as possible, avoiding requests for integrity check and reiniti
 
 \section sec_cart_opencloseinterface Opening and Closing the Cartesian Interface
 
-The Cartesian Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class but before
-this the user has to enforce the dependency of his project from the iCub hardware modules collection.
-
-To achieve that, the following lines have to be included in the <i>CMakeLists.txt</i> file whenever you intend to put
-your project within the iCub repository:
-\code
-target_link_libraries(${PROJECTNAME} icubmod)
-\endcode 
-
-On the contrary, if you are developing your module externally to the iCub repository, make sure to include the 
-following lines:
-\code
-find_package(ICUB)
-...
-include_directories(${ICUB_INCLUDE_DIRS})
-...
-target_link_libraries(${PROJECTNAME} icubmod)
-\endcode 
-
-Besides, it is also required to insert the following lines within the code in order to correctly enable the cartesian
-client controller:
-\code
-...
-#include <yarp/dev/all.h>
-YARP_DECLARE_DEVICES(icubmod)
-...
-
-int main()
-{
-    YARP_REGISTER_DEVICES(icubmod)
-    ...
-}
-\endcode
-
-You are now able to open the Cartesian Interface in the usual way:
+The Cartesian Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class:
 \code 
 Property option;
 option.put("device","cartesiancontrollerclient");

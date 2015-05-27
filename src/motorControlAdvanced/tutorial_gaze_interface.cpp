@@ -32,8 +32,6 @@
 #define STATE_WAIT          2
 #define STATE_STILL         3
 
-YARP_DECLARE_DEVICES(icubmod)
-
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::dev;
@@ -329,9 +327,6 @@ public:
 
 int main(int argc, char *argv[])
 {
-    // we need to initialize the drivers list 
-    YARP_REGISTER_DEVICES(icubmod)
-
     Network yarp;
     if (!yarp.checkNetwork())
     {

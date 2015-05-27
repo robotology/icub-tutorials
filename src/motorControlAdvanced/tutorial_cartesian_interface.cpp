@@ -24,8 +24,6 @@
 #define PRINT_STATUS_PER    1.0     // [s]
 #define MAX_TORSO_PITCH     30.0    // [deg]
 
-YARP_DECLARE_DEVICES(icubmod)
-
 using namespace yarp::os;
 using namespace yarp::dev;
 using namespace yarp::sig;
@@ -267,9 +265,6 @@ public:
 
 int main()
 {   
-    // we need to initialize the drivers list 
-    YARP_REGISTER_DEVICES(icubmod)
-
     Network yarp;
     if (!yarp.checkNetwork())
     {

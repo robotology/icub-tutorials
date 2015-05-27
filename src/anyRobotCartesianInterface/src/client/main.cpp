@@ -25,8 +25,6 @@
 #include <iomanip>
 #include <string>
 
-YARP_DECLARE_DEVICES(icubmod)
-
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::dev;
@@ -135,9 +133,6 @@ int main(int argc, char *argv[])
         cout<<"Error: yarp server does not seem available"<<endl;
         return -1;
     }
-
-    // we need to initialize the drivers list 
-    YARP_REGISTER_DEVICES(icubmod)
 
     ResourceFinder rf;
     rf.setVerbose(true);

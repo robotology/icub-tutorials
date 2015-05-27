@@ -15,9 +15,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
 include_directories(${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
 add_executable(tutorial_cartesian_interface tutorial_cartesian_interface.cpp)
-target_link_libraries(tutorial_cartesian_interface ${YARP_LIBRARIES} icubmod)
+target_link_libraries(tutorial_cartesian_interface ${YARP_LIBRARIES})
 
 add_executable(tutorial_gaze_interface tutorial_gaze_interface.cpp)
-target_link_libraries(tutorial_gaze_interface ${YARP_LIBRARIES} icubmod)
+target_link_libraries(tutorial_gaze_interface ${YARP_LIBRARIES})
 
 

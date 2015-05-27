@@ -23,8 +23,6 @@
 #include <iomanip>
 #include <string>
 
-YARP_DECLARE_DEVICES(icubmod)
-
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::dev;
@@ -119,10 +117,8 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    // register here the icubmod devices
-    // along with the new yarp devices
+    // register here the new yarp devices
     // for dealing with the fake robot
-    YARP_REGISTER_DEVICES(icubmod)
     registerFakeMotorDevices();
 
     ResourceFinder rf;
