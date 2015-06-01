@@ -29,7 +29,6 @@ int main()
     iKinChain *chain=arm.asChain();
 
     iKinIpOptMin slv(*chain,IKINCTRL_POSE_XYZ,1e-3,100);
-    slv.setTranslationalTol(1e-8);
     slv.setUserScaling(true,100.0,100.0,100.0);
 
     Vector xf(7,0.0);

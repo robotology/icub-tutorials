@@ -159,11 +159,6 @@ int main()
     // for both translational and rotational part
     iKinIpOptMin slv(*chain,IKINCTRL_POSE_FULL,1e-3,100);    
 
-    // we have a dedicated tolerance for the translational part
-    // which is by default equal to 1e-6;
-    // note that the tolerance is applied to the squared norm
-    slv.setTranslationalTol(1e-8);
-
     // In order to speed up the process, a scaling for the problem 
     // is usually required (a good scaling holds each element of the jacobian
     // of constraints and the hessian of lagrangian in norm between 0.1 and 10.0).

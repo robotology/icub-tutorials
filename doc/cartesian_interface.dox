@@ -219,8 +219,8 @@ as determined by the solver:
 Vector xdhat, odhat, qdhat;
 icart->getDesired(xdhat,odhat,qdhat);
 \endcode
-Of course due to the optimization process \f$ \hat{x}_d \f$ differs from the commanded \f$ x_d \f$ (but the distance in norm complies
-with the given tolerance), so as \f$ \hat{o}_d \f$ from \f$ o_d \f$; \f$ \hat{q}_d \f$ is such that \f$ \left[\hat{x}_d,\hat{o}_d\right]=K\left(\hat{q}_d\right) \f$,
+Of course due to the optimization process \f$ \hat{x}_d \f$ differs from the commanded \f$ x_d \f$, so as
+\f$ \hat{o}_d \f$ from \f$ o_d \f$; \f$ \hat{q}_d \f$ is such that \f$ \left[\hat{x}_d,\hat{o}_d\right]=K\left(\hat{q}_d\right) \f$,
 where \f$ K\left(\cdot\right) \f$ is the forward kinematic map. \n
 
 By contrast, if you want to solve for a given pose without actually moving there, you can use the ask-based methods as follows:
@@ -283,7 +283,7 @@ Briefly (a detailed description is given in the \ref iKinSlv "solver page"), the
 that can be described in this way:
 
 \f[
-\mathbf{q}=\arg\min_{\mathbf{q}\in \mathbb{R}^{n} }\left(\left\|\mathbf{\alpha}_d-\mathit{K_{\alpha}}\left(\mathbf{q}\right)\right\|^2+\mathit{w}\cdot\left(\mathbf{q}_r-\mathbf{q}\right)^{\top}\mathit{W}_r\left(\mathbf{q}_r-\mathbf{q}\right)\right) \quad s.t.\,\left\{\begin{array}{l}\left\|\mathbf{x}_d-\mathit{K_x}\left(\mathbf{q}\right)\right\|^2<\epsilon\\\mathbf{q}_L<\mathbf{q}<\mathbf{q}_U\end{array}\right.
+\mathbf{q}=\arg\min_{\mathbf{q}\in \mathbb{R}^{n} }\left(\left\|\mathbf{\alpha}_d-\mathit{K_{\alpha}}\left(\mathbf{q}\right)\right\|^2+\mathit{w}\cdot\left(\mathbf{q}_r-\mathbf{q}\right)^{\top}\mathit{W}_r\left(\mathbf{q}_r-\mathbf{q}\right)\right) \quad s.t.\,\left\{\begin{array}{l}\left\|\mathbf{x}_d-\mathit{K_x}\left(\mathbf{q}\right)\right\|^2=0\\\mathbf{q}_L<\mathbf{q}<\mathbf{q}_U\end{array}\right.
 \f]
 
 The term \f$ \left(\mathbf{q}_r-\mathbf{q}\right)^{\top}\mathit{W}_r\left(\mathbf{q}_r-\mathbf{q}\right) \f$ represents
