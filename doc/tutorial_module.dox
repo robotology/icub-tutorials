@@ -2,11 +2,11 @@
 *
 @page icub_tutorial_module The RFModule Class
 
-In this tutorial we show more details of how to write an iCub module using the module helper class. 
+In this tutorial we show more details of how to write an iCub module using the module helper class.
 
 \section sec_intro Introduction
 
-In a previous tutorial (\ref icub_resource_finder_basic and \ref icub_resource_finder_advanced) we showed how to use 
+In a previous tutorial (\ref icub_resource_finder_basic and \ref icub_resource_finder_advanced) we showed how to use
 the ResourceFinder to organize modules parameters in $YARP_DATA_HOME/contexts.
 
 The RFModule helper class simplify writing an iCub module that uses the ResourceFinder class.
@@ -15,8 +15,10 @@ This is how a module will look like:
 
 \code
 #include <iostream>
-#include <yarp/os/RFModule.h>
+#include <iomanip>
+
 #include <yarp/os/Network.h>
+#include <yarp/os/RFModule.h>
 
 using namespace std;
 using namespace yarp::os;
@@ -30,7 +32,7 @@ public:
     double getPeriod()
     {
         /* module periodicity (seconds), called implicitly by the module. */
-        return 1;
+        return 1.0;
     }
 
     /* This is our main function. Will be called periodically every getPeriod() seconds */
@@ -38,23 +40,23 @@ public:
     {
         count++;
         cout<<"["<<count<<"]"<< " updateModule... "<<endl;
-        
+
         return true;
     }
 
-	
+
     /* Message handler. Just echo all received messages. */
-    bool respond(const Bottle& command, Bottle& reply) 
+    bool respond(const Bottle& command, Bottle& reply)
     {
         cout<<"Got something, echo is on"<<endl;
         if (command.get(0).asString()=="quit")
-            return false;     
+            return false;
         else
             reply=command;
         return true;
     }
 
-    
+
     /* Configure function. Receive a previously initialized
        resource finder object. Use it to configure your module.
        If you are migrating from the old module, this is the function
@@ -67,9 +69,6 @@ public:
 	       to the respond method */
         handlerPort.open("/myModule");
         attach(handlerPort);
-	    /* optional, attach to terminal if you want that text typed at the console
-           is redirected to the respond method */
-        attachTerminal();     
         return true;
     }
 
@@ -100,13 +99,13 @@ int main(int argc, char * argv[])
     Network yarp;
 
     /* create your module */
-    MyModule module; 
+    MyModule module;
 
     /* prepare and configure the resource finder */
     ResourceFinder rf;
     rf.configure(argc, argv);
     rf.setVerbose(true);
- 
+
     cout << "Configuring and starting module. \n";
     module.runModule(rf);   // This calls configure(rf) and, upon success, the module execution begins with a call to updateModule()
 
@@ -121,4 +120,3 @@ int main(int argc, char * argv[])
 See code in: src/module/tutorial_module.cpp
 *
 **/
-

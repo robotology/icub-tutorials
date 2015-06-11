@@ -1,6 +1,8 @@
 #include <iostream>
-#include <yarp/os/RFModule.h>
+#include <iomanip>
+
 #include <yarp/os/Network.h>
+#include <yarp/os/RFModule.h>
 
 using namespace std;
 using namespace yarp::os;
@@ -13,7 +15,7 @@ public:
 
     double getPeriod()
     {
-        return 1; //module periodicity (seconds)
+        return 1.0; //module periodicity (seconds)
     }
 
     /*
@@ -51,7 +53,6 @@ public:
         count=0;
         handlerPort.open("/myModule");
         attach(handlerPort);
-        attachTerminal();
         return true;
     }
 
