@@ -23,5 +23,7 @@ target_link_libraries(${PROJECTNAME} perceptiveModels
                                      ${YARP_LIBRARIES})
 
 ########## application
+include(YarpInstallationHelpers)
+
 file(GLOB conf ${CMAKE_CURRENT_SOURCE_DIR}/app/conf/*.ini)
-yarp_install(FILES ${conf} DESTINATION ${CMAKE_BINARY_DIR}/bin/${CMAKE_CFG_INTDIR})
+yarp_install(FILES ${conf} DESTINATION actionPrimitives)

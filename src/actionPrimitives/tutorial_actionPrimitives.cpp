@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2010 RobotCub Consortium, European Commission FP6 Project IST-004370
  * Author: Ugo Pattacini
  * email:  ugo.pattacini@iit.it
@@ -16,127 +16,127 @@
  * Public License for more details
 */
 
-/** 
+/**
 \defgroup tutorial_ationPrimitives Tutorial on the ActionPrimitives library
- 
-Example of grasping module based upon \ref ActionPrimitives 
-library. 
+
+Example of grasping module based upon \ref ActionPrimitives
+library.
 
 Copyright (C) 2010 RobotCub Consortium
- 
-Author: Ugo Pattacini 
 
-CopyPolicy: Released under the terms of the GNU GPL v2.0. 
+Author: Ugo Pattacini
 
-\section intro_sec Description 
-An example module that makes use of \ref ActionPrimitives 
-library in order to execute a sequence of simple actions: 
-reaches for an object, tries to grasp it, then lifts it and 
-finally releases it. 
- 
-1) A bottle containing the 3-d position of the object to grasp 
+CopyPolicy: Released under the terms of the GNU GPL v2.0.
+
+\section intro_sec Description
+An example module that makes use of \ref ActionPrimitives
+library in order to execute a sequence of simple actions:
+reaches for an object, tries to grasp it, then lifts it and
+finally releases it.
+
+1) A bottle containing the 3-d position of the object to grasp
 is received (let be x1).
- 
+
 2) To this 3-d point a systematic offset is added in order to
 compensate for the uncalibrated kinematics of the arm (let be
-x2=x1+systematic_offset). 
- 
-3) The robot reaches for a position located on top of the object 
-with the specified orientation (let be reach(x2+grasp_disp,o)). 
- 
-4) The robot grasps the object (let be reach(x2,o)). 
- 
-5) The hand is closed. 
- 
-6) The robot lifts the object to a specified location (let be 
-reach(x2+lift_displacement,o)). 
- 
-7) The robot releases the grasped object. 
- 
-8) The robot steers the arm to home position. 
- 
-\note A video on iCub grasping objects can be seen <a 
+x2=x1+systematic_offset).
+
+3) The robot reaches for a position located on top of the object
+with the specified orientation (let be reach(x2+grasp_disp,o)).
+
+4) The robot grasps the object (let be reach(x2,o)).
+
+5) The hand is closed.
+
+6) The robot lifts the object to a specified location (let be
+reach(x2+lift_displacement,o)).
+
+7) The robot releases the grasped object.
+
+8) The robot steers the arm to home position.
+
+\note A video on iCub grasping objects can be seen <a
     href="http://wiki.icub.org/misc/icubvideos/icub_grasps_sponges.wmv">here</a>.
-  
-\section lib_sec Libraries 
-- YARP libraries. 
-- \ref ActionPrimitives library.  
+
+\section lib_sec Libraries
+- YARP libraries.
+- \ref ActionPrimitives library.
 
 \section parameters_sec Parameters
 --name \e name
 - specify the module name, which is \e ActionPrimitivesMod by
   default.
- 
+
 \section portsa_sec Ports Accessed
 The robot interface is assumed to be operative.
- 
-\section portsc_sec Ports Created 
-Aside from the internal ports created by \ref ActionPrimitives 
-library, we also have: 
- 
-- \e /<modName>/in receives a bottle containing the 3-d position 
+
+\section portsc_sec Ports Created
+Aside from the internal ports created by \ref ActionPrimitives
+library, we also have:
+
+- \e /<modName>/in receives a bottle containing the 3-d position
   of the object to grasp.
- 
-- \e /<modName>/rpc remote procedure call. 
+
+- \e /<modName>/rpc remote procedure call.
     Recognized remote commands:
     -'quit' quit the module
- 
+
 \section in_files_sec Input Data Files
 None.
 
-\section out_data_sec Output Data Files 
-None. 
- 
-\section conf_file_sec Configuration Files 
---grasp_model_type \e type 
-- specify the grasp model type according to the \ref 
+\section out_data_sec Output Data Files
+None.
+
+\section conf_file_sec Configuration Files
+--grasp_model_type \e type
+- specify the grasp model type according to the \ref
   ActionPrimitives documentation.
- 
---grasp_model_file \e file 
-- specify the path to the file containing the grasp model 
+
+--grasp_model_file \e file
+- specify the path to the file containing the grasp model
   options.
- 
---hand_sequences_file \e file 
-- specify the path to the file containing the hand motion 
+
+--hand_sequences_file \e file
+- specify the path to the file containing the hand motion
   sequences relative to the current context ( \ref
   ActionPrimitives ).
- 
---from \e file 
-- specify the configuration file (use \e --context option to 
+
+--from \e file
+- specify the configuration file (use \e --context option to
   select the current context).
- 
+
 The configuration file passed through the option \e --from
 should look like as follows:
- 
-\code 
+
+\code
 [general]
-// options used to open a ActionPrimitives object 
+// options used to open a ActionPrimitives object
 robot                           icub
 thread_period                   50
 default_exec_time               3.0
 reach_tol                       0.007
-verbosity                       on 
+verbosity                       on
 torso_pitch                     on
 torso_roll                      off
 torso_yaw                       on
-torso_pitch_max                 30.0 
-tracking_mode                   off 
-verbosity                       on 
- 
+torso_pitch_max                 30.0
+tracking_mode                   off
+verbosity                       on
+
 [arm_dependent]
 grasp_orientation               (-0.171542 0.124396 -0.977292 3.058211)
 grasp_displacement              (0.0 0.0 0.05)
 systematic_error_displacement   (-0.03 -0.07 -0.02)
 lifting_displacement            (0.0 0.0 0.2)
 home_position                   (-0.29 -0.21 0.11)
-home_orientation                (-0.029976 0.763076 -0.645613 2.884471) 
-\endcode 
+home_orientation                (-0.029976 0.763076 -0.645613 2.884471)
+\endcode
 
 \section tested_os_sec Tested OS
 Windows, Linux
 
 \author Ugo Pattacini
-*/ 
+*/
 
 #include <iostream>
 #include <fstream>
@@ -212,7 +212,7 @@ public:
         dLift[0]=0.0;
         dLift[1]=0.0;
         dLift[2]=0.15;
-        
+
         home_x[0]=-0.29;
         home_x[1]=-0.21;
         home_x[2]= 0.11;
@@ -296,7 +296,7 @@ public:
         option.put("part","left_arm");
         option.put("grasp_model_type",rf.find("grasp_model_type").asString().c_str());
         option.put("grasp_model_file",rf.findFile("grasp_model_file").c_str());
-        option.put("hand_sequences_file",rf.findFile("hand_sequences_file").c_str());        
+        option.put("hand_sequences_file",rf.findFile("hand_sequences_file").c_str());
 
         // parsing arm dependent config options
         Bottle &bArm=config.findGroup("arm_dependent");
@@ -309,7 +309,7 @@ public:
             delete action;
             return false;
         }
-        
+
         deque<string> q=action->getHandSeqList();
         cout<<"***** List of available hand sequence keys:"<<endl;
         for (size_t i=0; i<q.size(); i++)
@@ -445,9 +445,9 @@ public:
     bool interruptModule()
     {
         // since a call to checkActionsDone() blocks
-        // the execution until it's done, we need to 
+        // the execution until it's done, we need to
         // take control and exit from the waiting state
-        action->syncCheckInterrupt(true);        
+        action->syncCheckInterrupt(true);
 
         inPort.interrupt();
         rpcPort.interrupt();
@@ -469,7 +469,7 @@ int main(int argc, char *argv[])
 
     ResourceFinder rf;
     rf.setVerbose(true);
-    rf.setDefaultConfigFile("actionPrimitives.ini");
+    rf.setDefaultConfigFile("config.ini");
     rf.setDefault("grasp_model_type","tactile");
     rf.setDefault("grasp_model_file","grasp_model.ini");
     rf.setDefault("hand_sequences_file","hand_sequences.ini");
@@ -479,6 +479,3 @@ int main(int argc, char *argv[])
     ExampleModule mod;
     return mod.runModule(rf);
 }
-
-
-
