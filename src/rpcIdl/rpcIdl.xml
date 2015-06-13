@@ -12,8 +12,7 @@
    <description-long>
        Implements a trivial server that provides access to an integer.
        You can use html, for example to add a link to <a href="http://www.yarp.it"> the yarp page</a> and Doxygen tags.
-       We can even add an image: \image html icub_small.gif "Random image."
-
+       
        @subsection sec-intro Introduction
        This is the introduction. 123
 
