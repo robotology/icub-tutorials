@@ -12,14 +12,14 @@ A list of tutorials on various topics from basic compilation, visual processing,
 - \ref icub_impedance_control_tutorial - a tutorial on how to use the joint level torque/impedance interface
 - \ref icub_basic_image_processing - a tutorial on a basic image processing
 
-Check tutorials on how to organize command line parameters and config files (these tutorials have been recently revised and moved to the YARP online documentation): 
+Check tutorials on how to organize command line parameters and config files (these tutorials have been recently revised and moved to the YARP online documentation):
 <a href="http://wiki.icub.org/yarpdoc/yarp_resource_finder_tutorials.html">Tutorials on the ResourceFinder Class</a>
 
 - \ref icub_tutorial_module - a tutorial on how to use the module helper class to write a program
 - \ref icub_rate_thread - a tutorial on how to write a control loop using threads
 - \ref icub_cartesian_interface - a tutorial on how to control a robot's limb in the operational space
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a YARP interface
-- \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface 
+- \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface
 
 \section sec_lib_cpp C++ tutorials related to specific libraries
 
@@ -47,13 +47,13 @@ Online documentation is available here:
 
 \subsection sec_ml_lib_cpp Learning Machine Library
 
-These tutorials demonstrate how to interface with the learningMachine library. The easiest 
+These tutorials demonstrate how to interface with the learningMachine library. The easiest
 way is to use machine learning classes directly. The library also provides C++ abstract interfaces
 that facilitate migration to their learning methods; their use is illustrated in the intermediate and
-advanced tutorials. You should check all examples and choose the method that better suits your application. 
+advanced tutorials. You should check all examples and choose the method that better suits your application.
 
 - Basic tutorial. Use learning machines directly: src/learningMachines/lmlibdirect.cpp
-- Intermediate tutotial. Use learning machines thourgh abstract interfaces: src/learningMachines/lmlibindirect.cpp 
+- Intermediate tutotial. Use learning machines thourgh abstract interfaces: src/learningMachines/lmlibindirect.cpp
 - Advanced tutorial. Use learning machines through abstract interfaces and factory: src/learningMachines/lmlibportable.cpp
 
 Online documentation is available here:
@@ -63,6 +63,7 @@ Online documentation is available here:
 
 - src/ctrlLib/onlinePTuner/main.cpp - a tutorial on online tuning of a P controller
 - src/optimization/calibReference/main.cpp - a tutorial on how to calibrate two reference frames from a cloud of matching points
+- src/perceptiveModels/tutorial_perceptiveModels.cpp - a tutorial on how to detect contacts of the fingers with external object
 
 \section sec_python Python Tutorials
 
@@ -75,4 +76,3 @@ These tutorials assume you installed the YARP and iCub bindings for Python. Foll
 * This file can be edited at \link doc/doc.dox
 *
 **/
-
