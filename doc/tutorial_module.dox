@@ -6,8 +6,8 @@ In this tutorial we show more details of how to write an iCub module using the m
 
 \section sec_intro Introduction
 
-In a previous tutorial (\ref icub_resource_finder_basic and \ref icub_resource_finder_advanced) we showed how to use
-the ResourceFinder to organize modules parameters in $YARP_DATA_HOME/contexts.
+In a previous <a href="http://wiki.icub.org/yarpdoc/yarp_resource_finder_tutorials.html">tutorial</a>
+we showed how to use the ResourceFinder to organize modules parameters in $YARP_DATA_HOME/contexts.
 
 The RFModule helper class simplify writing an iCub module that uses the ResourceFinder class.
 
