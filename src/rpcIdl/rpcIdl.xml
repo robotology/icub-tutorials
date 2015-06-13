@@ -4,7 +4,7 @@
 <module>
     <!-- module's name should match its executable file's name. -->
     <name>rpcIdl</name>
-   <doxygen-group>idl_tutorials</doxygen-group>
+   <doxygen-group></doxygen-group>
    <description>Example to show idl usage.</description>
         <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
@@ -12,7 +12,7 @@
    <description-long>
        Implements a trivial server that provides access to an integer.
        You can use html, for example to add a link to <a href="http://www.yarp.it"> the yarp page</a> and Doxygen tags.
-       
+
        @subsection sec-intro Introduction
        This is the introduction. 123
 

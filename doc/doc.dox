@@ -74,6 +74,13 @@ These tutorials assume you installed the YARP and iCub bindings for Python. Foll
 - \ref icub_python_simworld_control - a tutorial on how to control the iCub simulator from Python via its RPC interface
 - \ref icub_python_imaging - a tutorial on processing YARP images in Python
 
+\section sec_idl IDL Tutorials
+
+These tutorials demonstrate how to use effectively use Thrift - the YARP choice of Interface Description Language (IDL) in YARP -
+to generate automatically rpc methods and the corresponding Doxygen documentation.
+
+- \ref rpcIdl - a tutorial on how to implement a trivial server providing access to an integer.
+
 * This file can be edited at \link doc/doc.dox
 *
 **/
