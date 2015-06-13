@@ -64,6 +64,7 @@ Online documentation is available here:
 - src/ctrlLib/onlinePTuner/main.cpp - a tutorial on online tuning of a P controller
 - src/optimization/calibReference/main.cpp - a tutorial on how to calibrate two reference frames from a cloud of matching points
 - src/perceptiveModels/tutorial_perceptiveModels.cpp - a tutorial on how to detect contacts of the fingers with external object
+- src/actionPrimitives/tutorial_actionPrimitives.cpp - a tutorial on how to sequence simple actions in fingers so as Cartesian space.
 
 \section sec_python Python Tutorials
 

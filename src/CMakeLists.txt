@@ -27,6 +27,7 @@ add_subdirectory(ctrlLib)
 add_subdirectory(iDyn)
 add_subdirectory(learningMachines)
 add_subdirectory(perceptiveModels)
+add_subdirectory(actionPrimitives)
 
 #set(ICUB_USE_GSL "ON" CACHE BOOL "dependency flag" FORCE)
 #set(ICUB_USE_GLUT "ON" CACHE BOOL "dependency flag" FORCE)
