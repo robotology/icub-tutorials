@@ -29,10 +29,10 @@ the desired orientation given in axis-angle representation.
 Before proceeding, the reader might find helpful to recap some motor control fundamentals (see \ref icub_motor_control_tutorial "here")
 as well as to be introduced to the underneath topic of forward and inverse kinematics by going through the \ref iKin documentation and tutorials.
 
-The architecture of the Cartesian Interface is based on three components: 1) a complex nonlinear <b>optimizer</b> that handles the inverse kinematics problem;
-2) a <b>controller</b> that represents the server part of the interface and is responsible for generating the human-like velocity profiles to move the system
-from its initial state to the joints configuration found by the solver; 3) a <b>client</b> part that exposes a collection of C++ methods to abstract the interface
-from its specific implementation. \n
+The architecture of the Cartesian Interface is based on three components: 1) a complex <b>nonlinear optimizer</b> that handles the inverse kinematics problem;
+2) a <b>bilogically inspired controller</b> that represents the server part of the interface and is responsible for generating the human-like velocity profiles
+to move the system from its initial state to the joints configuration found by the solver; 3) a <b>client</b> part that exposes a collection of C++ methods to
+abstract the interface from its specific implementation. \n
 Alternatively, the client can act as a pure wrapper over the solver coping with the inverse kinematics, whereas the user might consider developing his own controller
 meeting some specific requirements. However, also in this configuration, the server part needs to be launched (even if not employed) as a gateway to let the client
 communicate with the solver.
@@ -76,12 +76,12 @@ protocol as light as possible, avoiding requests for integrity check and reiniti
 \section sec_cart_opencloseinterface Opening and Closing the Cartesian Interface
 
 The Cartesian Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class:
-\code 
+\code
 Property option;
 option.put("device","cartesiancontrollerclient");
 option.put("remote","/icub/cartesianController/right_arm");
 option.put("local","/client/right_arm");
- 
+
 PolyDriver clientCartCtrl(option);
 
 ICartesianControl *icart=NULL;
@@ -102,27 +102,27 @@ getting the current pose of the right hand end-effector expressed with seven dou
 where the first three components are the 3d location of the center of the palm, whilst the final four describe the rotation of the
 frame attached to the end-effector with respect to the root reference frame in axis/angle notation (see \ref sec_cart_coordsystem).
 
-When you are done with controlling the robot you can explicitly close the device (or just let the destructor do it for you): 
+When you are done with controlling the robot you can explicitly close the device (or just let the destructor do it for you):
 \code
 clientCartCtrl.close();
 \endcode
 
 
-\section sec_cart_coordsystem Coordinate System 
+\section sec_cart_coordsystem Coordinate System
 
-Central for a correct usage of the cartesian controller is the knowledge of the coordinate system 
+Central for a correct usage of the cartesian controller is the knowledge of the coordinate system
 that shall be adopted to describe any desired limb pose.
 
 Positions (in meters) and orientation refer to the root frame attached to the waist as in the
 <a href="http://wiki.icub.org/wiki/ICubForwardKinematics">wiki</a> page. \n
 The root <b>x-axis</b> points backward, the <b>y-axis</b> points rightward, while the <b>z-axis</b> points upward.
- 
+
 To specify a target orientation of the end-effector, you have to provide three components for the rotation
 axis (whose norm is 1) and a fourth component for the rotation angle expressed in radians as required by the
 axis/angle notation (see <a href="http://en.wikipedia.org/wiki/Axis_angle">here</a>). \n
 The axis/angle format compacts the notation and protects from some singularities that might appear when the
 Euler angles are adopted, but obviously one can still use his most preferable representation since there exist
-transformation formulas from one domain to another (e.g. look at yarp::math::dcm2axis or yarp::math::axis2dcm documentation). 
+transformation formulas from one domain to another (e.g. look at yarp::math::dcm2axis or yarp::math::axis2dcm documentation).
 
 <b>Example</b> \n
 
@@ -178,7 +178,7 @@ Vector od=o0;
 icart->goToPose(xd,od);   // send request and forget
 \endcode
 The <i>goToPose()</i> method does not wait for any acknowledgement that the server has received the request,
-but it just lets the client module go straight to the next instruction in the code flow. Therefore, the 
+but it just lets the client module go straight to the next instruction in the code flow. Therefore, the
 intended use of this method is for streaming input (e.g. while tracking).
 
 If we would like to test whether the new pose has been achieved, it's as follows:
@@ -205,7 +205,7 @@ To tune the trajectory execution time for point-to-point movements, you can call
 icart->setTrajTime(1.5);  // given in seconds
 \endcode
 
-To let the controller determine when to declare the movement accomplished, there is a dedicated tolerance acting 
+To let the controller determine when to declare the movement accomplished, there is a dedicated tolerance acting
 both at the level of position and orientation errors. To set this tolerance you can write the following:
 \code
 icart->setInTargetTol(0.001);
@@ -277,7 +277,7 @@ gets disconnected until the next command is yielded and the limb can be moved by
 Conversely, in <i>tracking</i> mode the controller stays connected and tries to compensate for externally induced movements on the uncontrolled
 joints (that are seen as disturbs on the actual end-effector position) such as the torso ones (in case they have been previously disabled).
 
-Another advanced feature you can benefit from is the chance to change dynamically the rest position the solver uses to specify a secondary task 
+Another advanced feature you can benefit from is the chance to change dynamically the rest position the solver uses to specify a secondary task
 while converging to the solution. \n
 Briefly (a detailed description is given in the \ref iKinSlv "solver page"), the cartesian solver implements a nonlinear constrained optimization
 that can be described in this way:
@@ -343,7 +343,7 @@ icart->setTrackingMode(true);
 ...
 int context_0;
 icart->storeContext(&context_0);        // latch the context
-                                        
+
 icart->setDOF(newDof2,curDof2);         // at certain point the user may want the controller to
 icart->goToPose(x,o);                   // perform some actions with different configuration
 ...
@@ -397,7 +397,7 @@ iencs->getEncoders(encs.data());
 Vector joints;
 iCubFinger finger("right_index");                  // relevant code to get the position of the finger tip
 finger.getChainJoints(encs,joints);                // wrt the end-effector frame
-Matrix tipFrame=finger.getH((M_PI/180.0)*joints);  
+Matrix tipFrame=finger.getH((M_PI/180.0)*joints);
 
 Vector tip_x=tipFrame.getCol(3);
 Vector tip_o=yarp::math::dcm2axis(tipFrame);
@@ -496,4 +496,3 @@ You will need to compile the server part of the interface also on the cluster wh
 A working example is available under src/motorControlAdvanced/tutorial_cartesian_interface.cpp which makes the left hand follow
 a circular trajectory located in front of the simulated robot.
 */
-
