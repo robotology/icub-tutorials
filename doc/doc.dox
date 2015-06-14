@@ -76,7 +76,7 @@ These tutorials assume you installed the YARP and iCub bindings for Python. Foll
 
 \section sec_module_doc Module Documentation Tutorials
 
-- \ref module_documentation - tutorial on how to write the XML documentation of a module
+- \ref xml_module_documentation - tutorial on how to write the XML documentation of a module
 
 * This file can be edited at \link doc/doc.dox
 *
