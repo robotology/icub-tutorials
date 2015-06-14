@@ -76,10 +76,11 @@ These tutorials assume you installed the YARP and iCub bindings for Python. Foll
 
 \section sec_idl IDL Tutorials
 
-These tutorials demonstrate how to use effectively use Thrift - the YARP choice of Interface Description Language (IDL) in YARP -
-to generate automatically rpc methods and the corresponding Doxygen documentation.
+These tutorials demonstrate how to use effectively Thrift - the <a href="http://wiki.icub.org/yarpdoc/thrift_tutorial_portable.html">YARP choice</a>
+of Interface Description Language (IDL) in YARP - to generate automatically rpc methods and the
+corresponding Doxygen documentation.
 
-- \ref rpcIdl - a tutorial on how to implement a trivial server providing access to an integer.
+- src/rpcIdl/rpcIdl.xml - simple rules on how to write the xml documentation of a module whose final result is \ref rpcIdl
 
 * This file can be edited at \link doc/doc.dox
 *
