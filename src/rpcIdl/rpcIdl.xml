@@ -10,10 +10,11 @@
 
    <description-long>
        Implements a trivial server that provides access to an integer.
-       You can use html, for example to add a link to <a href="http://www.yarp.it"> the yarp page</a> and Doxygen tags.
 
        @subsection sec-intro Introduction
        This is the introduction. 123
+       You can use html, for example to add a link to
+       <a href="http://www.yarp.it"> the yarp page</a> and Doxygen tags.
 
        @subsection sec-details More stuff
        This is a detailed description, etc.
