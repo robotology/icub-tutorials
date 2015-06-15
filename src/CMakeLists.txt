@@ -44,19 +44,6 @@ add_subdirectory(rpcIdl)
 #set(ICUB_USE_OpenCV "ON" CACHE BOOL "dependency flag" FORCE)
 #set(ICUB_USE_Qt3 "ON" CACHE BOOL "dependency flag" FORCE)
 
-if(ICUB_USE_OpenCV)
-    find_package(OpenCV QUIET)
-    message(STATUS "Testing iCubVis dependent code")
-
-    add_executable(test_icubVis smoke-tests/icubVis.cpp)
-    target_link_libraries(test_icubVis ${YARP_LIBRARIES} iCubVis)
-
-    ### execute tests
-    add_test(NAME test_icubVis COMMAND test_icubVis)
-else()
-    message(STATUS "OpenCV not found")
-endif()
-
 if(ICUB_USE_IPOPT)
     find_package(IPOPT QUIET)
     message(STATUS "Testing IPOPT dependent code")
