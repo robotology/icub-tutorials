@@ -3,18 +3,7 @@
 
 \author Ugo Pattacini
 
-\section sec_customcart_contents Contents
-
-- \ref sec_customcart_intro
-- \ref sec_customcart_architecture
-- \ref sec_customcart_dependencies
-- \ref sec_customcart_custom_example
-- \ref sec_customcart_solver_configuration
-- \ref sec_customcart_server_configuration
-- \ref sec_customcart_client_configuration
-- \ref sec_customcart_compile_run_example
-- \ref sec_customcart_succ_stories
-
+\tableofcontents
 
 \section sec_customcart_intro Introduction
 

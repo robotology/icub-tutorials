@@ -3,20 +3,7 @@
 
 \author Ugo Pattacini
 
-\section sec_cart_contents Contents
-
-- \ref sec_cart_intro
-- \ref sec_cart_dependencies
-- \ref sec_cart_opencloseinterface
-- \ref sec_cart_coordsystem
-- \ref sec_cart_useinterface
-- \ref sec_cart_nonlineardesign
-- \ref sec_cart_contextswitch
-- \ref sec_cart_taskrefvel
-- \ref sec_cart_tipframe
-- \ref sec_cart_eventscallbacks
-- \ref sec_cart_siminterface
-
+\tableofcontents
 
 \section sec_cart_intro Introduction
 

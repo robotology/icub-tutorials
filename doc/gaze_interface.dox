@@ -3,17 +3,7 @@
 
 \author Ugo Pattacini
 
-\section sec_gaze_contents Contents
-
-- \ref sec_gaze_intro
-- \ref sec_gaze_dependencies
-- \ref sec_gaze_runningserver
-- \ref sec_gaze_opencloseinterface
-- \ref sec_gaze_useinterface
-- \ref sec_gaze_contextswitch
-- \ref sec_gaze_eventscallbacks
-- \ref sec_gaze_siminterface
-
+\tableofcontents
 
 \section sec_gaze_intro Introduction
 
