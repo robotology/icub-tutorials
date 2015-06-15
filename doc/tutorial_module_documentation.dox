@@ -187,7 +187,7 @@ Concluding, once processed the final Doxygen documentation will look like as in
 To install the description file in the location where all the xml are supposed to
 be just rely on the following cmake directive:
 
-\code{.xml}
+\code
 yarp_install(FILES rpcIdl.thrift DESTINATION ${ICUB_MODULES_INSTALL_DIR})
 \endcode
 
