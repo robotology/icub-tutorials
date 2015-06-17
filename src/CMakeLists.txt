@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.9)
 
-set(PROJECTNAME tutorials)
+set(PROJECTNAME icub-tutorials)
 
 project(${PROJECTNAME})
 
