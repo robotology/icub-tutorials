@@ -38,7 +38,7 @@ class genericRightArm : public iKinLimb
 public:
     genericRightArm() : iKinLimb()
     {
-         allocate("don't care");
+        allocate("don't care");
     }
 
 protected:
