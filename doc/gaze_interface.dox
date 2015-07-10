@@ -8,12 +8,12 @@
 \section sec_gaze_intro Introduction
 
 The YARP <b>Gaze Interface</b> provides an abstract layer to control the iCub gaze in a bio-plausible way, moving the neck
-and the eyes independently and performing saccades, pursuit, vergence, OCR (oculo-collic reflex) and VOR (vestibulo-ocular reflex
-relying on inertial data). 
+and the eyes independently and performing saccades, pursuit, vergence, OCR (oculo-collic reflex), VOR (vestibulo-ocular reflex)
+and gaze stabilization relying on inertial data. 
 
-Essentially the interface exports all the functionalities given by the \ref iKinGazeCtrl module directly from within the
+Essentially, the interface exports all the functionalities given by the \ref iKinGazeCtrl module directly from within the
 code without having to be concerned with the communication protocol done via YARP ports. Thus, the user is warmly invited
-to visit the iKinGazeCtrl \ref iKinGazeCtrl "page" where more detailed descriptions can be found.
+to visit the \ref iKinGazeCtrl "iKinGazeCtrl page" where more detailed descriptions can be found.
 
 \note <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>: U. Pattacini,
 "Modular Cartesian Controllers for Humanoid Robots: Design and Implementation on the iCub," <i>Ph.D. dissertation</i>, RBCS,
@@ -222,7 +222,7 @@ perfectly compensated, to fixate in stereo mode it is advisable to rely on the m
 
 \subsection subsec_gaze_fastsaccadicmode Fast Saccadic Mode
 The user has the possibility to enable the fast saccadic mode that employs the low level position control in order to generate
-very fast saccadic movements of the eyes. To do that one can simply do the following:
+very fast saccadic movements of the eyes. To achieve that, one can simply do the following:
 \code
 igaze->setSaccadesStatus(true);
 \endcode
@@ -231,6 +231,18 @@ can be retrieved and/or tuned relying on specific methods (i.e. <i>get/setSaccad
 The controller chooses to perform a saccade only if the angular distance of the target from the straight-ahead line overcomes a given
 threshold the user might profitable tune relying on dedicated methods (i.e. <i>get/setSaccadesActivationAngle()</i>). \n \n
 <i>Caveat</i>: vision processing algorithms that assume the continuity of the images flow might be heavily affected by saccades.
+
+
+\subsection subsec_gaze_stabilization Gaze Stabilization
+The controller can be instructed to do its best in order to keep the fixation point unvaried under the effect of external disturbances/movements.
+The gaze stabilization makes use of inertial data to accomplish the job and entails that corrections will be sent to the eyes as well
+(therefore, it is not a mere head stabilization). To enable the gaze stabilization, call the following method:
+\code
+igaze->setStabilizationMode(true);
+\endcode
+\note For further details about gaze stabilization refer to:
+Roncone A., Pattacini U., Metta G. & Natale L., "Gaze Stabilization for Humanoid Robots: a Comprehensive Framework",
+<i>IEEE-RAS International Conference on Humanoid Robots</i>, Madrid, Spain, November 18-20, 2014.
 
 
 \section sec_gaze_contextswitch Context Switch
