@@ -235,7 +235,7 @@ threshold the user might profitable tune relying on dedicated methods (i.e. <i>g
 
 \subsection subsec_gaze_stabilization Gaze Stabilization
 The controller can be instructed to do its best in order to keep the fixation point unvaried under the effect of external disturbances/movements.
-The gaze stabilization makes use of inertial data to accomplish the job and entails that corrections will be sent to the eyes as well
+The gaze stabilization makes use of inertial data to accomplish the job and entails that corrections will be sent to the eyes too
 (therefore, it is not a mere head stabilization). To enable the gaze stabilization, call the following method:
 \code
 igaze->setStabilizationMode(true);
