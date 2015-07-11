@@ -224,7 +224,7 @@ perfectly compensated, to fixate in stereo mode it is advisable to rely on the m
 The user has the possibility to enable the fast saccadic mode that employs the low level position control in order to generate
 very fast saccadic movements of the eyes. To achieve that, one can simply do the following:
 \code
-igaze->setSaccadesStatus(true);
+igaze->setSaccadesMode(true);
 \endcode
 After a saccade is executed, the next saccadic movement can be performed only after a given inhibition period of time, that in turn
 can be retrieved and/or tuned relying on specific methods (i.e. <i>get/setSaccadesInhibitionPeriod()</i>). \n
