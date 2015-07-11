@@ -243,9 +243,9 @@ igaze->setStabilizationMode(true);
 The stabilization is always active also during point-to-point motion or while tracking a moving reference, regardless of the current setting
 for the above mode and unless the stabilization has been purposely disabled (via command-line option), so that any disturbance occurring
 during that motion will be compesated for.
-In this respect, the difference between the <i>stabilization mode</i> and the <i>tracking mode</i> is that in the former the fixation point is stabilized
-in the "world" coordinate system, thus this modality is particularly suitable for balancing and walking, while in the latter the fixation point
-will be always tracked in the robot root reference frame, which might be moving in the world as well.
+In this respect, the difference between the <i>stabilization mode</i> and the <i>tracking mode</i> is that in the former modality the fixation
+point is stabilized in the "world" coordinate system, thus this mode turns to be particularly suitable for robot balancing and walking, while in the
+latter modality the fixation point will be always tracked in the robot's root reference frame, which might be moving with respect to the world as well.
 \note For further details about gaze stabilization refer to:
 Roncone A., Pattacini U., Metta G. & Natale L., "Gaze Stabilization for Humanoid Robots: a Comprehensive Framework",
 <i>IEEE-RAS International Conference on Humanoid Robots</i>, Madrid, Spain, November 18-20, 2014.
