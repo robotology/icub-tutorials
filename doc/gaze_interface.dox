@@ -154,7 +154,7 @@ igaze->lookAtFixationPoint(x);
 The benefit of <i>lookAtMonoPixel()</i> method is clearly that the time for the rpc communication is saved, hence it is particularly designed for control
 in streaming mode; on the other hand, the knowledge of the cartesian point remains hidden to the user, unless it is retrieved at the end of the
 motion through a call to <i>getFixationPoint()</i>. \n
-Alternatively, one can think to rely on the vergence angle given in degree in place of the the component z, accounting for a different way of expressing
+Alternatively, one can think to rely on the vergence angle given in degrees in place of the the component z, accounting for a different way of expressing
 distances from the eyes. To this end, the user can call the proper method <i>lookAtMonoPixelWithVergence(camSel,px,ver)</i>.
 
 
