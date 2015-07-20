@@ -53,7 +53,7 @@ int main()
     else
     {
         printf("test failed!\n");
-        return -1;
+        return 1;
     }
 }
 

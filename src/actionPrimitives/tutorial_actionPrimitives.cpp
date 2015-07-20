@@ -455,7 +455,7 @@ int main(int argc, char *argv[])
     if (!yarp.checkNetwork())
     {
         cout<<"YARP server not available!"<<endl;
-        return -1;
+        return 1;
     }
 
     ResourceFinder rf;

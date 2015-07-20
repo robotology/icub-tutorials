@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
     if (!yarp.checkNetwork())
     {
         printf("No yarp network, quitting\n");
-        return false;
+        return 1;
     }
 
 

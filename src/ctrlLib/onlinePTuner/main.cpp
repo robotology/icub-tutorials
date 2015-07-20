@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     if (!yarp.checkNetwork())
     {
         printf("YARP is not available!\n");
-        return -1;
+        return 1;
     }
 
     ResourceFinder rf;
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
     if (!driver.isValid())
     {
         printf("Part \"%s\" is not ready!\n",("/"+robot+"/"+part).c_str());
-        return -1;
+        return 1;
     }
 
     // ##### Preamble
@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
     if (!designer.configure(driver,pOptions))
     {
         printf("Configuration failed!\n");
-        return -1;
+        return 1;
     }
 
     // let's start the plant estimation by

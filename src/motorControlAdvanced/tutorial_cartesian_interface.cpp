@@ -269,7 +269,7 @@ int main()
     if (!yarp.checkNetwork())
     {
         fprintf(stdout,"Error: yarp server does not seem available\n");
-        return -1;
+        return 1;
     }
 
     CtrlModule mod;

@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     {
         fprintf(stderr, "Please specify the name of the robot\n");
         fprintf(stderr, "--robot name (e.g. icub)\n");
-        return -1;
+        return 1;
     }
     std::string robotName=params.find("robot").asString().c_str();
     std::string remotePorts="/";
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     if (!robotDevice.isValid()) {
         printf("Device not available.  Here are the known devices:\n");
         printf("%s", Drivers::factory().toString().c_str());
-        return 0;
+        return 1;
     }
 
     IPositionControl *pos;
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
     if (!ok) {
         printf("Problems acquiring interfaces\n");
-        return -1;
+        return 1;
     }
 
     int nj=0;

@@ -173,7 +173,7 @@ int main(int argc, char *argv[])
     if (!yarp.checkNetwork())
     {
         cout<<"Error: yarp server does not seem available"<<endl;
-        return -1;
+        return 1;
     }
 
     // register here the new yarp devices
@@ -189,6 +189,5 @@ int main(int argc, char *argv[])
     SolverModule solver;
     return solver.runModule(rf);
 }
-
 
 

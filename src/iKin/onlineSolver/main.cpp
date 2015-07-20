@@ -37,7 +37,7 @@ int main()
     Network yarp;
 
     if (!yarp.checkNetwork())
-        return -1;
+        return 1;
     
     // declare the on-line arm solver called "solver"
     iCubArmCartesianSolver onlineSolver("solver");
@@ -54,7 +54,7 @@ int main()
 
     // launch the solver and let it connect to the simulator
     if (!onlineSolver.open(options))
-        return -1;
+        return 1;
     
     // prepare ports
     Port in, out, rpc;

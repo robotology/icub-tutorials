@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     {
         fprintf(stderr, "Please specify the name of the robot\n");
         fprintf(stderr, "--robot name (e.g. icub)\n");
-        return -1;
+        return 1;
     }
     std::string robotName=params.find("robot").asString().c_str();
     std::string remotePorts="/";
