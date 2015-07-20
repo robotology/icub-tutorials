@@ -5,6 +5,12 @@
 
 \section sec_cpp C++ Tutorials
 
+We recommend you first get accustomed with YARP. There are a list of tutorials available in this page: <a href="http://wiki.icub.org/yarp/specs/dox/user/html/tutorials.html">YARP Tutorials</a>. In particular you should at least follow
+
+- <a href="http://wiki.icub.org/yarp/specs/dox/user/html/note_ports.html">Getting started with YARP ports</a>
+- <a href="http://wiki.icub.org/yarp/specs/dox/user/html/rpc_ports.html">Specialized RPC ports</a>
+- <a href="http://wiki.icub.org/yarp/specs/dox/user/html/yarp_rfmodule_tutorial.html">Writing modules, the RFModule</a>
+
 A list of tutorials on various topics from basic compilation, visual processing, to control in the operational space.
 
 - \ref icub_hello_icub - how to write the very first program
@@ -12,14 +18,14 @@ A list of tutorials on various topics from basic compilation, visual processing,
 - \ref icub_impedance_control_tutorial - a tutorial on how to use the joint level torque/impedance interface
 - \ref icub_basic_image_processing - a tutorial on a basic image processing
 
-Check tutorials on how to organize command line parameters and config files (these tutorials have been recently revised and moved to the YARP online documentation):
-<a href="http://wiki.icub.org/yarpdoc/yarp_resource_finder_tutorials.html">Tutorials on the ResourceFinder Class</a>
-
-- \ref icub_tutorial_module - a tutorial on how to use the module helper class to write a program
 - \ref icub_rate_thread - a tutorial on how to write a control loop using threads
 - \ref icub_cartesian_interface - a tutorial on how to control a robot's limb in the operational space
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a YARP interface
 - \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface
+
+Advanced integration with the YARP framework require that you get used to the ResourceFinder:
+- <a href="http://wiki.icub.org/yarp/specs/dox/user/html/yarp_resource_finder_tutorials.html"> Tutorials on the ResourceFinder</a>
+
 
 \section sec_lib_cpp C++ tutorials related to specific libraries
 
