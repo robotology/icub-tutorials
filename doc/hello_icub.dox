@@ -3,35 +3,34 @@
 
 \section sec_goal Goal
 In this short tutorial we learn how to use CMake. We compile a simple test program that links 
-all YARP libraries and is ready to use all the libraries in the iCub repository. This program 
-is trivial and does not use the robot yet. 
+all YARP libraries. This program is trivial and does not use the robot yet. 
 
 We assume you have:
 - installed and compiled YARP
-- installed and compiled the iCub repository
-- correctly set ICUB_ROOT/ICUB_DIR and YARP_ROOT/YARP_DIR
+- correctly set YARP_DIR
 
 First we need to prepare the main.cpp.
 
 Open a text editor and type the following:
 
 \code
-#include <stdio.h>
+#include <cstdio>
 #include <yarp/os/Time.h>
 
+using namespace std;
 using namespace yarp::os;
 
 int main()
 {
-	printf("Starting the application\n");
-	int times=10;
+    printf("Starting the application\n");
+    int times=10;
 
-	while(times--)
-	{
-		printf("Hello iCub\n");
-		Time::delay(0.5); //wait 0.5 seconds
-	}
-	printf("Goodbye!\n");
+    while(times--)
+    {
+        printf("Hello iCub\n");
+        Time::delay(0.5); //wait 0.5 seconds
+    }
+    printf("Goodbye!\n");
 }
 \endcode
 
@@ -47,34 +46,31 @@ Go back to your text editor and write the following file:
 \code
 PROJECT(HELLO_ICUB)
 
-FIND_PACKAGE(YARP)
-FIND_PACKAGE(ICUB)
+FIND_PACKAGE(YARP REQUIRED)
 
 # add include directories
-INCLUDE_DIRECTORIES(${YARP_INCLUDE_DIRS} ${ICUB_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${YARP_INCLUDE_DIRS})
 
 ADD_EXECUTABLE(hello main.cpp)
 
-# we now add the YARP and iCub libraries to our project.
-TARGET_LINK_LIBRARIES(hello ${YARP_LIBRARIES} ${ICUB_LIBRARIES})
+# we now add the YARP libraries to our project.
+TARGET_LINK_LIBRARIES(hello ${YARP_LIBRARIES})
 \endcode
 
 Now save this file as CMakeLists.txt, in the same directory as your main.cpp file.
 
 This code tells cmake to produce appropriate project files to compile an executable 
-named hello, using the file main.cpp. It also links in yarp libraries and sets up 
-your environment to link other libraries from the iCub repository.
+named hello, using the file main.cpp. It also links in yarp libraries.
 
 Now run cmake:
 \verbatim
 cmake ./
 \endverbatim
 
-If cmake complains about not being able to localize YARP or ICUB, it means that you have 
-not followed correctly the procedure in the manual about the compilation of YARP or the 
-installation of the iCub repository. In particular check that you have correctly set the 
-environment veriables ICUB_ROOT/ICUB_DIR and YARP_ROOT/YARP_DIR. It is also possible to
-manually set these values, but we do not recommend it.
+If cmake complains about not being able to localize YARP, it means that you have 
+not followed correctly the procedure in the manual about the compilation of YARP.
+In particular, check that you have correctly set the environment veriables YARP_DIR.
+It is also possible to manually set these values, but we do not recommend it.
 
 Now you are ready to compile this example using your favorite compiler, and execute it.
 
