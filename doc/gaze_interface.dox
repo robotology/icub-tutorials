@@ -245,7 +245,9 @@ for the above mode and unless the stabilization has been purposely disabled (via
 during that motion will be compesated for.
 In this respect, the difference between the <i>stabilization mode</i> and the <i>tracking mode</i> is that in the former modality the fixation
 point is stabilized in the "world" coordinate system, thus this mode turns to be particularly suitable for robot balancing and walking, while in the
-latter modality the fixation point will be always tracked in the robot's root reference frame, which might be moving with respect to the world as well.
+latter modality the fixation point will be always tracked in the robot's root reference frame, which might be moving with respect to the world as well. \n
+When the stabilization is active and the robot is purely compensating for external disturbances, the neck and eyes limits customized by the user are
+not taken into account, thus spanning their whole admittable range.
 \note For further details about gaze stabilization refer to:
 Roncone A., Pattacini U., Metta G. & Natale L., "Gaze Stabilization for Humanoid Robots: a Comprehensive Framework",
 <i>IEEE-RAS International Conference on Humanoid Robots</i>, Madrid, Spain, November 18-20, 2014.
