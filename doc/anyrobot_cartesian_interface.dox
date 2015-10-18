@@ -147,7 +147,7 @@ mode           shot                     // [shot] or [cont] for tracking mode of
 verbosity      off                      // self-explaining :)
 maxIter        200                      // stop solving whenever you overcome this limit
 tol            0.0001                   // tolerance for the task
-tol            0.000001                 // tolerance for the constraints
+constr_tol     0.000001                 // tolerance for the constraints
 interPoints    off                      // if [on] the points discovered while converging are provided as well: they might be not so adjacent
 ping_robot_tmo 10.0                     // at start-up, while connecting to the robot, wait for this timeout in [s] before giving up
 \endcode
