@@ -183,8 +183,9 @@ public:
         commData->setDesired(xd_old,chain->getAng());
 
         // instantiate the optimizer with the passed chain, the ctrlPose control
-        // mode, the tolerance and a maximum number of iteration
-        slv=new iKinIpOptMin(*chain,ctrlPose,1e-3,200);
+        // mode, the cost function and constraints tolerances and
+        // a maximum number of iteration
+        slv=new iKinIpOptMin(*chain,ctrlPose,1e-3,1e-6,200);
 
         // in order to speed up the process, a scaling for the problem 
         // is usually required (a good scaling holds each element of the jacobian

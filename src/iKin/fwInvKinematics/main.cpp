@@ -157,7 +157,7 @@ int main()
 
     // instantiate a IPOPT solver for inverse kinematic
     // for both translational and rotational part
-    iKinIpOptMin slv(*chain,IKINCTRL_POSE_FULL,1e-3,100);    
+    iKinIpOptMin slv(*chain,IKINCTRL_POSE_FULL,1e-3,1e-6,100);    
 
     // In order to speed up the process, a scaling for the problem 
     // is usually required (a good scaling holds each element of the jacobian

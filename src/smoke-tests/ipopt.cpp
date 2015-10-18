@@ -28,7 +28,7 @@ int main()
     iCubArm arm("right");
     iKinChain *chain=arm.asChain();
 
-    iKinIpOptMin slv(*chain,IKINCTRL_POSE_XYZ,1e-3,100);
+    iKinIpOptMin slv(*chain,IKINCTRL_POSE_XYZ,1e-3,1e-6,100);
     slv.setUserScaling(true,100.0,100.0,100.0);
 
     Vector xf(7,0.0);
