@@ -147,7 +147,7 @@ Vector o=yarp::math::dcm2axis(R);
 
 \section sec_cart_useinterface Using the Cartesian Interface
 
-The YARP <b>Cartesian Interface</b> is fully documented <u><b><a href="http://wiki.icub.org/yarpdoc/classyarp_1_1dev_1_1ICartesianControl.html">here</a></b></u>.
+The YARP <b>Cartesian Interface</b> is fully documented <b><a href="http://wiki.icub.org/yarpdoc/classyarp_1_1dev_1_1ICartesianControl.html">here</a></b>.
 Moreover, some examples are also reported hereafter to gain a deeper insight into the cartesian device.
 
 Imagine that we want to get the actual arm pose from within our code. What we have to write is just:
