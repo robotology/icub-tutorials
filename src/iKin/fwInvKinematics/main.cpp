@@ -12,6 +12,7 @@
  * CopyPolicy: Released under the terms of GPL 2.0 or later
  */ 
 
+#include <cmath>
 #include <iostream>
 #include <iomanip>
 
