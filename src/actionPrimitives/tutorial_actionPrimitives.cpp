@@ -327,7 +327,8 @@ public:
         {
             if (!model->isCalibrated())
             {
-                Property prop("(finger all_parallel)");
+                Property prop;
+                prop.put("finger","all");
                 model->calibrate(prop);
             }
         }
