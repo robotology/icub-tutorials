@@ -11,8 +11,10 @@
 //
 // Author: Serena Ivaldi - <serena.ivaldi@iit.it>
 
+#include <cmath>
 #include <iostream>
 #include <iomanip>
+
 #include <yarp/sig/Vector.h>
 #include <yarp/sig/Matrix.h>
 #include <iCub/ctrl/math.h>
