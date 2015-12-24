@@ -16,32 +16,32 @@
 #include <yarp/sig/Matrix.h>
 #include <iCub/iDyn/iDyn.h>
 #include <iCub/iDyn/iDynInv.h>
+#include <iCub/skinDynLib/common.h>
 
 using namespace std;
 using namespace yarp::sig;
 using namespace iCub::iDyn;
-
-
+using namespace iCub::skinDynLib;
 
 // useful print functions
 // print a matrix nicely
-void printMatrix(string s, const Matrix &m)
+void printMatrix(const string &s, const Matrix &m)
 {
-	cout<<s<<endl;
-	for(int i=0;i<m.rows();i++)
-	{
-		for(int j=0;j<m.cols();j++)
-			cout<<setw(15)<<m(i,j);
-		cout<<endl;
-	}
+    cout<<s<<endl;
+    for(int i=0;i<m.rows();i++)
+    {
+        for(int j=0;j<m.cols();j++)
+            cout<<setw(15)<<m(i,j);
+        cout<<endl;
+    }
 }
 // print a vector nicely
-void printVector(string s, const Vector &v)
+void printVector(const string &s, const Vector &v)
 {
-	cout<<s<<endl;
-	for(int j=0;j<v.length();j++)
-		cout<<setw(15)<<v(j);
-	cout<<endl;
+    cout<<s<<endl;
+    for(size_t j=0;j<v.length();j++)
+        cout<<setw(15)<<v(j);
+    cout<<endl;
 }
 
 
@@ -51,11 +51,11 @@ void printVector(string s, const Vector &v)
 
 int main()
 {
-	// we create a iDyn::iCubArmNoTorsoDyn = arm only
+    // we create a iDyn::iCubArmNoTorsoDyn = arm only
     // if you are familiar with iKin's iCubArm, beware this one is different!
     // iDyn::iCubArmDyn is exactly like iKin::iCubArm, with the same kinematic properties and so on.
     // iDyn::iCubArmNoTorsoDyn, as the name says, does not have the 3 torso links: so here N==DOF.
-	iCubArmNoTorsoDyn *arm = new iCubArmNoTorsoDyn("right");
+    iCubArmNoTorsoDyn *arm = new iCubArmNoTorsoDyn("right");
     
     // we create a iDyn::iDynSensorArmNoTorso for the right arm, with force/moment computation in the static case
     // (STATIC) and verbosity flag on (VERBOSE).
@@ -100,8 +100,8 @@ int main()
     // this information must be set at the base of the chain, where the base is intended to be the first link (first.. in the Denavit
     // Hartenberg convention)
     // note: if nothing is moving, it can be simply zero, but ddp0 must provide the gravity information :)
-	Vector w0(3); Vector dw0(3); Vector ddp0(3);
-	w0=dw0=ddp0=0.0; ddp0[2]=9.81;
+    Vector w0(3); Vector dw0(3); Vector ddp0(3);
+    w0=dw0=ddp0=0.0; ddp0[2]=9.81;
     // here we set the kinematic information on the arm chain
     arm->initKinematicNewtonEuler(w0,dw0,ddp0);
 
@@ -142,10 +142,6 @@ int main()
     printMatrix("Forces ",F);
     printMatrix("Moments ",Mu);
     printVector("Torques ",Tau);
-
-
-    //exit
-	cin.get();
 
     // remember to delete everything before exiting :)
     cout<<"\nDestroying sensor..."<<endl;
