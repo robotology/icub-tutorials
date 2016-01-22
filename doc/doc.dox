@@ -11,6 +11,8 @@ We recommend you first get accustomed with YARP. There are a list of tutorials a
 - <a href="http://wiki.icub.org/yarp/specs/dox/user/html/rpc_ports.html">Specialized RPC ports</a>
 - <a href="http://wiki.icub.org/yarp/specs/dox/user/html/yarp_rfmodule_tutorial.html">Writing modules, the RFModule</a>
 
+The source code of the following tutorials is hosted in the <a href="https://github.com/robotology/icub-tutorials">icub-tutorials</a> repository.
+
 A list of tutorials on various topics from basic compilation, visual processing, to control in the operational space.
 
 - \ref icub_hello_icub - how to write the very first program
