@@ -9,7 +9,7 @@
 
 The YARP <b>Gaze Interface</b> provides an abstract layer to control the iCub gaze in a bio-plausible way, moving the neck
 and the eyes independently and performing saccades, pursuit, vergence, OCR (oculo-collic reflex), VOR (vestibulo-ocular reflex)
-and gaze stabilization relying on inertial data. 
+and gaze stabilization relying on inertial data.
 
 Essentially, the interface exports all the functionalities given by the \ref iKinGazeCtrl module directly from within the
 code without having to be concerned with the communication protocol done via YARP ports. Thus, the user is warmly invited
@@ -17,7 +17,7 @@ to visit the \ref iKinGazeCtrl "iKinGazeCtrl page" where more detailed descripti
 
 \note <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>:
 Roncone A., Pattacini U., Metta G. & Natale L., "A Cartesian 6-DoF Gaze Controller for Humanoid Robots",
-<i>Proceedings of Robotics: Science and Systems</i>, Ann Arbor, USA (MI), June 18-22, 2016.
+<i>Proceedings of Robotics: Science and Systems</i>, Ann Arbor, MI, June 18-22, 2016.
 
 
 \section sec_gaze_dependencies Dependencies
@@ -47,12 +47,12 @@ also able to launch the gaze server contextually with the iCubInterface module.
 \section sec_gaze_opencloseinterface Opening and Closing the Gaze Interface
 
 The Gaze Interface can be opened as a normal YARP interface resorting to the <i>PolyDriver</i> class:
-\code 
+\code
 Property option;
 option.put("device","gazecontrollerclient");
 option.put("remote","/iKinGazeCtrl");
 option.put("local","/client/gaze");
- 
+
 PolyDriver clientGazeCtrl(option);
 
 IGazeControl *igaze=NULL;
@@ -62,7 +62,7 @@ if (clientGazeCtrl.isValid()) {
 }
 \endcode
 
-When you are done with controlling the robot you can explicitly close the device (or just let the destructor do it for you): 
+When you are done with controlling the robot you can explicitly close the device (or just let the destructor do it for you):
 \code
 clientGazeCtrl.close();
 \endcode
@@ -102,7 +102,7 @@ This coordinate system is an absolute head-centered angular reference frame as e
 - <i>Head-Centered</i> means that the frame is attached at the middle point between the two cameras owning the same set of three axes.
 - <i>Absolute</i> indicates that it remains still irrespective of the robot motion and it refers to the position of the head
   when the robot is in rest configuration (i.e. torso and head angles zeroed).
-  
+
 For instance, to specify a desired location where to look at in this coordinate system, one can write:
 \code
 Vector ang(3);
@@ -269,7 +269,7 @@ igaze->storeContext(&context_0);        // latch the context
 
 igaze->setNeckTrajTime(1.5);            // at certain point the user may want the controller to
 igaze->clearNeckPitch();                // perform some actions with different configuration
-igaze->lookAtFixationPoint(fp);         
+igaze->lookAtFixationPoint(fp);
 ...
 
 igaze->restoreContext(context_0);       // ... and then retrieve the stored context_0
@@ -365,4 +365,3 @@ iKinGazeCtrl --from configSim.ini
 
 A working example is available here: src/motorControlAdvanced/tutorial_gaze_interface.cpp
 */
-
