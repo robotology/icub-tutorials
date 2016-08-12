@@ -24,6 +24,7 @@ A list of tutorials on various topics from basic compilation, visual processing,
 - \ref icub_cartesian_interface - a tutorial on how to control a robot's limb in the operational space
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a YARP interface
 - \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface
+- <a href="https://github.com/robotology/icub-basic-demos">iCub Basic Demos</a> - you might also examine some of our demos built on the basic components above.
 
 Advanced integration with the YARP framework require that you get used to the ResourceFinder:
 - <a href="http://wiki.icub.org/yarp/specs/dox/user/html/yarp_resource_finder_tutorials.html"> Tutorials on the ResourceFinder</a>
