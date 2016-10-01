@@ -67,13 +67,13 @@ public:
         // we suppose that:
         //
         // 1 - the iCub simulator is running
-        //     (launch iCub_SIM)
+        //     (launch: iCub_SIM)
         //
         // 2 - the cartesian server is running
-        //     (launch simCartesianControl)
-        //     
+        //     (launch: yarprobotinterface --context simCartesianControl)
+        //
         // 3 - the cartesian solver for the left arm is running too
-        //     (launch iKinCartesianSolver --context simCartesianControl --part left_arm)
+        //     (launch: iKinCartesianSolver --context simCartesianControl --part left_arm)
         //
         Property option("(device cartesiancontrollerclient)");
         option.put("remote","/icubSim/cartesianController/left_arm");
@@ -150,7 +150,7 @@ public:
     }
 
     virtual void threadRelease()
-    {    
+    {
         // we require an immediate stop
         // before closing the client for safety reason
         icart->stopControl();
@@ -163,14 +163,14 @@ public:
     }
 
     void generateTarget()
-    {   
+    {
         // translational target part: a circular trajectory
         // in the yz plane centered in [-0.3,-0.1,0.1] with radius=0.1 m
         // and frequency 0.1 Hz
         xd[0]=-0.3;
         xd[1]=-0.1+0.1*cos(2.0*M_PI*0.1*(t-t0));
-        xd[2]=+0.1+0.1*sin(2.0*M_PI*0.1*(t-t0));            
-                 
+        xd[2]=+0.1+0.1*sin(2.0*M_PI*0.1*(t-t0));
+
         // we keep the orientation of the left arm constant:
         // we want the middle finger to point forward (end-effector x-axis)
         // with the palm turned down (end-effector y-axis points leftward);
@@ -194,7 +194,7 @@ public:
     }
 
     void printStatus()
-    {        
+    {
         if (t-t1>=PRINT_STATUS_PER)
         {
             Vector x,o,xdhat,odhat,qdhat;
@@ -264,7 +264,7 @@ public:
 
 
 int main()
-{   
+{
     Network yarp;
     if (!yarp.checkNetwork())
     {
@@ -277,6 +277,3 @@ int main()
     ResourceFinder rf;
     return mod.runModule(rf);
 }
-
-
-

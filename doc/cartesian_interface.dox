@@ -8,8 +8,8 @@
 \section sec_cart_intro Introduction
 
 The YARP <b>Cartesian Interface</b> has been conceived in order to enable the control of the arms
-and the legs of the robot directly in the operational space, that is instead of commading new configuration
-for the joints, user can require for instance the arm to reach a specified pose in the cartesian space, expressed
+and the legs of the robot directly in the operational space, that is instead of commanding new configuration
+for the joints, user can require for instance the arm to reach a specified pose in the Cartesian space, expressed
 as a combination of a 3d point to be attained by the end-effector (the center of the palm in this case) along with
 the desired orientation given in axis-angle representation.
 
@@ -47,7 +47,7 @@ indicates the hub board mounted on the robot]
 <b>iCubStartup Application Launcher</b> \n
 
 Henceforth rely on the installed copy of <i>$ICUB_ROOT/main/app/iCubStartup/scripts/iCubStartup.xml.template</i> application
-to launch both the cartesian solvers (and other useful tools as well). \n
+to launch both the Cartesian solvers (and other useful tools as well). \n
 The \ref iKinCartesianSolver "Cartesian Solvers" are required to invert the kinematics using Ipopt and they are meant to run
 on the cluster to avoid overloading the PC104 core. Make sure that the machines where the solvers will be running are configured
 properly to work with the specific robot (e.g. the <b>YARP_ROBOT_NAME</b> correctly points to the name of the robot) in order
@@ -78,8 +78,8 @@ if (clientCartCtrl.isValid()) {
 }
 \endcode
 
-As you might have noticed, the stem-name of the cartesian server controller (taken as standard) is "/<robot_name>/cartesianController/<part_name>".
-Thus, similarly to a usual motor controller, a state port streaming out the cartesian pose of the limb's end-effector is also
+As you might have noticed, the stem-name of the Cartesian server controller (taken as standard) is "/<robot_name>/cartesianController/<part_name>".
+Thus, similarly to a usual motor controller, a state port streaming out the Cartesian pose of the limb's end-effector is also
 available whose name is "/<robot_name>/cartesianController/<part_name>/state:o".
 As result you can do:
 \code
@@ -97,7 +97,7 @@ clientCartCtrl.close();
 
 \section sec_cart_coordsystem Coordinate System
 
-Central for a correct usage of the cartesian controller is the knowledge of the coordinate system
+Central for a correct usage of the Cartesian controller is the knowledge of the coordinate system
 that shall be adopted to describe any desired limb pose.
 
 Positions (in meters) and orientation refer to the root frame attached to the waist as in the
@@ -148,14 +148,14 @@ Vector o=yarp::math::dcm2axis(R);
 \section sec_cart_useinterface Using the Cartesian Interface
 
 The YARP <b>Cartesian Interface</b> is fully documented <b><a href="http://wiki.icub.org/yarpdoc/classyarp_1_1dev_1_1ICartesianControl.html">here</a></b>.
-Moreover, some examples are also reported hereafter to gain a deeper insight into the cartesian device.
+Moreover, some examples are also reported hereafter to gain a deeper insight into the Cartesian device.
 
 Imagine that we want to get the actual arm pose from within our code. What we have to write is just:
 \code
 Vector x0,o0;
 icart->getPose(x0,o0);
 \endcode
-The current translational position is returned in <i>x0</i> while <i>o0</i> containes now the current orientation.
+The current translational position is returned in <i>x0</i> while <i>o0</i> contains now the current orientation.
 
 Then we want to move the hand a bit farther from the body, let's say just 10 cm away along -x,
 keeping the orientation constant:
@@ -247,26 +247,26 @@ Two things deserve your attention:
   Usually the motor control interfaces stream the torso joints in the reversed order (i.e. [yaw,roll,pitch]) since they assume
   a different kinematic origin (the base of the neck in this case).
 - The shoulder joints are considered all together to be a super-joint (in order to take into account the shoulder's cable
-  lenght issue) so that you are not allowed to enable/disable one of them differently from the others.
+  length issue) so that you are not allowed to enable/disable one of them differently from the others.
 
 Furthermore, as you can easily figure out, the torso joints are shared by both arms. This tells us to take care of a misuse
-of the cartesian device that might arise when one arm is controlled simultaneously to the other one: if this happens, a supervisor
+of the Cartesian device that might arise when one arm is controlled simultaneously to the other one: if this happens, a supervisor
 that enables/disables the torso joints according to the needs should be put in place.
 
-When the torso is being controlled by an external module, there exists also the possibility for the cartesian device to counteract
-to the induced movements of the uncontrolled joints in order to mantain the final end-effector pose stable. \n
+When the torso is being controlled by an external module, there exists also the possibility for the Cartesian device to counteract
+to the induced movements of the uncontrolled joints in order to maintain the final end-effector pose stable. \n
 To enable this feature one should call the proper method:
 \code
 icart->setTrackingMode(true);
 \endcode
-Usually the cartesian device brings up in <i>non-tracking</i> mode: this means that once the limb has reached the desired pose, the controller
+Usually the Cartesian device brings up in <i>non-tracking</i> mode: this means that once the limb has reached the desired pose, the controller
 gets disconnected until the next command is yielded and the limb can be moved by other external agents. \n
 Conversely, in <i>tracking</i> mode the controller stays connected and tries to compensate for externally induced movements on the uncontrolled
 joints (that are seen as disturbs on the actual end-effector position) such as the torso ones (in case they have been previously disabled).
 
 Another advanced feature you can benefit from is the chance to change dynamically the rest position the solver uses to specify a secondary task
 while converging to the solution. \n
-Briefly (a detailed description is given in the \ref iKinSlv "solver page"), the cartesian solver implements a nonlinear constrained optimization
+Briefly (a detailed description is given in the \ref iKinSlv "solver page"), the Cartesian solver implements a nonlinear constrained optimization
 that can be described in this way:
 
 \f[
@@ -294,9 +294,9 @@ just the arm.
 \section sec_cart_nonlineardesign Nonlinear Problem Design
 
 In this small section a couple of considerations that motivated the design of the inversion problem are briefly summarized as taken from the
-article on the cartesian controller and perhaps more importantly as they came up from discussions with some meticulous users.
+article on the Cartesian controller and perhaps more importantly as they came up from discussions with some meticulous users.
 
-One of the main aspects of the nonlinear problem as handled by the cartesian solver is that the reaching for position is a constraint, whereas the
+One of the main aspects of the nonlinear problem as handled by the Cartesian solver is that the reaching for position is a constraint, whereas the
 reaching in orientation appears directly in the cost function. As result, the former is treated with higher priority with respect to the latter
 to reflect the requirement of achieving the task in a very localized zone of the space. For example, this particular preference is of major
 interest for grasping, where having an hand perfectly oriented with respect to the object to be grasped but with a position of even a couple
@@ -367,7 +367,7 @@ towards lower values, whereas it should be increased to track low task-space ref
 
 \section sec_cart_tipframe Defining a Different Effector
 
-The cartesian controller can be also instructed to control a different effector that can be suitably expressed with respect to the standard end-effector
+The Cartesian controller can be also instructed to control a different effector that can be suitably expressed with respect to the standard end-effector
 reference frame. This is thus equivalent to rigidly attaching a tip to the standard end-effector.
 Therefore, to achieve such extension, it is required to call the <i>attachTipFrame()</i> method of the interface as done in the following example,
 where the aim is to control the tip of the index finger rather than the center of the palm:
@@ -477,8 +477,14 @@ public:
 
 \section sec_cart_siminterface The Simulator and the Cartesian Interface
 
-To have the Cartesian Interface fully operative together with the robot simulator, please have a look \ref simCartesianControl "here".
-You will need to compile the server part of the interface also on the cluster where the simulator is supposed to run.
+To have the Cartesian Interface fully operative together with the robot simulator, follow these steps:
+
+-# Launch the \ref icub_Simulation "iCub Simulator".
+-# Deploy the Cartesian servers: <b>yarprobotinterface --context simCartesianControl</b>
+-# Launch the \ref iKinCartesianSolver "Cartesian Solvers" for the required limbs: have a look to the template located in
+   the directory <i>icub-main/app/simCartesianControl/scripts</i>.
+
+Note that you will need to compile the server part of the interface also on the cluster where the simulator is supposed to run.
 
 A working example is available under src/motorControlAdvanced/tutorial_cartesian_interface.cpp which makes the left hand follow
 a circular trajectory located in front of the simulated robot.
