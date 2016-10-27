@@ -391,7 +391,7 @@ Vector tip_o=yarp::math::dcm2axis(tipFrame);
 icart->attachTipFrame(tip_x,tip_o);                // establish the new controlled frame
 ...
 
-icart->getPose(x,o);                               // now the pose refers to the finger tip frame
+icart->getPose(x,o);                               // now we get the pose of the finger tip frame
 icart->goToPose(xd,od);                            // so as the target will be attained with the finger tip
 ...
 
