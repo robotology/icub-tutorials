@@ -78,7 +78,7 @@ This coordinate system is the same as the one the \ref icub_cartesian_interface 
 <a href="http://wiki.icub.org/wiki/ICubForwardKinematics">wiki</a> specifications; it lets the user to give the target
 location where to gaze at with respect to the root reference frame attached to the robot's waist.
 
-The following snippet of code shows how to command the gaze in the cartesian space and to retrieve the current configuration.
+The following snippet of code shows how to command the gaze in the Cartesian space and to retrieve the current configuration.
 
 \code
 Vector fp(3);
@@ -86,7 +86,7 @@ fp[0]=-0.50;                                    // x-component [m]
 fp[1]=+0.00;                                    // y-component [m]
 fp[2]=+0.35;                                    // z-component [m]
 
-igaze->lookAtFixationPoint(fp);                 // move the gaze to the desired fixation point
+igaze->lookAtFixationPointSync(fp);             // request to gaze at the desired fixation point and wait for reply (sync method)
 igaze->waitMotionDone();                        // wait until the operation is done
 
 Vector x;
@@ -95,6 +95,8 @@ igaze->getFixationPoint(x);                     // retrieve the current fixation
 cout<<"final error = "<<norm(fp-x)<<endl;       // return a measure of the displacement error
 \endcode
 
+We have also here <b>sync</b> and <b>non-sync</b> methods for yielding gazing movements, therefore
+we refer the reader to the \ref icub_cartesian_interface "Cartesian Interface" to get insights on their peculiarities.
 
 \subsection subsec_gaze_absangcoorsystem Expressing the fixation point in Absolute Angular Coordinate System
 This coordinate system is an absolute head-centered angular reference frame as explained below:
@@ -145,14 +147,14 @@ double z=1.0;   // distance [m] of the object from the image plane (extended to 
 igaze->lookAtMonoPixel(camSel,px,z);    // look!
 \endcode
 What the interface will internally execute is to retrieve the corresponding 3D point through a call to <i>get3DPoint()</i> to then use
-this result to command an equivalent cartesian displacement as in the following:
+this result to command an equivalent Cartesian displacement as in the following:
 \code
 Vector x;
 igaze->get3DPoint(camSel,px,z,x);
 igaze->lookAtFixationPoint(x);
 \endcode
 The benefit of <i>lookAtMonoPixel()</i> method is clearly that the time for the rpc communication is saved, hence it is particularly designed for control
-in streaming mode; on the other hand, the knowledge of the cartesian point remains hidden to the user, unless it is retrieved at the end of the
+in streaming mode; on the other hand, the knowledge of the Cartesian point remains hidden to the user, unless it is retrieved at the end of the
 motion through a call to <i>getFixationPoint()</i>. \n
 Alternatively, one can think to rely on the vergence angle given in degrees in place of the the component z, accounting for a different way of expressing
 distances from the eyes. To this end, the user can call the proper method <i>lookAtMonoPixelWithVergence(camSel,px,ver)</i>.
