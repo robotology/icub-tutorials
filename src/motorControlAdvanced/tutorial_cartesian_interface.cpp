@@ -104,12 +104,12 @@ public:
         newDof[0]=1;
         newDof[1]=0;
         newDof[2]=1;
-
-        // impose some restriction on the torso pitch
-        limitTorsoPitch();
-
+        
         // send the request for dofs reconfiguration
         icart->setDOF(newDof,curDof);
+        
+        // impose some restriction on the torso pitch
+        limitTorsoPitch();       
 
         // print out some info about the controller
         Bottle info;
