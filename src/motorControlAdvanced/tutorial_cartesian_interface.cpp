@@ -5,6 +5,9 @@
 //
 // Author: Ugo Pattacini - <ugo.pattacini@iit.it>
 
+#include <cstdio>
+#include <cmath>
+
 #include <yarp/os/Network.h>
 #include <yarp/os/RFModule.h>
 #include <yarp/os/RateThread.h>
@@ -16,14 +19,11 @@
 #include <yarp/dev/CartesianControl.h>
 #include <yarp/dev/PolyDriver.h>
 
-#include <gsl/gsl_math.h>
-
-#include <stdio.h>
-
 #define CTRL_THREAD_PER     0.02    // [s]
 #define PRINT_STATUS_PER    1.0     // [s]
 #define MAX_TORSO_PITCH     30.0    // [deg]
 
+using namespace std;
 using namespace yarp::os;
 using namespace yarp::dev;
 using namespace yarp::sig;
@@ -56,7 +56,7 @@ public:
     CtrlThread(const double period) : RateThread(int(period*1000.0))
     {
         // we wanna raise an event each time the arm is at 20%
-        // of the trajectory (or 70% far from the target)
+        // of the trajectory (or 80% far from the target)
         cartesianEventParameters.type="motion-ongoing";
         cartesianEventParameters.motionOngoingCheckPoint=0.2;
     }

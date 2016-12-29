@@ -3,16 +3,18 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 # 
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-SET(PROJECTNAME motorControlAdvanced)
-PROJECT(${PROJECTNAME})
+cmake_minimum_required(VERSION 2.6)
+project(motorControlAdvanced)
 
 find_package(YARP)
 find_package(ICUB)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
+list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH})
+list(APPEND CMAKE_MODULE_PATH ${ICUB_MODULE_PATH})
 
 include_directories(${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+
+# import math symbols from standard cmath
+add_definitions(-D_USE_MATH_DEFINES)
 
 add_executable(tutorial_cartesian_interface tutorial_cartesian_interface.cpp)
 target_link_libraries(tutorial_cartesian_interface ${YARP_LIBRARIES})
