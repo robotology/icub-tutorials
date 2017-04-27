@@ -449,7 +449,7 @@ int main(int argc, char *argv[])
     rf.setVerbose(true);
     rf.setDefault("name","ctrl");
     rf.setDefault("config","config.ini");
-    rf.configure(NULL,argc,argv);
+    rf.configure(argc,argv);
 
     if (rf.check("help"))
     {
