@@ -11,7 +11,7 @@
  * CopyPolicy: Released under the terms of GPL 2.0 or later
  */ 
 
-#include <stdio.h>
+#include <cstdio>
 #include <math.h>
 #include <string>
 #include <sstream>

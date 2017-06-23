@@ -1,14 +1,15 @@
 // -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
 
-#include <stdio.h>
+#include <string>
+#include <cstdio>
+
 #include <yarp/os/Network.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/os/Time.h>
 #include <yarp/sig/Vector.h>
 
-#include <string>
-
+using namespace std;
 using namespace yarp::dev;
 using namespace yarp::sig;
 using namespace yarp::os;

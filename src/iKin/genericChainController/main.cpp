@@ -21,6 +21,9 @@
  * CopyPolicy: Released under the terms of GPL 2.0 or later
  */ 
 
+#include <string>
+#include <cstdio>
+
 #include <yarp/os/Network.h>
 #include <yarp/os/Semaphore.h>
 #include <yarp/os/RateThread.h>
@@ -33,9 +36,6 @@
 #include <iCub/iKin/iKinFwd.h>
 #include <iCub/iKin/iKinInv.h>
 #include <iCub/iKin/iKinIpOpt.h>
-
-#include <string>
-#include <stdio.h>
 
 using namespace std;
 using namespace yarp::os;

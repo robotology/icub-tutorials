@@ -10,6 +10,10 @@
  * CopyPolicy: Released under the terms of GPL 2.0 or later
  */ 
 
+#include <string>
+#include <iostream>
+#include <iomanip>
+
 #include <yarp/os/Network.h>
 #include <yarp/os/Port.h>
 #include <yarp/os/Bottle.h>
@@ -19,10 +23,6 @@
 #include <iCub/iKin/iKinVocabs.h>
 #include <iCub/iKin/iKinHlp.h>
 #include <iCub/iKin/iKinSlv.h>
-
-#include <iostream>
-#include <iomanip>
-#include <string>
 
 using namespace std;
 using namespace yarp::os;
