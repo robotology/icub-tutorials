@@ -7,7 +7,7 @@
 
 // This code is just a white test to verify Ipopt installation
 
-#include <stdio.h>
+#include <cstdio>
 
 #include <yarp/os/Time.h>
 #include <yarp/sig/Vector.h>
@@ -16,6 +16,7 @@
 #include <iCub/iKin/iKinFwd.h>
 #include <iCub/iKin/iKinIpOpt.h>
 
+using namespace std;
 using namespace yarp::sig;
 using namespace yarp::math;
 using namespace iCub::iKin;
@@ -56,5 +57,3 @@ int main()
         return 1;
     }
 }
-
-
