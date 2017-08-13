@@ -17,7 +17,7 @@
 #include <yarp/os/Property.h>
 #include <yarp/math/Math.h>
 #include <yarp/math/Rand.h>
-#include <yarp/os/Time.h>
+#include <yarp/os/SystemClock.h>
 
 #define MIN(a, b)   ((a < b) ? a : b)
 
@@ -141,17 +141,17 @@ int main(int argc, char** argv) {
     Vector noisyOutput = sample.second + Rand::vector(noise_min, noise_max);
 
     // transform input using RF
-    tic = yarp::os::Time::now();
+    tic = yarp::os::SystemClock::nowSystem();
     Vector transInput = tp.getWrapped().transform(sample.first);
-    trtrtime += (yarp::os::Time::now() - tic);
+    trtrtime += (yarp::os::SystemClock::nowSystem() - tic);
 
     // make prediction before feeding full sample
-    tic = yarp::os::Time::now();
+    tic = yarp::os::SystemClock::nowSystem();
     Prediction prediction = mp.getWrapped().predict(transInput);
 
     // train on complete sample with noisy output
     mp.getWrapped().feedSample(transInput, noisyOutput);
-    mctrtime += (yarp::os::Time::now() - tic);
+    mctrtime += (yarp::os::SystemClock::nowSystem() - tic);
 
     Vector diff = prediction.getPrediction() - sample.second;
     elementProd(diff, diff);
@@ -188,14 +188,14 @@ int main(int argc, char** argv) {
     std::pair<Vector, Vector> sample = createSample();
 
     // transform input using RF
-    tic = yarp::os::Time::now();
+    tic = yarp::os::SystemClock::nowSystem();
     Vector transInput = tp.getWrapped().transform(sample.first);
-    trtetime += (yarp::os::Time::now() - tic);
+    trtetime += (yarp::os::SystemClock::nowSystem() - tic);
 
     // make prediction
-    tic = yarp::os::Time::now();
+    tic = yarp::os::SystemClock::nowSystem();
     Prediction prediction = mp.getWrapped().predict(transInput);
-    mctetime += (yarp::os::Time::now() - tic);
+    mctetime += (yarp::os::SystemClock::nowSystem() - tic);
     Vector diff = prediction.getPrediction() - sample.second;
     elementProd(diff, diff);
     //std::cout << "Sample: " << sample.input <<

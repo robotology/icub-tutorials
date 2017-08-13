@@ -16,7 +16,7 @@
 #include <iostream>
 #include <iomanip>
 
-#include <yarp/os/Time.h>
+#include <yarp/os/SystemClock.h>
 #include <yarp/sig/Vector.h>
 #include <yarp/math/Math.h>
 
@@ -174,9 +174,9 @@ int main()
     }
 
     // solve for xf starting from current configuration q0
-    double t=Time::now();
+    double t=SystemClock::nowSystem();
     qhat=slv.solve(chain->getAng(),xf);
-    double dt=Time::now()-t;
+    double dt=SystemClock::nowSystem()-t;
 
     // in general the solved qf is different from the initial qf
     // due to the redundancy

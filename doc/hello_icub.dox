@@ -2,8 +2,8 @@
 @page icub_hello_icub The classic hello world
 
 \section sec_goal Goal
-In this short tutorial we learn how to use CMake. We compile a simple test program that links 
-all YARP libraries. This program is trivial and does not use the robot yet. 
+In this short tutorial we learn how to use CMake. We compile a simple test program that links
+all YARP libraries. This program is trivial and does not use the robot yet.
 
 We assume you have:
 - installed and compiled YARP
@@ -15,7 +15,7 @@ Open a text editor and type the following:
 
 \code
 #include <cstdio>
-#include <yarp/os/Time.h>
+#include <yarp/os/SystemClock.h>
 
 using namespace std;
 using namespace yarp::os;
@@ -28,7 +28,7 @@ int main()
     while(times--)
     {
         printf("Hello iCub\n");
-        Time::delay(0.5); //wait 0.5 seconds
+        SystemClock::delaySystem(0.5); //wait 0.5 seconds
     }
     printf("Goodbye!\n");
 }
@@ -37,7 +37,7 @@ int main()
 Save it to main.cpp.
 
 This program will print the "Hello iCub" message
-for some times, waiting 0.5 seconds at every iteration of the while loop. 
+for some times, waiting 0.5 seconds at every iteration of the while loop.
 
 Let's see now how to compile this program.
 
@@ -59,7 +59,7 @@ TARGET_LINK_LIBRARIES(hello ${YARP_LIBRARIES})
 
 Now save this file as CMakeLists.txt, in the same directory as your main.cpp file.
 
-This code tells cmake to produce appropriate project files to compile an executable 
+This code tells cmake to produce appropriate project files to compile an executable
 named hello, using the file main.cpp. It also links in yarp libraries.
 
 Now run cmake:
@@ -67,7 +67,7 @@ Now run cmake:
 cmake ./
 \endverbatim
 
-If cmake complains about not being able to localize YARP, it means that you have 
+If cmake complains about not being able to localize YARP, it means that you have
 not followed correctly the procedure in the manual about the compilation of YARP.
 In particular, check that you have correctly set the environment veriables YARP_DIR.
 It is also possible to manually set these values, but we do not recommend it.

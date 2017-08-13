@@ -83,9 +83,9 @@ int main()
     Matrix Hcap;
     Vector scalecap;
     double error;
-    double t0=Time::now();
+    double t0=SystemClock::nowSystem();
     calibrator.calibrate(Hcap,scalecap,error);
-    double dt=Time::now()-t0;
+    double dt=SystemClock::nowSystem()-t0;
 
     // the final report
     cout<<endl;
