@@ -480,7 +480,7 @@ public:
 To have the Cartesian Interface fully operative together with the robot simulator, follow these steps:
 
 -# Launch the \ref icub_Simulation "iCub Simulator".
--# Deploy the Cartesian servers: <b>yarprobotinterface --context simCartesianControl</b>
+-# Deploy the Cartesian servers: <b>yarprobotinterface \--context simCartesianControl</b>
 -# Launch the \ref iKinCartesianSolver "Cartesian Solvers" for the required limbs: have a look to the template located in
    the directory <i>icub-main/app/simCartesianControl/scripts</i>.
 

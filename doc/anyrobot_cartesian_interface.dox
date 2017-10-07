@@ -220,7 +220,7 @@ one, the "fake_part"), put them into a special list, open the <i>cartesiancontro
 parameters that ensure the initialization of the kinematic structure, finally attach that list to such cartesian device. \n
 The code is worth a thousand words ...
 \code
-Property optPart("(device fakeyClient)");        
+Property optPart("(device fakeyClient)");
 optPart.put("device","fakeyClient");
 optPart.put("remote","/fake_robot/fake_part");
 optPart.put("local","/server/fake_part");
@@ -313,7 +313,7 @@ joint_9           ((Kp 1.000) (Tz 0.000) (Tw 0.000) (Zeta 0.000) (Td 0.000))
 \endcode
 
 To give the feeling of how important could be accounting for this dynamics, take a look at the picture below, where the ideal response of a joint
-commanded by our velocity controller (dashed black) is depicted against the two real cases: with (green) and without (red) the compensation. 
+commanded by our velocity controller (dashed black) is depicted against the two real cases: with (green) and without (red) the compensation.
 
 \image html cartIFPlantResponse.jpg "System Response with and without Plant Compensantion"
 
@@ -354,18 +354,17 @@ filled with the library and the code and then there is an <i>app</i> directory c
 to run the binaries. Therefore, just create the <i>anyRobotCartesianInterface/build</i> directory (be always neat and divide the code
 from the compilation products :), go there and launch the <i>ccmake ../</i> command. After the compilation and the installation you'll
 end up having the directory <i>anyRobotCartesianInterface/bin</i> where all the binaries will be copied in, along with the configuration
-files and the xml scripts. Run the command <i>yarprun --server /node</i> from the same directory of the binaries and then launch in a
+files and the xml scripts. Run the command <i>yarprun \--server /node</i> from the same directory of the binaries and then launch in a
 row first the modules in <i>robot_server_solver.xml</i> and soon afterwards the modules in <i>client.xml</i>.
 
 
 \section sec_customcart_succ_stories Success Stories
 
 You are warmly encouraged to add up below your case study on the use of Cartesian Interface:
-- Duarte Aragão employed the Cartesian Interface for his robot Vizzy and documented the development
+- Duarte Aragï¿½o employed the Cartesian Interface for his robot Vizzy and documented the development
   <a href="http://mediawiki.isr.ist.utl.pt/wiki/Vizzy_Cartesian_Interface">here</a>.
 - Juan G. Victores managed to replicate the Cartesian Interface functionalities for Asibot whose server part is documented
   <a href="http://roboticslab.sourceforge.net/asibot/group__cartesianServer.html">here</a>.
 - Elena Ceseracciu customized the Cartesian Solver for the ARMAR III robot. Relevant info can be browsed
   <a href="http://wiki.icub.org/xperience/dox/html/group__ArmarIIICartesianSolver.html">here</a>.
 */
-
