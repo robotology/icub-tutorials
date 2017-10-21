@@ -12,6 +12,8 @@
 #include <yarp/os/RFModule.h>
 #include <yarp/os/RateThread.h>
 #include <yarp/os/Time.h>
+#include <yarp/os/Mutex.h>
+#include <yarp/os/LockGuard.h>
 #include <yarp/sig/Vector.h>
 #include <yarp/math/Math.h>
 
@@ -22,9 +24,8 @@
 
 #define CTRL_THREAD_PER     0.02        // [s]
 #define PRINT_STATUS_PER    1.0         // [s]
-#define STORE_POI_PER       3.0         // [s]
+#define STORE_POI_PER       2.0         // [s]
 #define SWITCH_STATE_PER    10.0        // [s]
-#define STILL_STATE_TIME    5.0         // [s]
 
 #define STATE_TRACK         0
 #define STATE_RECALL        1
@@ -50,21 +51,23 @@ protected:
 
     int state;
     int startup_context_id;
-
+    
     Vector fp;
 
     deque<Vector> poiList;
+    Mutex mutex;
 
     double t;
     double t0;
     double t1;
     double t2;
     double t3;
-    double t4;
 
     // the motion-done callback
     virtual void gazeEventCallback()
     {
+        LockGuard lg(mutex);
+
         Vector ang;
         igaze->getAngles(ang);
 
@@ -78,8 +81,6 @@ protected:
         ienc->getEncoder(0,&val);
         ipos->positionMove(0,val>0.0?-30.0:30.0);
 
-        t4=t;
-        
         // detach the callback
         igaze->unregisterEvent(*this);
 
@@ -147,7 +148,7 @@ public:
 
         state=STATE_TRACK;
 
-        t=t0=t1=t2=t3=t4=Time::now();
+        t=t0=t1=t2=t3=Time::now();
 
         return true;
     }
@@ -162,8 +163,9 @@ public:
 
     virtual void run()
     {
-        t=Time::now();
+        LockGuard lg(mutex);
 
+        t=Time::now();
         generateTarget();
 
         if (state==STATE_TRACK)
@@ -209,7 +211,10 @@ public:
 
         if (state==STATE_STILL)
         {
-            if (t-t4>=STILL_STATE_TIME)
+            // check if the torso movement is complete
+            bool done;
+            ipos->checkMotionDone(0,&done);
+            if (done)
             {
                 fprintf(stdout,"done\n");
 
