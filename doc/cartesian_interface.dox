@@ -17,7 +17,7 @@ Before proceeding, the reader might find helpful to recap some motor control fun
 as well as to be introduced to the underneath topic of forward and inverse kinematics by going through the \ref iKin documentation and tutorials.
 
 The architecture of the Cartesian Interface is based on three components: 1) a complex <b>nonlinear optimizer</b> that handles the inverse kinematics problem;
-2) a <b>bilogically inspired controller</b> that represents the server part of the interface and is responsible for generating the human-like velocity profiles
+2) a <b>biologically inspired controller</b> that represents the server part of the interface and is responsible for generating the human-like velocity profiles
 to move the system from its initial state to the joints configuration found by the solver; 3) a <b>client</b> part that exposes a collection of C++ methods to
 abstract the interface from its specific implementation. \n
 Alternatively, the client can act as a pure wrapper over the solver coping with the inverse kinematics, whereas the user might consider developing his own controller
