@@ -4,7 +4,7 @@
 
 This tutorial shows how to use the following interfaces:
 
-yarp::dev::IControlMode2
+yarp::dev::IControlMode
 
 yarp::dev::ITorqueControl
 
@@ -21,7 +21,7 @@ The example is based on the previous tutorial src/motorControlBasic/tutorial_arm
 
 The example shows how to open the ITorqueControl to show the arm joint torques and how to change the control mode of the elbow joint from position to impedance control. 
 
-A detailed reference of the yarp interfaces used in this tutorial (IControlMode2, ITorqueControl, IImpedanceControl, IInteractionControl) can be found <a href="http://wiki.icub.org/yarpdoc/namespaceyarp_1_1dev.html">in the YARP doxygen documentation</a> and in the <a href="http://wiki.icub.org/wiki/File:ICub_Control_Modes_1_1.pdf">YARP Control Modes documentation</a>.
+A detailed reference of the yarp interfaces used in this tutorial (IControlMode, ITorqueControl, IImpedanceControl, IInteractionControl) can be found <a href="http://wiki.icub.org/yarpdoc/namespaceyarp_1_1dev.html">in the YARP doxygen documentation</a> and in the <a href="http://wiki.icub.org/wiki/File:ICub_Control_Modes_1_1.pdf">YARP Control Modes documentation</a>.
 
 \section sec_initialization Initialization
 
@@ -33,7 +33,7 @@ We can also open the IControlMode interface (resposibile to set the control mode
 \code
     IPositionControl *pos;
     IEncoders *encs;
-    IControlMode2 *ictrl;
+    IControlMode *ictrl;
     IInteractionMode *iint;
     IImpedanceControl *iimp;
     ITorqueControl *itrq;

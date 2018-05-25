@@ -67,7 +67,9 @@ public:
 
     // not implemented
     /**********************************************************/
-    bool setLimits(int axis, double min, double max) { return false; }
+    bool setLimits(int,double,double)      { return false; }
+    bool setVelLimits(int,double,double)   { return false; }
+    bool getVelLimits(int,double*,double*) { return false; }
 
     ////////////////////////////////////////////////////////////
     ////
@@ -78,16 +80,16 @@ public:
 
     // not implemented
     /**********************************************************/
-    bool getEncoder(int j, double *v)                { return false; }
-    bool getEncoders(double *encs)                   { return false; }
-    bool resetEncoder(int j)                         { return false; }
-    bool resetEncoders()                             { return false; }
-    bool setEncoder(int j, double val)               { return false; }
-    bool setEncoders(const double *vals)             { return false; } 
-    bool getEncoderSpeed(int j, double *sp)          { return false; }
-    bool getEncoderSpeeds(double *spds)              { return false; }
-    bool getEncoderAcceleration(int j, double *spds) { return false; }
-    bool getEncoderAccelerations(double *accs)       { return false; }
+    bool getEncoder(int,double*)             { return false; }
+    bool getEncoders(double*)                { return false; }
+    bool resetEncoder(int)                   { return false; }
+    bool resetEncoders()                     { return false; }
+    bool setEncoder(int,double)              { return false; }
+    bool setEncoders(const double*)          { return false; } 
+    bool getEncoderSpeed(int,double*)        { return false; }
+    bool getEncoderSpeeds(double*)           { return false; }
+    bool getEncoderAcceleration(int,double*) { return false; }
+    bool getEncoderAccelerations(double*)    { return false; }
 
     ////////////////////////////////////////////////////////////
     ////
@@ -100,12 +102,15 @@ public:
 
     // not implemented
     /**********************************************************/
-    bool setVelocityMode()                      { return false; }
-    bool velocityMove(const double *sp)         { return false; }
-    bool setRefAccelerations(const double *acc) { return false; }
-    bool getRefAcceleration(int j, double *acc) { return false; }
-    bool getRefAccelerations(double *accs)      { return false; }
-    bool stop()                                 { return false; }
+    bool velocityMove(const int,const int*,const double*)        { return false; }
+    bool velocityMove(const double*)                             { return false; }
+    bool setRefAccelerations(const int,const int*,const double*) { return false; }
+    bool setRefAccelerations(const double*)                      { return false; }
+    bool getRefAccelerations(const int,const int*,double*)       { return false; }
+    bool getRefAcceleration(int,double*)                         { return false; }
+    bool getRefAccelerations(double*)                            { return false; }
+    bool stop(const int,const int*)                              { return false; }
+    bool stop()                                                  { return false; }
 };
 
 /**
@@ -160,7 +165,9 @@ public:
 
     // not implemented
     /**********************************************************/
-    bool setLimits(int axis, double min, double max) { return false; }
+    bool setLimits(int,double,double)      { return false; }
+    bool setVelLimits(int,double,double)   { return false; }
+    bool getVelLimits(int,double*,double*) { return false; }
 
     ////////////////////////////////////////////////////////////
     ////
@@ -172,15 +179,15 @@ public:
 
     // not implemented
     /**********************************************************/
-    bool getEncoder(int j, double *v)                { return false; }
-    bool resetEncoder(int j)                         { return false; }
-    bool resetEncoders()                             { return false; }
-    bool setEncoder(int j, double val)               { return false; }
-    bool setEncoders(const double *vals)             { return false; }
-    bool getEncoderSpeed(int j, double *sp)          { return false; }
-    bool getEncoderSpeeds(double *spds)              { return false; }
-    bool getEncoderAcceleration(int j, double *spds) { return false; }
-    bool getEncoderAccelerations(double *accs)       { return false; }
+    bool getEncoder(int,double*)             { return false; }
+    bool resetEncoder(int)                   { return false; }
+    bool resetEncoders()                     { return false; }
+    bool setEncoder(int,double)              { return false; }
+    bool setEncoders(const double*)          { return false; }
+    bool getEncoderSpeed(int,double*)        { return false; }
+    bool getEncoderSpeeds(double*)           { return false; }
+    bool getEncoderAcceleration(int,double*) { return false; }
+    bool getEncoderAccelerations(double*)    { return false; }
 
     ////////////////////////////////////////////////////////////
     ////
@@ -193,12 +200,15 @@ public:
 
     // not implemented
     /**********************************************************/
-    bool setVelocityMode()                      { return false; }
-    bool velocityMove(const double *sp)         { return false; }
-    bool setRefAccelerations(const double *acc) { return false; }
-    bool getRefAcceleration(int j, double *acc) { return false; }
-    bool getRefAccelerations(double *accs)      { return false; }
-    bool stop()                                 { return false; }
+    bool velocityMove(const int,const int*,const double*)        { return false; }
+    bool velocityMove(const double*)                             { return false; }
+    bool setRefAccelerations(const int,const int*,const double*) { return false; }
+    bool setRefAccelerations(const double*)                      { return false; }
+    bool getRefAccelerations(const int,const int*,double*)       { return false; }
+    bool getRefAcceleration(int,double*)                         { return false; }
+    bool getRefAccelerations(double*)                            { return false; }
+    bool stop(const int,const int*)                              { return false; }
+    bool stop()                                                  { return false; }
 };
 
 #endif

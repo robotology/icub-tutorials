@@ -8,52 +8,52 @@
 
 class IRpcServer_get_answer : public yarp::os::Portable {
 public:
-  int32_t _return;
+  std::int32_t _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection);
-  virtual bool read(yarp::os::ConnectionReader& connection);
+  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class IRpcServer_set_answer : public yarp::os::Portable {
 public:
-  int32_t rightAnswer;
+  std::int32_t rightAnswer;
   bool _return;
-  void init(const int32_t rightAnswer);
-  virtual bool write(yarp::os::ConnectionWriter& connection);
-  virtual bool read(yarp::os::ConnectionReader& connection);
+  void init(const std::int32_t rightAnswer);
+  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class IRpcServer_add_int : public yarp::os::Portable {
 public:
-  int32_t x;
-  int32_t _return;
-  void init(const int32_t x);
-  virtual bool write(yarp::os::ConnectionWriter& connection);
-  virtual bool read(yarp::os::ConnectionReader& connection);
+  std::int32_t x;
+  std::int32_t _return;
+  void init(const std::int32_t x);
+  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class IRpcServer_start : public yarp::os::Portable {
 public:
   bool _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection);
-  virtual bool read(yarp::os::ConnectionReader& connection);
+  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class IRpcServer_stop : public yarp::os::Portable {
 public:
   bool _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection);
-  virtual bool read(yarp::os::ConnectionReader& connection);
+  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class IRpcServer_is_running : public yarp::os::Portable {
 public:
   bool _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection);
-  virtual bool read(yarp::os::ConnectionReader& connection);
+  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 bool IRpcServer_get_answer::write(yarp::os::ConnectionWriter& connection) {
@@ -95,7 +95,7 @@ bool IRpcServer_set_answer::read(yarp::os::ConnectionReader& connection) {
   return true;
 }
 
-void IRpcServer_set_answer::init(const int32_t rightAnswer) {
+void IRpcServer_set_answer::init(const std::int32_t rightAnswer) {
   _return = false;
   this->rightAnswer = rightAnswer;
 }
@@ -118,7 +118,7 @@ bool IRpcServer_add_int::read(yarp::os::ConnectionReader& connection) {
   return true;
 }
 
-void IRpcServer_add_int::init(const int32_t x) {
+void IRpcServer_add_int::init(const std::int32_t x) {
   _return = 0;
   this->x = x;
 }
@@ -189,32 +189,32 @@ void IRpcServer_is_running::init() {
 IRpcServer::IRpcServer() {
   yarp().setOwner(*this);
 }
-int32_t IRpcServer::get_answer() {
-  int32_t _return = 0;
+std::int32_t IRpcServer::get_answer() {
+  std::int32_t _return = 0;
   IRpcServer_get_answer helper;
   helper.init();
   if (!yarp().canWrite()) {
-    yError("Missing server method '%s'?","int32_t IRpcServer::get_answer()");
+    yError("Missing server method '%s'?","std::int32_t IRpcServer::get_answer()");
   }
   bool ok = yarp().write(helper,helper);
   return ok?helper._return:_return;
 }
-bool IRpcServer::set_answer(const int32_t rightAnswer) {
+bool IRpcServer::set_answer(const std::int32_t rightAnswer) {
   bool _return = false;
   IRpcServer_set_answer helper;
   helper.init(rightAnswer);
   if (!yarp().canWrite()) {
-    yError("Missing server method '%s'?","bool IRpcServer::set_answer(const int32_t rightAnswer)");
+    yError("Missing server method '%s'?","bool IRpcServer::set_answer(const std::int32_t rightAnswer)");
   }
   bool ok = yarp().write(helper,helper);
   return ok?helper._return:_return;
 }
-int32_t IRpcServer::add_int(const int32_t x) {
-  int32_t _return = 0;
+std::int32_t IRpcServer::add_int(const std::int32_t x) {
+  std::int32_t _return = 0;
   IRpcServer_add_int helper;
   helper.init(x);
   if (!yarp().canWrite()) {
-    yError("Missing server method '%s'?","int32_t IRpcServer::add_int(const int32_t x)");
+    yError("Missing server method '%s'?","std::int32_t IRpcServer::add_int(const std::int32_t x)");
   }
   bool ok = yarp().write(helper,helper);
   return ok?helper._return:_return;
@@ -254,13 +254,13 @@ bool IRpcServer::read(yarp::os::ConnectionReader& connection) {
   yarp::os::idl::WireReader reader(connection);
   reader.expectAccept();
   if (!reader.readListHeader()) { reader.fail(); return false; }
-  yarp::os::ConstString tag = reader.readTag();
+  std::string tag = reader.readTag();
   bool direct = (tag=="__direct__");
   if (direct) tag = reader.readTag();
   while (!reader.isError()) {
     // TODO: use quick lookup, this is just a test
     if (tag == "get_answer") {
-      int32_t _return;
+      std::int32_t _return;
       _return = get_answer();
       yarp::os::idl::WireWriter writer(reader);
       if (!writer.isNull()) {
@@ -271,7 +271,7 @@ bool IRpcServer::read(yarp::os::ConnectionReader& connection) {
       return true;
     }
     if (tag == "set_answer") {
-      int32_t rightAnswer;
+      std::int32_t rightAnswer;
       if (!reader.readI32(rightAnswer)) {
         reader.fail();
         return false;
@@ -287,12 +287,12 @@ bool IRpcServer::read(yarp::os::ConnectionReader& connection) {
       return true;
     }
     if (tag == "add_int") {
-      int32_t x;
+      std::int32_t x;
       if (!reader.readI32(x)) {
         reader.fail();
         return false;
       }
-      int32_t _return;
+      std::int32_t _return;
       _return = add_int(x);
       yarp::os::idl::WireWriter writer(reader);
       if (!writer.isNull()) {
@@ -345,7 +345,7 @@ bool IRpcServer::read(yarp::os::ConnectionReader& connection) {
         if (!writer.isNull()) {
           if (!writer.writeListHeader(2)) return false;
           if (!writer.writeTag("many",1, 0)) return false;
-          if (!writer.writeListBegin(BOTTLE_TAG_INT, static_cast<uint32_t>(_return.size()))) return false;
+          if (!writer.writeListBegin(BOTTLE_TAG_INT32, static_cast<uint32_t>(_return.size()))) return false;
           std::vector<std::string> ::iterator _iterHelp;
           for (_iterHelp = _return.begin(); _iterHelp != _return.end(); ++_iterHelp)
           {
@@ -357,7 +357,7 @@ bool IRpcServer::read(yarp::os::ConnectionReader& connection) {
       return true;
     }
     if (reader.noMore()) { reader.fail(); return false; }
-    yarp::os::ConstString next_tag = reader.readTag();
+    std::string next_tag = reader.readTag();
     if (next_tag=="") break;
     tag = tag + "_" + next_tag;
   }
@@ -379,18 +379,18 @@ std::vector<std::string> IRpcServer::help(const std::string& functionName) {
   }
   else {
     if (functionName=="get_answer") {
-      helpString.push_back("int32_t get_answer() ");
+      helpString.push_back("std::int32_t get_answer() ");
       helpString.push_back("Get answer from server ");
       helpString.push_back("@return the answer ");
     }
     if (functionName=="set_answer") {
-      helpString.push_back("bool set_answer(const int32_t rightAnswer) ");
+      helpString.push_back("bool set_answer(const std::int32_t rightAnswer) ");
       helpString.push_back("Set value for future answers. ");
       helpString.push_back("@param rightAnswer new answer ");
       helpString.push_back("@return true if connection was successful ");
     }
     if (functionName=="add_int") {
-      helpString.push_back("int32_t add_int(const int32_t x) ");
+      helpString.push_back("std::int32_t add_int(const std::int32_t x) ");
       helpString.push_back("Add one integer to future answers. ");
       helpString.push_back("@param x value to add ");
       helpString.push_back("@return new value ");

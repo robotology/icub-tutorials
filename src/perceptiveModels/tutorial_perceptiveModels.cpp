@@ -113,11 +113,11 @@ public:
     /************************************************************************/
     bool configure(ResourceFinder &rf)
     {
-        string name=rf.find("name").asString().c_str();
-        string robot=rf.find("robot").asString().c_str();
-        string hand=rf.find("hand").asString().c_str();
-        string modelType=rf.find("modelType").asString().c_str();
-        fingerName=rf.find("finger").asString().c_str();
+        string name=rf.find("name").asString();
+        string robot=rf.find("robot").asString();
+        string hand=rf.find("hand").asString();
+        string modelType=rf.find("modelType").asString();
+        fingerName=rf.find("finger").asString();
 
         if (fingerName=="thumb")
             joint=10;
@@ -136,8 +136,8 @@ public:
         }
 
         Property driverOpt("(device remote_controlboard)");
-        driverOpt.put("remote",("/"+robot+"/"+hand+"_arm").c_str());
-        driverOpt.put("local",("/"+name).c_str());
+        driverOpt.put("remote","/"+robot+"/"+hand+"_arm");
+        driverOpt.put("local","/"+name);
         if (!driver.open(driverOpt))
             return false;
 
@@ -154,11 +154,11 @@ public:
         val=&min;
 
         Property genOpt;
-        genOpt.put("name",(name+"/"+modelType).c_str());
-        genOpt.put("robot",robot.c_str());
-        genOpt.put("type",hand.c_str());
+        genOpt.put("name",name+"/"+modelType);
+        genOpt.put("robot",robot);
+        genOpt.put("type",hand);
         genOpt.put("verbose",1);
-        string general(genOpt.toString().c_str());
+        string general(genOpt.toString());
         string thumb( "(thumb  (name thumb))");
         string index( "(index  (name index))");
         string middle("(middle (name middle))");
@@ -211,7 +211,7 @@ public:
         if (calibrate)
         {
             Property options;
-            options.put("finger",fingerName.c_str());
+            options.put("finger",fingerName);
             model->calibrate(options);
             calibrate=false;
 

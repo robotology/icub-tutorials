@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "--robot name (e.g. icub)\n");
         return 1;
     }
-    std::string robotName=params.find("robot").asString().c_str();
+    std::string robotName=params.find("robot").asString();
     std::string remotePorts="/";
     remotePorts+=robotName;
     remotePorts+="/right_arm";
@@ -36,8 +36,8 @@ int main(int argc, char *argv[])
 
     Property options;
     options.put("device", "remote_controlboard");
-    options.put("local", localPorts.c_str());   //local port names
-    options.put("remote", remotePorts.c_str());         //where we connect to
+    options.put("local", localPorts);   //local port names
+    options.put("remote", remotePorts); //where we connect to
 
     // create a device
     PolyDriver robotDevice(options);

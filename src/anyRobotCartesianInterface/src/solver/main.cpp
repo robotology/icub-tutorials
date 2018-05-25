@@ -51,20 +51,20 @@ protected:
             return NULL;
         }
 
-        string robot=options.check("robot",Value("fake_robot")).asString().c_str();
+        string robot=options.check("robot",Value("fake_robot")).asString();
         string part="fake_part";
 
         // here we declare everything is required to open up
         // the device driver to access the fake robot
         Property optPart;
         optPart.put("device","fakeyClient");
-        optPart.put("remote",("/"+robot+"/"+part).c_str());
-        optPart.put("local",("/"+slvName+"/"+part).c_str());
-        optPart.put("part",part.c_str());
+        optPart.put("remote","/"+robot+"/"+part);
+        optPart.put("local","/"+slvName+"/"+part);
+        optPart.put("part",part);
 
         // we grab info on the fake robot's kinematics
         Property linksOptions;
-        linksOptions.fromConfigFile(options.find("CustomKinFile").asString().c_str());
+        linksOptions.fromConfigFile(options.find("CustomKinFile").asString());
         iKinLimb *limb=new iKinLimb(linksOptions);
         if (!limb->isValid())
         {
@@ -117,12 +117,12 @@ public:
             return false;
         }
 
-        string solverName=rf.find("name").asString().c_str();
-        string pathToKin=rf.findFile("kinematics_file").c_str();
+        string solverName=rf.find("name").asString();
+        string pathToKin=rf.findFile("kinematics_file");
 
         Property config;
-        config.fromConfigFile(rf.findFile("from").c_str());
-        config.put("CustomKinFile",pathToKin.c_str());
+        config.fromConfigFile(rf.findFile("from"));
+        config.put("CustomKinFile",pathToKin);
 
         solver=new fakeRobotCartesianSolver(solverName);
         if (!solver->open(config))

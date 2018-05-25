@@ -21,19 +21,19 @@ public:
    * Get answer from server
    * @return the answer
    */
-  virtual int32_t get_answer();
+  virtual std::int32_t get_answer();
   /**
    * Set value for future answers.
    * @param rightAnswer new answer
    * @return true if connection was successful
    */
-  virtual bool set_answer(const int32_t rightAnswer);
+  virtual bool set_answer(const std::int32_t rightAnswer);
   /**
    * Add one integer to future answers.
    * @param x value to add
    * @return new value
    */
-  virtual int32_t add_int(const int32_t x);
+  virtual std::int32_t add_int(const std::int32_t x);
   /**
    * Start service
    * @return true if service started correctly
@@ -49,9 +49,8 @@ public:
    * @return true/false if service is/is not running
    */
   virtual bool is_running();
-  virtual bool read(yarp::os::ConnectionReader& connection);
+  virtual bool read(yarp::os::ConnectionReader& connection) override;
   virtual std::vector<std::string> help(const std::string& functionName="--all");
 };
 
 #endif
-

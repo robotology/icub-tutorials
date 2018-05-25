@@ -37,17 +37,17 @@ bool fakeMotorDeviceClient::open(Searchable &config)
 {
     printf("Opening Fake Motor Device Client ...\n");
 
-    string remote=config.check("remote",Value("/fakeyServer")).asString().c_str();
-    string local=config.check("local",Value("/fakeyClient")).asString().c_str();
+    string remote=config.check("remote",Value("/fakeyServer")).asString();
+    string local=config.check("local",Value("/fakeyClient")).asString();
 
-    statePort.open((local+"/state:i").c_str());
-    cmdPort.open((local+"/cmd:o").c_str());
-    rpcPort.open((local+"/rpc").c_str());
+    statePort.open(local+"/state:i");
+    cmdPort.open(local+"/cmd:o");
+    rpcPort.open(local+"/rpc");
     
     bool ok=true;
-    ok&=Network::connect((remote+"/state:o").c_str(),statePort.getName().c_str(),"udp");
-    ok&=Network::connect(cmdPort.getName().c_str(),(remote+"/cmd:i").c_str(),"udp");
-    ok&=Network::connect(rpcPort.getName().c_str(),(remote+"/rpc").c_str(),"tcp");
+    ok&=Network::connect(remote+"/state:o",statePort.getName(),"udp");
+    ok&=Network::connect(cmdPort.getName(),remote+"/cmd:i","udp");
+    ok&=Network::connect(rpcPort.getName(),remote+"/rpc","tcp");
 
     if (ok)
     {

@@ -38,12 +38,12 @@ bool fakeMotorDeviceServer::open(Searchable &config)
 {
     printf("Opening Fake Motor Device Server ...\n");
 
-    string local=config.check("local",Value("/fakeyServer")).asString().c_str();
+    string local=config.check("local",Value("/fakeyServer")).asString();
     int Ts=config.check("Ts",Value(10)).asInt();
 
-    statePort.open((local+"/state:o").c_str());
-    cmdPort.open((local+"/cmd:i").c_str());
-    rpcPort.open((local+"/rpc").c_str());
+    statePort.open(local+"/state:o");
+    cmdPort.open(local+"/cmd:i");
+    rpcPort.open(local+"/rpc");
     rpcPort.setReader(*this);
  
     // the part is composed of three rotational joints

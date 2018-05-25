@@ -89,11 +89,11 @@ int main()
 
     // the final report
     cout<<endl;
-    cout<<"H"<<endl<<H.toString(3,3).c_str()<<endl;
-    cout<<"scale = "<<scale.toString(3,3).c_str()<<endl;
+    cout<<"H"<<endl<<H.toString(3,3)<<endl;
+    cout<<"scale = "<<scale.toString(3,3)<<endl;
     cout<<endl;
-    cout<<"Hcap"<<endl<<Hcap.toString(3,3).c_str()<<endl;
-    cout<<"scalecap = "<<scalecap.toString(3,3).c_str()<<endl;
+    cout<<"Hcap"<<endl<<Hcap.toString(3,3)<<endl;
+    cout<<"scalecap = "<<scalecap.toString(3,3)<<endl;
     cout<<endl;
     cout<<"residual error = "<<error<<" [m]"<<endl;
     cout<<"calibration performed in "<<dt<<" [s]"<<endl;
