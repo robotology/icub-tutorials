@@ -41,18 +41,18 @@ public:
     bool configure(ResourceFinder &rf)
     {   
         // grab parameters from the configuration file
-        string robot=rf.find("robot").asString().c_str();
-        string part=rf.find("part").asString().c_str();
-        string local=rf.find("local").asString().c_str();
-        string pathToKin=rf.findFile("kinematics_file").c_str();
+        string robot=rf.find("robot").asString();
+        string part=rf.find("part").asString();
+        string local=rf.find("local").asString();
+        string pathToKin=rf.findFile("kinematics_file");
 
         // prepare the option to open up the device driver to
         // access the fake robot
         Property optPart;
         optPart.put("device","fakeyClient");
-        optPart.put("remote",("/"+robot+"/"+part).c_str());
-        optPart.put("local",("/"+local+"/"+part).c_str());
-        optPart.put("part",part.c_str());
+        optPart.put("remote","/"+robot+"/"+part);
+        optPart.put("local","/"+local+"/"+part);
+        optPart.put("part",part);
 
         // open the device driver
         if (!partDrv.open(optPart))
@@ -68,7 +68,7 @@ public:
 
         // take the parameters and fill the kinematic description
         Property optServer("(device cartesiancontrollerserver)");
-        optServer.fromConfigFile(rf.findFile("from").c_str(),false);
+        optServer.fromConfigFile(rf.findFile("from"),false);
         if (!server.open(optServer))
         {
             cout<<"Error: Unable to open the Cartesian Controller Server!"<<endl;

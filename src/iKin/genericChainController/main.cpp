@@ -156,11 +156,11 @@ public:
     {
         fprintf(stdout,"Starting Solver at %g ms\n",getRate());
 
-        string name=rf.find("name").asString().c_str();
+        string name=rf.find("name").asString();
         unsigned int ctrlPose=rf.check("onlyXYZ")?IKINCTRL_POSE_XYZ:IKINCTRL_POSE_FULL;
 
         Property linksOptions;
-        linksOptions.fromConfigFile(rf.findFile("config").c_str());
+        linksOptions.fromConfigFile(rf.findFile("config"));
 
         // instantiate the limb
         limb=new iKinLimb(linksOptions);
@@ -192,11 +192,11 @@ public:
         // of constraints and the hessian of lagrangian in norm between 0.1 and 10.0)
         slv->setUserScaling(true,100.0,100.0,100.0);
 
-        port_xd.open(("/"+name+"/xd:i").c_str());
+        port_xd.open("/"+name+"/xd:i");
         port_xd.useCallback();
         port_xd.set_vect(xd_old);
 
-        port_qd.open(("/"+name+"/qd:o").c_str());        
+        port_qd.open("/"+name+"/qd:o");        
 
         return true;
     }
@@ -290,11 +290,11 @@ public:
     {
         fprintf(stdout,"Starting Controller at %g ms\n",getRate());
 
-        string name=rf.find("name").asString().c_str();
+        string name=rf.find("name").asString();
         unsigned int ctrlPose=rf.check("onlyXYZ")?IKINCTRL_POSE_XYZ:IKINCTRL_POSE_FULL;
 
         Property linksOptions;
-        linksOptions.fromConfigFile(rf.findFile("config").c_str());
+        linksOptions.fromConfigFile(rf.findFile("config"));
 
         // instantiate the limb
         limb=new iKinLimb(linksOptions);
@@ -316,8 +316,8 @@ public:
         // set the task execution time
         ctrl->set_execTime(rf.check("T",Value(2.0)).asDouble(),true);
 
-        port_v.open(("/"+name+"/v:o").c_str());
-        port_x.open(("/"+name+"/x:o").c_str());
+        port_v.open("/"+name+"/v:o");
+        port_x.open("/"+name+"/x:o");
 
         return true;
     }
@@ -385,7 +385,7 @@ public:
     {
         Time::turboBoost();
 
-        string name=rf.find("name").asString().c_str();
+        string name=rf.find("name").asString();
 
         // Note that Solver and Controller operate on
         // different limb objects (instantiated internally
@@ -407,7 +407,7 @@ public:
         }
 
         // open the feedback port
-        port_q.open(("/"+name+"/q:i").c_str());
+        port_q.open("/"+name+"/q:i");
         port_q.useCallback();
 
         return true;

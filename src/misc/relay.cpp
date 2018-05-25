@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
             Bottle& output = outPort.prepare();
             output=*input;
             
-            cout << "writing " << output.toString().c_str() << endl;
+            cout << "writing " << output.toString() << endl;
             outPort.write();
         }
     }

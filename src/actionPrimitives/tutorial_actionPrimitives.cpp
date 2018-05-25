@@ -279,10 +279,10 @@ public:
     /************************************************************************/
     bool configure(ResourceFinder &rf)
     {
-        string name=rf.find("name").asString().c_str();
+        string name=rf.find("name").asString();
         setName(name.c_str());
 
-        Property config; config.fromConfigFile(rf.findFile("from").c_str());
+        Property config; config.fromConfigFile(rf.findFile("from"));
         Bottle &bGeneral=config.findGroup("general");
         if (bGeneral.isNull())
         {
@@ -292,11 +292,11 @@ public:
 
         // parsing general config options
         Property option(bGeneral.toString().c_str());
-        option.put("local",name.c_str());
+        option.put("local",name);
         option.put("part","left_arm");
-        option.put("grasp_model_type",rf.find("grasp_model_type").asString().c_str());
-        option.put("grasp_model_file",rf.findFile("grasp_model_file").c_str());
-        option.put("hand_sequences_file",rf.findFile("hand_sequences_file").c_str());
+        option.put("grasp_model_type",rf.find("grasp_model_type").asString());
+        option.put("grasp_model_file",rf.findFile("grasp_model_file"));
+        option.put("hand_sequences_file",rf.findFile("hand_sequences_file"));
 
         // parsing arm dependent config options
         Bottle &bArm=config.findGroup("arm_dependent");
@@ -316,8 +316,8 @@ public:
             cout<<q[i]<<endl;
 
         string fwslash="/";
-        inPort.open((fwslash+name+"/in").c_str());
-        rpcPort.open((fwslash+name+"/rpc").c_str());
+        inPort.open(fwslash+name+"/in");
+        rpcPort.open(fwslash+name+"/rpc");
         attach(rpcPort);
 
         // check whether the grasp model is calibrated,

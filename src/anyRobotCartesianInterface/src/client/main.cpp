@@ -45,13 +45,13 @@ public:
     /**********************************************************/
     bool configure(ResourceFinder &rf)
     {
-        string remote=rf.find("remote").asString().c_str();
-        string local=rf.find("local").asString().c_str();
+        string remote=rf.find("remote").asString();
+        string local=rf.find("local").asString();
 
         // Just usual things...
         Property option("(device cartesiancontrollerclient)");
-        option.put("remote",("/"+remote).c_str());
-        option.put("local",("/"+local).c_str());
+        option.put("remote","/"+remote);
+        option.put("local","/"+local);
 
         if (!client.open(option))
             return false;
@@ -102,18 +102,18 @@ public:
             xd[2]=0.0;
 
             cout<<endl;
-            cout<<"Solving for: ("<<xd.toString().c_str()<<")"<<endl;
+            cout<<"Solving for: ("<<xd.toString()<<")"<<endl;
             arm->goToPositionSync(xd);
             Vector odhat,qdhat;
             arm->getDesired(xdhat,odhat,qdhat);
-            cout<<"Going to: ("<<xdhat.toString().c_str()<<")"<<endl;
-            cout<<"Solved Configuration: ["<<qdhat.toString().c_str()<<"]"<<endl;
+            cout<<"Going to: ("<<xdhat.toString()<<")"<<endl;
+            cout<<"Solved Configuration: ["<<qdhat.toString()<<"]"<<endl;
         }
         else
         {
             Vector x,o;
             arm->getPose(x,o);
-            cout<<"Running: ("<<x.toString().c_str()<<");  distance to go: "<<norm(xdhat-x)<<endl;
+            cout<<"Running: ("<<x.toString()<<");  distance to go: "<<norm(xdhat-x)<<endl;
         }
 
         return true;

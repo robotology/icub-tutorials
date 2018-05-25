@@ -46,20 +46,20 @@ int main(int argc, char *argv[])
     ResourceFinder rf;
     rf.configure(argc,argv);
 
-    string name=rf.check("name",Value("tuner")).asString().c_str();
-    string robot=rf.check("robot",Value("icub")).asString().c_str();
-    string part=rf.check("part",Value("right_arm")).asString().c_str();
+    string name=rf.check("name",Value("tuner")).asString();
+    string robot=rf.check("robot",Value("icub")).asString();
+    string part=rf.check("part",Value("right_arm")).asString();
     int joint=rf.check("joint",Value(11)).asInt();
     double encoder=rf.check("encoder",Value(2.43)).asDouble();
 
     Property pOptions;
     pOptions.put("device","remote_controlboard");
-    pOptions.put("remote",("/"+robot+"/"+part).c_str());
-    pOptions.put("local",("/"+name+"/"+part).c_str());
+    pOptions.put("remote","/"+robot+"/"+part);
+    pOptions.put("local","/"+name+"/"+part);
     PolyDriver driver(pOptions);
     if (!driver.isValid())
     {
-        printf("Part \"%s\" is not ready!\n",("/"+robot+"/"+part).c_str());
+        printf("Part \"%s\" is not ready!\n","/"+robot+"/"+part);
         return 1;
     }
 
@@ -111,13 +111,13 @@ int main(int argc, char *argv[])
     // the "port" option allows opening up a yarp port which
     // will stream out useful information while identifying
     // and validating the system
-    pGeneral.put("port",("/"+name+"/info:o").c_str());
+    pGeneral.put("port","/"+name+"/info:o");
     string sGeneral="(general ";
-    sGeneral+=pGeneral.toString().c_str();
+    sGeneral+=pGeneral.toString();
     sGeneral+=')';
 
     Bottle bGeneral,bPlantEstimation,bStictionEstimation;
-    bGeneral.fromString(sGeneral.c_str());
+    bGeneral.fromString(sGeneral);
     // here follow the parameters for the EKF along with the
     // initial values for tau and K
     bPlantEstimation.fromString("(plant_estimation (Ts 0.01) (Q 1.0) (R 1.0) (P0 100000.0) (tau 1.0) (K 1.0) (max_pwm 800.0))");
@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
     Bottle bConf=bGeneral;
     bConf.append(bPlantEstimation);
     bConf.append(bStictionEstimation);
-    pOptions.fromString(bConf.toString().c_str());
+    pOptions.fromString(bConf.toString());
 
     OnlineCompensatorDesign designer;
     if (!designer.configure(driver,pOptions))
