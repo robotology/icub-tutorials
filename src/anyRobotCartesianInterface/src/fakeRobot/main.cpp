@@ -40,8 +40,6 @@ public:
     /**********************************************************/
     bool configure(ResourceFinder &rf)
     {
-        Time::turboBoost();
-
         Property options;
         options.put("device","fakeyServer");
         options.put("local","/fake_robot/fake_part");

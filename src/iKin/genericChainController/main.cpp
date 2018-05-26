@@ -383,8 +383,6 @@ public:
     /*****************************************************************/
     virtual bool configure(ResourceFinder &rf)
     {
-        Time::turboBoost();
-
         string name=rf.find("name").asString();
 
         // Note that Solver and Controller operate on

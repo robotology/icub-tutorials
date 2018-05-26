@@ -303,8 +303,6 @@ protected:
 public:
     virtual bool configure(ResourceFinder &rf)
     {
-        Time::turboBoost();
-
         thr=new CtrlThread(CTRL_THREAD_PER);
         if (!thr->start())
         {
