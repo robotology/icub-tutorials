@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     PolyDriver driver(pOptions);
     if (!driver.isValid())
     {
-        printf("Part \"%s\" is not ready!\n","/"+robot+"/"+part);
+        printf("Part \"%s\" is not ready!\n",string("/"+robot+"/"+part).c_str());
         return 1;
     }
 

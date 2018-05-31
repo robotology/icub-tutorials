@@ -227,8 +227,8 @@ public:
     {
         if (Bottle *pB=b.find("grasp_orientation").asList())
         {
-            int sz=pB->size();
-            int len=_gOrien.length();
+            int sz=(int)pB->size();
+            int len=(int)_gOrien.length();
             int l=len<sz?len:sz;
 
             for (int i=0; i<l; i++)
@@ -237,8 +237,8 @@ public:
 
         if (Bottle *pB=b.find("grasp_displacement").asList())
         {
-            int sz=pB->size();
-            int len=_gDisp.length();
+            int sz=(int)pB->size();
+            int len=(int)_gDisp.length();
             int l=len<sz?len:sz;
 
             for (int i=0; i<l; i++)
@@ -247,8 +247,8 @@ public:
 
         if (Bottle *pB=b.find("systematic_error_displacement").asList())
         {
-            int sz=pB->size();
-            int len=_dOffs.length();
+            int sz=(int)pB->size();
+            int len=(int)_dOffs.length();
             int l=len<sz?len:sz;
 
             for (int i=0; i<l; i++)
@@ -257,8 +257,8 @@ public:
 
         if (Bottle *pB=b.find("lifting_displacement").asList())
         {
-            int sz=pB->size();
-            int len=_dLift.length();
+            int sz=(int)pB->size();
+            int len=(int)_dLift.length();
             int l=len<sz?len:sz;
 
             for (int i=0; i<l; i++)
@@ -267,8 +267,8 @@ public:
 
         if (Bottle *pB=b.find("home_position").asList())
         {
-            int sz=pB->size();
-            int len=_home_x.length();
+            int sz=(int)pB->size();
+            int len=(int)_home_x.length();
             int l=len<sz?len:sz;
 
             for (int i=0; i<l; i++)
