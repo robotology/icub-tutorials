@@ -15,6 +15,6 @@ set(folder_source src/fakeMotorDevice.cpp src/fakeMotorDeviceServer.cpp src/fake
 source_group("Header Files" FILES ${folder_header})
 source_group("Source Files" FILES ${folder_source})
 
-include_directories(${PROJECT_SOURCE_DIR}/include ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${PROJECT_SOURCE_DIR}/include ${ICUB_INCLUDE_DIRS})
 add_library(${PROJECTNAME} ${folder_source} ${folder_header})
 target_link_libraries(${PROJECTNAME} ctrlLib ${YARP_LIBRARIES})

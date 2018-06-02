@@ -15,8 +15,7 @@ set(sources tutorial_actionPrimitives.cpp)
 source_group("Source Files" FILES ${sources})
 
 include_directories(${actionPrimitives_INCLUDE_DIRS}
-                    ${perceptiveModels_INCLUDE_DIRS}
-                    ${YARP_INCLUDE_DIRS})
+                    ${perceptiveModels_INCLUDE_DIRS})
 add_executable(${PROJECTNAME} ${sources})
 target_link_libraries(${PROJECTNAME} perceptiveModels
                                      actionPrimitives

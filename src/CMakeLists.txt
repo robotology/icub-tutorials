@@ -11,7 +11,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
 include(iCubOptions)
 
-include_directories(${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${ICUB_INCLUDE_DIRS})
 
 ## this is for testing only, please ignore if you are reading tutorials	
 include(CTest)

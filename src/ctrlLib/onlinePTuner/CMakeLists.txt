@@ -14,6 +14,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
 set(folder_source main.cpp)
 source_group("Source Files" FILES ${folder_source})
 
-include_directories(${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${ICUB_INCLUDE_DIRS})
 add_executable(${PROJECTNAME} ${folder_source})
 target_link_libraries(${PROJECTNAME} ctrlLib ${YARP_LIBRARIES})

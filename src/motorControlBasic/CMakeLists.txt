@@ -10,7 +10,6 @@ PROJECT(${PROJECTNAME})
 FIND_PACKAGE(YARP)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 
-include_directories(${YARP_INCLUDE_DIRS})
 add_executable(tutorial_arm tutorial_arm.cpp)
 target_link_libraries(tutorial_arm ${YARP_LIBRARIES})
 

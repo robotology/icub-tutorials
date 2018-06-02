@@ -14,6 +14,6 @@ list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH}
 set(sources tutorial_perceptiveModels.cpp)
 source_group("Source Files" FILES ${sources})
 
-include_directories(${perceptiveModels_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${perceptiveModels_INCLUDE_DIRS})
 add_executable(${PROJECTNAME} ${sources})
 target_link_libraries(${PROJECTNAME} perceptiveModels ${YARP_LIBRARIES})
