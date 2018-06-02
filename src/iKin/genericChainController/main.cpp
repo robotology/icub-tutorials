@@ -26,7 +26,7 @@
 
 #include <yarp/os/Network.h>
 #include <yarp/os/Semaphore.h>
-#include <yarp/os/RateThread.h>
+#include <yarp/os/PeriodicThread.h>
 #include <yarp/os/RFModule.h>
 #include <yarp/os/BufferedPort.h>
 #include <yarp/os/Time.h>
@@ -126,7 +126,7 @@ public:
 // in charge of inverting the limb kinematic relying
 // on IpOpt computation.
 /*****************************************************************/
-class Solver : public RateThread
+class Solver : public PeriodicThread
 {
 protected:
     ResourceFinder &rf;
@@ -144,7 +144,7 @@ protected:
 public:
     /*****************************************************************/
     Solver(ResourceFinder &_rf, inPort *_port_q, exchangeData *_commData, unsigned int period) :
-           RateThread(period), rf(_rf), port_q(_port_q), commData(_commData)
+           PeriodicThread((double)period/1000.0), rf(_rf), port_q(_port_q), commData(_commData)
     {
         limb=NULL;
         chain=NULL;
@@ -154,7 +154,7 @@ public:
     /*****************************************************************/
     virtual bool threadInit()
     {
-        fprintf(stdout,"Starting Solver at %g ms\n",getRate());
+        fprintf(stdout,"Starting Solver at %g ms\n",1000.0*getPeriod());
 
         string name=rf.find("name").asString();
         unsigned int ctrlPose=rf.check("onlyXYZ")?IKINCTRL_POSE_XYZ:IKINCTRL_POSE_FULL;
@@ -262,7 +262,7 @@ public:
 // The thread launched by the application which is
 // in charge of computing the velocities profile
 /*****************************************************************/
-class Controller : public RateThread
+class Controller : public PeriodicThread
 {
 protected:
     ResourceFinder      &rf;
@@ -278,7 +278,7 @@ protected:
 public:
     /*****************************************************************/
     Controller(ResourceFinder &_rf, inPort *_port_q, exchangeData *_commData, unsigned int period) :
-               RateThread(period), rf(_rf), port_q(_port_q), commData(_commData)
+               PeriodicThread((double)period/1000.0), rf(_rf), port_q(_port_q), commData(_commData)
     {
         limb=NULL;
         chain=NULL;
@@ -288,7 +288,7 @@ public:
     /*****************************************************************/
     virtual bool threadInit()
     {
-        fprintf(stdout,"Starting Controller at %g ms\n",getRate());
+        fprintf(stdout,"Starting Controller at %g ms\n",1000.0*getPeriod());
 
         string name=rf.find("name").asString();
         unsigned int ctrlPose=rf.check("onlyXYZ")?IKINCTRL_POSE_XYZ:IKINCTRL_POSE_FULL;
@@ -311,7 +311,7 @@ public:
         chain=limb->asChain();
 
         // instantiate controller
-        ctrl=new MultiRefMinJerkCtrl(*chain,ctrlPose,getRate()/1000.0);
+        ctrl=new MultiRefMinJerkCtrl(*chain,ctrlPose,getPeriod());
 
         // set the task execution time
         ctrl->set_execTime(rf.check("T",Value(2.0)).asDouble(),true);

@@ -29,7 +29,7 @@
  * Only the used interface methods are actually implemented.
  */
 class fakeMotorDeviceServer : public yarp::dev::DeviceDriver,
-                              public yarp::os::RateThread,
+                              public yarp::os::PeriodicThread,
                               public yarp::os::PortReader,
                               public yarp::dev::IControlLimits,
                               public yarp::dev::IEncoders,

@@ -20,7 +20,7 @@ A list of tutorials on various topics from basic compilation, visual processing,
 - \ref icub_impedance_control_tutorial - a tutorial on how to use the joint level torque/impedance interface
 - \ref icub_basic_image_processing - a tutorial on a basic image processing
 
-- \ref icub_rate_thread - a tutorial on how to write a control loop using threads
+- \ref icub_periodic_thread - a tutorial on how to write a control loop using threads
 - \ref icub_cartesian_interface - a tutorial on how to control a robot's limb in the operational space
 - \ref icub_gaze_interface - a tutorial on how to control the robot gaze through a YARP interface
 - \ref icub_anyrobot_cartesian_interface - how to control a generic robot through the cartesian interface

@@ -10,7 +10,7 @@
 
 #include <yarp/os/Network.h>
 #include <yarp/os/RFModule.h>
-#include <yarp/os/RateThread.h>
+#include <yarp/os/PeriodicThread.h>
 #include <yarp/os/Time.h>
 #include <yarp/sig/Vector.h>
 #include <yarp/math/Math.h>
@@ -30,7 +30,7 @@ using namespace yarp::sig;
 using namespace yarp::math;
 
 
-class CtrlThread: public RateThread,
+class CtrlThread: public PeriodicThread,
                   public CartesianEvent
 {
 protected:
@@ -53,7 +53,7 @@ protected:
     }
 
 public:
-    CtrlThread(const double period) : RateThread(int(period*1000.0))
+    CtrlThread(const double period) : PeriodicThread(period)
     {
         // we wanna raise an event each time the arm is at 20%
         // of the trajectory (or 80% far from the target)

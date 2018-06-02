@@ -10,7 +10,7 @@
 
 #include <yarp/os/Network.h>
 #include <yarp/os/RFModule.h>
-#include <yarp/os/RateThread.h>
+#include <yarp/os/PeriodicThread.h>
 #include <yarp/os/Time.h>
 #include <yarp/os/Mutex.h>
 #include <yarp/os/LockGuard.h>
@@ -39,7 +39,7 @@ using namespace yarp::sig;
 using namespace yarp::math;
 
 
-class CtrlThread: public RateThread,
+class CtrlThread: public PeriodicThread,
                   public GazeEvent
 {
 protected:
@@ -89,7 +89,7 @@ protected:
     }
 
 public:
-    CtrlThread(const double period) : RateThread(int(period*1000.0))
+    CtrlThread(const double period) : PeriodicThread(period)
     {
         // here we specify that the event we are interested in is
         // of type "motion-done"

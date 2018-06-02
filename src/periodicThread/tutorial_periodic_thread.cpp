@@ -1,7 +1,7 @@
 // -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
 
 #include <yarp/os/Network.h>
-#include <yarp/os/RateThread.h>
+#include <yarp/os/PeriodicThread.h>
 #include <yarp/os/Time.h>
 #include <yarp/os/Property.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
@@ -17,7 +17,7 @@ using namespace yarp::sig;
 
 using namespace std;
 
-class ControlThread: public RateThread
+class ControlThread: public PeriodicThread
 {
     PolyDriver dd;
     IVelocityControl *ivel;
@@ -26,7 +26,7 @@ class ControlThread: public RateThread
     Vector commands;
     int count;
 public:
-    ControlThread(int period):RateThread(period){}
+    ControlThread(double period):PeriodicThread(period){}
 
     bool threadInit()
     {
@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
     }
 
 
-    ControlThread myThread(4000); //period is 40ms
+    ControlThread myThread(4.0); //period is 4s
 
     myThread.start();
 

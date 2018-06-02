@@ -27,7 +27,7 @@ using namespace yarp::sig;
 using namespace iCub::ctrl;
 
 /**********************************************************/
-fakeMotorDeviceServer::fakeMotorDeviceServer() : RateThread(10)
+fakeMotorDeviceServer::fakeMotorDeviceServer() : PeriodicThread(0.01)
 {
     motors=NULL;
     configured=false;
@@ -60,10 +60,10 @@ bool fakeMotorDeviceServer::open(Searchable &config)
     // the motors themselves are represented
     // by pure integrators that give back joints
     // positions when fed with joints velocities
-    motors=new Integrator(0.001*Ts,q0,lim);
+    motors=new Integrator((double)Ts/1000.0,q0,lim);
     vel.resize(motors->get().length(),0.0);        
 
-    setRate(Ts);
+    setPeriod((double)Ts/1000.0);
     start();
 
     configured=true;
@@ -81,7 +81,7 @@ bool fakeMotorDeviceServer::close()
         stop();
 
     mutex.wait();
-    RateThread::stop();
+    PeriodicThread::stop();
     mutex.post();
 
     statePort.interrupt();
