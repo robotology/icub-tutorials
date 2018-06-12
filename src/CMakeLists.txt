@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 2.8.9)
+cmake_minimum_required(VERSION 3.5)
 
 set(PROJECTNAME icub-tutorials)
 
 project(${PROJECTNAME})
 
-find_package(YARP REQUIRED)
+find_package(YARP REQUIRED COMPONENTS OS sig dev math gsl)
 find_package(ICUB REQUIRED)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})

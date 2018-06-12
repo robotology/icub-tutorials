@@ -18,7 +18,7 @@ class IRpcServer_get_answer : public yarp::os::Portable {
 public:
   std::int32_t _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
@@ -27,7 +27,7 @@ public:
   std::int32_t rightAnswer;
   bool _return;
   void init(const std::int32_t rightAnswer);
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
@@ -36,7 +36,7 @@ public:
   std::int32_t x;
   std::int32_t _return;
   void init(const std::int32_t x);
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
@@ -44,7 +44,7 @@ class IRpcServer_start : public yarp::os::Portable {
 public:
   bool _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
@@ -52,7 +52,7 @@ class IRpcServer_stop : public yarp::os::Portable {
 public:
   bool _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
@@ -60,11 +60,11 @@ class IRpcServer_is_running : public yarp::os::Portable {
 public:
   bool _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
-bool IRpcServer_get_answer::write(yarp::os::ConnectionWriter& connection) {
+bool IRpcServer_get_answer::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(2)) return false;
   if (!writer.writeTag("get_answer",1,2)) return false;
@@ -85,7 +85,7 @@ void IRpcServer_get_answer::init() {
   _return = 0;
 }
 
-bool IRpcServer_set_answer::write(yarp::os::ConnectionWriter& connection) {
+bool IRpcServer_set_answer::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(3)) return false;
   if (!writer.writeTag("set_answer",1,2)) return false;
@@ -108,7 +108,7 @@ void IRpcServer_set_answer::init(const std::int32_t rightAnswer) {
   this->rightAnswer = rightAnswer;
 }
 
-bool IRpcServer_add_int::write(yarp::os::ConnectionWriter& connection) {
+bool IRpcServer_add_int::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(3)) return false;
   if (!writer.writeTag("add_int",1,2)) return false;
@@ -131,7 +131,7 @@ void IRpcServer_add_int::init(const std::int32_t x) {
   this->x = x;
 }
 
-bool IRpcServer_start::write(yarp::os::ConnectionWriter& connection) {
+bool IRpcServer_start::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(1)) return false;
   if (!writer.writeTag("start",1,1)) return false;
@@ -152,7 +152,7 @@ void IRpcServer_start::init() {
   _return = false;
 }
 
-bool IRpcServer_stop::write(yarp::os::ConnectionWriter& connection) {
+bool IRpcServer_stop::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(1)) return false;
   if (!writer.writeTag("stop",1,1)) return false;
@@ -173,7 +173,7 @@ void IRpcServer_stop::init() {
   _return = false;
 }
 
-bool IRpcServer_is_running::write(yarp::os::ConnectionWriter& connection) {
+bool IRpcServer_is_running::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(2)) return false;
   if (!writer.writeTag("is_running",1,2)) return false;
