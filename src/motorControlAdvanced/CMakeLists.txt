@@ -3,15 +3,11 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 # 
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 project(motorControlAdvanced)
 
 find_package(YARP)
-find_package(ICUB)
 list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH})
-list(APPEND CMAKE_MODULE_PATH ${ICUB_MODULE_PATH})
-
-include_directories(${ICUB_INCLUDE_DIRS})
 
 # import math symbols from standard cmath
 add_definitions(-D_USE_MATH_DEFINES)

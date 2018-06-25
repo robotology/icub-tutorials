@@ -3,9 +3,8 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 # 
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-SET(PROJECTNAME periodicThread)
-PROJECT(${PROJECTNAME})
+cmake_minimum_required(VERSION 3.5)
+project(periodicThread)
 
 find_package(YARP)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})

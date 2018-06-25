@@ -2,9 +2,8 @@
 # Author: Ugo Pattacini
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-cmake_minimum_required(VERSION 2.6)
-set(PROJECTNAME tutorial_perceptiveModels)
-project(${PROJECTNAME})
+cmake_minimum_required(VERSION 3.5)
+project(tutorial_perceptiveModels)
 
 find_package(YARP)
 find_package(ICUB)
@@ -14,6 +13,5 @@ list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH}
 set(sources tutorial_perceptiveModels.cpp)
 source_group("Source Files" FILES ${sources})
 
-include_directories(${perceptiveModels_INCLUDE_DIRS})
-add_executable(${PROJECTNAME} ${sources})
-target_link_libraries(${PROJECTNAME} perceptiveModels ${YARP_LIBRARIES})
+add_executable(${PROJECT_NAME} ${sources})
+target_link_libraries(${PROJECT_NAME} perceptiveModels ${YARP_LIBRARIES})

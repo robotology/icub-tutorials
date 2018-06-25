@@ -2,7 +2,7 @@
 # Authors: Ugo Pattacini
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 project(iKin_tutorials)
 add_subdirectory(fwInvKinematics)
 add_subdirectory(genericChainController)

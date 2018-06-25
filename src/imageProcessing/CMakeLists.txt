@@ -3,9 +3,8 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 # 
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-SET(PROJECTNAME imageProcessing)
-PROJECT(${PROJECTNAME})
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
+project(imageProcessing)
 
 find_package(YARP)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
@@ -15,5 +14,3 @@ target_link_libraries(findLocation ${YARP_LIBRARIES})
 
 add_executable(lookAtLocation lookAtLocation.cpp)
 target_link_libraries(lookAtLocation ${YARP_LIBRARIES})
-
-

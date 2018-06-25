@@ -3,25 +3,23 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 # 
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-SET(PROJECTNAME onlineSolver)
-PROJECT(${PROJECTNAME})
+cmake_minimum_required(VERSION 3.5)
+project(onlineSolver)
 
-FIND_PACKAGE(YARP)
-FIND_PACKAGE(ICUB)
+find_package(YARP)
+find_package(ICUB)
 
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
 
-IF(NOT ICUB_USE_IPOPT)
-    MESSAGE(FATAL_ERROR "IPOPT is required")
-ENDIF(NOT ICUB_USE_IPOPT)
+if(NOT ICUB_USE_IPOPT)
+    message(FATAL_ERROR "IPOPT is required")
+endif()
 
-SET(folder_source main.cpp)
-SOURCE_GROUP("Source Files" FILES ${folder_source})
+set(folder_source main.cpp)
+source_group("Source Files" FILES ${folder_source})
 
-INCLUDE_DIRECTORIES(${ICUB_INCLUDE_DIRS})
-ADD_EXECUTABLE(${PROJECTNAME} ${folder_source})
-TARGET_LINK_LIBRARIES(${PROJECTNAME} iKin ${YARP_LIBRARIES})
+add_executable(${PROJECT_NAME} ${folder_source})
+target_link_libraries(${PROJECT_NAME} iKin ${YARP_LIBRARIES})
 
 

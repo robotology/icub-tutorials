@@ -3,14 +3,11 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 # 
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-SET(PROJECTNAME motorControlBasic)
-PROJECT(${PROJECTNAME})
+cmake_minimum_required(VERSION 3.5)
+project(motorControlBasic)
 
-FIND_PACKAGE(YARP)
+find_package(YARP)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
 
 add_executable(tutorial_arm tutorial_arm.cpp)
 target_link_libraries(tutorial_arm ${YARP_LIBRARIES})
-
-

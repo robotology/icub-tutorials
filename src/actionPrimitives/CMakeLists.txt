@@ -2,7 +2,7 @@
 # Author: Ugo Pattacini
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 set(PROJECTNAME tutorial_actionPrimitives)
 project(${PROJECTNAME})
 
@@ -14,8 +14,6 @@ list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH}
 set(sources tutorial_actionPrimitives.cpp)
 source_group("Source Files" FILES ${sources})
 
-include_directories(${actionPrimitives_INCLUDE_DIRS}
-                    ${perceptiveModels_INCLUDE_DIRS})
 add_executable(${PROJECTNAME} ${sources})
 target_link_libraries(${PROJECTNAME} perceptiveModels
                                      actionPrimitives

@@ -44,17 +44,14 @@ Let's see now how to compile this program.
 Go back to your text editor and write the following file:
 
 \code
-PROJECT(HELLO_ICUB)
+project(HELLO_ICUB)
 
-FIND_PACKAGE(YARP REQUIRED)
+find_package(YARP REQUIRED)
 
-# add include directories
-INCLUDE_DIRECTORIES(${YARP_INCLUDE_DIRS})
-
-ADD_EXECUTABLE(hello main.cpp)
+add_executable(hello main.cpp)
 
 # we now add the YARP libraries to our project.
-TARGET_LINK_LIBRARIES(hello ${YARP_LIBRARIES})
+target_link_libriaries(hello ${YARP_LIBRARIES})
 \endcode
 
 Now save this file as CMakeLists.txt, in the same directory as your main.cpp file.

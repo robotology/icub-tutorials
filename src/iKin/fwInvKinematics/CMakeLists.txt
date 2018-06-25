@@ -3,9 +3,8 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 # 
 
-cmake_minimum_required(VERSION 2.6)
-set(PROJECTNAME fwInvKinematics)
-project(${PROJECTNAME})
+cmake_minimum_required(VERSION 3.5)
+project(fwInvKinematics)
 
 find_package(YARP)
 find_package(ICUB)
@@ -20,9 +19,8 @@ endif()
 set(folder_source main.cpp)
 source_group("Source Files" FILES ${folder_source})
 
-include_directories(${ICUB_INCLUDE_DIRS})
 add_definitions(-D_USE_MATH_DEFINES)
-add_executable(${PROJECTNAME} ${folder_source})
-target_link_libraries(${PROJECTNAME} iKin ${YARP_LIBRARIES})
+add_executable(${PROJECT_NAME} ${folder_source})
+target_link_libraries(${PROJECT_NAME} iKin ${YARP_LIBRARIES})
 
 
