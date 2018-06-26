@@ -2,21 +2,16 @@
 # Author: Serena Ivaldi
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 # 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
+cmake_minimum_required(VERSION 3.5)
 
-PROJECT(multiLimbJacobian)
+project(multiLimbJacobian)
 
-FIND_PACKAGE(YARP)
-FIND_PACKAGE(ICUB)
+find_package(YARP)
+find_package(ICUB)
 
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
 
-SET(folder_source main.cpp)
-
-SOURCE_GROUP("Source Files" FILES ${folder_source})
-
-ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
-ADD_EXECUTABLE(${PROJECT_NAME} ${folder_source})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ctrlLib iKin skinDynLib iDyn ${YARP_LIBRARIES})
-
+set(folder_source main.cpp)
+add_definitions(-D_USE_MATH_DEFINES)
+add_executable(${PROJECT_NAME} ${folder_source})
+target_link_libraries(${PROJECT_NAME} ctrlLib iKin skinDynLib iDyn ${YARP_LIBRARIES})

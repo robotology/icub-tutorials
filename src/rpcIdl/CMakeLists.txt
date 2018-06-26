@@ -6,9 +6,7 @@ cmake_minimum_required(VERSION 3.5)
 project(rpcIdl)
 
 find_package(YARP)
-list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH})
 
-include(YarpIDL)
 yarp_idl_to_dir(IRpcServer.thrift ${CMAKE_CURRENT_SOURCE_DIR})
 
 file(GLOB header_files include/*.h)
