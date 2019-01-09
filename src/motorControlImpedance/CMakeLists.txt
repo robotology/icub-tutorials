@@ -4,9 +4,9 @@
 # 
 
 cmake_minimum_required(VERSION 3.5)
-project(motorControlImpedance)
+project(tutorial_arm_joint_impedance)
 
 find_package(YARP)
 
-add_executable(motorControlImpedance tutorial_arm_joint_impedance.cpp)
-target_link_libraries(motorControlImpedance ${YARP_LIBRARIES})
+add_executable(tutorial_arm_joint_impedance tutorial_arm_joint_impedance.cpp)
+target_link_libraries(tutorial_arm_joint_impedance ${YARP_LIBRARIES})

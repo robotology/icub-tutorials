@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
         if (times%2)
         {
              // set the elbow joint only in compliant mode
-             ictrl->setPositionMode(3);
+             ictrl->setControlMode(3,VOCAB_CM_POSITION);
              iint->setInteractionMode(3,VOCAB_IM_COMPLIANT);
              // set new reference positions
              command[0]=-50;
@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
         else
         {
              // set the elbow joint in stiff mode
-             ictrl->setPositionMode(3);
+             ictrl->setControlMode(3,VOCAB_CM_POSITION);
              iint->setInteractionMode(3,VOCAB_IM_STIFF);
              // set new reference positions
              command[0]=-20;
@@ -164,13 +164,12 @@ int main(int argc, char *argv[])
                     iint->getInteractionMode(i, &interaction_mode);
                     switch (control_mode)
                     {
-                        case VOCAB_CM_IDLE:            printf("IDLE     ");        break;
+                        case VOCAB_CM_IDLE:            printf("IDLE     ");         break;
                         case VOCAB_CM_POSITION:        printf("POSITION ");         break;
                         case VOCAB_CM_POSITION_DIRECT: printf("POSITION DIRECT ");  break;
                         case VOCAB_CM_VELOCITY:        printf("VELOCITY ");         break;
                         case VOCAB_CM_MIXED:           printf("MIXED POS/VEL");     break;
                         case VOCAB_CM_TORQUE:          printf("TORQUE   ");         break;
-                        case VOCAB_CM_OPENLOOP:        printf("OPENLOOP ");         break;
                         default:
                         case VOCAB_CM_UNKNOWN:         printf("UNKNOWN  ");         break;
                     }
