@@ -18,8 +18,8 @@ class IRpcServer_get_answer : public yarp::os::Portable {
 public:
   std::int32_t _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
-  virtual bool read(yarp::os::ConnectionReader& connection) override;
+  bool write(yarp::os::ConnectionWriter& connection) const override;
+  bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class IRpcServer_set_answer : public yarp::os::Portable {
@@ -27,8 +27,8 @@ public:
   std::int32_t rightAnswer;
   bool _return;
   void init(const std::int32_t rightAnswer);
-  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
-  virtual bool read(yarp::os::ConnectionReader& connection) override;
+  bool write(yarp::os::ConnectionWriter& connection) const override;
+  bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class IRpcServer_add_int : public yarp::os::Portable {
@@ -36,32 +36,32 @@ public:
   std::int32_t x;
   std::int32_t _return;
   void init(const std::int32_t x);
-  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
-  virtual bool read(yarp::os::ConnectionReader& connection) override;
+  bool write(yarp::os::ConnectionWriter& connection) const override;
+  bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class IRpcServer_start : public yarp::os::Portable {
 public:
   bool _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
-  virtual bool read(yarp::os::ConnectionReader& connection) override;
+  bool write(yarp::os::ConnectionWriter& connection) const override;
+  bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class IRpcServer_stop : public yarp::os::Portable {
 public:
   bool _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
-  virtual bool read(yarp::os::ConnectionReader& connection) override;
+  bool write(yarp::os::ConnectionWriter& connection) const override;
+  bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class IRpcServer_is_running : public yarp::os::Portable {
 public:
   bool _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
-  virtual bool read(yarp::os::ConnectionReader& connection) override;
+  bool write(yarp::os::ConnectionWriter& connection) const override;
+  bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 bool IRpcServer_get_answer::write(yarp::os::ConnectionWriter& connection) const {
@@ -367,7 +367,7 @@ bool IRpcServer::read(yarp::os::ConnectionReader& connection) {
     if (reader.noMore()) { reader.fail(); return false; }
     std::string next_tag = reader.readTag();
     if (next_tag=="") break;
-    tag = tag + "_" + next_tag;
+    tag.append("_").append(next_tag);
   }
   return false;
 }
@@ -376,56 +376,56 @@ std::vector<std::string> IRpcServer::help(const std::string& functionName) {
   bool showAll=(functionName=="--all");
   std::vector<std::string> helpString;
   if(showAll) {
-    helpString.push_back("*** Available commands:");
-    helpString.push_back("get_answer");
-    helpString.push_back("set_answer");
-    helpString.push_back("add_int");
-    helpString.push_back("start");
-    helpString.push_back("stop");
-    helpString.push_back("is_running");
-    helpString.push_back("help");
+    helpString.emplace_back("*** Available commands:");
+    helpString.emplace_back("get_answer");
+    helpString.emplace_back("set_answer");
+    helpString.emplace_back("add_int");
+    helpString.emplace_back("start");
+    helpString.emplace_back("stop");
+    helpString.emplace_back("is_running");
+    helpString.emplace_back("help");
   }
   else {
     if (functionName=="get_answer") {
-      helpString.push_back("std::int32_t get_answer() ");
-      helpString.push_back("Get answer from server ");
-      helpString.push_back("@return the answer ");
+      helpString.emplace_back("std::int32_t get_answer() ");
+      helpString.emplace_back("Get answer from server ");
+      helpString.emplace_back("@return the answer ");
     }
     if (functionName=="set_answer") {
-      helpString.push_back("bool set_answer(const std::int32_t rightAnswer) ");
-      helpString.push_back("Set value for future answers. ");
-      helpString.push_back("@param rightAnswer new answer ");
-      helpString.push_back("@return true if connection was successful ");
+      helpString.emplace_back("bool set_answer(const std::int32_t rightAnswer) ");
+      helpString.emplace_back("Set value for future answers. ");
+      helpString.emplace_back("@param rightAnswer new answer ");
+      helpString.emplace_back("@return true if connection was successful ");
     }
     if (functionName=="add_int") {
-      helpString.push_back("std::int32_t add_int(const std::int32_t x) ");
-      helpString.push_back("Add one integer to future answers. ");
-      helpString.push_back("@param x value to add ");
-      helpString.push_back("@return new value ");
+      helpString.emplace_back("std::int32_t add_int(const std::int32_t x) ");
+      helpString.emplace_back("Add one integer to future answers. ");
+      helpString.emplace_back("@param x value to add ");
+      helpString.emplace_back("@return new value ");
     }
     if (functionName=="start") {
-      helpString.push_back("bool start() ");
-      helpString.push_back("Start service ");
-      helpString.push_back("@return true if service started correctly ");
+      helpString.emplace_back("bool start() ");
+      helpString.emplace_back("Start service ");
+      helpString.emplace_back("@return true if service started correctly ");
     }
     if (functionName=="stop") {
-      helpString.push_back("bool stop() ");
-      helpString.push_back("Stop service ");
-      helpString.push_back("@return true if service stopped correctly ");
+      helpString.emplace_back("bool stop() ");
+      helpString.emplace_back("Stop service ");
+      helpString.emplace_back("@return true if service stopped correctly ");
     }
     if (functionName=="is_running") {
-      helpString.push_back("bool is_running() ");
-      helpString.push_back("Check is service is running ");
-      helpString.push_back("@return true/false if service is/is not running ");
+      helpString.emplace_back("bool is_running() ");
+      helpString.emplace_back("Check is service is running ");
+      helpString.emplace_back("@return true/false if service is/is not running ");
     }
     if (functionName=="help") {
-      helpString.push_back("std::vector<std::string> help(const std::string& functionName=\"--all\")");
-      helpString.push_back("Return list of available commands, or help message for a specific function");
-      helpString.push_back("@param functionName name of command for which to get a detailed description. If none or '--all' is provided, print list of available commands");
-      helpString.push_back("@return list of strings (one string per line)");
+      helpString.emplace_back("std::vector<std::string> help(const std::string& functionName=\"--all\")");
+      helpString.emplace_back("Return list of available commands, or help message for a specific function");
+      helpString.emplace_back("@param functionName name of command for which to get a detailed description. If none or '--all' is provided, print list of available commands");
+      helpString.emplace_back("@return list of strings (one string per line)");
     }
   }
-  if ( helpString.empty()) helpString.push_back("Command not found");
+  if ( helpString.empty()) helpString.emplace_back("Command not found");
   return helpString;
 }
 

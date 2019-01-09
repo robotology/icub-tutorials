@@ -57,7 +57,7 @@ public:
    * @return true/false if service is/is not running
    */
   virtual bool is_running();
-  virtual bool read(yarp::os::ConnectionReader& connection) override;
+  bool read(yarp::os::ConnectionReader& connection) override;
   virtual std::vector<std::string> help(const std::string& functionName="--all");
 };
 
