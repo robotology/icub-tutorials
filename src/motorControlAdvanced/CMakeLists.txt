@@ -8,11 +8,10 @@ project(motorControlAdvanced)
 
 find_package(YARP)
 
-# import math symbols from standard cmath
-add_definitions(-D_USE_MATH_DEFINES)
-
 add_executable(tutorial_cartesian_interface tutorial_cartesian_interface.cpp)
+target_compile_definitions(tutorial_cartesian_interface PRIVATE _USE_MATH_DEFINES)
 target_link_libraries(tutorial_cartesian_interface ${YARP_LIBRARIES})
 
 add_executable(tutorial_gaze_interface tutorial_gaze_interface.cpp)
+target_compile_definitions(tutorial_gaze_interface PRIVATE _USE_MATH_DEFINES)
 target_link_libraries(tutorial_gaze_interface ${YARP_LIBRARIES})

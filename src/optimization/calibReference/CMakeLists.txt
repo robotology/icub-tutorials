@@ -15,6 +15,6 @@ if(NOT ICUB_USE_IPOPT)
 endif()
 
 set(folder_source main.cpp)
-add_definitions(-D_USE_MATH_DEFINES)
 add_executable(${PROJECT_NAME} ${folder_source})
+target_compile_definitions(${PROJECT_NAME} PRIVATE _USE_MATH_DEFINES)
 target_link_libraries(${PROJECT_NAME} optimization ${YARP_LIBRARIES})
