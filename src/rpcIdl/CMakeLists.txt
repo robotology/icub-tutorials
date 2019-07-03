@@ -7,7 +7,7 @@ project(rpcIdl)
 
 find_package(YARP)
 
-yarp_idl_to_dir(IRpcServer.thrift ${CMAKE_CURRENT_SOURCE_DIR})
+yarp_idl_to_dir(INPUT_FILES IRpcServer.thrift OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 file(GLOB header_files include/*.h)
 file(GLOB source_files src/*.cpp)

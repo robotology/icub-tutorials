@@ -6,9 +6,7 @@ project(${PROJECTNAME})
 
 find_package(YARP REQUIRED COMPONENTS OS sig dev math gsl idl_tools)
 find_package(ICUB REQUIRED)
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
-include(iCubOptions)
+list(APPEND CMAKE_MODULE_PATH ${ICUB_MODULE_PATH})
 
 include_directories(${ICUB_INCLUDE_DIRS})
 
