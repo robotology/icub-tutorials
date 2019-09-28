@@ -5,6 +5,7 @@
 // Author: Ugo Pattacini - <ugo.pattacini@iit.it>
 
 #include <cstdio>
+#include <mutex>
 #include <cmath>
 #include <deque>
 
@@ -12,8 +13,6 @@
 #include <yarp/os/RFModule.h>
 #include <yarp/os/PeriodicThread.h>
 #include <yarp/os/Time.h>
-#include <yarp/os/Mutex.h>
-#include <yarp/os/LockGuard.h>
 #include <yarp/sig/Vector.h>
 #include <yarp/math/Math.h>
 
@@ -55,7 +54,7 @@ protected:
     Vector fp;
 
     deque<Vector> poiList;
-    Mutex mutex;
+    mutex mtx;
 
     double t;
     double t0;
@@ -66,7 +65,7 @@ protected:
     // the motion-done callback
     virtual void gazeEventCallback()
     {
-        LockGuard lg(mutex);
+        lock_guard<mutex> lg(mtx);
 
         Vector ang;
         igaze->getAngles(ang);
@@ -163,7 +162,7 @@ public:
 
     virtual void run()
     {
-        LockGuard lg(mutex);
+        lock_guard<mutex> lg(mtx);
 
         t=Time::now();
         generateTarget();

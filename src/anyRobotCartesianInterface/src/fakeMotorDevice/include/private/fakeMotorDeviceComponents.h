@@ -18,6 +18,8 @@
 #ifndef __FAKEMOTORDEVICECOMPONENTS_H__
 #define __FAKEMOTORDEVICECOMPONENTS_H__
 
+#include <mutex>
+
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 #include <yarp/sig/all.h>
@@ -40,7 +42,7 @@ protected:
     yarp::os::BufferedPort<yarp::os::Bottle>  cmdPort;
     yarp::os::Port                            rpcPort;
 
-    yarp::os::Semaphore mutex;
+    std::mutex mtx;
 
     iCub::ctrl::Integrator *motors;
     yarp::sig::Vector vel;
@@ -130,9 +132,8 @@ protected:
         {
             if (owner!=NULL)
             {
-                owner->mutex.wait();
+                std::lock_guard<std::mutex> lg(owner->mtx);
                 owner->encs=encs;
-                owner->mutex.post();
             }
         }
     public:
@@ -144,7 +145,7 @@ protected:
     yarp::os::BufferedPort<yarp::os::Bottle> cmdPort;
     yarp::os::RpcClient                      rpcPort;
 
-    yarp::os::Semaphore mutex;
+    std::mutex mtx;
 
     yarp::sig::Vector encs;
     bool configured;

@@ -131,10 +131,9 @@ bool fakeMotorDeviceClient::getEncoders(double *encs)
     if (!configured || (encs==NULL))
         return false;
 
-    mutex.wait();
+    lock_guard<mutex> lg(mtx);
     for (size_t i=0; i<this->encs.length(); i++)
         encs[i]=this->encs[i];
-    mutex.post();
 
     return true;
 }

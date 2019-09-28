@@ -21,11 +21,11 @@
  * CopyPolicy: Released under the terms of GPL 2.0 or later
  */ 
 
+#include <mutex>
 #include <string>
 #include <cstdio>
 
 #include <yarp/os/Network.h>
-#include <yarp/os/Semaphore.h>
 #include <yarp/os/PeriodicThread.h>
 #include <yarp/os/RFModule.h>
 #include <yarp/os/BufferedPort.h>
@@ -52,40 +52,33 @@ using namespace iCub::iKin;
 class inPort : public BufferedPort<Bottle>
 {
 protected:
-    Semaphore mutex;
+    mutex mtx;
     Vector vect;
 
     /*****************************************************************/
     virtual void onRead(Bottle &b)
     {
-        mutex.wait();
-
+        lock_guard<mutex> lg(mtx);
         if (vect.length()!=b.size())
             vect.resize(b.size());
 
         for (size_t i=0; i<vect.length(); i++)
             vect[i]=b.get(i).asDouble();
-
-        mutex.post();
     }
 
 public:
     /*****************************************************************/
     Vector get_vect()
     {
-        mutex.wait();
-        Vector _vect=vect;
-        mutex.post();
-
-        return _vect;
+        lock_guard<mutex> lg(mtx);
+        return vect;
     }
 
     /*****************************************************************/
     void set_vect(const Vector &_vect)
     {
-        mutex.wait();
+        lock_guard<mutex> lg(mtx);
         vect=_vect;
-        mutex.post();
     }
 };
 
@@ -96,7 +89,7 @@ public:
 class exchangeData
 {
 protected:
-    Semaphore mutex;
+    mutex mtx;
 
     Vector xd;
     Vector qd;
@@ -105,19 +98,17 @@ public:
     /*****************************************************************/
     void setDesired(const Vector &_xd, const Vector &_qd)
     {
-        mutex.wait();
+        lock_guard<mutex> lg(mtx);
         xd=_xd;
         qd=_qd;
-        mutex.post();
     }
 
     /*****************************************************************/
     void getDesired(Vector &_xd, Vector &_qd)
     {
-        mutex.wait();
+        lock_guard<mutex> lg(mtx);
         _xd=xd;
         _qd=qd;
-        mutex.post();
     }
 };
 

@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(anyRobotCartesianInterface)
 
-find_package(YARP)
+find_package(YARP 3.2.101 REQUIRED)
 find_package(ICUB)
 list(APPEND CMAKE_MODULE_PATH ${ICUB_MODULE_PATH})
 

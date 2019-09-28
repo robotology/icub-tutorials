@@ -80,9 +80,9 @@ bool fakeMotorDeviceServer::close()
     if (isRunning())
         stop();
 
-    mutex.wait();
+    mtx.lock();
     PeriodicThread::stop();
-    mutex.post();
+    mtx.unlock();
 
     statePort.interrupt();
     cmdPort.interrupt();
@@ -107,8 +107,7 @@ bool fakeMotorDeviceServer::close()
 /**********************************************************/
 void fakeMotorDeviceServer::run()
 {
-    mutex.wait();
-
+    lock_guard<mutex> lg(mtx);
     if (Bottle *cmd=cmdPort.read(false))
     {
         if ((size_t)cmd->size()>=vel.length())
@@ -118,8 +117,6 @@ void fakeMotorDeviceServer::run()
 
     statePort.prepare()=motors->integrate(vel);
     statePort.write();
-
-    mutex.post();
 }
 
 /**********************************************************/
@@ -128,7 +125,7 @@ bool fakeMotorDeviceServer::read(ConnectionReader &connection)
     Bottle cmd,reply;
     cmd.read(connection);
     
-    mutex.wait();
+    mtx.lock();
 
     int codeIF=cmd.get(0).asVocab();
     int codeMethod=cmd.get(1).asVocab();
@@ -186,7 +183,7 @@ bool fakeMotorDeviceServer::read(ConnectionReader &connection)
     if (reply.size()==0)
         reply.addVocab(Vocab::encode("nack"));
 
-    mutex.post();
+    mtx.unlock();
 
     if (ConnectionWriter *returnToSender=connection.getWriter())
         reply.write(*returnToSender);
