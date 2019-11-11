@@ -10,6 +10,8 @@ find_package(YARP)
 
 add_executable(findLocation findLocation.cpp)
 target_link_libraries(findLocation ${YARP_LIBRARIES})
+install(TARGETS findLocation DESTINATION bin)
 
 add_executable(lookAtLocation lookAtLocation.cpp)
 target_link_libraries(lookAtLocation ${YARP_LIBRARIES})
+install(TARGETS lookAtLocation DESTINATION bin)

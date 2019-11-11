@@ -7,8 +7,8 @@ project(onlinePTuner)
 
 find_package(YARP)
 find_package(ICUB)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
 
 set(folder_source main.cpp)
 add_executable(${PROJECT_NAME} ${folder_source})
 target_link_libraries(${PROJECT_NAME} ctrlLib ${YARP_LIBRARIES})
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)

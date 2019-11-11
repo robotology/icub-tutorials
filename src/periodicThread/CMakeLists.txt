@@ -8,6 +8,7 @@ project(periodicThread)
 
 find_package(YARP)
 
-add_executable(periodicThread tutorial_periodic_thread.cpp)
-target_link_libraries(periodicThread ${YARP_LIBRARIES})
+add_executable(${PROJECT_NAME} tutorial_periodic_thread.cpp)
+target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES})
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 

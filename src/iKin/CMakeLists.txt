@@ -4,6 +4,7 @@
 
 cmake_minimum_required(VERSION 3.5)
 project(iKin_tutorials)
+add_subdirectory(iCubLimbsFwKin)
 add_subdirectory(fwInvKinematics)
 add_subdirectory(genericChainController)
 add_subdirectory(onlineSolver)

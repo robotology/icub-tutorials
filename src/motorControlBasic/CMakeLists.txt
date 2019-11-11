@@ -10,3 +10,4 @@ find_package(YARP)
 
 add_executable(tutorial_arm tutorial_arm.cpp)
 target_link_libraries(tutorial_arm ${YARP_LIBRARIES})
+install(TARGETS tutorial_arm DESTINATION bin)

@@ -39,6 +39,7 @@ The following are some specific tutorials.
 
 \subsection sec_ikin_lib_cpp  iKin library
 
+- src/iKin/iCubLimbsFwKin/main.cpp - a tutorial on how to use \ref iKin for forward kinematics of iCub limbs
 - src/iKin/fwInvKinematics/main.cpp - a tutorial on how to directly use \ref iKin to cope with forward/inverse kinematics problems
 - src/iKin/onlineSolver/main.cpp - a tutorial on how to solve online inverse kinematics of a generic robot limb
 - src/iKin/genericChainController/main.cpp - a tutorial on how to control a generic kinematic chain
