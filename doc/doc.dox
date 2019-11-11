@@ -33,7 +33,7 @@ Advanced integration with the YARP framework require that you get used to the Re
 \section sec_lib_cpp C++ tutorials related to specific libraries
 
 Online documentation for the libraries is available here:
-<a href="http://wiki.icub.org/iCub/main/dox/html/group__icub__libraries.html">iCub libraries</a>.
+<a href="http://www.icub.org/doc/icub-main/group__icub__libraries.html">iCub libraries</a>.
 
 The following are some specific tutorials.
 
@@ -44,7 +44,7 @@ The following are some specific tutorials.
 - src/iKin/genericChainController/main.cpp - a tutorial on how to control a generic kinematic chain
 
 Online documentation is available here:
-<a href="http://wiki.icub.org/iCub_documentation/group__iKin.html">iKin online documentation</a>.
+<a href="http://www.icub.org/doc/icub-main/group__iKin.html">iKin online documentation</a>.
 
 \subsection sec_idyn_lib_cpp  iDyn library
 
@@ -52,7 +52,7 @@ Online documentation is available here:
 - \ref idyn_one_chain_tutorial - how to compute torques in a single chain, using \ref iDyn library
 
 Online documentation is available here:
-<a href="http://wiki.icub.org/iCub_documentation/group__iDyn.html">iDyn online documentation</a>.
+<a href="http://www.icub.org/doc/icub-main/group__iDyn.html">iDyn online documentation</a>.
 
 \subsection sec_ml_lib_cpp Learning Machine Library
 
@@ -66,7 +66,7 @@ advanced tutorials. You should check all examples and choose the method that bet
 - Advanced tutorial. Use learning machines through abstract interfaces and factory: src/learningMachines/lmlibportable.cpp
 
 Online documentation is available here:
-<a href="http://wiki.icub.org/iCub_documentation/group__icub__libLearningMachine.html">learningMachines online documentation</a>.
+<a href="http://www.icub.org/doc/icub-main/group__icub__libLearningMachine.html">learningMachines online documentation</a>.
 
 \subsection sec_other_lis_cpp Other libraries
 
