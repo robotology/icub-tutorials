@@ -7,7 +7,6 @@ project(anyRobotCartesianInterface)
 
 find_package(YARP 3.2.101 REQUIRED)
 find_package(ICUB)
-list(APPEND CMAKE_MODULE_PATH ${ICUB_MODULE_PATH})
 
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH "Installation directory" FORCE)
 

@@ -10,3 +10,4 @@ find_package(YARP)
 
 add_executable(tutorial_arm_joint_impedance tutorial_arm_joint_impedance.cpp)
 target_link_libraries(tutorial_arm_joint_impedance ${YARP_LIBRARIES})
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)

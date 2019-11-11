@@ -9,12 +9,11 @@ project(genericChainController)
 find_package(YARP)
 find_package(ICUB)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ICUB_MODULE_PATH})
-
 if(NOT ICUB_USE_IPOPT)
-    MESSAGE(FATAL_ERROR "IPOPT is required")
+  message(FATAL_ERROR "IPOPT is required")
 endif()
 
 set(folder_source main.cpp)
 add_executable(${PROJECT_NAME} ${folder_source})
 target_link_libraries(${PROJECT_NAME} iKin ${YARP_LIBRARIES})
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)

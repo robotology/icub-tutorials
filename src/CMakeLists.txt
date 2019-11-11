@@ -48,6 +48,7 @@ if(ICUB_USE_IPOPT)
 
     add_executable(test_ipopt smoke-tests/ipopt.cpp)
     target_link_libraries(test_ipopt ${YARP_LIBRARIES} iKin)
+    install(TARGETS test_ipopt DESTINATION bin)
 
     ### execute tests
     add_test(NAME test_ipopt COMMAND test_ipopt)
