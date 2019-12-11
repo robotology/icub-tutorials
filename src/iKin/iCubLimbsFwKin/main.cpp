@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     {
         cout << "Options:" << endl;
         cout << "--kinematics eye|arm|leg" << endl;
-        cout << "--type left|right" << endl;
+        cout << "--type left|right|left_v2|..." << endl;
         cout << "--q \"(1.0 ... n)\"" << endl;
         return EXIT_SUCCESS;
     }
@@ -52,12 +52,6 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    if ((type != "left") && (type != "right"))
-    {
-        cerr << "unrecognized type \"" << type << "\"" << endl;
-        return EXIT_FAILURE;
-    }
-
     unique_ptr<iKinLimb> limb;
     if (kinematics == "eye")
     {
@@ -71,6 +65,9 @@ int main(int argc, char *argv[])
     {
         limb = unique_ptr<iKinLimb>(new iCubLeg(type));
     }
+
+    cout << "Asked for type \"" << type << "\"" << endl;
+    cout << "Type used \"" << limb->getType() << "\"" << endl;
 
 	iKinChain* chain = limb->asChain();
 	chain->setAllConstraints(false);
