@@ -1,7 +1,9 @@
-#include <stdio.h>
+#include <cstdio>
+#include <vector>
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
 #include <yarp/dev/all.h>
+using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
@@ -20,13 +22,15 @@ int main() {
     printf("Cannot connect to robot head\n");
     return 1;
   }
+  IControlMode     *mod;
   IPositionControl *pos;
   IVelocityControl *vel;
   IEncoders *enc;
+  robotHead.view(mod);
   robotHead.view(pos);
   robotHead.view(vel);
   robotHead.view(enc);
-  if (pos==NULL || vel==NULL || enc==NULL) {
+  if (mod==NULL || pos==NULL || vel==NULL || enc==NULL) {
     printf("Cannot get interface to robot head\n");
     robotHead.close();
     return 1;
@@ -35,6 +39,10 @@ int main() {
   pos->getAxes(&jnts);
   Vector setpoints;
   setpoints.resize(jnts);
+
+  // enable velocity control mode
+  vector<int> modes(jnts,VOCAB_CM_VELOCITY);
+  mod->setControlModes(modes.data());
 
   while (1) { // repeat forever
     Vector *target = targetPort.read();  // read a target
