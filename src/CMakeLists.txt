@@ -4,7 +4,7 @@ set(PROJECTNAME icub-tutorials)
 
 project(${PROJECTNAME})
 
-find_package(YARP 3.3.1 REQUIRED COMPONENTS os sig dev math gsl idl_tools)
+find_package(YARP 3.3.2 REQUIRED COMPONENTS os sig dev math gsl idl_tools)
 find_package(ICUB REQUIRED)
 list(APPEND CMAKE_MODULE_PATH ${ICUB_MODULE_PATH})
 
