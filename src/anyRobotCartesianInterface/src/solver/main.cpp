@@ -181,7 +181,6 @@ int main(int argc, char *argv[])
     registerFakeMotorDevices();
 
     ResourceFinder rf;
-    rf.setVerbose(true);
     rf.setDefaultConfigFile("solver.ini");
     rf.setDefault("kinematics_file","kinematics.ini");
     rf.configure(argc,argv);

@@ -257,7 +257,6 @@ int main(int argc, char *argv[])
     }
 
     ResourceFinder rf;
-    rf.setVerbose(true);
     rf.setDefault("name","percex");
     rf.setDefault("robot","icub");
     rf.setDefault("hand","right");

@@ -135,7 +135,6 @@ int main(int argc, char *argv[])
     }
 
     ResourceFinder rf;
-    rf.setVerbose(true);
     rf.setDefault("remote","server");
     rf.setDefault("local","client");
     rf.configure(argc,argv);

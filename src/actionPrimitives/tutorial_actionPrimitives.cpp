@@ -460,7 +460,6 @@ int main(int argc, char *argv[])
     }
 
     ResourceFinder rf;
-    rf.setVerbose(true);
     rf.setDefaultConfigFile("config.ini");
     rf.setDefault("grasp_model_type","tactile");
     rf.setDefault("grasp_model_file","grasp_model.ini");

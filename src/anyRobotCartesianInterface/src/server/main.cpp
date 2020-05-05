@@ -122,7 +122,6 @@ int main(int argc, char *argv[])
     registerFakeMotorDevices();
 
     ResourceFinder rf;
-    rf.setVerbose(true);
     rf.setDefaultConfigFile("server.ini");
     rf.setDefault("robot","fake_robot");
     rf.setDefault("part","fake_part");
