@@ -270,7 +270,13 @@ Briefly (a detailed description is given in the \ref iKinSlv "solver page"), the
 that can be described in this way:
 
 \f[
-\mathbf{q}=\arg\min_{\mathbf{q}\in \mathbb{R}^{n} }\left(\left\|\mathbf{\alpha}_d-\mathit{K_{\alpha}}\left(\mathbf{q}\right)\right\|^2+\mathit{w}\cdot\left(\mathbf{q}_r-\mathbf{q}\right)^{\top}\mathit{W}_r\left(\mathbf{q}_r-\mathbf{q}\right)\right) \quad s.t.\,\left\{\begin{array}{l}\left\|\mathbf{x}_d-\mathit{K_x}\left(\mathbf{q}\right)\right\|^2=0\\\mathbf{q}_L<\mathbf{q}<\mathbf{q}_U\end{array}\right.
+\begin{array}{c}
+  \mathbf{q}=\arg\min\limits_{\mathbf{q} \in \mathbb{R}^{n} }\left(\left\|\mathbf{\alpha}_d-\mathit{K_{\alpha}}\left(\mathbf{q}\right)\right\|^2+\mathit{w}\cdot\left(\mathbf{q}_r-\mathbf{q}\right)^{\top}\mathit{W}_r\left(\mathbf{q}_r-\mathbf{q}\right)\right) \\
+  \text{s.t.}
+  \begin{cases} \left\|\mathbf{x}_d-\mathit{K_x}\left(\mathbf{q}\right)\right\|^2=0 \\
+    \mathbf{q}_L<\mathbf{q}<\mathbf{q}_U
+  \end{cases}
+\end{array}.
 \f]
 
 The term \f$ \left(\mathbf{q}_r-\mathbf{q}\right)^{\top}\mathit{W}_r\left(\mathbf{q}_r-\mathbf{q}\right) \f$ represents
