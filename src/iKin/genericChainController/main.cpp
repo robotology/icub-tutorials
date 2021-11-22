@@ -63,7 +63,7 @@ protected:
             vect.resize(b.size());
 
         for (size_t i=0; i<vect.length(); i++)
-            vect[i]=b.get(i).asDouble();
+            vect[i]=b.get(i).asFloat64();
     }
 
 public:
@@ -305,7 +305,7 @@ public:
         ctrl=new MultiRefMinJerkCtrl(*chain,ctrlPose,getPeriod());
 
         // set the task execution time
-        ctrl->set_execTime(rf.check("T",Value(2.0)).asDouble(),true);
+        ctrl->set_execTime(rf.check("T",Value(2.0)).asFloat64(),true);
 
         port_v.open("/"+name+"/v:o");
         port_x.open("/"+name+"/x:o");

@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
         size_t len = std::min(q.length(), (size_t)b->size());
         for (size_t i = 0; i < len; i++)
         {
-            q[i] = b->get(i).asDouble();
+            q[i] = b->get(i).asFloat64();
         }
     }
 

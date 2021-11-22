@@ -65,20 +65,20 @@ int main()
 
     // print status    
     cmd.clear();
-    cmd.addVocab(IKINSLV_VOCAB_CMD_GET);
-    cmd.addVocab(IKINSLV_VOCAB_OPT_DOF);
+    cmd.addVocab32(IKINSLV_VOCAB_CMD_GET);
+    cmd.addVocab32(IKINSLV_VOCAB_OPT_DOF);
     rpc.write(cmd,reply);
     cout<<"got dof: "<<reply.toString()<<endl;
 
     cmd.clear();
-    cmd.addVocab(IKINSLV_VOCAB_CMD_GET);
-    cmd.addVocab(IKINSLV_VOCAB_OPT_POSE);
+    cmd.addVocab32(IKINSLV_VOCAB_CMD_GET);
+    cmd.addVocab32(IKINSLV_VOCAB_OPT_POSE);
     rpc.write(cmd,reply);
     cout<<"got pose: "<<reply.toString()<<endl;
 
     cmd.clear();
-    cmd.addVocab(IKINSLV_VOCAB_CMD_GET);
-    cmd.addVocab(IKINSLV_VOCAB_OPT_MODE);
+    cmd.addVocab32(IKINSLV_VOCAB_CMD_GET);
+    cmd.addVocab32(IKINSLV_VOCAB_OPT_MODE);
     rpc.write(cmd,reply);
     cout<<"got mode: "<<reply.toString()<<endl;
 
@@ -86,9 +86,9 @@ int main()
     // any movement induced on unactuated joints
     // is detected the solver is able to react
     cmd.clear();
-    cmd.addVocab(IKINSLV_VOCAB_CMD_SET);
-    cmd.addVocab(IKINSLV_VOCAB_OPT_MODE);
-    cmd.addVocab(IKINSLV_VOCAB_VAL_MODE_TRACK);
+    cmd.addVocab32(IKINSLV_VOCAB_CMD_SET);
+    cmd.addVocab32(IKINSLV_VOCAB_OPT_MODE);
+    cmd.addVocab32(IKINSLV_VOCAB_VAL_MODE_TRACK);
     cout<<"switching to track mode...";
     rpc.write(cmd,reply);
     cout<<reply.toString()<<endl;

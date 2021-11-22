@@ -93,13 +93,13 @@ bool fakeMotorDeviceClient::getLimits(int axis, double *min, double *max)
         return false;
 
     Bottle cmd,reply;
-    cmd.addVocab(Vocab::encode("lim"));
-    cmd.addVocab(Vocab::encode("get"));
-    cmd.addInt(axis);
+    cmd.addVocab32("lim");
+    cmd.addVocab32("get");
+    cmd.addInt32(axis);
     if (rpcPort.write(cmd,reply))
     {
-        *min=reply.get(1).asDouble();
-        *max=reply.get(2).asDouble();
+        *min=reply.get(1).asFloat64();
+        *max=reply.get(2).asFloat64();
 
         return true;
     }
@@ -114,11 +114,11 @@ bool fakeMotorDeviceClient::getAxes(int *ax)
         return false;
 
     Bottle cmd,reply;
-    cmd.addVocab(Vocab::encode("enc"));
-    cmd.addVocab(Vocab::encode("axes"));
+    cmd.addVocab32("enc");
+    cmd.addVocab32("axes");
     if (rpcPort.write(cmd,reply))
     {
-        *ax=reply.get(1).asInt();
+        *ax=reply.get(1).asInt32();
         return true;
     }
     else
@@ -145,10 +145,10 @@ bool fakeMotorDeviceClient::velocityMove(int j, double sp)
         return false;
 
     Bottle cmd,reply;
-    cmd.addVocab(Vocab::encode("vel"));
-    cmd.addVocab(Vocab::encode("move"));
-    cmd.addInt(j);
-    cmd.addDouble(sp);
+    cmd.addVocab32("vel");
+    cmd.addVocab32("move");
+    cmd.addInt32(j);
+    cmd.addFloat64(sp);
     if (rpcPort.write(cmd,reply))
         return true;
     else
@@ -162,10 +162,10 @@ bool fakeMotorDeviceClient::setRefAcceleration(int j, double acc)
         return false;
 
     Bottle cmd,reply;
-    cmd.addVocab(Vocab::encode("vel"));
-    cmd.addVocab(Vocab::encode("acc"));
-    cmd.addInt(j);
-    cmd.addDouble(acc);
+    cmd.addVocab32("vel");
+    cmd.addVocab32("acc");
+    cmd.addInt32(j);
+    cmd.addFloat64(acc);
     if (rpcPort.write(cmd,reply))
         return true;
     else
@@ -179,9 +179,9 @@ bool fakeMotorDeviceClient::stop(int j)
         return false;
 
     Bottle cmd,reply;
-    cmd.addVocab(Vocab::encode("vel"));
-    cmd.addVocab(Vocab::encode("stop"));
-    cmd.addInt(j);
+    cmd.addVocab32("vel");
+    cmd.addVocab32("stop");
+    cmd.addInt32(j);
     if (rpcPort.write(cmd,reply))
         return true;
     else

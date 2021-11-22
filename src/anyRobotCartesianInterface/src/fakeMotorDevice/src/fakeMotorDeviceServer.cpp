@@ -39,7 +39,7 @@ bool fakeMotorDeviceServer::open(Searchable &config)
     printf("Opening Fake Motor Device Server ...\n");
 
     string local=config.check("local",Value("/fakeyServer")).asString();
-    int Ts=config.check("Ts",Value(10)).asInt();
+    int Ts=config.check("Ts",Value(10)).asInt32();
 
     statePort.open(local+"/state:o");
     cmdPort.open(local+"/cmd:i");
@@ -112,7 +112,7 @@ void fakeMotorDeviceServer::run()
     {
         if ((size_t)cmd->size()>=vel.length())
             for (size_t i=0; i<vel.length(); i++)
-                vel[i]=cmd->get(i).asDouble();
+                vel[i]=cmd->get(i).asFloat64();
     }
 
     statePort.prepare()=motors->integrate(vel);
@@ -127,61 +127,61 @@ bool fakeMotorDeviceServer::read(ConnectionReader &connection)
     
     mtx.lock();
 
-    int codeIF=cmd.get(0).asVocab();
-    int codeMethod=cmd.get(1).asVocab();
+    int codeIF=cmd.get(0).asVocab32();
+    int codeMethod=cmd.get(1).asVocab32();
 
-    if (codeIF==Vocab::encode("lim"))
+    if (codeIF==Vocab32::encode("lim"))
     {
-        if (codeMethod==Vocab::encode("get"))
+        if (codeMethod==Vocab32::encode("get"))
         {
-            int axis=cmd.get(2).asInt();
+            int axis=cmd.get(2).asInt32();
             double min,max;
             if (getLimits(axis,&min,&max))
             {
-                reply.addVocab(Vocab::encode("ack"));
-                reply.addDouble(min);
-                reply.addDouble(max);
+                reply.addVocab32("ack");
+                reply.addFloat64(min);
+                reply.addFloat64(max);
             }
         }
     }
-    else if (codeIF==Vocab::encode("enc"))
+    else if (codeIF==Vocab32::encode("enc"))
     {
-        if (codeMethod==Vocab::encode("axes"))
+        if (codeMethod==Vocab32::encode("axes"))
         {
             int ax;
             if (getAxes(&ax))
             {
-                reply.addVocab(Vocab::encode("ack"));
-                reply.addInt(ax);
+                reply.addVocab32("ack");
+                reply.addInt32(ax);
             }
         }
     }
-    else if (codeIF==Vocab::encode("vel"))
+    else if (codeIF==Vocab32::encode("vel"))
     {
-        if (codeMethod==Vocab::encode("move"))
+        if (codeMethod==Vocab32::encode("move"))
         {
-            int axis=cmd.get(2).asInt();
-            double sp=cmd.get(3).asDouble();
+            int axis=cmd.get(2).asInt32();
+            double sp=cmd.get(3).asFloat64();
             if (velocityMove(axis,sp))
-                reply.addVocab(Vocab::encode("ack"));
+                reply.addVocab32("ack");
         }
-        else if (codeMethod==Vocab::encode("acc"))
+        else if (codeMethod==Vocab32::encode("acc"))
         {
-            int axis=cmd.get(2).asInt();
-            double acc=cmd.get(3).asDouble();
+            int axis=cmd.get(2).asInt32();
+            double acc=cmd.get(3).asFloat64();
             if (setRefAcceleration(axis,acc))
-                reply.addVocab(Vocab::encode("ack"));
+                reply.addVocab32("ack");
         }
-        else if (codeMethod==Vocab::encode("stop"))
+        else if (codeMethod==Vocab32::encode("stop"))
         {
-            int axis=cmd.get(2).asInt();
+            int axis=cmd.get(2).asInt32();
             if (stop(axis))
-                reply.addVocab(Vocab::encode("ack"));
+                reply.addVocab32("ack");
         }
     }
 
     if (reply.size()==0)
-        reply.addVocab(Vocab::encode("nack"));
+        reply.addVocab32("nack");
 
     mtx.unlock();
 

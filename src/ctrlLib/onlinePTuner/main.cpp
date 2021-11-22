@@ -49,8 +49,8 @@ int main(int argc, char *argv[])
     string name=rf.check("name",Value("tuner")).asString();
     string robot=rf.check("robot",Value("icub")).asString();
     string part=rf.check("part",Value("right_arm")).asString();
-    int joint=rf.check("joint",Value(11)).asInt();
-    double encoder=rf.check("encoder",Value(2.43)).asDouble();
+    int joint=rf.check("joint",Value(11)).asInt32();
+    double encoder=rf.check("encoder",Value(2.43)).asFloat64();
 
     Property pOptions;
     pOptions.put("device","remote_controlboard");
@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
     designer.startPlantEstimation(pPlantEstimation);
 
     printf("Estimation experiment will last %g seconds...\n",
-           pPlantEstimation.find("max_time").asDouble());
+           pPlantEstimation.find("max_time").asFloat64());
 
     double t0=Time::now();
     while (!designer.isDone())
@@ -163,8 +163,8 @@ int main(int argc, char *argv[])
     // retrieve the identified values (averaged over time)
     Property pResults;
     designer.getResults(pResults);
-    double tau=pResults.find("tau_mean").asDouble();
-    double K=pResults.find("K_mean").asDouble();
+    double tau=pResults.find("tau_mean").asFloat64();
+    double K=pResults.find("K_mean").asFloat64();
 
     printf("plant = K/s * 1/(1+s*tau)\n");
     printf("Estimated parameters...\n");
@@ -188,7 +188,7 @@ int main(int argc, char *argv[])
     designer.startPlantValidation(pPlantValidation);
 
     printf("Validation experiment will last %g seconds...\n",
-           pPlantValidation.find("max_time").asDouble());
+           pPlantValidation.find("max_time").asFloat64());
 
     t0=Time::now();
     while (!designer.isDone())
@@ -216,7 +216,7 @@ int main(int argc, char *argv[])
     pControllerRequirements.put("type","P");
     designer.tuneController(pControllerRequirements,pController);
     printf("tuning results: %s\n",pController.toString().c_str());
-    double Kp=pController.find("Kp").asDouble();
+    double Kp=pController.find("Kp").asFloat64();
     printf("found Kp = %g\n",Kp);
     int scale=4;
     double Kp_fw=Kp*encoder*(1<<scale);
@@ -233,7 +233,7 @@ int main(int argc, char *argv[])
     designer.startStictionEstimation(pStictionEstimation);
 
     printf("Stiction estimation experiment will last no more than %g seconds...\n",
-           pStictionEstimation.find("max_time").asDouble());
+           pStictionEstimation.find("max_time").asFloat64());
 
     t0=Time::now();
     while (!designer.isDone())
@@ -245,8 +245,8 @@ int main(int argc, char *argv[])
     // retrieve the stiction values
     designer.getResults(pResults);
     Vector stiction(2);
-    stiction[0]=pResults.find("stiction").asList()->get(0).asDouble();
-    stiction[1]=pResults.find("stiction").asList()->get(1).asDouble();
+    stiction[0]=pResults.find("stiction").asList()->get(0).asFloat64();
+    stiction[1]=pResults.find("stiction").asList()->get(1).asFloat64();
     printf("Stiction values: up = %g; down = %g\n",stiction[0],stiction[1]);
 
     // now that we know P and stiction, let's try out our controller
@@ -283,7 +283,7 @@ int main(int argc, char *argv[])
     designer.startControllerValidation(pControllerValidation);
 
     printf("Controller validation will last %g seconds...\n",
-           pControllerValidation.find("max_time").asDouble());
+           pControllerValidation.find("max_time").asFloat64());
 
     t0=Time::now();
     while (!designer.isDone())

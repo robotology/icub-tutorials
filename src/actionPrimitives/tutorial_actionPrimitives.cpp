@@ -232,7 +232,7 @@ public:
             int l=len<sz?len:sz;
 
             for (int i=0; i<l; i++)
-                _gOrien[i]=pB->get(i).asDouble();
+                _gOrien[i]=pB->get(i).asFloat64();
         }
 
         if (Bottle *pB=b.find("grasp_displacement").asList())
@@ -242,7 +242,7 @@ public:
             int l=len<sz?len:sz;
 
             for (int i=0; i<l; i++)
-                _gDisp[i]=pB->get(i).asDouble();
+                _gDisp[i]=pB->get(i).asFloat64();
         }
 
         if (Bottle *pB=b.find("systematic_error_displacement").asList())
@@ -252,7 +252,7 @@ public:
             int l=len<sz?len:sz;
 
             for (int i=0; i<l; i++)
-                _dOffs[i]=pB->get(i).asDouble();
+                _dOffs[i]=pB->get(i).asFloat64();
         }
 
         if (Bottle *pB=b.find("lifting_displacement").asList())
@@ -262,7 +262,7 @@ public:
             int l=len<sz?len:sz;
 
             for (int i=0; i<l; i++)
-                _dLift[i]=pB->get(i).asDouble();
+                _dLift[i]=pB->get(i).asFloat64();
         }
 
         if (Bottle *pB=b.find("home_position").asList())
@@ -272,7 +272,7 @@ public:
             int l=len<sz?len:sz;
 
             for (int i=0; i<l; i++)
-                _home_x[i]=pB->get(i).asDouble();
+                _home_x[i]=pB->get(i).asFloat64();
         }
     }
 
@@ -384,9 +384,9 @@ public:
             Vector xd(3);
             bool f;
 
-            xd[0]=b->get(0).asDouble();
-            xd[1]=b->get(1).asDouble();
-            xd[2]=b->get(2).asDouble();
+            xd[0]=b->get(0).asFloat64();
+            xd[1]=b->get(1).asFloat64();
+            xd[2]=b->get(2).asFloat64();
 
             // apply systematic offset
             // due to uncalibrated kinematic
