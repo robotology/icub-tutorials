@@ -41,7 +41,7 @@ performances. Here follow the details. \n
   as much as possible since a lag in the control loop will inevitably cause for instance unwanted overshoots in the
   response. As final suggestion, consider placing the server physically close to the robot, that is where fast ethernet
   link ends (and yarp too) and the internal robot bus begins (e.g. CAN); for iCub indeed, the server runs aboard the
-  PC104.
+  icub-head.
 - The client simply lives inside the user code, making queries to the server through yarp ports, thus it never speaks
   to the solver. There are no special needs for it: the location of the client depends only on the requirements of the
   user code; a program that opens up a client may run on a shuffle PC so as on a powerful machine or even aboard the
@@ -50,8 +50,8 @@ performances. Here follow the details. \n
 
 \section sec_customcart_dependencies Dependencies
 
-Besides the "classical" dependecies you need to have in order to compile all the components (<a href="http://wiki.icub.org/wiki/Installing_IPOPT">Ipopt</a>,
-\ref iKin, \ref servercartesiancontroller, \ref clientcartesiancontroller; you should know them very well by now :),
+Besides the "classical" dependecies you need to have in order to compile all the components (Ipopt, yarp, icub-main,
+iKin, servercartesiancontroller, clientcartesiancontroller; you should know them very well by now :),
 you are required to accomplish a preliminary job: it can be tedious (I realize it when I had to write the "fake" stuff :)
 but is mandatory. You have to provide some low-level yarp motor interfaces that are necessary for the cartesian components
 to start and operate correctly. They are only three: <b>IControlLimits</b>, <b>IEncoders</b>, <b>IVelocityControl</b>.
@@ -65,7 +65,7 @@ Moreover, as enhanced option, the server is also capable of automatically detect
 interface, through which the low-level velocity control is replaced by the faster and more accurate streaming position control.
 In this latter modality, also the standard <b>IPositionControl</b> interface is required to be implemented. \n
 This is not the right place where to tell about how to deal with these interfaces, but please find out more on the topic
-of making a new device in yarp <a href="http://wiki.icub.org/wiki/Making_a_new_device_in_YARP">here</a>.
+of <a href="https://www.yarp.it/latest/group__note__devices.html">making a new device in yarp</a>.
 
 
 \section sec_customcart_custom_example Example of Customization
@@ -108,9 +108,9 @@ link_0 (A 1.0) (D 0.0) (alpha 0.0) (offset 0.0) (min -180.0) (max 180.0)
 link_1 (A 1.0) (D 0.0) (alpha 0.0) (offset 0.0) (min -180.0) (max 180.0)
 link_2 (A 1.0) (D 0.0) (alpha 0.0) (offset 0.0) (min -180.0) (max 180.0)
 \endcode
-The meaning of these parameters is described in the \ref iKinLink class; at any rate they are easily recognized as the link length
-(<i>A</i> in [m]), the link offset (<i>D</i> in [m]), the link twist (<i>alpha</i> in [rad]) and so on: please visit the wiki
-<a href="http://wiki.icub.org/wiki/ICubForwardKinematics">page</a> on kinematics for a deeper insight. \n
+The meaning of these parameters is described in the iKinLink class; at any rate they are easily recognized as the link length
+(<i>A</i> in [m]), the link offset (<i>D</i> in [m]), the link twist (<i>alpha</i> in [rad]) and so on: please visit the
+<a href="https://icub-tech-iit.github.io/documentation/icub_kinematics/icub-forward-kinematics/icub-forward-kinematics">documentation</a> on kinematics for a deeper insight. \n
 A careful reader should have not missed the expression for the joints limits, which here can definitely take whatever values for all
 the three joints, much different from the bounds assigned to the real joints and hard-coded within the fake motor device.
 Do not worry about that: at start-up the solver will query the low-level interface (namely <i>IControlLimits</i>) about the actual

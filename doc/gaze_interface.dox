@@ -24,8 +24,7 @@ Roncone A., Pattacini U., Metta G. & Natale L., "A Cartesian 6-DoF Gaze Controll
 
 In order to use the Gaze Interface, make sure that the following steps are done:
 
--# Update YARP and iCub repositories and compile them (always a good practice).
--# Install <a href="http://wiki.icub.org/wiki/Installing_IPOPT">Ipopt</a>.
+-# Install the required <a href="https://icub-tech-iit.github.io/documentation/sw_installation/">software dependencies</a>.
 -# Compile the iCub repository with the switch <b>ENABLE_icubmod_gazecontrollerclient</b> enabled: this will make
    the client part of the interface available. The server part is represented by the module \ref iKinGazeCtrl itself.
 
@@ -70,12 +69,12 @@ clientGazeCtrl.close();
 
 \section sec_gaze_useinterface Using the Gaze Interface
 
-The YARP <b>Gaze Interface</b> is fully documented <b><a href="http://wiki.icub.org/yarpdoc/classyarp_1_1dev_1_1IGazeControl.html">here</a></b>.
+The YARP documentation contains a full description of <b><a href="https://yarp.it/latest/classyarp_1_1dev_1_1IGazeControl.html">Gaze Interface</a></b>.
 It makes use of three different coordinate systems that enable the user to control the robot's gaze as detailed hereafter.
 
 \subsection subsec_gaze_cartcoorsystem Expressing the fixation point in Cartesian Coordinates
 This coordinate system is the same as the one the \ref icub_cartesian_interface "Cartesian Interface" relies on and complies with the
-<a href="http://wiki.icub.org/wiki/ICubForwardKinematics">wiki</a> specifications; it lets the user to give the target
+<a href="https://icub-tech-iit.github.io/documentation/icub_kinematics/icub-forward-kinematics/icub-forward-kinematics">documentation</a>; it lets the user to give the target
 location where to gaze at with respect to the root reference frame attached to the robot's waist.
 
 The following snippet of code shows how to command the gaze in the Cartesian space and to retrieve the current configuration.
@@ -355,15 +354,4 @@ public:
    }
 };
 \endcode
-
-
-\section sec_gaze_siminterface The Simulator and the Gaze Interface
-
-The Gaze Interface is already fully operative with the robot simulator: you only need to select the proper configuration file. \n
-To do that, type the following:
-\code
-iKinGazeCtrl --from configSim.ini
-\endcode
-
-A working example is available here: src/motorControlAdvanced/tutorial_gaze_interface.cpp
 */

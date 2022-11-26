@@ -24,23 +24,21 @@ Alternatively, the client can act as a pure wrapper over the solver coping with 
 meeting some specific requirements. However, also in this configuration, the server part needs to be launched (even if not employed) as a gateway to let the client
 communicate with the solver.
 
-\note A paper that describes how the controller works can be downloaded <a href="http://wiki.icub.org/images/c/cf/CartesianControllersEvaluation.pdf">here</a>.
-<b>If you're going to use this controller for your work, please quote it within any resulting publication</b>: U. Pattacini, F. Nori, L. Natale, G. Metta, G. Sandini,
-"An Experimental Evaluation of a Novel Minimum-Jerk Cartesian Controller for Humanoid Robots", <i>IEEE/RSJ International Conference on Intelligent Robots and Systems</i>,
-Taipei, Taiwan, 2010.
+\note <b>If you're going to use this controller for your work, please quote it within any resulting publication</b>:
+U. Pattacini, F. Nori, L. Natale, G. Metta, G. Sandini, "An Experimental Evaluation of a Novel Minimum-Jerk Cartesian Controller for Humanoid Robots",
+<i>IEEE/RSJ International Conference on Intelligent Robots and Systems</i>, Taipei, Taiwan, 2010.
 
 
 \section sec_cart_dependencies Dependencies
 
 In order to use the Cartesian Interface, make sure that the following steps are done: \n
-[Note that the term <i>cluster</i> refers to the set of computers directly connected to the robot network, whereas <i>PC104</i>
+[Note that the term <i>cluster</i> refers to the set of computers directly connected to the robot network, whereas <i>icub-head</i>
 indicates the hub board mounted on the robot]
 
--# Update YARP and iCub repositories and compile them (always a good practice).
--# Install <a href="http://wiki.icub.org/wiki/Installing_IPOPT">Ipopt</a> on the cluster.
+-# Install the required <a href="https://icub-tech-iit.github.io/documentation/sw_installation/">software dependencies</a>. 
 -# On the cluster: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerclient</b> enabled. This will make
    the client part of the interface available.
--# On PC104: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled. This will make the
+-# On icub-head: compile the repository with the switch <b>ENABLE_icubmod_cartesiancontrollerserver</b> enabled. This will make the
    server part of the interface available on the hub.
 
 
@@ -49,7 +47,7 @@ indicates the hub board mounted on the robot]
 Henceforth rely on the installed copy of <i>$ICUB_ROOT/main/app/iCubStartup/scripts/iCubStartup.xml.template</i> application
 to launch both the Cartesian solvers (and other useful tools as well). \n
 The \ref iKinCartesianSolver "Cartesian Solvers" are required to invert the kinematics using Ipopt and they are meant to run
-on the cluster to avoid overloading the PC104 core. Make sure that the machines where the solvers will be running are configured
+on the cluster to avoid overloading the icub-head core. Make sure that the machines where the solvers will be running are configured
 properly to work with the specific robot (e.g. the <b>YARP_ROBOT_NAME</b> correctly points to the name of the robot) in order
 to load at start-up the robot dependent kinematics. \n
 The solvers need the robotInterface to connect to the robot to get useful data to operate (e.g. the joints bounds) and also the
@@ -101,7 +99,7 @@ Central for a correct usage of the Cartesian controller is the knowledge of the 
 that shall be adopted to describe any desired limb pose.
 
 Positions (in meters) and orientation refer to the root frame attached to the waist as in the
-<a href="http://wiki.icub.org/wiki/ICubForwardKinematics">wiki</a> page. \n
+<a href="https://icub-tech-iit.github.io/documentation/icub_kinematics/icub-forward-kinematics/icub-forward-kinematics">documentation</a>. \n
 The root <b>x-axis</b> points backward, the <b>y-axis</b> points rightward, while the <b>z-axis</b> points upward.
 
 To specify a target orientation of the end-effector, you have to provide three components for the rotation
@@ -147,7 +145,7 @@ Vector o=yarp::math::dcm2axis(R);
 
 \section sec_cart_useinterface Using the Cartesian Interface
 
-The YARP <b>Cartesian Interface</b> is fully documented <b><a href="http://wiki.icub.org/yarpdoc/classyarp_1_1dev_1_1ICartesianControl.html">here</a></b>.
+The YARP documentation contains a full description of <b><a href="https://yarp.it/latest/classyarp_1_1dev_1_1ICartesianControl.html">Cartesian Interface</a></b>.
 Moreover, some examples are also reported hereafter to gain a deeper insight into the Cartesian device.
 
 Imagine that we want to get the actual arm pose from within our code. What we have to write is just:
@@ -479,19 +477,4 @@ public:
    }
 };
 \endcode
-
-
-\section sec_cart_siminterface The Simulator and the Cartesian Interface
-
-To have the Cartesian Interface fully operative together with the robot simulator, follow these steps:
-
--# Launch the \ref icub_Simulation "iCub Simulator".
--# Deploy the Cartesian servers: <b>yarprobotinterface \--context simCartesianControl</b>
--# Launch the \ref iKinCartesianSolver "Cartesian Solvers" for the required limbs: have a look to the template located in
-   the directory <i>icub-main/app/simCartesianControl/scripts</i>.
-
-Note that you will need to compile the server part of the interface also on the cluster where the simulator is supposed to run.
-
-A working example is available under src/motorControlAdvanced/tutorial_cartesian_interface.cpp which makes the left hand follow
-a circular trajectory located in front of the simulated robot.
 */

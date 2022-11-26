@@ -17,7 +17,6 @@ include(CTest)
 # go by subdirectories
 add_subdirectory(imageProcessing)
 add_subdirectory(motorControlBasic)
-add_subdirectory(motorControlAdvanced)
 add_subdirectory(motorControlImpedance)
 add_subdirectory(periodicThread)
 add_subdirectory(ctrlLib)
